@@ -24,6 +24,8 @@
  ****************************************************************************/
 
 #include "MainScene.h"
+#include "TcpClient.h"
+
 
 using namespace ax;
 
@@ -49,6 +51,9 @@ bool MainScene::init()
     {
         return false;
     }
+ 
+    TcpClient::get();
+
 
     auto visibleSize = _director->getVisibleSize();
     auto origin = _director->getVisibleOrigin();
@@ -143,6 +148,38 @@ void MainScene::update(float delta)
     }
     case GameState::update:
     {
+        //timeval timeout = {0, 0};
+        //if (TcpClient::get() && TcpClient::get()->Select(timeout))
+        //{
+        //    if (TcpClient::get()->RecvData())
+        //    {
+        //        Decording();
+        //    }
+        //}
+
+        //// 받아온 데이터를 토대로 함수 실행
+        //for (auto actor : mActorList)
+        //{
+        //    if (actor)
+        //        actor->update(delta);
+        //}
+
+        //for (auto actor : mPJList)
+        //{
+        //    if (actor)
+        //    {
+        //        actor->update(delta);
+        //    }
+        //    // 투사체 액터 삭제하기
+        //    // 나중에 꼭 수정할것
+        //    /* if (actor->mRoot->isVisible() == false)
+        //     {
+        //         delete actor->mMoveComp;
+        //         delete actor->mPJComp;
+        //         actor->mRoot->removeFromParent();
+        //         actor = nullptr;
+        //     }*/
+        //}
         break;
     }
     case GameState::pause: { break; }
@@ -169,3 +206,94 @@ void MainScene::menuCloseCallback(ax::Object* sender)
      // EventCustom customEndEvent("game_scene_close_event");
      //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
+
+//void MainScene::Decording()
+//{
+//    char buf[1024] = {0};
+//    bool check     = true;
+//    int Idx        = 0;
+//    short Len      = 0;
+//
+//    while (check)
+//    {
+//
+//        PK_Head haed;
+//        PK_Data data;
+//
+//        memcpy(&haed, TcpClient::get()->mRecvBuf + Idx, sizeof(PK_Head));
+//        Idx += sizeof(PK_Head);
+//
+//        if (haed.dataLen == 0)
+//        {
+//            for (int i = 0; i < Idx - 3; i++)
+//            {
+//                TcpClient::get()->mRecvBuf[i] = 0;
+//            }
+//            check = false;
+//            continue;
+//        }
+//
+//        memcpy(&data, TcpClient::get()->mRecvBuf + Idx, sizeof(PK_Data));
+//        Idx += sizeof(PK_Data);
+//
+//        switch (data.input)
+//        {
+//        case 77:
+//        case 78:
+//        case 79:
+//        {
+//
+//            if (mPlayActor == nullptr && data.ClientID == TcpClient::get()->GetID())
+//            {
+//                Actor* actor = CreateActor(data);
+//                mPlayActor   = actor;
+//            }
+//            if (mPlayActor)
+//            {
+//                bool check = false;
+//                for (auto actor : mActorList)
+//                {
+//                    if (actor && actor->mID == data.ClientID)
+//                    {
+//                        check = true;
+//                    }
+//                }
+//                if (!check)
+//                {
+//                    Actor* actor = CreateActor(data);
+//                    PK_Data d;
+//                    d.ClientID = TcpClient::get()->GetID();
+//                    d.input    = mPlayActor->charNum;
+//                    d.pos      = mPlayActor->sprite->getPosition();
+//                    TcpClient::get()->SendActorMessage(d);
+//                }
+//            }
+//        }
+//        break;
+//        case 108:
+//        {
+//            for (auto actor : mActorList)
+//            {
+//                if (actor && actor->mID == data.ClientID)
+//                {
+//                    Actor* pro = CreateActor(data);
+//                    pro->mMoveComp->SetTarget(data.pos);
+//                }
+//            }
+//        }
+//        break;
+//        case 114:
+//            for (auto actor : mActorList)
+//            {
+//                if (actor && actor->mID == data.ClientID)
+//                {
+//                    actor->mMoveComp->SetPath(PathSearch(data.pos));
+//                }
+//            }
+//            break;
+//        ///////////////////////
+//        default:
+//            break;
+//        }
+//    }
+//}

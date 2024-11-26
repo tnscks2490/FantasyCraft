@@ -13,14 +13,20 @@ public:
 
     void update(float delta);
     void AddChild(ax::Node* node);
-    ax::Node* mRoot    = nullptr;
-    ax::Node* sprite = nullptr;
+
+
+public:
+
     short mID          = -1;
     char charNum     = 0;
 
+
+
+    ax::Node* mRoot    = nullptr;
 public:
-    //컴포넌트 모임
+    // 컴포넌트
     MoveComp* mMoveComp = nullptr;
-    ProjectileComp* mPJComp = nullptr;
+
+
 };
 

@@ -82,6 +82,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     // create a scene. it's an autorelease object
     auto scene = utils::createInstance<MainScene>();
 
+    if (scene->getDefaultCamera())
+    {
+        printf("카메라 있음");
+    }
     // run
     director->runWithScene(scene);
 

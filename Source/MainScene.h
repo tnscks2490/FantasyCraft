@@ -65,6 +65,9 @@ public:
     void menuCloseCallback(ax::Object* sender);
 
 
+    //void Decording();
+
+
 public:
     TcpClient* mClient = nullptr;
 
