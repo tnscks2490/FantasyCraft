@@ -28,6 +28,7 @@
 
 #include "axmol.h"
 
+class TcpClient;
 
 class MainScene : public ax::Scene
 {
@@ -62,6 +63,11 @@ public:
 
     // a selector callback
     void menuCloseCallback(ax::Object* sender);
+
+
+public:
+    TcpClient* mClient = nullptr;
+
 
 private:
     GameState _gameState = GameState::init;
