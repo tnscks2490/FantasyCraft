@@ -26,7 +26,7 @@
 #ifndef __MAIN_SCENE_H__
 #define __MAIN_SCENE_H__
 
-#include "axmol.h"
+#include "World.h"
 
 class TcpClient;
 
@@ -65,12 +65,15 @@ public:
     void menuCloseCallback(ax::Object* sender);
 
 
-    //void Decording();
+    void Decording();
 
 
 public:
     TcpClient* mClient = nullptr;
+    World* mWorld      = nullptr;
 
+
+    Actor* player = nullptr;
 
 private:
     GameState _gameState = GameState::init;

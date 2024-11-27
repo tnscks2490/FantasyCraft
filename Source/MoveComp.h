@@ -1,6 +1,6 @@
 #pragma once
 #include "IActorComp.h"
-
+#include "JPSPathFinder.h"
 
 class Actor;
 
@@ -13,6 +13,10 @@ public:
     virtual void update(float delta) override;
 
 
+    void SetTarget(ax::Vec2 target);
+    void SetPath(std::list<jpspath::Coord> Path);
+    float length(ax::Vec2 v1, ax::Vec2 v2);
+    ax::Vec2 Vec2DNormalized(ax::Vec2 target);
     bool IsArrive();
     void Do_Moving();
     void CheckTargetList();

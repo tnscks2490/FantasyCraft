@@ -22,7 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-
+#include "pch.h"
 #include "AppDelegate.h"
 #include "MainScene.h"
 
@@ -80,8 +80,16 @@ bool AppDelegate::applicationDidFinishLaunching()
                                     ResolutionPolicy::SHOW_ALL);
 
     // create a scene. it's an autorelease object
-    auto scene = utils::createInstance<MainScene>();
 
+    // 마우스 커서 가두기 그런데 뭔가 이상함 좀더알아볼것
+    /*RECT* r = new RECT;
+    
+    GetClientRect(glView->getWin32Window(),r);
+    ClipCursor(r);*/
+
+
+    auto scene = utils::createInstance<MainScene>();
+    
     if (scene->getDefaultCamera())
     {
         printf("카메라 있음");

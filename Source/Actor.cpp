@@ -1,5 +1,7 @@
+#include "pch.h"
 #include "Actor.h"
 #include "TcpClient.h"
+#include "MoveComp.h"
 
 Actor::Actor()
 {
@@ -14,6 +16,8 @@ Actor::~Actor()
 
 void Actor::update(float delta)
 {
+    if (mMoveComp)
+        mMoveComp->update(delta);
 }
 
 void Actor::AddChild(ax::Node* node)

@@ -20,8 +20,6 @@ public:
     short mID          = -1;
     char charNum     = 0;
 
-
-
     ax::Node* mRoot    = nullptr;
 public:
     // 컴포넌트
