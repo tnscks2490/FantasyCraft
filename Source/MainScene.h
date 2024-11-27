@@ -27,11 +27,15 @@
 #define __MAIN_SCENE_H__
 
 #include "World.h"
+#include "JPSPathFinder.h"
 
 class TcpClient;
+class PathFind;
+class TileNode;
 
 class MainScene : public ax::Scene
 {
+    typedef std::vector<TileNode*> TileList;
     enum class GameState
     {
         init = 0,
@@ -45,11 +49,6 @@ class MainScene : public ax::Scene
 public:
     bool init() override;
     void update(float delta) override;
-
-    // touch
-    void onTouchesBegan(const std::vector<ax::Touch*>& touches, ax::Event* event);
-    void onTouchesMoved(const std::vector<ax::Touch*>& touches, ax::Event* event);
-    void onTouchesEnded(const std::vector<ax::Touch*>& touches, ax::Event* event);
 
     // mouse
     void onMouseDown(ax::Event* event);
@@ -67,14 +66,30 @@ public:
 
     void Decording();
 
+    void SetTileNodes();
+    void OnOffTile();
+
+    std::list<jpspath::Coord> PathSearch(ax::Vec2 targetPos);
+
+    void ScreenMove(float delta);
+
+    float mTimer = 0.f;
 
 public:
     TcpClient* mClient = nullptr;
     World* mWorld      = nullptr;
+    PathFind* mPath;
 
-
+    ax::TMXTiledMap* Map = nullptr;
     Actor* player = nullptr;
+    TileList mTileList;
+    int width = 128;
+    int height = 128;
+    bool TileOn = false;
 
+
+    Actor* mCursor = nullptr;
+    ax::Vec2 mCursorPos;
 private:
     GameState _gameState = GameState::init;
 };

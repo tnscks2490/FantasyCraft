@@ -28,6 +28,8 @@
 #include "TcpClient.h"
 #include "Actor.h"
 #include "MoveComp.h"
+#include "PathFind.h"
+#include "TileNode.h"
 
 
 using namespace ax;
@@ -56,6 +58,17 @@ bool MainScene::init()
     }
  
     TcpClient::get();
+    mPath            = new PathFind(width, height);
+
+    //콘솔창에 이동가는 한 곳 띄우는 디버깅용 코드
+    /*for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            printf("%d ", mPath->mColMap->IsCollision(j, i));
+        }
+        printf("\n");
+    }*/
 
     auto visibleSize = _director->getVisibleSize();
     auto origin = _director->getVisibleOrigin();
@@ -81,10 +94,41 @@ bool MainScene::init()
     keyboardListener->onKeyReleased = AX_CALLBACK_2(MainScene::onKeyReleased, this);
     _eventDispatcher->addEventListenerWithFixedPriority(keyboardListener, 11);
 
+    mCursor = new Actor;
+    mCursor->mRoot->setPosition(500, 500);
 
-
-    auto Map = ax::TMXTiledMap::create("Map/python/python.tmx");
+    Map = ax::TMXTiledMap::create("Map/python/python.tmx");
     addChild(Map);
+
+    auto wall = Map->getLayer("MetaInfo");
+
+    SetTileNodes();
+    OnOffTile();
+
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            auto t = wall->getTileAt(ax::Vec2(j, height - 1 - i));
+            if (t)
+            {
+                auto value = wall->getProperty("Wall");
+                if (value.asBool())
+                    mTileList[i * width + j]->ChangeDrawNode();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -98,24 +142,24 @@ bool MainScene::init()
 }
 
 
-void MainScene::onTouchesBegan(const std::vector<ax::Touch*>& touches, ax::Event* event)
-{
-   
-}
-
-void MainScene::onTouchesMoved(const std::vector<ax::Touch*>& touches, ax::Event* event)
-{
-    
-}
-
-void MainScene::onTouchesEnded(const std::vector<ax::Touch*>& touches, ax::Event* event)
-{
-  
-}
-
 void MainScene::onMouseDown(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
+
+    ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
+
+
+    if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
+    {
+        if (player)
+        {
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 'r';
+            data.pos      = mousePos;
+            TcpClient::get()->SendActorMessage(data);
+        }
+    }
 }
 
 void MainScene::onMouseUp(Event* event)
@@ -126,6 +170,12 @@ void MainScene::onMouseUp(Event* event)
 void MainScene::onMouseMove(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
+
+    ax::Vec2 pos;
+    pos.x = e->getCursorX();
+    pos.y = e->getCursorY();
+    mCursor->mRoot->setPosition(pos);
+
 }
 
 void MainScene::onMouseScroll(Event* event)
@@ -135,6 +185,38 @@ void MainScene::onMouseScroll(Event* event)
 
 void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 {
+    if (code == ax::EventKeyboard::KeyCode::KEY_P)
+        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
+     if (code == ax::EventKeyboard::KeyCode::KEY_T)
+    {
+        TileOn = !TileOn;
+        OnOffTile();
+
+        if (!TileOn)
+        {
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if (mTileList[i * width + j]->IsPass == true)
+                        mPath->mColMap->ClrAt(j, i);
+                    else
+                        mPath->mColMap->SetAt(j, i);
+                }
+            }
+            ///////////////////////////////////
+            for (int i = height - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    printf("%d ", mPath->mColMap->IsCollision(j, i));
+                }
+                printf("\n");
+            }
+        }
+    }
+
     switch (code)
     {
     case ax::EventKeyboard::KeyCode::KEY_C:
@@ -147,43 +229,6 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
             TcpClient::get()->SendActorMessage(data);
             printf("생성했음\n");
         }
-        break;
-    case ax::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-    {
-        PK_Data data;
-        data.ClientID = 0;
-        data.input    = 'Z';
-        data.pos      = player->mRoot->getPosition() + ax::Vec2(-32, 0);
-        TcpClient::get()->SendActorMessage(data);
-    }    
-        break;
-    case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-    {
-
-        PK_Data data;
-        data.ClientID = 0;
-        data.input    = 'Z';
-        data.pos      = player->mRoot->getPosition() + ax::Vec2(32,0);
-        TcpClient::get()->SendActorMessage(data);
-    }
-        break;
-    case ax::EventKeyboard::KeyCode::KEY_UP_ARROW:
-    {
-        PK_Data data;
-        data.ClientID = 0;
-        data.input    = 'Z';
-        data.pos      = player->mRoot->getPosition() + ax::Vec2(0, 32);
-        TcpClient::get()->SendActorMessage(data);
-    }
-        break;
-    case ax::EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-    {
-        PK_Data data;
-        data.ClientID = 0;
-        data.input    = 'Z';
-        data.pos      = player->mRoot->getPosition() + ax::Vec2(0, -32);
-        TcpClient::get()->SendActorMessage(data);
-    } 
         break;
     default:
         break;
@@ -199,6 +244,11 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 void MainScene::update(float delta)
 {
+    
+
+    ScreenMove(delta);
+
+
     switch (_gameState)
     {
     case GameState::init:
@@ -313,7 +363,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetTarget(data.pos);
+                    actor->mMoveComp->SetPath(PathSearch(data.pos));
                 }
             }
         }
@@ -330,7 +380,7 @@ void MainScene::Decording()
             }
         }
         break;*/
-        /*case 114:
+        case 114:
             for (auto actor : World::get()->w_ActorList)
             {
                 if (actor && actor->mID == data.ClientID)
@@ -338,10 +388,80 @@ void MainScene::Decording()
                     actor->mMoveComp->SetPath(PathSearch(data.pos));
                 }
             }
-            break;*/
+            break;
         ///////////////////////
         default:
             break;
         }
     }
 }
+
+void MainScene::SetTileNodes()
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            TileNode* mTileNode = TileNode::CreateTileNode(this);
+            ax::Vec2 pos(8 + 16 * j, 8 + 16 * i);
+            mTileNode->idx = i * width + j;
+            mTileNode->SetPosition(pos);
+            mTileList.push_back(mTileNode);
+        }
+    }
+}
+
+void MainScene::OnOffTile()
+{
+    for (auto tile : mTileList)
+    {
+        tile->mRoot->setVisible(TileOn);
+    }
+}
+
+std::list<jpspath::Coord> MainScene::PathSearch(ax::Vec2 targetPos)
+{
+    std::list<jpspath::Coord> ResultNodes;
+    jpspath::Path jps;
+    jps.Init(mPath->mColMap);
+
+    int32_t sx = player->mRoot->getPosition().x / 16;
+    int32_t sy = player->mRoot->getPosition().y / 16;
+    int32_t ex = targetPos.x / 16;
+    int32_t ey = targetPos.y / 16;
+
+    jps.Search(sx, sy, ex, ey, ResultNodes);
+    return ResultNodes;
+}
+
+void MainScene::ScreenMove(float delta)
+{
+    mCursorPos = mCursor->mRoot->getPosition();
+
+    //mTimer += delta;
+
+    ax::Vec2 mapPos = Map->getPosition();
+    if (mCursorPos.x > 1232)
+    {
+        mapPos.x -= 32;
+        Map->setPosition(mapPos);
+    }
+    else if (mCursorPos.x < 48)
+    {
+        mapPos.x += 32;
+        Map->setPosition(mapPos);
+    }
+    else if (mCursorPos.y > 672)
+    {
+        mapPos.y -= 32;
+        Map->setPosition(mapPos);
+    }
+    else if (mCursorPos.y < 48)
+    {
+        mapPos.y += 32;
+        Map->setPosition(mapPos);
+    }
+    
+}
+
+

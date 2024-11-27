@@ -36,7 +36,15 @@ void MoveComp::update(float delta)
 
 bool MoveComp::IsArrive()
 {
-    return false;
+    ax::Vec2 mypos  = mActor->mRoot->getPosition();
+    ax::Vec2 target = mTarget;
+
+    float m = length(mActor->mRoot->getPosition(), mTarget);
+    // printf("목적지와 현재위치와의 거리 : %f\n");
+    if (3.0 > m)
+        return true;
+    else
+        return false;
 }
 
 void MoveComp::Do_Moving()
@@ -92,7 +100,10 @@ void MoveComp::SetPath(std::list<jpspath::Coord> ResultNodes)
 
 float MoveComp::length(ax::Vec2 v1, ax::Vec2 v2)
 {
-    return 0.0f;
+    float dx = v2.x - v1.x;
+    float dy = v2.y - v1.y;
+
+    return sqrt(dx * dx + dy * dy);
 }
 
 ax::Vec2 MoveComp::Vec2DNormalized(ax::Vec2 target)
