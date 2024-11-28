@@ -2,6 +2,7 @@
 #include "axmol.h"
 
 class MoveComp;
+class DrawComp;
 class ProjectileComp;
 
 
@@ -20,10 +21,12 @@ public:
     short mID          = -1;
     char charNum     = 0;
 
-    ax::Node* mRoot    = nullptr;
+    ax::Node* mRoot = nullptr;
+
 public:
     // 컴포넌트
     MoveComp* mMoveComp = nullptr;
+    DrawComp* mDrawComp = nullptr;
 
 
 };

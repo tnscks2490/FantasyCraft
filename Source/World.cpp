@@ -2,7 +2,7 @@
 #include "World.h"
 #include "Actor.h"
 #include "MoveComp.h"
-
+#include "DrawComp.h"
 
 namespace
 {
@@ -28,23 +28,35 @@ void World::update(float delta)
 
 Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 {
+    // 빈 엑터 생성
     Actor* actor = new Actor();
-    parent->addChild(actor->mRoot);
 
+    // 드로우컴포넌트 및 루트 노드 생성 후 씬에 붙이기
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node);
+
+    // 스프라이트 생성후 루트 노드에 붙이기
     auto sprite = ax::Sprite::create("Farmer.png"sv);
     actor->mRoot->setPosition(500, 500);
-    actor->mRoot->addChild(sprite);
+    node->addChild(sprite);
 
+
+    // 엑터에 클라이언트 데이터 넣어주기
     actor->mID = data.ClientID;
     actor->charNum = data.input;
 
+    // 무브컴포넌트 생성
     auto move = new MoveComp(actor);
 
+
+    // 단순 루트노드 찾기용 코드
     auto drawNode = ax::DrawNode::create();
     drawNode->drawRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), ax::Color4F::RED);
-    actor->mRoot->addChild(drawNode);
+    node->addChild(drawNode);
 
 
+    // 월드 엑터리스트에 이 엑터 넣어주기
     w_ActorList.push_back(actor);
 
     return actor;
