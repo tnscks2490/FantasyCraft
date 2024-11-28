@@ -44,15 +44,38 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateSpriteNode(std::string_view filename)
+ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir)
 {
     if (mRoot.isNotNull())
     {
-        auto sprite = ax::Sprite::create(filename);
-        sprite->setName("Sprite");
+        AnimInfo& info = FindAnimInfo(name, action, dir);
+        info.CreateAnimation();
 
-        mRoot.get()->addChild(sprite);
-        return sprite;  
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName("Anim");
+
+        auto animate = ax::Animate::create(info.animation.get());
+
+        ax::Action* action;
+        action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        mRoot->addChild(node);
+        return node;  
     }
     return nullptr;
 }
+
+void DrawComp::ChangeAnim(AnimInfo* info)
+{
+    auto anim = mRoot->getChildByName("Anim");
+
+    anim->stopActionByTag(20202);
+
+    info->CreateAnimation();
+
+
+
+}
+

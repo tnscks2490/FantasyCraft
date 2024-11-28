@@ -1,7 +1,7 @@
 #pragma once
 #include "IActorComp.h"
 #include "Actor.h"
-
+#include "AnimInfo.h"
 
 class DrawComp : public IActorComp
 {
@@ -14,7 +14,10 @@ public:
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
-    ax::Node* CreateSpriteNode(std::string_view filename);
+    ax::Node* CreateAnimNode(ECharName name,ECharAct action, ECharDir dir);
+
+
+    void ChangeAnim(AnimInfo* info);
 
 public:
     Ptr<ax::Node> mRoot = nullptr;

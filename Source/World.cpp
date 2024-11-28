@@ -39,7 +39,8 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 몸통부분 생성 및 루트노드에 붙이기
     auto body = draw->CreatePhysicsNode(ax::Vec2(16,16));
-    auto sprite = draw->CreateSpriteNode("Farmer.png"sv);
+    auto sprite = draw->CreateAnimNode(ECharName::Farmer,ECharAct::Idle,ECharDir::Face);
+    
     /////////////////////////////////////////////////
     // 스프라이트 생성후 루트 노드에 붙이기
 

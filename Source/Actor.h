@@ -19,7 +19,7 @@ public:
 
 public:
 
-    short mID          = -1;
+    short mID        = -1;
     char charNum     = 0;
 
     
