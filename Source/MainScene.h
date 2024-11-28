@@ -32,6 +32,7 @@
 class TcpClient;
 class PathFind;
 class TileNode;
+class Player;
 
 class MainScene : public ax::Scene
 {
@@ -82,6 +83,8 @@ public:
 
     ax::TMXTiledMap* Map = nullptr;
     Actor* player = nullptr;
+    Player* mPlayer      = nullptr;
+
     TileList mTileList;
     int width = 128;
     int height = 128;
@@ -90,6 +93,13 @@ public:
 
     ax::Node* mCursor = nullptr;
     ax::Vec2 mCursorPos;
+
+
+    ax::DrawNode* DragNode = nullptr;
+    ax::Vec2 Spos;
+    ax::Vec2 EPos;
+    bool isDraging     = false;
+
 private:
     GameState _gameState = GameState::init;
 };

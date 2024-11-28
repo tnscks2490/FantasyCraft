@@ -30,6 +30,7 @@
 #include "MoveComp.h"
 #include "PathFind.h"
 #include "TileNode.h"
+#include "Player.h"
 
 
 using namespace ax;
@@ -101,6 +102,10 @@ bool MainScene::init()
     addChild(Map);
 
     auto wall = Map->getLayer("MetaInfo");
+    mPlayer   = new Player;
+
+
+
 
     SetTileNodes();
     OnOffTile();
@@ -125,10 +130,11 @@ bool MainScene::init()
 
 
 
-
-
-
-
+    // 드래그용
+    DragNode = ax::DrawNode::create();
+    DragNode->setPosition(0, 0);
+    DragNode->setOpacity(100);
+    addChild(DragNode);
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -160,11 +166,21 @@ void MainScene::onMouseDown(Event* event)
             TcpClient::get()->SendActorMessage(data);
         }
     }
+    else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+    {
+        isDraging = true;
+        Spos      = mousePos;
+    }
 }
 
 void MainScene::onMouseUp(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
+    if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+    {
+        isDraging = false;
+        DragNode->clear();
+    }
 }
 
 void MainScene::onMouseMove(Event* event)
@@ -174,6 +190,8 @@ void MainScene::onMouseMove(Event* event)
     ax::Vec2 pos;
     pos.x = e->getCursorX();
     pos.y = e->getCursorY();
+
+    EPos  = pos;
     //mCursor->setPosition(pos);
 
 }
@@ -257,6 +275,15 @@ void MainScene::update(float delta)
     }
     case GameState::update:
     {
+        //드래그
+
+        if (isDraging)
+        {
+            DragNode->clear();
+            DragNode->drawSolidRect(Spos,EPos,ax::Color4B::GREEN);
+        }
+
+
 
         timeval timeout = {0, 0};
         if (TcpClient::get() && TcpClient::get()->Select(timeout))
