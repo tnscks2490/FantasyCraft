@@ -16,6 +16,7 @@ public:
 
 
     ax::Node* GetRoot();
+    ax::Vec2 GetVelocity();
 
 public:
 

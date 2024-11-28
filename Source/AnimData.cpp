@@ -22,19 +22,6 @@ AnimInfo g_AnimInfo_Farmer_Move[] = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
 {
     switch (Name)

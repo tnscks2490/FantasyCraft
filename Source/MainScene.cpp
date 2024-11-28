@@ -227,7 +227,6 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
             data.pos      = Vec2(500, 500);
             data.input    = 77;
             TcpClient::get()->SendActorMessage(data);
-            printf("생성했음\n");
         }
         break;
     default:

@@ -14,10 +14,14 @@ public:
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
-    ax::Node* CreateAnimNode(ECharName name,ECharAct action, ECharDir dir);
+    ax::Node* CreateAnimNode(ECharName name);
 
 
-    void ChangeAnim(AnimInfo* info);
+    void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);
+    ECharDir CalcAniDir(ax::Vec2 mVelocity);
+
+    float Timer = 0.f;
+    ECharDir dir = ECharDir::Face;
 
 public:
     Ptr<ax::Node> mRoot = nullptr;

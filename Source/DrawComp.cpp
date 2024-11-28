@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "DrawComp.h"
-
+#include "MoveComp.h"
 
 DrawComp::DrawComp(Actor* actor)
     : IActorComp(actor)
@@ -10,7 +10,21 @@ DrawComp::DrawComp(Actor* actor)
 
 DrawComp::~DrawComp() {}
 
-void DrawComp::update(float delta) {}
+void DrawComp::update(float delta)
+{
+    if (mActor->mMoveComp)
+    {
+        if (!mActor->mMoveComp->IsArrive())
+        {
+            ECharDir newdir = CalcAniDir(mActor->GetVelocity());
+            if (dir != newdir)
+            {
+                dir = newdir;
+                ChangeAnim(ECharName::Farmer, ECharAct::Idle, dir);
+            }
+        }
+    }
+}
 
 ax::Node* DrawComp::CreateRootNode()
 {
@@ -44,38 +58,55 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir)
+ax::Node* DrawComp::CreateAnimNode(ECharName name)
 {
     if (mRoot.isNotNull())
     {
-        AnimInfo& info = FindAnimInfo(name, action, dir);
+        AnimInfo& info = FindAnimInfo(name,ECharAct::Idle,ECharDir::Face);
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName("Anim");
+        mRoot->addChild(node);
 
-        auto animate = ax::Animate::create(info.animation.get());
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
 
-        ax::Action* action;
-        action = ax::RepeatForever::create(animate);
+        ax::Action* action = ax::RepeatForever::create(animate);
         action->setTag(20202);
         node->runAction(action);
 
-        mRoot->addChild(node);
         return node;  
     }
     return nullptr;
 }
 
-void DrawComp::ChangeAnim(AnimInfo* info)
+void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
 {
-    auto anim = mRoot->getChildByName("Anim");
+    auto animNode = mRoot->getChildByName("Anim");
+    animNode->stopActionByTag(20202);
 
-    anim->stopActionByTag(20202);
+    AnimInfo& animInfo = FindAnimInfo(Name, act, dir);
+    animInfo.CreateAnimation();
 
-    info->CreateAnimation();
+    ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
 
+    ax::Action* action;
+    action = ax::RepeatForever::create(animate);
+    action->setTag(20202);
+    animNode->runAction(action);
+}
 
+ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
+{
+    float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
 
+    if (mVelocity.x > cos45)
+        return ECharDir::Right;
+    if (mVelocity.x < -cos45)
+        return ECharDir::Left;
+    if (mVelocity.y > 0)
+        return ECharDir::Back;
+
+    return ECharDir::Face;
 }
 

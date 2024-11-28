@@ -32,3 +32,9 @@ ax::Node* Actor::GetRoot()
     return nullptr;
 }
 
+ax::Vec2 Actor::GetVelocity()
+{
+    if (mMoveComp)
+        return mMoveComp->mVelocity;
+}
+

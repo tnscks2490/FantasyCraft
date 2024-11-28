@@ -30,6 +30,6 @@ void AnimInfo::CreateAnimation()
         animFrames.pushBack(sp);
         animFrames.pushBack(sp);
     }
-    animation = ax::Animation::createWithSpriteFrames(animFrames);
+    animation = ax::Animation::createWithSpriteFrames(animFrames,perFrameTime);
 }
 
