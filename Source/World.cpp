@@ -33,13 +33,17 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 드로우컴포넌트 및 루트 노드 생성 후 씬에 붙이기
     auto draw = new DrawComp(actor);
+    // 루트 노드 생성 및 메인씬에 붙이기(그리기 위함)
     auto node = draw->CreateRootNode();
     parent->addChild(node);
 
+    // 몸통부분 생성 및 루트노드에 붙이기
+    auto body = draw->CreatePhysicsNode(ax::Vec2(16,16));
+    auto sprite = draw->CreateSpriteNode("Farmer.png"sv);
+    /////////////////////////////////////////////////
     // 스프라이트 생성후 루트 노드에 붙이기
-    auto sprite = ax::Sprite::create("Farmer.png"sv);
-    actor->mRoot->setPosition(500, 500);
-    node->addChild(sprite);
+
+    draw->mRoot.get()->setPosition(500, 500);
 
 
     // 엑터에 클라이언트 데이터 넣어주기

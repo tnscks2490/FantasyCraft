@@ -88,7 +88,7 @@ public:
     bool TileOn = false;
 
 
-    Actor* mCursor = nullptr;
+    ax::Node* mCursor = nullptr;
     ax::Vec2 mCursorPos;
 private:
     GameState _gameState = GameState::init;

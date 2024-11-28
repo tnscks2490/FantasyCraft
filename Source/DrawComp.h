@@ -14,6 +14,7 @@ public:
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
+    ax::Node* CreateSpriteNode(std::string_view filename);
 
 public:
     Ptr<ax::Node> mRoot = nullptr;

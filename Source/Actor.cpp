@@ -2,11 +2,11 @@
 #include "Actor.h"
 #include "TcpClient.h"
 #include "MoveComp.h"
+#include "DrawComp.h"
+
 
 Actor::Actor()
 {
-    mRoot = ax::Node::create();
-    mRoot->retain();
 }
 
 Actor::~Actor()
@@ -16,12 +16,19 @@ Actor::~Actor()
 
 void Actor::update(float delta)
 {
-    if (mMoveComp)
-        mMoveComp->update(delta);
+    if (mMoveComp) mMoveComp->update(delta);
+    if (mDrawComp) mDrawComp->update(delta);
 }
 
-void Actor::AddChild(ax::Node* node)
+
+ax::Node* Actor::GetRoot()
 {
-    mRoot->addChild(node);
+    if (mDrawComp)
+    {
+        if (mDrawComp->mRoot.isNotNull())
+            return mDrawComp->mRoot.get();
+    }
+
+    return nullptr;
 }
 

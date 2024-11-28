@@ -94,8 +94,8 @@ bool MainScene::init()
     keyboardListener->onKeyReleased = AX_CALLBACK_2(MainScene::onKeyReleased, this);
     _eventDispatcher->addEventListenerWithFixedPriority(keyboardListener, 11);
 
-    mCursor = new Actor;
-    mCursor->mRoot->setPosition(500, 500);
+    //mCursor = ax::Node::create();
+    //mCursor->setPosition(500, 500);
 
     Map = ax::TMXTiledMap::create("Map/python/python.tmx");
     addChild(Map);
@@ -174,7 +174,7 @@ void MainScene::onMouseMove(Event* event)
     ax::Vec2 pos;
     pos.x = e->getCursorX();
     pos.y = e->getCursorY();
-    mCursor->mRoot->setPosition(pos);
+    //mCursor->setPosition(pos);
 
 }
 
@@ -246,7 +246,7 @@ void MainScene::update(float delta)
 {
     
 
-    ScreenMove(delta);
+    //ScreenMove(delta);
 
 
     switch (_gameState)
@@ -351,7 +351,7 @@ void MainScene::Decording()
                     PK_Data d;
                     d.ClientID = TcpClient::get()->GetID();
                     d.input    = player->charNum;
-                    d.pos      = player->mRoot->getPosition();
+                    d.pos      = player->GetRoot()->getPosition();
                     TcpClient::get()->SendActorMessage(d);
                 }
             }
@@ -425,8 +425,8 @@ std::list<jpspath::Coord> MainScene::PathSearch(ax::Vec2 targetPos)
     jpspath::Path jps;
     jps.Init(mPath->mColMap);
 
-    int32_t sx = player->mRoot->getPosition().x / 16;
-    int32_t sy = player->mRoot->getPosition().y / 16;
+    int32_t sx = player->GetRoot()->getPosition().x / 16;
+    int32_t sy = player->GetRoot()->getPosition().y / 16;
     int32_t ex = targetPos.x / 16;
     int32_t ey = targetPos.y / 16;
 
@@ -436,7 +436,7 @@ std::list<jpspath::Coord> MainScene::PathSearch(ax::Vec2 targetPos)
 
 void MainScene::ScreenMove(float delta)
 {
-    mCursorPos = mCursor->mRoot->getPosition();
+   // mCursorPos = mCursor->getPosition();
 
     //mTimer += delta;
 
