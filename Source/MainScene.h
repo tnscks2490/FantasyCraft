@@ -61,14 +61,17 @@ public:
     void onKeyPressed(ax::EventKeyboard::KeyCode code, ax::Event* event);
     void onKeyReleased(ax::EventKeyboard::KeyCode code, ax::Event* event);
 
+    // Contact
+    bool onContactBegin(ax::PhysicsContact& contact);
+    bool onContactSeparate(ax::PhysicsContact& contact);
+
     // a selector callback
     void menuCloseCallback(ax::Object* sender);
 
 
     void Decording();
 
-    void SetTileNodes();
-    void OnOffTile();
+
 
     std::list<jpspath::Coord> PathSearch(ax::Vec2 targetPos);
 

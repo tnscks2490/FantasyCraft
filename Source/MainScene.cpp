@@ -59,7 +59,7 @@ bool MainScene::init()
     }
  
     TcpClient::get();
-    mPath            = new PathFind(width, height);
+   
 
     //콘솔창에 이동가는 한 곳 띄우는 디버깅용 코드
     /*for (int i = 0; i < height; i++)
@@ -95,46 +95,43 @@ bool MainScene::init()
     keyboardListener->onKeyReleased = AX_CALLBACK_2(MainScene::onKeyReleased, this);
     _eventDispatcher->addEventListenerWithFixedPriority(keyboardListener, 11);
 
+    auto contactListener               = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin    = AX_CALLBACK_1(MainScene::onContactBegin, this);
+    contactListener->onContactSeparate = AX_CALLBACK_1(MainScene::onContactSeparate, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
     //mCursor = ax::Node::create();
     //mCursor->setPosition(500, 500);
 
     Map = ax::TMXTiledMap::create("Map/python/python.tmx");
     addChild(Map);
 
+    mPath     = new PathFind(width, height);
+
     auto wall = Map->getLayer("MetaInfo");
+    mPath->DefaultSetting(wall);
+    
     mPlayer   = new Player;
 
 
+    mCursor = ax::Node::create();
+    addChild(mCursor);
 
 
-    SetTileNodes();
-    OnOffTile();
-
-
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            auto t = wall->getTileAt(ax::Vec2(j, height - 1 - i));
-            if (t)
-            {
-                auto value = wall->getProperty("Wall");
-                if (value.asBool())
-                    mTileList[i * width + j]->ChangeDrawNode();
-            }
-        }
-    }
-
-
-
-
-
+    //커서 이미지
+    auto sprite = ax::Sprite::create("Cursor.png"sv);
+    mCursor->addChild(sprite);
 
     // 드래그용
     DragNode = ax::DrawNode::create();
-    DragNode->setPosition(0, 0);
     DragNode->setOpacity(100);
+
+    auto body = ax::PhysicsBody::createBox(ax::Vec2(16,16));
+    body->setContactTestBitmask(0xFFFFFFFF);
+    body->setDynamic(false);
+    DragNode->setPhysicsBody(body);
     addChild(DragNode);
+    //mCursor->addChild(DragNode);
+
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -170,6 +167,7 @@ void MainScene::onMouseDown(Event* event)
     {
         isDraging = true;
         Spos      = mousePos;
+        DragNode->setPosition(Spos);
     }
 }
 
@@ -180,6 +178,7 @@ void MainScene::onMouseUp(Event* event)
     {
         isDraging = false;
         DragNode->clear();
+        
     }
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
@@ -188,12 +187,42 @@ void MainScene::onMouseMove(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
 
-    ax::Vec2 pos;
-    pos.x = e->getCursorX();
-    pos.y = e->getCursorY();
+    ax::Vec2 mousepos;
+    mousepos.x = e->getCursorX();
+    mousepos.y = e->getCursorY();
 
-    EPos  = pos;
-    //mCursor->setPosition(pos);
+    EPos = mousepos;
+    if (isDraging)
+    {
+        auto body = DragNode->getPhysicsBody();
+        if (Spos.x < EPos.x)
+        {
+            if (Spos.y > EPos.y)
+            {
+                body->removeAllShapes();
+                body->addShape(ax::PhysicsShapeBox::create(ax::Vec2(EPos.x-Spos.x,EPos.y-Spos.y)));
+            }
+            else if (Spos.y <= EPos.y)
+            {
+
+            }
+        }
+        else if (Spos.x >= EPos.x)
+        {
+            if (Spos.y > EPos.y)
+            {
+
+            }
+            else if (Spos.y <= EPos.y)
+            {
+
+            }
+        }  
+        DragNode->clear();
+        DragNode->setPosition(EPos);
+        DragNode->drawSolidRect(Spos - mousepos, ax::Vec2::ZERO, ax::Color4B::GREEN);
+    }
+   
 
 }
 
@@ -206,35 +235,6 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 {
     if (code == ax::EventKeyboard::KeyCode::KEY_P)
         getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-
-     if (code == ax::EventKeyboard::KeyCode::KEY_T)
-    {
-        TileOn = !TileOn;
-        OnOffTile();
-
-        if (!TileOn)
-        {
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    if (mTileList[i * width + j]->IsPass == true)
-                        mPath->mColMap->ClrAt(j, i);
-                    else
-                        mPath->mColMap->SetAt(j, i);
-                }
-            }
-            ///////////////////////////////////
-            for (int i = height - 1; i >= 0; i--)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    printf("%d ", mPath->mColMap->IsCollision(j, i));
-                }
-                printf("\n");
-            }
-        }
-    }
 
     switch (code)
     {
@@ -260,6 +260,22 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
     
 }
 
+bool MainScene::onContactBegin(ax::PhysicsContact& contact)
+{
+    auto A = contact.getShapeA()->getBody()->getOwner();
+    auto B = contact.getShapeB()->getBody()->getOwner();
+
+
+
+
+    return false;
+}
+
+bool MainScene::onContactSeparate(ax::PhysicsContact& contact)
+{
+    return false;
+}
+
 void MainScene::update(float delta)
 {
     
@@ -278,11 +294,13 @@ void MainScene::update(float delta)
     {
         //드래그
 
-        if (isDraging)
-        {
-            DragNode->clear();
-            DragNode->drawSolidRect(Spos,EPos,ax::Color4B::GREEN);
-        }
+        //if (isDraging)
+        //{
+        //    //DragNode->clear();
+        //    ax::Vec2 pos = DragNode->getPosition();
+        //    DragNode->drawSolidRect(Spos-pos,EPos-pos,ax::Color4B::GREEN);
+        //    
+        //}
 
 
 
@@ -423,28 +441,6 @@ void MainScene::Decording()
     }
 }
 
-void MainScene::SetTileNodes()
-{
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            TileNode* mTileNode = TileNode::CreateTileNode(this);
-            ax::Vec2 pos(8 + 16 * j, 8 + 16 * i);
-            mTileNode->idx = i * width + j;
-            mTileNode->SetPosition(pos);
-            mTileList.push_back(mTileNode);
-        }
-    }
-}
-
-void MainScene::OnOffTile()
-{
-    for (auto tile : mTileList)
-    {
-        tile->mRoot->setVisible(TileOn);
-    }
-}
 
 std::list<jpspath::Coord> MainScene::PathSearch(ax::Vec2 targetPos)
 {
