@@ -14,15 +14,26 @@ void DrawComp::update(float delta)
 {
     if (mActor->mMoveComp)
     {
-        if (!mActor->mMoveComp->IsArrive())
+        if (mActor->mMoveComp->IsMoving)
         {
             ECharDir newdir = CalcAniDir(mActor->GetVelocity());
-            if (dir != newdir)
+            if (mCurDir != newdir)
             {
-                dir = newdir;
-                ChangeAnim(ECharName::Farmer, ECharAct::Idle, dir);
+                mCurDir = newdir;
+                mCurAction = ECharAct::Move;
+                ChangeAnim(mCurAnim, ECharAct::Move, mCurDir);
             }
         }
+        else
+        {
+            if (mCurAction == ECharAct::Move)
+            {
+                ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
+                mCurAction = ECharAct::Idle;
+            }
+        }
+
+        
     }
 }
 

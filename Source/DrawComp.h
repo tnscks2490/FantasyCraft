@@ -21,7 +21,12 @@ public:
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
 
     float Timer = 0.f;
-    ECharDir dir = ECharDir::Face;
+    //TODO:추후에 수정할것 생성하는 액터에 따라서
+    ECharName mCurAnim  = ECharName::Farmer;
+    ECharAct mCurAction = ECharAct::Idle;
+    ECharDir mCurDir    = ECharDir::Face;
+
+
 
 public:
     Ptr<ax::Node> mRoot = nullptr;

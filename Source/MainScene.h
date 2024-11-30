@@ -79,6 +79,7 @@ public:
 
     float mTimer = 0.f;
 
+
 public:
     TcpClient* mClient = nullptr;
     World* mWorld      = nullptr;
@@ -102,6 +103,13 @@ public:
     ax::Vec2 Spos;
     ax::Vec2 EPos;
     bool isDraging     = false;
+
+
+
+    ax::DrawNode* testdraw = nullptr;
+
+
+
 
 private:
     GameState _gameState = GameState::init;

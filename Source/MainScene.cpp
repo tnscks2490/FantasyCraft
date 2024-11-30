@@ -57,9 +57,8 @@ bool MainScene::init()
     {
         return false;
     }
- 
+
     TcpClient::get();
-   
 
     //콘솔창에 이동가는 한 곳 띄우는 디버깅용 코드
     /*for (int i = 0; i < height; i++)
@@ -125,7 +124,7 @@ bool MainScene::init()
     DragNode = ax::DrawNode::create();
     DragNode->setOpacity(100);
 
-    auto body = ax::PhysicsBody::createBox(ax::Vec2(16,16));
+    auto body = ax::PhysicsBody::createBox(ax::Vec2(100,100));
     body->setContactTestBitmask(0xFFFFFFFF);
     body->setDynamic(false);
     DragNode->setPhysicsBody(body);
@@ -133,14 +132,20 @@ bool MainScene::init()
     //mCursor->addChild(DragNode);
 
 
+
+    testdraw = DrawNode::create();
+    testdraw->setPosition(ax::Vec2(0,0));
+    DragNode->addChild(testdraw);
+    testdraw->drawRect(ax::Vec2(-25, -25), ax::Vec2(25, 25), Color4B::BLACK);
+
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
     drawNode->setPosition(Vec2(0, 0));
     addChild(drawNode);
     drawNode->drawRect(safeArea.origin + Vec2(1, 1), safeArea.origin + safeArea.size, Color4B::BLUE);
 
-    scheduleUpdate();
 
+    scheduleUpdate();
     return true;
 }
 
@@ -174,11 +179,58 @@ void MainScene::onMouseDown(Event* event)
 void MainScene::onMouseUp(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
+
+    ax::Vec2 mousepos;
+    mousepos.x = e->getCursorX();
+    mousepos.y = e->getCursorY();
+
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         isDraging = false;
         DragNode->clear();
+
+        auto CheckNode = ax::Node::create();
+        auto s         = ax::Sprite::create("Cursor.png"sv);
+        CheckNode->addChild(s);
         
+        auto body      = ax::PhysicsBody::createBox(ax::Vec2(16, 16));
+        body->setContactTestBitmask(0xFFFFFFFF);
+        body->setDynamic(false);
+        CheckNode->setPhysicsBody(body);
+        addChild(CheckNode);
+
+        int sx = Spos.x / 16;
+        int sy = Spos.y / 16;
+
+        int ex = EPos.x / 16;
+        int ey = EPos.y / 16;
+
+        ax::Vec2 pos;
+        pos.x = sx * 16;
+        pos.y = sy * 16;
+
+        CheckNode->setPosition(pos);
+
+        CheckNode->setVisible(true);
+        for (int i = sy; i <= ey - sy; i++)
+        {
+            for (int j = sx; j <= ex - sx; j++)
+            {
+                ax::Vec2 pos;
+                pos.x = j * 16;
+                pos.y = i * 16;
+
+                CheckNode->setPosition(pos);
+            }
+
+        }
+        //CheckNode->setVisible(false);
+
+        /*printf("시작점 x : %f ,  y : %f\n", Spos.x, Spos.y);
+        printf("끝점 x : %f ,  y : %f\n", EPos.x, EPos.y);
+        if (player)
+            printf("캐릭터 위치 x : %f ,  y : %f\n", player->GetRoot()->getPosition().x, player->GetRoot()->getPosition().y);*/
+
     }
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
@@ -191,39 +243,12 @@ void MainScene::onMouseMove(Event* event)
     mousepos.x = e->getCursorX();
     mousepos.y = e->getCursorY();
 
-    EPos = mousepos;
     if (isDraging)
-    {
-        auto body = DragNode->getPhysicsBody();
-        if (Spos.x < EPos.x)
-        {
-            if (Spos.y > EPos.y)
-            {
-                body->removeAllShapes();
-                body->addShape(ax::PhysicsShapeBox::create(ax::Vec2(EPos.x-Spos.x,EPos.y-Spos.y)));
-            }
-            else if (Spos.y <= EPos.y)
-            {
-
-            }
-        }
-        else if (Spos.x >= EPos.x)
-        {
-            if (Spos.y > EPos.y)
-            {
-
-            }
-            else if (Spos.y <= EPos.y)
-            {
-
-            }
-        }  
+    { 
         DragNode->clear();
-        DragNode->setPosition(EPos);
+        DragNode->setPosition(mousepos);
         DragNode->drawSolidRect(Spos - mousepos, ax::Vec2::ZERO, ax::Color4B::GREEN);
     }
-   
-
 }
 
 void MainScene::onMouseScroll(Event* event)
@@ -234,7 +259,7 @@ void MainScene::onMouseScroll(Event* event)
 void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 {
     if (code == ax::EventKeyboard::KeyCode::KEY_P)
-        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_SHAPE);
 
     switch (code)
     {
@@ -265,8 +290,9 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getOwner();
     auto B = contact.getShapeB()->getBody()->getOwner();
 
+    
 
-
+    printf("충돌\n");
 
     return false;
 }
@@ -292,18 +318,6 @@ void MainScene::update(float delta)
     }
     case GameState::update:
     {
-        //드래그
-
-        //if (isDraging)
-        //{
-        //    //DragNode->clear();
-        //    ax::Vec2 pos = DragNode->getPosition();
-        //    DragNode->drawSolidRect(Spos-pos,EPos-pos,ax::Color4B::GREEN);
-        //    
-        //}
-
-
-
         timeval timeout = {0, 0};
         if (TcpClient::get() && TcpClient::get()->Select(timeout))
         {
@@ -312,8 +326,12 @@ void MainScene::update(float delta)
                 Decording();
             }
         }
-        break;
+        // 아래는 업데이트 내용 위에서 서버에서 받은내용을 실행하고 그 다음 데이터 처리
+
+
+
     }
+    break;
     case GameState::pause: { break; }
     case GameState::menu1: { break; }
     case GameState::menu2: { break; }
@@ -484,7 +502,6 @@ void MainScene::ScreenMove(float delta)
         mapPos.y += 32;
         Map->setPosition(mapPos);
     }
-    
 }
 
 

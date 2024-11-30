@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "MoveComp.h"
+#include "DrawComp.h"
 #include "Actor.h"
 
 
@@ -15,13 +16,6 @@ MoveComp::~MoveComp() {}
 void MoveComp::update(float delta)
 {
     mVelocity = ax::Vec2(0, 0);
-
-    mTimer += delta;
-
-    if (mTimer > 1.0f)
-    {
-        mTimer = 0;
-    }
 
     CheckTargetList();
     if (IsMoving)
@@ -40,9 +34,11 @@ bool MoveComp::IsArrive()
     ax::Vec2 target = mTarget;
 
     float m = length(mActor->GetRoot()->getPosition(), mTarget);
-    // printf("목적지와 현재위치와의 거리 : %f\n");
+    
     if (3.0 > m)
+    {
         return true;
+    }
     else
         return false;
 }
@@ -63,7 +59,9 @@ void MoveComp::Do_Moving()
 void MoveComp::CheckTargetList()
 {
     if (mTargetList.size() < 1)
+    {
         return;
+    }
 
     if (!IsMoving)
     {
@@ -77,6 +75,7 @@ void MoveComp::SetTarget(ax::Vec2 target)
 {
     mTarget  = target;
     IsMoving = true;
+   
 }
 
 void MoveComp::SetPath(std::list<jpspath::Coord> ResultNodes)
@@ -94,8 +93,6 @@ void MoveComp::SetPath(std::list<jpspath::Coord> ResultNodes)
         mTargetList.push_back(pos);
     }
     mTargetList.pop_front();
-
-    printf("size of mTargetList : %d\n", mTargetList.size());
 }
 
 float MoveComp::length(ax::Vec2 v1, ax::Vec2 v2)

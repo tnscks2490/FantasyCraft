@@ -58,7 +58,7 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 단순 루트노드 찾기용 코드
     auto drawNode = ax::DrawNode::create();
-    drawNode->drawRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), ax::Color4F::RED);
+    drawNode->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4F::RED);
     node->addChild(drawNode);
 
 
