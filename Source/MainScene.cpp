@@ -190,6 +190,7 @@ void MainScene::onMouseUp(Event* event)
         DragNode->clear();
 
         auto CheckNode = ax::Node::create();
+        CheckNode->setName("CheckNode");
         auto s         = ax::Sprite::create("Cursor.png"sv);
         CheckNode->addChild(s);
         
