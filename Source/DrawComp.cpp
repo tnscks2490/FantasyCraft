@@ -43,6 +43,8 @@ ax::Node* DrawComp::CreateRootNode()
     {
         auto node = ax::Node::create();
         mRoot     = node;
+        node->setName("Root");
+        
         return node;
     }
     return nullptr;

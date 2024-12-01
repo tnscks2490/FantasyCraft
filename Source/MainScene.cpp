@@ -122,6 +122,7 @@ bool MainScene::init()
 
     // 드래그용
     DragNode = ax::DrawNode::create();
+    DragNode->setName("DragNode");
     DragNode->setOpacity(100);
 
     auto body = ax::PhysicsBody::createBox(ax::Vec2(100,100));
@@ -180,13 +181,11 @@ void MainScene::onMouseUp(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
 
-    ax::Vec2 mousepos;
-    mousepos.x = e->getCursorX();
-    mousepos.y = e->getCursorY();
+    EPos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        isDraging = false;
+        
         DragNode->clear();
 
         auto CheckNode = ax::Node::create();
@@ -206,16 +205,9 @@ void MainScene::onMouseUp(Event* event)
         int ex = EPos.x / 16;
         int ey = EPos.y / 16;
 
-        ax::Vec2 pos;
-        pos.x = sx * 16;
-        pos.y = sy * 16;
-
-        CheckNode->setPosition(pos);
-
-        CheckNode->setVisible(true);
-        for (int i = sy; i <= ey - sy; i++)
+        for (int i = std::min(sy,ey); i <= std::max(sy,ey); i++)
         {
-            for (int j = sx; j <= ex - sx; j++)
+            for (int j = std::min(sx, ex); j <= std::max(sx, ex); j++)
             {
                 ax::Vec2 pos;
                 pos.x = j * 16;
@@ -225,13 +217,8 @@ void MainScene::onMouseUp(Event* event)
             }
 
         }
-        //CheckNode->setVisible(false);
-
-        /*printf("시작점 x : %f ,  y : %f\n", Spos.x, Spos.y);
-        printf("끝점 x : %f ,  y : %f\n", EPos.x, EPos.y);
-        if (player)
-            printf("캐릭터 위치 x : %f ,  y : %f\n", player->GetRoot()->getPosition().x, player->GetRoot()->getPosition().y);*/
-
+        CheckNode->setPosition(EPos);
+        isDraging = false;
     }
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
@@ -291,10 +278,13 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getOwner();
     auto B = contact.getShapeB()->getBody()->getOwner();
 
+
     
-
-    printf("충돌\n");
-
+    auto stra = A->getName();
+    
+    AXLOG("%s \n", stra);
+    //printf("%c\n", strb);
+    
     return false;
 }
 
