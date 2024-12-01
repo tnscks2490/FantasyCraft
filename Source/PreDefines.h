@@ -9,5 +9,10 @@ class DrawComp;
 class AnimInfo;
 
 
+class TcpClient;
+class PathFind;
+class TileNode;
+class Player;
+class Cursor;
 
 

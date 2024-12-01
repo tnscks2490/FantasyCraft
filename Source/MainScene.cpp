@@ -31,6 +31,7 @@
 #include "PathFind.h"
 #include "TileNode.h"
 #include "Player.h"
+#include "Cursor.h"
 
 
 using namespace ax;
@@ -111,39 +112,18 @@ bool MainScene::init()
     
     mPlayer   = new Player;
 
-
-    mCursor = ax::Node::create();
-    addChild(mCursor);
-
-
-    //커서 이미지
-    auto sprite = ax::Sprite::create("Cursor.png"sv);
-    mCursor->addChild(sprite);
-
-    // 드래그용
-    DragNode = ax::DrawNode::create();
-    DragNode->setName("DragNode");
-    DragNode->setOpacity(100);
-
-    auto body = ax::PhysicsBody::createBox(ax::Vec2(100,100));
-    body->setContactTestBitmask(0xFFFFFFFF);
-    body->setDynamic(false);
-    DragNode->setPhysicsBody(body);
-    addChild(DragNode);
-    //mCursor->addChild(DragNode);
+    // 커서 생성
+    mCursor = new Cursor(this);
 
 
 
-    testdraw = DrawNode::create();
-    testdraw->setPosition(ax::Vec2(0,0));
-    DragNode->addChild(testdraw);
-    testdraw->drawRect(ax::Vec2(-25, -25), ax::Vec2(25, 25), Color4B::BLACK);
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
     drawNode->setPosition(Vec2(0, 0));
     addChild(drawNode);
     drawNode->drawRect(safeArea.origin + Vec2(1, 1), safeArea.origin + safeArea.size, Color4B::BLUE);
+
 
 
     scheduleUpdate();
@@ -171,9 +151,9 @@ void MainScene::onMouseDown(Event* event)
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        isDraging = true;
-        Spos      = mousePos;
-        DragNode->setPosition(Spos);
+        mCursor->isDraging = true;
+        mCursor->sPos      = mousePos;
+        mCursor->setPosition(mCursor->sPos);
     }
 }
 
@@ -181,44 +161,14 @@ void MainScene::onMouseUp(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
 
-    EPos = ax::Vec2(e->getCursorX(), e->getCursorY());
+    mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         
-        DragNode->clear();
-
-        auto CheckNode = ax::Node::create();
-        CheckNode->setName("CheckNode");
-        auto s         = ax::Sprite::create("Cursor.png"sv);
-        CheckNode->addChild(s);
-        
-        auto body      = ax::PhysicsBody::createBox(ax::Vec2(16, 16));
-        body->setContactTestBitmask(0xFFFFFFFF);
-        body->setDynamic(false);
-        CheckNode->setPhysicsBody(body);
-        addChild(CheckNode);
-
-        int sx = Spos.x / 16;
-        int sy = Spos.y / 16;
-
-        int ex = EPos.x / 16;
-        int ey = EPos.y / 16;
-
-        for (int i = std::min(sy,ey); i <= std::max(sy,ey); i++)
-        {
-            for (int j = std::min(sx, ex); j <= std::max(sx, ex); j++)
-            {
-                ax::Vec2 pos;
-                pos.x = j * 16;
-                pos.y = i * 16;
-
-                CheckNode->setPosition(pos);
-            }
-
-        }
-        CheckNode->setPosition(EPos);
-        isDraging = false;
+        mCursor->GetDrawNode()->clear();
+        mCursor->CheckNodeInDrag();
+        mCursor->isDraging = false;
     }
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
@@ -231,11 +181,14 @@ void MainScene::onMouseMove(Event* event)
     mousepos.x = e->getCursorX();
     mousepos.y = e->getCursorY();
 
-    if (isDraging)
+    mCursor->GetRoot()->setPosition(mousepos);
+    if (mCursor->isDraging)
     { 
-        DragNode->clear();
-        DragNode->setPosition(mousepos);
-        DragNode->drawSolidRect(Spos - mousepos, ax::Vec2::ZERO, ax::Color4B::GREEN);
+        mCursor->GetDrawNode()->clear();
+        mCursor->setPosition(mousepos);
+        mCursor->GetDrawNode()->drawSolidRect(mCursor->sPos - mousepos,
+            ax::Vec2::ZERO, ax::Color4B::GREEN);
+        
     }
 }
 
@@ -275,15 +228,10 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 {
-    auto A = contact.getShapeA()->getBody()->getOwner();
-    auto B = contact.getShapeB()->getBody()->getOwner();
+    //auto A = contact.getShapeA()->getBody()->getOwner();
+    //auto B = contact.getShapeB()->getBody()->getOwner();
 
-
-    
-    auto stra = A->getName();
-    
-    AXLOG("%s \n", stra);
-    //printf("%c\n", strb);
+    printf("감지\n");
     
     return false;
 }
@@ -309,6 +257,10 @@ void MainScene::update(float delta)
     }
     case GameState::update:
     {
+        
+
+
+
         timeval timeout = {0, 0};
         if (TcpClient::get() && TcpClient::get()->Select(timeout))
         {
@@ -472,7 +424,7 @@ void MainScene::ScreenMove(float delta)
 
     //mTimer += delta;
 
-    ax::Vec2 mapPos = Map->getPosition();
+    /*ax::Vec2 mapPos = Map->getPosition();
     if (mCursorPos.x > 1232)
     {
         mapPos.x -= 32;
@@ -492,7 +444,7 @@ void MainScene::ScreenMove(float delta)
     {
         mapPos.y += 32;
         Map->setPosition(mapPos);
-    }
+    }*/
 }
 
 

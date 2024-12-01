@@ -28,11 +28,9 @@
 
 #include "World.h"
 #include "JPSPathFinder.h"
+#include "PreDefines.h"
 
-class TcpClient;
-class PathFind;
-class TileNode;
-class Player;
+
 
 class MainScene : public ax::Scene
 {
@@ -95,21 +93,7 @@ public:
     bool TileOn = false;
 
 
-    ax::Node* mCursor = nullptr;
-    ax::Vec2 mCursorPos;
-
-
-    ax::DrawNode* DragNode = nullptr;
-    ax::Vec2 Spos;
-    ax::Vec2 EPos;
-    bool isDraging     = false;
-
-
-
-    ax::DrawNode* testdraw = nullptr;
-
-
-
+    Cursor* mCursor = nullptr;
 
 private:
     GameState _gameState = GameState::init;
