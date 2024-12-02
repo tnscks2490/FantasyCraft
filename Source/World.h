@@ -1,7 +1,11 @@
 #pragma once
 #include "PrePacket.h"
-class Actor;
 
+class Actor;
+struct UserData
+{
+    Actor* mActor;
+};
 
 class World
 {

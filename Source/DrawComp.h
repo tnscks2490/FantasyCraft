@@ -14,7 +14,7 @@ public:
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
-    ax::Node* CreateAnimNode(ECharName name);
+    ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
 
 
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);

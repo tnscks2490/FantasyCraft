@@ -71,7 +71,7 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateAnimNode(ECharName name)
+ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
 {
     if (mRoot.isNotNull())
     {
@@ -79,7 +79,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name)
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
-        node->setName("Anim");
+        node->setName(nodeName);
         mRoot->addChild(node);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());

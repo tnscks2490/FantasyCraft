@@ -9,7 +9,9 @@ public:
     Player();
     ~Player();
 
-    void SelectActors();
+
+    void Selected(Actor* actor);
+    bool isSelected();
 
 public:
     std::vector<Actor*> PlayerActors;

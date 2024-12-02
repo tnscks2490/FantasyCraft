@@ -4,6 +4,10 @@
 #include "MoveComp.h"
 #include "DrawComp.h"
 
+
+
+
+
 namespace
 {
 static World* g_World = nullptr;
@@ -36,6 +40,8 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 루트 노드 생성 및 메인씬에 붙이기(그리기 위함)
     auto node = draw->CreateRootNode();
+    
+
     draw->mRoot->setPosition(500, 500);
     parent->addChild(node);
 
@@ -43,7 +49,7 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
     // 몸통부분 생성 및 루트노드에 붙이기
     auto body = draw->CreatePhysicsNode(ax::Vec2(16,16));
     auto anim = draw->CreateAnimNode(ECharName::Farmer);
-    
+    auto selectanim = draw->CreateAnimNode(ECharName::Select, "Select");
     /////////////////////////////////////////////////
     // 스프라이트 생성후 루트 노드에 붙이기
 
@@ -62,6 +68,11 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
     drawNode->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4F::RED);
     node->addChild(drawNode);
 
+    // 유저데이터 넣기
+    // 나중에 위치변경할것
+    UserData* mUserData = new UserData;
+    mUserData->mActor = actor;
+    draw->mRoot->setUserData(mUserData);
 
     // 월드 엑터리스트에 이 엑터 넣어주기
     w_ActorList.push_back(actor);

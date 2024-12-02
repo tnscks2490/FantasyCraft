@@ -79,20 +79,7 @@ void Cursor::CheckNodeInDrag()
     int ex = ePos.x / 16;
     int ey = ePos.y / 16;
 
-    /*for (int i = std::min(sy, ey); i <= std::max(sy, ey); i++)
-    {
-        for (int j = std::min(sx, ex); j <= std::max(sx, ex); j++)
-        {
-            ax::Vec2 pos;
-            pos.x = j * 16;
-            pos.y = i * 16;
-
-            CheckNode->setPosition(pos - mRoot->getPosition()); 
-        }
-    }
-    CheckNode->setPosition(ax::Vec2::ZERO);*/
-
-       // 드래그 속 체크 노드
+    // 드래그 속 체크 노드
     
     auto checknode = ax::Node::create();
     checknode->setName("CursorCheckNode");
@@ -115,20 +102,22 @@ void Cursor::CheckNodeInDrag()
     checknode->addChild(dnode);
     dnode->drawRect(ax::Vec2(-boxSize.x / 2, -boxSize.y / 2), ax::Vec2(boxSize.x / 2, boxSize.y / 2),
                     ax::Color4B::BLACK);
+
+
+    //위치 재조정
     ax::Vec2 nodepos;
     nodepos.x = (sPos.x - ePos.x) / 2;
     nodepos.y = (sPos.y - ePos.y) / 2;
-    // checknode->setAnchorPoint(ax::Vec2(0.f,0.f));
     checknode->setPosition(nodepos);    
 
 }
 
 void Cursor::DeleteCheckNode()
 {
-    ax::Node* node = nullptr;
-    node           = mRoot->getChildByName("CursorCheckNode");
+    
+    auto node = mRoot->getChildByName("CursorCheckNode");
 
-    if (node)
+    if (node != nullptr)
     {
         node->getChildByName("drawCheckNode")->removeFromParent();
         node->removeFromParent();

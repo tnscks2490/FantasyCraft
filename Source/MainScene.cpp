@@ -26,6 +26,7 @@
 #include "pch.h"
 #include "MainScene.h"
 #include "TcpClient.h"
+#include "World.h"
 #include "Actor.h"
 #include "MoveComp.h"
 #include "PathFind.h"
@@ -111,7 +112,8 @@ bool MainScene::init()
 
     auto wall = Map->getLayer("MetaInfo");
     mPath->DefaultSetting(wall);
-    
+
+    // 플레이어 생성
     mPlayer   = new Player;
 
     // 커서 생성
@@ -142,7 +144,7 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-        if (player)
+        if (mPlayer->isSelected())
         {
             PK_Data data;
             data.ClientID = TcpClient::get()->GetID();
@@ -172,6 +174,7 @@ void MainScene::onMouseUp(Event* event)
         mCursor->CheckNodeInDrag();
         mCursor->isDraging = false;
     }
+    mPlayer->PlayerActors.clear();
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
 //따라서 드래그했을때 해당 사각형 안에 있는 노드(즉 엑터)들이 플레이어의 엑터리스트에 들어가야함
@@ -192,6 +195,7 @@ void MainScene::onMouseMove(Event* event)
             ax::Vec2::ZERO, ax::Color4B::GREEN);
         
     }
+    mCursor->DeleteCheckNode();
 }
 
 void MainScene::onMouseScroll(Event* event)
@@ -207,15 +211,13 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     switch (code)
     {
     case ax::EventKeyboard::KeyCode::KEY_C:
-        if (!player)
-        {
-            PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
-            data.pos      = Vec2(500, 500);
-            data.input    = 77;
-            TcpClient::get()->SendActorMessage(data);
-        }
-        break;
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.pos      = Vec2(500, 500);
+        data.input    = 77;
+        TcpClient::get()->SendActorMessage(data);
+    } break;
     default:
         break;
     }
@@ -230,10 +232,21 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 {
-    //auto A = contact.getShapeA()->getBody()->getOwner();
-    //auto B = contact.getShapeB()->getBody()->getOwner();
+    auto A = contact.getShapeA()->getBody()->getOwner();
+    auto B = contact.getShapeB()->getBody()->getOwner();
 
-    printf("감지\n");
+    if (A->getName() == "CursorCheckNode")
+    {
+        auto Broot = B->getParent();
+        UserData* userData = (UserData*)Broot->getUserData();
+        
+        if (userData->mActor->mID == TcpClient::get()->GetID())
+            mPlayer->Selected(userData->mActor);
+    }
+    else if (B->getName() == "CursorCheckNode")
+    {
+
+    }
     
     return false;
 }
@@ -339,12 +352,11 @@ void MainScene::Decording()
         case 79:
         {
 
-            if (player == nullptr && data.ClientID == TcpClient::get()->GetID())
+            if (data.ClientID == TcpClient::get()->GetID())
             {
                 Actor* actor = World::get()->CreateActor(this,data);
-                player       = actor;
             }
-            if (player)
+            if (true)
             {
                 bool check = false;
                 for (auto actor : World::get()->w_ActorList)
@@ -356,12 +368,12 @@ void MainScene::Decording()
                 }
                 if (!check)
                 {
-                    Actor* actor = World::get()->CreateActor(this, data);
+                    /*Actor* actor = World::get()->CreateActor(this, data);
                     PK_Data d;
                     d.ClientID = TcpClient::get()->GetID();
                     d.input    = player->charNum;
                     d.pos      = player->GetRoot()->getPosition();
-                    TcpClient::get()->SendActorMessage(d);
+                    TcpClient::get()->SendActorMessage(d);*/
                 }
             }
         }
@@ -372,7 +384,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(PathSearch(data.pos));
+                    actor->mMoveComp->SetPath(mPath,data.pos);
                 }
             }
         }
@@ -394,7 +406,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(PathSearch(data.pos));
+                    actor->mMoveComp->SetPath(mPath, data.pos);
                 }
             }
             break;
@@ -406,20 +418,7 @@ void MainScene::Decording()
 }
 
 
-std::list<jpspath::Coord> MainScene::PathSearch(ax::Vec2 targetPos)
-{
-    std::list<jpspath::Coord> ResultNodes;
-    jpspath::Path jps;
-    jps.Init(mPath->mColMap);
 
-    int32_t sx = player->GetRoot()->getPosition().x / 16;
-    int32_t sy = player->GetRoot()->getPosition().y / 16;
-    int32_t ex = targetPos.x / 16;
-    int32_t ey = targetPos.y / 16;
-
-    jps.Search(sx, sy, ex, ey, ResultNodes);
-    return ResultNodes;
-}
 
 void MainScene::ScreenMove(float delta)
 {

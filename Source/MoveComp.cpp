@@ -3,6 +3,7 @@
 #include "MoveComp.h"
 #include "DrawComp.h"
 #include "Actor.h"
+#include "PathFind.h"
 
 
 MoveComp::MoveComp(Actor* actor)
@@ -26,6 +27,21 @@ void MoveComp::update(float delta)
         pos += mVelocity * delta * mSpeed;
         mActor->GetRoot()->setPosition(pos);
     }
+}
+
+std::list<jpspath::Coord> MoveComp::PathSearch(PathFind* path, ax::Vec2 targetPos)
+{
+    std::list<jpspath::Coord> ResultNodes;
+    jpspath::Path jps;
+    jps.Init(path->mColMap);
+
+    int32_t sx = mActor->GetRoot()->getPosition().x / 16;
+    int32_t sy = mActor->GetRoot()->getPosition().y / 16;
+    int32_t ex = targetPos.x / 16;
+    int32_t ey = targetPos.y / 16;
+
+    jps.Search(sx, sy, ex, ey, ResultNodes);
+    return ResultNodes;
 }
 
 bool MoveComp::IsArrive()
@@ -78,14 +94,16 @@ void MoveComp::SetTarget(ax::Vec2 target)
    
 }
 
-void MoveComp::SetPath(std::list<jpspath::Coord> ResultNodes)
+void MoveComp::SetPath(PathFind* path, ax::Vec2 targetPos)
 {
+    auto resultNode = PathSearch(path,targetPos);
+
     if (mTargetList.size() > 0)
     {
         mTargetList.clear();
     }
 
-    for (auto t : ResultNodes)
+    for (auto t : resultNode)
     {
         ax::Vec2 pos;
         pos.x = (float)t.m_x * 16;

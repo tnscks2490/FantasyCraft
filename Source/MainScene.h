@@ -71,7 +71,7 @@ public:
 
 
 
-    std::list<jpspath::Coord> PathSearch(ax::Vec2 targetPos);
+    
 
     void ScreenMove(float delta);
 
@@ -84,21 +84,26 @@ public:
     PathFind* mPath;
 
     ax::TMXTiledMap* Map = nullptr;
-    Actor* player = nullptr;
+
+
     Player* mPlayer      = nullptr;
 
-    TileList mTileList;
-    int width = 128;
-    int height = 128;
 
 
 
 
     Cursor* mCursor = nullptr;
 
-    //window size
-
+    
+public:
+    //Scene의 고정 값들
+    
+    // init() 때 값을 넣어줌
     ax::Vec2 visibleSize;
+
+    // 총 타일의 갯수 각 타일별 16 x 16 픽셀이다
+    int width = 128;
+    int height = 128;
 
 
 
