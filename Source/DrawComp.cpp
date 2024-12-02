@@ -32,8 +32,6 @@ void DrawComp::update(float delta)
                 mCurAction = ECharAct::Idle;
             }
         }
-
-        
     }
 }
 
@@ -44,7 +42,6 @@ ax::Node* DrawComp::CreateRootNode()
         auto node = ax::Node::create();
         mRoot     = node;
         node->setName("Root");
-        
         return node;
     }
     return nullptr;
@@ -52,7 +49,6 @@ ax::Node* DrawComp::CreateRootNode()
 
 ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
 {
-    static int i = 0;
     if (mRoot.isNotNull())
     {
         //노드 생성
@@ -60,26 +56,24 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         bodyNode->setName("Body");
         
         //피직스바디생성 및 노드에 붙여주기
-        auto body = ax::PhysicsBody::createBox(bodysize);
-        body->setContactTestBitmask(0xFFFFFFFF);
-        /*if (i == 0)
-        {
-            body->setCategoryBitmask(0x01);
-            body->setCollisionBitmask(0x02);
-        }
-        else if (i == 1)
-        {
-            body->setCategoryBitmask(0x03);
-            body->setCollisionBitmask(0x03);
-        }*/
 
-        body->setDynamic(false);
+        auto body = ax::PhysicsBody::createBox(bodysize);
+
+        body->setMass(100.0f);
+        body->addMass(500.0f);
+        auto t = body->getVelocity();
+
+
+        body->setContactTestBitmask(0xFFFFFFFF);
+        body->setCategoryBitmask(0xFFFFFFFF);
+        body->setCollisionBitmask(0xFFFFFFFF);
+
+        body->setDynamic(true);
         bodyNode->setPhysicsBody(body);
 
         //루트노드에 피직스노드붙여주기
         mRoot.get()->addChild(bodyNode);
         return bodyNode;
-        i++;
     }
     return nullptr;
 }

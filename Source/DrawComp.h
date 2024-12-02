@@ -29,6 +29,7 @@ public:
 
     bool isSelected = false;
 
+
 public:
     Ptr<ax::Node> mRoot = nullptr;
 };

@@ -98,9 +98,9 @@ void Cursor::CheckNodeInDrag()
 
     auto body = ax::PhysicsBody::createBox(boxSize);
     body->setContactTestBitmask(0xFFFFFFFF);
-    //body->setCategoryBitmask(true);
-    //body->setCollisionBitmask(0x03);
-    body->setDynamic(false);
+    //body->setCategoryBitmask(0xFFFFFFFF);
+    //body->setCollisionBitmask(0xFFFFFFFFF);
+    body->setDynamic(true);
 
     checknode->setPhysicsBody(body);
 

@@ -272,7 +272,6 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
         if (userData->mActor->mID == TcpClient::get()->GetID())
             mPlayer->Selected(userData->mActor);
     }
-    
     return true;
 }
 
@@ -376,6 +375,8 @@ void MainScene::Decording()
                 if (actor && actor->idx == selectidx)
                 {
                     actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
+                    //auto body = actor->GetRoot()->getChildByName("Body")->getPhysicsBody();
+                    // body->setVelocity(data.pos);
                 }
             }
         }
