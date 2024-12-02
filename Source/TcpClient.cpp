@@ -105,7 +105,7 @@ bool TcpClient::RecvData()
 
             PK_Head head;
             memcpy(&head.UniqueID, mSaveBuf + SaveIdx, sizeof(head.UniqueID));
-            len += sizeof(PK_Head);
+           len += sizeof(PK_Head);
 
             if (head.UniqueID != 12)
             {

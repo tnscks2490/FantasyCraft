@@ -171,7 +171,7 @@ void MainScene::onMouseUp(Event* event)
     {
         mCursor->CursorUp();
     }
-
+    printf("현재 선택된 엑터 수 : %d \n", mPlayer->PlayerActors.size());
      //mPlayer->Clear();
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
@@ -207,6 +207,12 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 
     switch (code)
     {
+    case ax::EventKeyboard::KeyCode::KEY_1:
+        selectidx = 1;
+        break;
+    case ax::EventKeyboard::KeyCode::KEY_2:
+        selectidx = 2;
+        break;
     case ax::EventKeyboard::KeyCode::KEY_C:
     {
         PK_Data data;
@@ -215,6 +221,24 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.input    = 77;
         TcpClient::get()->SendActorMessage(data);
     } break;
+    case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.pos      = Vec2(16, 0);
+        data.input    = 6;
+        TcpClient::get()->SendActorMessage(data);
+    }
+        break;
+    case ax::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.pos      = Vec2(-16,0);
+        data.input    = 4;
+        TcpClient::get()->SendActorMessage(data);
+    }
+        break;
     default:
         break;
     }
@@ -229,8 +253,8 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 {
-    auto A = contact.getShapeA()->getBody()->getOwner();
-    auto B = contact.getShapeB()->getBody()->getOwner();
+    auto A = contact.getShapeA()->getBody()->getNode();
+    auto B = contact.getShapeB()->getBody()->getNode();
 
     if (A->getName() == "CursorCheckNode")
     {
@@ -242,14 +266,19 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     }
     else if (B->getName() == "CursorCheckNode")
     {
+        auto Aroot         = A->getParent();
+        UserData* userData = (UserData*)Aroot->getUserData();
 
+        if (userData->mActor->mID == TcpClient::get()->GetID())
+            mPlayer->Selected(userData->mActor);
     }
     
-    return false;
+    return true;
 }
 
 bool MainScene::onContactSeparate(ax::PhysicsContact& contact)
 {
+    printf("분리");
     return false;
 }
 
@@ -270,10 +299,6 @@ void MainScene::update(float delta)
     }
     case GameState::update:
     {
-        
-
-
-
         timeval timeout = {0, 0};
         if (TcpClient::get() && TcpClient::get()->Select(timeout))
         {
@@ -344,6 +369,28 @@ void MainScene::Decording()
 
         switch (data.input)
         {
+        case 6:
+        {
+            for (auto actor : World::get()->w_ActorList)
+            {
+                if (actor && actor->idx == selectidx)
+                {
+                    actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
+                }
+            }
+        }
+            break;
+        case 4:
+        {
+            for (auto actor : World::get()->w_ActorList)
+            {
+                if (actor && actor->idx == selectidx)
+                {
+                    actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
+                }
+            }
+        }
+            break;
         case 77:
         case 78:
         case 79:

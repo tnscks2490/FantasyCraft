@@ -105,7 +105,7 @@ public:
     int width = 128;
     int height = 128;
 
-
+    int selectidx = -1;
 
 private:
     GameState _gameState = GameState::init;

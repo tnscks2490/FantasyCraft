@@ -52,22 +52,34 @@ ax::Node* DrawComp::CreateRootNode()
 
 ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
 {
+    static int i = 0;
     if (mRoot.isNotNull())
     {
         //노드 생성
         auto bodyNode = ax::Node::create();
         bodyNode->setName("Body");
-
-        ax::PhysicsMaterial met(0.1f, 1.0f, 0.0f);
+        
         //피직스바디생성 및 노드에 붙여주기
-        auto body = ax::PhysicsBody::createBox(bodysize, met,ax::Vec2(0.5f,0.5f));
+        auto body = ax::PhysicsBody::createBox(bodysize);
         body->setContactTestBitmask(0xFFFFFFFF);
+        /*if (i == 0)
+        {
+            body->setCategoryBitmask(0x01);
+            body->setCollisionBitmask(0x02);
+        }
+        else if (i == 1)
+        {
+            body->setCategoryBitmask(0x03);
+            body->setCollisionBitmask(0x03);
+        }*/
+
         body->setDynamic(false);
         bodyNode->setPhysicsBody(body);
 
         //루트노드에 피직스노드붙여주기
         mRoot.get()->addChild(bodyNode);
         return bodyNode;
+        i++;
     }
     return nullptr;
 }

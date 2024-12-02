@@ -29,7 +29,6 @@ void MoveComp::update(float delta)
         pos += body->getVelocity();
         mActor->GetRoot()->setPosition(pos);
 
-
         //auto bodypos = body->getPosition();
         //printf("x : %f y : %f ", bodypos.x, bodypos.y);
         printf("");

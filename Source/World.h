@@ -17,6 +17,7 @@ public:
     void update(float delta);
 
 
+    void Actor_PushBack(Actor* actor);
     Actor* CreateActor(ax::Node* parent, PK_Data data);
 
     void PrintActorList();

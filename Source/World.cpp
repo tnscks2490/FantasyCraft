@@ -30,6 +30,8 @@ void World::update(float delta)
     }
 }
 
+
+
 Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 {
     // 빈 엑터 생성
@@ -73,9 +75,14 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
     draw->mRoot->setUserData(mUserData);
 
     // 월드 엑터리스트에 이 엑터 넣어주기
-    w_ActorList.push_back(actor);
-
+    Actor_PushBack(actor);
     return actor;
+}
+
+void World::Actor_PushBack(Actor* actor)
+{
+    w_ActorList.push_back(actor);
+    actor->idx = w_ActorList.size();
 }
 
 void World::PrintActorList()

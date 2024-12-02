@@ -23,6 +23,7 @@ public:
 
     short mID        = -1;
     char charNum     = 0;
+    short idx        = -1;
 
     
 public:
