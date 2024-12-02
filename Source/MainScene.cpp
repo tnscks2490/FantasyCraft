@@ -169,12 +169,10 @@ void MainScene::onMouseUp(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        
-        mCursor->GetDrawNode()->clear();
-        mCursor->CheckNodeInDrag();
-        mCursor->isDraging = false;
+        mCursor->CursorUp();
     }
-    mPlayer->PlayerActors.clear();
+
+     //mPlayer->Clear();
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
 //따라서 드래그했을때 해당 사각형 안에 있는 노드(즉 엑터)들이 플레이어의 엑터리스트에 들어가야함
@@ -193,7 +191,6 @@ void MainScene::onMouseMove(Event* event)
         mCursor->setPosition(mousepos);
         mCursor->GetDrawNode()->drawSolidRect(mCursor->sPos - mousepos,
             ax::Vec2::ZERO, ax::Color4B::GREEN);
-        
     }
     mCursor->DeleteCheckNode();
 }

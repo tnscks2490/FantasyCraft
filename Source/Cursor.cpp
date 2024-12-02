@@ -62,6 +62,13 @@ ax::DrawNode* Cursor::GetDrawNode()
     return nullptr;
 }
 
+void Cursor::CursorUp()
+{
+    GetDrawNode()->clear();
+    CheckNodeInDrag();
+    isDraging = false;
+}
+
 void Cursor::setPosition(ax::Vec2 pos)
 {
     if (mRoot.isNotNull())

@@ -9,7 +9,7 @@ public:
     Player();
     ~Player();
 
-
+    void Clear();
     void Selected(Actor* actor);
     bool isSelected();
 

@@ -58,8 +58,9 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         auto bodyNode = ax::Node::create();
         bodyNode->setName("Body");
 
+        ax::PhysicsMaterial met(0.1f, 1.0f, 0.0f);
         //피직스바디생성 및 노드에 붙여주기
-        auto body = ax::PhysicsBody::createBox(bodysize);
+        auto body = ax::PhysicsBody::createBox(bodysize, met,ax::Vec2(0.5f,0.5f));
         body->setContactTestBitmask(0xFFFFFFFF);
         body->setDynamic(false);
         bodyNode->setPhysicsBody(body);

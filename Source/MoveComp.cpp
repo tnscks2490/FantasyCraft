@@ -24,8 +24,15 @@ void MoveComp::update(float delta)
         Do_Moving();
         mVelocity.normalize();
         ax::Vec2 pos = mActor->GetRoot()->getPosition();
-        pos += mVelocity * delta * mSpeed;
+        ax::PhysicsBody* body    = (ax::PhysicsBody*)mActor->GetRoot()->getChildByName("Body")->getPhysicsBody();
+        body->setVelocity(mVelocity * delta * mSpeed);
+        pos += body->getVelocity();
         mActor->GetRoot()->setPosition(pos);
+
+
+        //auto bodypos = body->getPosition();
+        //printf("x : %f y : %f ", bodypos.x, bodypos.y);
+        printf("");
     }
 }
 

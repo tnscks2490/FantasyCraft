@@ -12,6 +12,9 @@ public:
     ax::Vec2 GetPosition();
     ax::DrawNode* GetDrawNode();
 
+
+    void CursorUp();
+
     
 
 public:

@@ -27,6 +27,7 @@ public:
     ECharDir mCurDir    = ECharDir::Face;
 
 
+    bool isSelected = false;
 
 public:
     Ptr<ax::Node> mRoot = nullptr;
