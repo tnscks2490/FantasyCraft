@@ -36,6 +36,8 @@
 
 using namespace ax;
 
+
+
 // Print useful error message instead of segfaulting when files are not there.
 static void problemLoading(const char* filename)
 {
@@ -71,7 +73,7 @@ bool MainScene::init()
         printf("\n");
     }*/
 
-    auto visibleSize = _director->getVisibleSize();
+    visibleSize = _director->getVisibleSize();
     auto origin = _director->getVisibleOrigin();
     auto safeArea = _director->getSafeAreaRect();
     auto safeOrigin = safeArea.origin;    
@@ -244,7 +246,8 @@ bool MainScene::onContactSeparate(ax::PhysicsContact& contact)
 void MainScene::update(float delta)
 {
     
-
+    // 마우스가 화면 끝으로 갔을 때 화면 전체를 옮긴다.
+    // 해당기능은 마우스의 위치백터만큼 화면에 더해야한다.
     //ScreenMove(delta);
 
 
@@ -420,31 +423,31 @@ std::list<jpspath::Coord> MainScene::PathSearch(ax::Vec2 targetPos)
 
 void MainScene::ScreenMove(float delta)
 {
-   // mCursorPos = mCursor->getPosition();
+    auto mCursorPos = mCursor->GetPosition();
 
     //mTimer += delta;
 
-    /*ax::Vec2 mapPos = Map->getPosition();
-    if (mCursorPos.x > 1232)
+    ax::Vec2 mapPos = Map->getPosition();
+    if (mCursorPos.x > visibleSize.x - 32)
     {
-        mapPos.x -= 32;
+        mapPos.x -= 8;
         Map->setPosition(mapPos);
     }
-    else if (mCursorPos.x < 48)
+    else if (mCursorPos.x < 32)
     {
-        mapPos.x += 32;
+        mapPos.x += 8;
         Map->setPosition(mapPos);
     }
     else if (mCursorPos.y > 672)
     {
-        mapPos.y -= 32;
+        mapPos.y -= 8;
         Map->setPosition(mapPos);
     }
     else if (mCursorPos.y < 48)
     {
-        mapPos.y += 32;
+        mapPos.y += 8;
         Map->setPosition(mapPos);
-    }*/
+    }
 }
 
 

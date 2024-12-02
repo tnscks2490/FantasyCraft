@@ -90,10 +90,17 @@ public:
     TileList mTileList;
     int width = 128;
     int height = 128;
-    bool TileOn = false;
+
+
 
 
     Cursor* mCursor = nullptr;
+
+    //window size
+
+    ax::Vec2 visibleSize;
+
+
 
 private:
     GameState _gameState = GameState::init;

@@ -9,6 +9,7 @@ public:
 
     ax::Node* CreateCursor(ax::Node* parent);
     ax::Node* GetRoot();
+    ax::Vec2 GetPosition();
     ax::DrawNode* GetDrawNode();
 
     

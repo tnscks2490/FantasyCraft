@@ -42,13 +42,19 @@ ax::Node* Cursor::CreateCursor(ax::Node* parent)
 
 ax::Node* Cursor::GetRoot()
 {
-    if (mRoot.get())
+    if (mRoot.isNotNull())
         return mRoot.get();
+}
+
+ax::Vec2 Cursor::GetPosition()
+{
+    if (mRoot.isNotNull())
+        return mRoot->getPosition();
 }
 
 ax::DrawNode* Cursor::GetDrawNode()
 {
-    if (mRoot.get())
+    if (mRoot.isNotNull())
     {
         auto drawnode = (ax::DrawNode*)mRoot->getChildByName("CursorDrawNode");
         return drawnode;
@@ -58,7 +64,7 @@ ax::DrawNode* Cursor::GetDrawNode()
 
 void Cursor::setPosition(ax::Vec2 pos)
 {
-    if (mRoot.get())
+    if (mRoot.isNotNull())
     {
         mRoot->setPosition(pos);
     }
