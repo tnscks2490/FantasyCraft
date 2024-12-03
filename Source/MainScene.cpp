@@ -270,18 +270,18 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
-    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
-    {
+    //if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    //{
 
-        /*UserData* userDataA = (UserData*)A->getUserData();
-        UserData* userDataB = (UserData*)B->getUserData();
+    //    /*UserData* userDataA = (UserData*)A->getUserData();
+    //    UserData* userDataB = (UserData*)B->getUserData();
 
-        Actor* actorA               = userDataA->mActor;
-        Actor* actorB               = userDataB->mActor;
+    //    Actor* actorA               = userDataA->mActor;
+    //    Actor* actorB               = userDataB->mActor;
 
-        actorA->mMoveComp->IsMoving = false;
-        actorA->mMoveComp->SetPath(mPath, actorA->mMoveComp->mTarget);  */ 
-    }
+    //    actorA->mMoveComp->IsMoving = false;
+    //    actorA->mMoveComp->SetPath(mPath, actorA->mMoveComp->mTarget);  */ 
+    //}
 
     return true;
 }
@@ -309,7 +309,7 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
     }
     else if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
-        UserData* userDataA = (UserData*)A->getUserData();
+        /*UserData* userDataA = (UserData*)A->getUserData();
         UserData* userDataB = (UserData*)B->getUserData();
 
         Actor* actorA = userDataA->mActor;
@@ -359,8 +359,65 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
             return false;
         }
 
+*/
+        UserData* userDataA = (UserData*)A->getUserData();
+        UserData* userDataB = (UserData*)B->getUserData();
 
+        Actor* actorA = userDataA->mActor;
+        Actor* actorB = userDataB->mActor;
 
+        struct lrtb
+        {
+            float left;
+            float right;
+            float top;
+            float bottom;
+        };
+
+        lrtb Alrtb;
+        lrtb Blrtb;
+
+        Alrtb.left   = actorA->GetPosition().x - 8.f;
+        Alrtb.right  = actorA->GetPosition().x + 8.f;
+        Alrtb.bottom = actorA->GetPosition().y - 8.f;
+        Alrtb.top    = actorA->GetPosition().y + 8.f;
+
+        Blrtb.left   = actorB->GetPosition().x - 8.f;
+        Blrtb.right  = actorB->GetPosition().x + 8.f;
+        Blrtb.bottom = actorB->GetPosition().y - 8.f;
+        Blrtb.top    = actorB->GetPosition().y + 8.f;
+
+        float Left   = Alrtb.left - Blrtb.right;
+        float Right  = Blrtb.left - Alrtb.right;
+        float Top    = Alrtb.top - Blrtb.bottom;
+        float Bottom = Blrtb.top - Alrtb.bottom;
+
+        if (Right <= 0 || Left <= 0 || Top <= 0 || Bottom <= 0)
+        {
+            if (Right >= Left && Right >= Top && Right >= Bottom)
+            {
+
+                float sx = actorA->GetPosition().x + Right;
+                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(sx, actorA->GetPosition().y));
+            }
+            else if (Left >= Right && Left >= Top && Left >= Bottom)
+            {
+                float sx = actorA->GetPosition().x - Left;
+                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(sx, actorA->GetPosition().y));
+            }
+            else if (Top >= Right && Top >= Left && Top >= Bottom)
+            {
+                float sy = actorA->GetPosition().y - Top;
+                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(actorA->GetPosition().x, sy));
+            }
+            else
+            {
+                float sy = actorA->GetPosition().y + Bottom;
+                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(actorA->GetPosition().x, sy));
+            }
+        }
+         
+        return true;
     }
     return true;
 }
