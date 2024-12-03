@@ -17,6 +17,8 @@ public:
 
 
     ax::Node* GetRoot();
+    void SetPosition(ax::Vec2 pos);
+    ax::Vec2 GetPosition();
     ax::Vec2 GetVelocity();
 
 public:

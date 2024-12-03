@@ -16,7 +16,7 @@ ax::Node* Cursor::CreateCursor(ax::Node* parent)
     auto node = ax::Node::create();
     mRoot     = node;
     mRoot->setName("CursorRootNode");
-    parent->addChild(mRoot.get());
+    parent->addChild(node);
 
     // 드래그 부분 그리기
     auto drawnode = ax::DrawNode::create();
@@ -97,9 +97,10 @@ void Cursor::CheckNodeInDrag()
     boxSize.y = std::max(sPos.y, ePos.y) - std::min(sPos.y, ePos.y);
 
     auto body = ax::PhysicsBody::createBox(boxSize);
+    body->setGravityEnable(false);
+    body->setRotationEnable(false);
     body->setContactTestBitmask(0xFFFFFFFF);
-    //body->setCategoryBitmask(0xFFFFFFFF);
-    //body->setCollisionBitmask(0xFFFFFFFFF);
+
     body->setDynamic(true);
 
     checknode->setPhysicsBody(body);
@@ -118,7 +119,6 @@ void Cursor::CheckNodeInDrag()
     nodepos.x = (sPos.x - ePos.x) / 2;
     nodepos.y = (sPos.y - ePos.y) / 2;
     checknode->setPosition(nodepos);    
-
 }
 
 void Cursor::DeleteCheckNode()

@@ -26,6 +26,7 @@ void MoveComp::update(float delta)
         ax::Vec2 pos = mActor->GetRoot()->getPosition();
         mCurFrameMovement = mVelocity * delta * mSpeed;
         pos += mCurFrameMovement;
+  
         mActor->GetRoot()->setPosition(pos);
     }
 }
@@ -52,7 +53,7 @@ bool MoveComp::IsArrive()
 
     float m = length(mActor->GetRoot()->getPosition(), mTarget);
     
-    if (3.0 > m)
+    if (1.0 > m)
     {
         return true;
     }
@@ -103,6 +104,9 @@ void MoveComp::SetPath(PathFind* path, ax::Vec2 targetPos)
     {
         mTargetList.clear();
     }
+
+    if (resultNode.size() < 1)
+        return;
 
     for (auto t : resultNode)
     {

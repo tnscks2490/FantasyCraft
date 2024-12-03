@@ -32,6 +32,23 @@ ax::Node* Actor::GetRoot()
     return nullptr;
 }
 
+void Actor::SetPosition(ax::Vec2 pos)
+{
+    if (mDrawComp->mRoot.isNotNull())
+    {
+        mDrawComp->mRoot->setPosition(pos);
+    }
+}
+
+
+ax::Vec2 Actor::GetPosition()
+{
+    if (mDrawComp->mRoot.isNotNull())
+    {
+        return mDrawComp->mRoot->getPosition();
+    }
+}
+
 ax::Vec2 Actor::GetVelocity()
 {
     if (mMoveComp)

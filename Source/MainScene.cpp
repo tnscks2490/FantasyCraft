@@ -100,6 +100,7 @@ bool MainScene::init()
 
     auto contactListener               = EventListenerPhysicsContact::create();
     contactListener->onContactBegin    = AX_CALLBACK_1(MainScene::onContactBegin, this);
+    contactListener->onContactPreSolve = AX_CALLBACK_2(MainScene::onContactPreSolve, this);
     contactListener->onContactSeparate = AX_CALLBACK_1(MainScene::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
     //mCursor = ax::Node::create();
@@ -202,7 +203,21 @@ void MainScene::onMouseScroll(Event* event)
 void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 {
     if (code == ax::EventKeyboard::KeyCode::KEY_P)
-        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_SHAPE);
+    {
+
+        printf("\n");
+        for (int i = 0; i < mPath->mColMap->GetHeight(); i++)
+        {
+            for (int j = 0; j < mPath->mColMap->GetWidth(); j++)
+            {
+                if (mPath->mColMap->IsCollision(j, i))
+                    printf("O");
+                else
+                    printf(" ");
+            }
+            printf("\n");
+        }
+    }
 
     switch (code)
     {
@@ -252,50 +267,106 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 {
+
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
-
-    if (A->getName() == "CursorCheckNode")
+    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
-        UserData* userData = (UserData*)B->getUserData();
 
-        if (userData->mActor->mID == TcpClient::get()->GetID())
-            mPlayer->Selected(userData->mActor);
+        /*UserData* userDataA = (UserData*)A->getUserData();
+        UserData* userDataB = (UserData*)B->getUserData();
 
+        Actor* actorA               = userDataA->mActor;
+        Actor* actorB               = userDataB->mActor;
+
+        actorA->mMoveComp->IsMoving = false;
+        actorA->mMoveComp->SetPath(mPath, actorA->mMoveComp->mTarget);  */ 
     }
-    else if (B->getName() == "CursorCheckNode")
-    {
-        UserData* userData = (UserData*)B->getUserData();
 
-        if (userData->mActor->mID == TcpClient::get()->GetID())
-            mPlayer->Selected(userData->mActor);
-    }
-    printf("충돌");
-    return false;
+    return true;
 }
 
-bool MainScene::onContactPreSolve(ax::PhysicsContact& contact)
+bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContactPreSolve& solve)
 {
-    /*printf("프리솔브");
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    if (A->getName() == "CursorCheckNode")
+    if (A->getName() == "CursorCheckNode" )
     {
-        return false;
+        UserData* userData = (UserData*)B->getUserData();
 
+        if (userData->mActor->mID == TcpClient::get()->GetID())
+            mPlayer->Selected(userData->mActor);
+        return false;
     }
     else if (B->getName() == "CursorCheckNode")
     {
-        return false;
-    }*/
+        UserData* userData = (UserData*)A->getUserData();
 
+        if (userData->mActor->mID == TcpClient::get()->GetID())
+            mPlayer->Selected(userData->mActor);
+        return false;
+    }
+    else if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    {
+        UserData* userDataA = (UserData*)A->getUserData();
+        UserData* userDataB = (UserData*)B->getUserData();
+
+        Actor* actorA = userDataA->mActor;
+        Actor* actorB = userDataB->mActor;
+
+        std::vector<ax::Vec2> aroundPos;
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(-40, 0));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(-40, 40));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(-40, -40));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(0, 40));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(0, -40));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(40, 40));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(40, 0));
+        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(40, -40));
+
+        float len = 10000000000;
+        ax::Vec2 pos;
+        for (auto t : aroundPos)
+        {
+            int x = t.x/16;
+            int y = t.y/16;
+            if (!mPath->mColMap->IsCollision(x, y))
+            {
+                if (actorA->GetPosition().distance(t) < len)
+                {
+                    len = actorA->GetPosition().distance(t);
+                    pos = t;
+                }
+            }
+            if (actorA->GetPosition().distance(t) < len)
+            {
+                len = actorA->GetPosition().distance(t);
+                pos = t;
+            }
+        }
+
+
+        if (actorA->mMoveComp->mTargetList.size() == 0)
+        {
+            actorA->mMoveComp->mTargetList.emplace_front(pos);
+            return false;
+        }
+        else
+        {
+            actorA->mMoveComp->IsMoving = false;
+            actorA->mMoveComp->SetPath(mPath, actorA->mMoveComp->mTarget);
+            return false;
+        }
+
+
+
+    }
     return true;
 }
 
 void MainScene::onContactSeparate(ax::PhysicsContact& contact)
 {
-    printf("분리");
 }
 
 void MainScene::update(float delta)

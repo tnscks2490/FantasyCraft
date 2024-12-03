@@ -2,6 +2,7 @@
 #include "DrawComp.h"
 #include "MoveComp.h"
 
+
 DrawComp::DrawComp(Actor* actor)
     : IActorComp(actor)
 {
@@ -26,11 +27,12 @@ void DrawComp::update(float delta)
         }
         else
         {
-            if (mCurAction == ECharAct::Move)
+            mCurAction = ECharAct::Idle;
+            ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
+           /* if (mCurAction == ECharAct::Move)
             {
-                ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
-                mCurAction = ECharAct::Idle;
-            }
+                
+            }*/
         }
     }
 }
@@ -41,7 +43,31 @@ ax::Node* DrawComp::CreateRootNode()
     {
         auto node = ax::Node::create();
         mRoot     = node;
+
         node->setName("Root");
+
+        auto met = ax::PhysicsMaterial(0.1,1.0f,0.f);
+
+        ax::Vec2 bodysize(16, 16);
+
+        node->setAnchorPoint(ax::Vec2(0.5f, 0.5f));
+
+        auto body = ax::PhysicsBody::createBox(bodysize);
+        body->setTag(10);
+        body->setContactTestBitmask(0xFFFFFFFF);
+        body->setDynamic(false);
+        
+        node->setPhysicsBody(body);
+        
+
+
+
+
+        auto draw = ax::DrawNode::create();
+        draw->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::RED);
+        node->addChild(draw);
+        
+        
         return node;
     }
     return nullptr;
@@ -58,21 +84,21 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         //피직스바디생성 및 노드에 붙여주기
 
         auto body = ax::PhysicsBody::createBox(bodysize);
-
-        body->setMass(100.0f);
-        body->addMass(500.0f);
-        auto t = body->getVelocity();
-
+        body->setGravityEnable(false);
 
         body->setContactTestBitmask(0xFFFFFFFF);
-        body->setCategoryBitmask(0xFFFFFFFF);
         body->setCollisionBitmask(0xFFFFFFFF);
-
+        body->setCategoryBitmask(0xFFFFFFFF);
         body->setDynamic(true);
         bodyNode->setPhysicsBody(body);
 
+
+        auto drawNode = ax::DrawNode::create();
+        drawNode->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4F::RED);
+        bodyNode->addChild(drawNode);
+
         //루트노드에 피직스노드붙여주기
-        mRoot.get()->addChild(bodyNode);
+        mRoot->addChild(bodyNode);
         return bodyNode;
     }
     return nullptr;

@@ -35,7 +35,6 @@ public:
     ax::Vec2 mVelocity;
     ax::Vec2 mCurFrameMovement;
 
-
 public:
     //정해진 값
     float mSpeed = 100.0f;
