@@ -24,6 +24,7 @@ public:
     void CheckTargetList();
 
 public:
+    //멤버 변수
 
     bool IsMoving     = false;
     bool IsPathMoving = false;
@@ -32,9 +33,12 @@ public:
 
     ax::Vec2 mTarget;
     ax::Vec2 mVelocity;
+    ax::Vec2 mCurFrameMovement;
+
+
+public:
+    //정해진 값
     float mSpeed = 100.0f;
     float mTimer = 0.f;
-
-
 };
 

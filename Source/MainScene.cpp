@@ -121,7 +121,6 @@ bool MainScene::init()
 
 
 
-
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
     drawNode->setPosition(Vec2(0, 0));
@@ -258,27 +257,45 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
     if (A->getName() == "CursorCheckNode")
     {
-        auto Broot = B->getParent();
-        UserData* userData = (UserData*)Broot->getUserData();
-        
+        UserData* userData = (UserData*)B->getUserData();
+
         if (userData->mActor->mID == TcpClient::get()->GetID())
             mPlayer->Selected(userData->mActor);
+
     }
     else if (B->getName() == "CursorCheckNode")
     {
-        auto Aroot         = A->getParent();
-        UserData* userData = (UserData*)Aroot->getUserData();
+        UserData* userData = (UserData*)B->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
             mPlayer->Selected(userData->mActor);
     }
+    printf("충돌");
+    return false;
+}
+
+bool MainScene::onContactPreSolve(ax::PhysicsContact& contact)
+{
+    /*printf("프리솔브");
+    auto A = contact.getShapeA()->getBody()->getNode();
+    auto B = contact.getShapeB()->getBody()->getNode();
+
+    if (A->getName() == "CursorCheckNode")
+    {
+        return false;
+
+    }
+    else if (B->getName() == "CursorCheckNode")
+    {
+        return false;
+    }*/
+
     return true;
 }
 
-bool MainScene::onContactSeparate(ax::PhysicsContact& contact)
+void MainScene::onContactSeparate(ax::PhysicsContact& contact)
 {
     printf("분리");
-    return false;
 }
 
 void MainScene::update(float delta)

@@ -61,8 +61,8 @@ public:
 
     // Contact
     bool onContactBegin(ax::PhysicsContact& contact);
-    bool onContactSeparate(ax::PhysicsContact& contact);
-
+    bool onContactPreSolve(ax::PhysicsContact& contact);
+    void onContactSeparate(ax::PhysicsContact& contact);
     // a selector callback
     void menuCloseCallback(ax::Object* sender);
 

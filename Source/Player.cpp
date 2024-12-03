@@ -29,11 +29,10 @@ void Player::Selected(Actor* actor)
         if (ac == nullptr)
         {
             ac = actor;
-            actor->mDrawComp->isSelected = true;
+            actor->mDrawComp->isSelected = true;       
             return;
         }
     }
-
     PlayerActors.push_back(actor);
 }
 

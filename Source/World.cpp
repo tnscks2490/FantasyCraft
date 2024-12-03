@@ -65,14 +65,14 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 단순 루트노드 찾기용 코드
     auto drawNode = ax::DrawNode::create();
-    drawNode->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4F::RED);
+    drawNode->drawRect(ax::Vec2(-10, -10), ax::Vec2(10, 10), ax::Color4F::BLUE);
     node->addChild(drawNode);
 
     // 유저데이터 넣기
     // 나중에 위치변경할것
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;
-    draw->mRoot->setUserData(mUserData);
+    node->setUserData(mUserData);
 
     // 월드 엑터리스트에 이 엑터 넣어주기
     Actor_PushBack(actor);
