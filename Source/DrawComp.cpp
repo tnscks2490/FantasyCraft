@@ -55,14 +55,9 @@ ax::Node* DrawComp::CreateRootNode()
         auto body = ax::PhysicsBody::createBox(bodysize);
         body->setTag(10);
         body->setContactTestBitmask(0xFFFFFFFF);
-        body->setDynamic(false);
-        
+        body->setDynamic(false);      
         node->setPhysicsBody(body);
-        
-
-
-
-
+       
         auto draw = ax::DrawNode::create();
         draw->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::RED);
         node->addChild(draw);
@@ -126,6 +121,28 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
     return nullptr;
 }
 
+ax::Node* DrawComp::CreateSelectedNode()
+{
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& info = FindAnimInfo(ECharName::Select, ECharAct::Idle, ECharDir::Face);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName("SelectNode");
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+
+        ax::Action* action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        return node;
+    }
+    return nullptr;
+}
+
 void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
 {
     auto animNode = mRoot->getChildByName("Anim");
@@ -154,5 +171,19 @@ ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
         return ECharDir::Back;
 
     return ECharDir::Face;
+}
+
+void DrawComp::isSelected()
+{
+    if (selected)
+    {
+        auto selectNode = (ax::DrawNode*)mRoot->getChildByName("SelectNode");
+        selectNode->setVisible(true);
+    }
+    else
+    {
+        auto selectNode = (ax::DrawNode*)mRoot->getChildByName("SelectNode");
+        selectNode->setVisible(false);
+    }
 }
 

@@ -13,13 +13,17 @@ AnimInfo g_AnimInfo_Farmer_Idle[] = {
 };
 
 AnimInfo g_AnimInfo_Farmer_Move[] = {
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Face, "Farmer.plist", "Farmer/Move/Face/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Back, "Farmer.plist", "Farmer/Move/Back/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Left, "Farmer.plist", "Farmer/Move/Left/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Right, "Farmer.plist", "Farmer/Move/Right/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Farmer, ECharAct::Move, ECharDir::Face, "Plist/Farmer.plist", "Farmer/Move/Face/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Farmer, ECharAct::Move, ECharDir::Back, "Plist/Farmer.plist", "Farmer/Move/Back/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Farmer, ECharAct::Move, ECharDir::Left, "Plist/Farmer.plist", "Farmer/Move/Left/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Farmer, ECharAct::Move, ECharDir::Right, "Plist/Farmer.plist", "Farmer/Move/Right/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
 
 };
 
+
+AnimInfo g_AnimInfo_Select_Idle[] = {{ECharName::Select, ECharAct::Move, ECharDir::Face, "Plist/Select.plist",
+                                      "Select/%04d.png", 1, 2, (1.f / 2), Vec2(0.5, 0.5), nullptr}
+};
 
 
 AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
@@ -46,6 +50,9 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         default:
             break;
         }
-        break;
+    break;
+    /// farmer
+    case ECharName::Select:
+        return g_AnimInfo_Select_Idle[0];
     }
 }

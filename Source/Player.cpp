@@ -16,7 +16,8 @@ void Player::Clear()
     {
         if (ac)
         {
-            ac->mDrawComp->isSelected = false;
+            ac->mDrawComp->selected = false;
+            ac->mDrawComp->isSelected();
         }
     }
     PlayerActors.clear();
@@ -29,10 +30,13 @@ void Player::Selected(Actor* actor)
         if (ac == nullptr)
         {
             ac = actor;
-            actor->mDrawComp->isSelected = true;       
+            actor->mDrawComp->selected = true;
+            actor->mDrawComp->isSelected();
             return;
         }
     }
+    actor->mDrawComp->selected = true;
+    actor->mDrawComp->isSelected();
     PlayerActors.push_back(actor);
 }
 

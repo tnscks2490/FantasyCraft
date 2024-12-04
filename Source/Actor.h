@@ -7,6 +7,10 @@ class DrawComp;
 class ProjectileComp;
 
 
+
+
+
+
 class Actor
 {
 public:
@@ -32,10 +36,7 @@ public:
     // 컴포넌트
     MoveComp* mMoveComp = nullptr;
     DrawComp* mDrawComp = nullptr;
-
-
     
-
 
 };
 

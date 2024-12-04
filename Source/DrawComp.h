@@ -15,7 +15,7 @@ public:
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
     ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
-
+    ax::Node* CreateSelectedNode();
 
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
@@ -27,7 +27,9 @@ public:
     ECharDir mCurDir    = ECharDir::Face;
 
 
-    bool isSelected = false;
+    void isSelected();
+
+    bool selected = false;
 
 
 public:
