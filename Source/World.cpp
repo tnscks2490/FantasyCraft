@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "MoveComp.h"
 #include "DrawComp.h"
+#include "UnitComp.h"
 
 
 
@@ -43,7 +44,6 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
     // 루트 노드 생성 및 메인씬에 붙이기(그리기 위함)
     auto node = draw->CreateRootNode();
     
-
     draw->mRoot->setPosition(500, 500);
     parent->addChild(node);
 
@@ -62,6 +62,15 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 무브컴포넌트 생성
     auto move = new MoveComp(actor);
+
+
+    // 유닛컴포넌트 생성
+    auto unit = new UnitComp(actor);
+
+
+
+
+
 
 
     // 단순 루트노드 찾기용 코드

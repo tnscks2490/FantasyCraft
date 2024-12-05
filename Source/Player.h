@@ -3,6 +3,13 @@
 class Actor;
 
 
+enum class PlayerRace
+{
+    None,
+    Terran,
+    Protoss,
+    Zerg,
+};
 
 enum class PlayerCommand
 {
@@ -30,6 +37,7 @@ public:
     bool isSelected();
 
     PlayerCommand mCommand = PlayerCommand::Idle;
+    PlayerRace mRace       = PlayerRace::None;
 
 public:
     std::vector<Actor*> PlayerActors;

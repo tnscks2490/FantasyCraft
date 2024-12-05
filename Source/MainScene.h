@@ -79,9 +79,6 @@ public:
     World* mWorld      = nullptr;
     PathFind* mPath;
 
-
-
-
     ax::TMXTiledMap* Map = nullptr;
 
     Player* mPlayer      = nullptr;

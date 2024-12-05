@@ -8,11 +8,20 @@ enum class UnitType
 {
     None = 0,
     GatheringUnit,
+
     BattleUnit,
+    NBattleUnit,
+
     Building,
     BattleBuilding,
 };
-
+enum class UnitRace
+{
+    None,
+    Terran,
+    Protoss,
+    Zerg,
+};
 
 enum class UnitCommand
 {
@@ -40,7 +49,7 @@ enum class UnitArea
 class UnitComp : public IActorComp
 {
 public:
-    UnitComp(Actor* actor) : IActorComp(actor) {}
+    UnitComp(Actor* actor);
     ~UnitComp();
 
     virtual void update(float delta) override;
@@ -55,6 +64,7 @@ public:
 public:
 
     UnitCommand mCurCommand = UnitCommand::Stop;
+    UnitRace mRace               = UnitRace::None;
     UnitCommand mUsingCommand[9] = {UnitCommand::None};
 };
 

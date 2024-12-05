@@ -4,6 +4,7 @@
 
 class MoveComp;
 class DrawComp;
+class UnitComp;
 class ProjectileComp;
 
 
@@ -36,7 +37,7 @@ public:
     // 컴포넌트
     MoveComp* mMoveComp = nullptr;
     DrawComp* mDrawComp = nullptr;
-    
+    UnitComp* mUnitComp = nullptr;
 
 };
 
