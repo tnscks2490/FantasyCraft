@@ -3,8 +3,20 @@
 
 class Actor;
 
+
+enum class UnitType
+{
+    None = 0,
+    GatheringUnit,
+    BattleUnit,
+    Building,
+    BattleBuilding,
+};
+
+
 enum class UnitCommand
 {
+    None = 0,
     Move,           // 이동
     Stop,           // 정지
     Attack,         // 공격
@@ -17,7 +29,7 @@ enum class UnitCommand
     ExtraSkill4,    // 특수 스킬
 };
 
-enum class UnitUpDown
+enum class UnitArea
 {
     None,
     Ground,
@@ -28,14 +40,21 @@ enum class UnitUpDown
 class UnitComp : public IActorComp
 {
 public:
-    UnitComp(Actor* actor): IActorComp(actor){}
+    UnitComp(Actor* actor) : IActorComp(actor) {}
     ~UnitComp();
 
     virtual void update(float delta) override;
 
 
+    // 변경되지 않는 고유의 값
 public:
-    UnitCommand mUcommand = UnitCommand::Stop;
-    UnitUpDown mUUpDown = UnitUpDown::None;
+    UnitArea mArea    = UnitArea::None;
+    UnitType mType        = UnitType::None;
+
+
+public:
+
+    UnitCommand mCurCommand = UnitCommand::Stop;
+    UnitCommand mUsingCommand[9] = {UnitCommand::None};
 };
 

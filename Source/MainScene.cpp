@@ -308,122 +308,55 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
         return false;
     }
     else if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
-    {
-        /*UserData* userDataA = (UserData*)A->getUserData();
-        UserData* userDataB = (UserData*)B->getUserData();
+    {      
+        //UserData* userDataA = (UserData*)A->getUserData();
+        //UserData* userDataB = (UserData*)B->getUserData();
 
-        Actor* actorA = userDataA->mActor;
-        Actor* actorB = userDataB->mActor;
-
-        std::vector<ax::Vec2> aroundPos;
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(-40, 0));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(-40, 40));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(-40, -40));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(0, 40));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(0, -40));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(40, 40));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(40, 0));
-        aroundPos.push_back(actorB->GetPosition() + ax::Vec2(40, -40));
-
-        float len = 10000000000;
-        ax::Vec2 pos;
-        for (auto t : aroundPos)
-        {
-            int x = t.x/16;
-            int y = t.y/16;
-            if (!mPath->mColMap->IsCollision(x, y))
-            {
-                if (actorA->GetPosition().distance(t) < len)
-                {
-                    len = actorA->GetPosition().distance(t);
-                    pos = t;
-                }
-            }
-            if (actorA->GetPosition().distance(t) < len)
-            {
-                len = actorA->GetPosition().distance(t);
-                pos = t;
-            }
-        }
+        //Actor* actorA = userDataA->mActor;
+        //Actor* actorB = userDataB->mActor;
 
 
-        if (actorA->mMoveComp->mTargetList.size() == 0)
-        {
-            actorA->mMoveComp->mTargetList.emplace_front(pos);
-            return false;
-        }
-        else
-        {
-            actorA->mMoveComp->IsMoving = false;
-            actorA->mMoveComp->SetPath(mPath, actorA->mMoveComp->mTarget);
-            return false;
-        }
+        //if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
+        //    actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        //{
+        //    actorB->mMoveComp->IfCollisionMove(actorA->mMoveComp->mBodyBorder);  
+        //    actorB->mMoveComp->IsMoving = false;
+        //}
+        //else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
+        //         actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        //{
+        //    actorA->mMoveComp->IfCollisionMove(actorB->mMoveComp->mBodyBorder);  
+        //    actorA->mMoveComp->IsMoving = false;
+        //}
 
-*/
-        UserData* userDataA = (UserData*)A->getUserData();
-        UserData* userDataB = (UserData*)B->getUserData();
-
-        Actor* actorA = userDataA->mActor;
-        Actor* actorB = userDataB->mActor;
-
-        struct lrtb
-        {
-            float left;
-            float right;
-            float top;
-            float bottom;
-        };
-
-        lrtb Alrtb;
-        lrtb Blrtb;
-
-        Alrtb.left   = actorA->GetPosition().x - 8.f;
-        Alrtb.right  = actorA->GetPosition().x + 8.f;
-        Alrtb.bottom = actorA->GetPosition().y - 8.f;
-        Alrtb.top    = actorA->GetPosition().y + 8.f;
-
-        Blrtb.left   = actorB->GetPosition().x - 8.f;
-        Blrtb.right  = actorB->GetPosition().x + 8.f;
-        Blrtb.bottom = actorB->GetPosition().y - 8.f;
-        Blrtb.top    = actorB->GetPosition().y + 8.f;
-
-        float Left   = Alrtb.left - Blrtb.right;
-        float Right  = Blrtb.left - Alrtb.right;
-        float Top    = Alrtb.top - Blrtb.bottom;
-        float Bottom = Blrtb.top - Alrtb.bottom;
-
-        if (Right <= 0 || Left <= 0 || Top <= 0 || Bottom <= 0)
-        {
-            if (Right >= Left && Right >= Top && Right >= Bottom)
-            {
-
-                float sx = actorA->GetPosition().x + Right;
-                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(sx, actorA->GetPosition().y));
-            }
-            else if (Left >= Right && Left >= Top && Left >= Bottom)
-            {
-                float sx = actorA->GetPosition().x - Left;
-                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(sx, actorA->GetPosition().y));
-            }
-            else if (Top >= Right && Top >= Left && Top >= Bottom)
-            {
-                float sy = actorA->GetPosition().y - Top;
-                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(actorA->GetPosition().x, sy));
-            }
-            else
-            {
-                float sy = actorA->GetPosition().y + Bottom;
-                actorA->mMoveComp->mTargetList.emplace_front(ax::Vec2(actorA->GetPosition().x, sy));
-            }
-        }
-         
-        return true;
+        //return true;
     }
     return true;
 }
 
 void MainScene::onContactSeparate(ax::PhysicsContact& contact)
 {
+
+    auto A = contact.getShapeA()->getBody()->getNode();
+    auto B = contact.getShapeB()->getBody()->getNode();
+
+    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    {
+        UserData* userDataA = (UserData*)A->getUserData();
+        UserData* userDataB = (UserData*)B->getUserData();
+
+        Actor* actorA = userDataA->mActor;
+        Actor* actorB = userDataB->mActor;
+
+        if (!actorA->mMoveComp->IsMoving)
+        {
+            actorA->mMoveComp->IsMoving = true;
+        }
+        else if (!actorB->mMoveComp->IsMoving)
+        {
+            actorB->mMoveComp->IsMoving = true;
+        }
+    }
 }
 
 void MainScene::update(float delta)
@@ -431,7 +364,7 @@ void MainScene::update(float delta)
     
     // 마우스가 화면 끝으로 갔을 때 화면 전체를 옮긴다.
     // 해당기능은 마우스의 위치백터만큼 화면에 더해야한다.
-    //ScreenMove(delta);
+    ScreenMove(delta);
 
 
     switch (_gameState)
@@ -614,29 +547,36 @@ void MainScene::ScreenMove(float delta)
 {
     auto mCursorPos = mCursor->GetPosition();
 
-    //mTimer += delta;
 
-    ax::Vec2 mapPos = Map->getPosition();
-    if (mCursorPos.x > visibleSize.x - 32)
+    ScreenMoveTimer += delta;
+
+    if (ScreenMoveTimer > 0.02f)
     {
-        mapPos.x -= 8;
-        Map->setPosition(mapPos);
+        ScreenMoveTimer = 0;
+        ax::Vec2 mapPos = Map->getPosition();
+        if (mCursorPos.x > visibleSize.x - 32 && mapPos.x > -768)
+        {
+            mapPos.x -= 8;
+            Map->setPosition(mapPos);
+        }
+        else if (mCursorPos.x < 32 && mapPos.x < 0)
+        {
+            mapPos.x += 8;
+            Map->setPosition(mapPos);
+        }
+        else if (mCursorPos.y > 672 && mapPos.y > -1328)
+        {
+            mapPos.y -= 8;
+            Map->setPosition(mapPos);
+        }
+        else if (mCursorPos.y < 48 && mapPos.y < 0)
+        {
+            mapPos.y += 8;
+            Map->setPosition(mapPos);
+        }
     }
-    else if (mCursorPos.x < 32)
-    {
-        mapPos.x += 8;
-        Map->setPosition(mapPos);
-    }
-    else if (mCursorPos.y > 672)
-    {
-        mapPos.y -= 8;
-        Map->setPosition(mapPos);
-    }
-    else if (mCursorPos.y < 48)
-    {
-        mapPos.y += 8;
-        Map->setPosition(mapPos);
-    }
+
+   
 }
 
 

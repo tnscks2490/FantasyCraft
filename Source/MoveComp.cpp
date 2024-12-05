@@ -26,8 +26,8 @@ void MoveComp::update(float delta)
         ax::Vec2 pos = mActor->GetRoot()->getPosition();
         mCurFrameMovement = mVelocity * delta * mSpeed;
         pos += mCurFrameMovement;
-  
         mActor->GetRoot()->setPosition(pos);
+        UpdateBodyRect();
     }
 }
 
@@ -88,6 +88,67 @@ void MoveComp::CheckTargetList()
         SetTarget(pos);
     }
 }
+
+void MoveComp::UpdateBodyRect()
+{
+    mBodyBorder.left = mActor->GetPosition().x - 8.f;
+    mBodyBorder.right = mActor->GetPosition().x + 8.f;
+    mBodyBorder.bottom = mActor->GetPosition().y - 8.f;
+    mBodyBorder.top    = mActor->GetPosition().y + 8.f;
+}
+
+//void MoveComp::IfCollisionMove(Border other)
+//{
+//    float Left   = mBodyBorder.left - other.right;
+//    float Right  = other.left - mBodyBorder.right;
+//    float Top    = mBodyBorder.top - other.bottom;
+//    float Bottom = other.top - mBodyBorder.bottom;
+//
+//
+//    if (Right <= 0 && Left <= 0 && Top <= 0 && Bottom <= 0)
+//    {
+//        if (Right >= Left && Right >= Top && Right >= Bottom)
+//        {
+//            float sx = mActor->GetPosition().x + Right;
+//            if (mActor->mMoveComp->mTargetList.size() < 1)
+//                mActor->mMoveComp->mTargetList.emplace_front(ax::Vec2(sx, mActor->GetPosition().y));
+//            else
+//            { 
+//                  mActor->mMoveComp->mTarget = ax::Vec2(sx, mActor->GetPosition().y);
+//            }
+//        }
+//        else if (Left >= Right && Left >= Top && Left >= Bottom)
+//        {
+//            float sx = mActor->GetPosition().x - Left;
+//            if (mActor->mMoveComp->mTargetList.size() < 1)
+//                mActor->mMoveComp->mTargetList.emplace_front(ax::Vec2(sx, mActor->GetPosition().y));
+//            else
+//            {
+//                mActor->mMoveComp->mTarget = ax::Vec2(sx, mActor->GetPosition().y);
+//            }
+//        }
+//        else if (Top >= Right && Top >= Left && Top >= Bottom)
+//        {
+//            float sy = mActor->GetPosition().y - Top;
+//            if (mActor->mMoveComp->mTargetList.size() < 1)
+//                mActor->mMoveComp->mTargetList.emplace_front(ax::Vec2(mActor->GetPosition().x, sy));
+//            else
+//            {
+//                mActor->mMoveComp->mTarget = ax::Vec2(mActor->GetPosition().x, sy);
+//            }
+//        }
+//        else if (Bottom >= Right && Bottom >= Left && Bottom >= Top)
+//        {
+//            float sy = mActor->GetPosition().y + Bottom;
+//            if (mActor->mMoveComp->mTargetList.size() < 1)
+//                mActor->mMoveComp->mTargetList.emplace_front(ax::Vec2(mActor->GetPosition().x, sy));
+//            else
+//            {
+//                mActor->mMoveComp->mTarget = ax::Vec2(mActor->GetPosition().x, sy);
+//            }
+//        }
+//    }
+//}
 
 void MoveComp::SetTarget(ax::Vec2 target)
 {

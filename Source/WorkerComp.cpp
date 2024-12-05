@@ -3,7 +3,8 @@
 WorkerComp::WorkerComp(Actor* actor)
     : UnitComp(actor)
 {
-    mUUpDown = UnitUpDown::Ground;
+    mArea = UnitArea::Ground;
+    mType = UnitType::GatheringUnit;
 }
 
 WorkerComp::~WorkerComp() {}

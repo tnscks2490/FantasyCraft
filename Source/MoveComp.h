@@ -5,6 +5,15 @@
 class Actor;
 class PathFind;
 
+struct Border
+{
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
+
+
 class MoveComp : public IActorComp
 {
 public:
@@ -22,6 +31,9 @@ public:
     bool IsArrive();
     void Do_Moving();
     void CheckTargetList();
+    void UpdateBodyRect();
+
+    //void IfCollisionMove(Border other);
 
 public:
     //멤버 변수
@@ -34,6 +46,7 @@ public:
     ax::Vec2 mTarget;
     ax::Vec2 mVelocity;
     ax::Vec2 mCurFrameMovement;
+    Border mBodyBorder;
 
 public:
     //정해진 값

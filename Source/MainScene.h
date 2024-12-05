@@ -69,29 +69,22 @@ public:
 
     void Decording();
 
-
-
-    
-
     void ScreenMove(float delta);
 
     float mTimer = 0.f;
-
+    float ScreenMoveTimer = 0.f;
 
 public:
     TcpClient* mClient = nullptr;
     World* mWorld      = nullptr;
     PathFind* mPath;
 
+
+
+
     ax::TMXTiledMap* Map = nullptr;
 
-
     Player* mPlayer      = nullptr;
-
-
-
-
-
     Cursor* mCursor = nullptr;
 
     

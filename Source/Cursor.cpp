@@ -97,11 +97,8 @@ void Cursor::CheckNodeInDrag()
     boxSize.y = std::max(sPos.y, ePos.y) - std::min(sPos.y, ePos.y);
 
     auto body = ax::PhysicsBody::createBox(boxSize);
-    body->setGravityEnable(false);
-    body->setRotationEnable(false);
     body->setContactTestBitmask(0xFFFFFFFF);
-
-    body->setDynamic(true);
+    body->setDynamic(false);
 
     checknode->setPhysicsBody(body);
 

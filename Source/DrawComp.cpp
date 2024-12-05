@@ -50,12 +50,12 @@ ax::Node* DrawComp::CreateRootNode()
 
         ax::Vec2 bodysize(16, 16);
 
-        node->setAnchorPoint(ax::Vec2(0.5f, 0.5f));
 
         auto body = ax::PhysicsBody::createBox(bodysize);
         body->setTag(10);
         body->setContactTestBitmask(0xFFFFFFFF);
         body->setDynamic(false);      
+        node->setAnchorPoint(ax::Vec2(0.5f, 0.5f));
         node->setPhysicsBody(body);
        
         auto draw = ax::DrawNode::create();
