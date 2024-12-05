@@ -67,19 +67,15 @@ public:
     void menuCloseCallback(ax::Object* sender);
 
 
-
-public:
-    // 게임 스크린 관련 코딩
-    void ScreenMove(float delta);
-    void SetGameScale(float s);
-    
-    float mTimer = 0.f;
-    float mGameScale;
-
-public:
-
-    // 서버 관련 함수
     void Decording();
+
+
+
+    
+
+    void ScreenMove(float delta);
+
+    float mTimer = 0.f;
 
 
 public:
@@ -88,12 +84,17 @@ public:
     PathFind* mPath;
 
     ax::TMXTiledMap* Map = nullptr;
+
+
     Player* mPlayer      = nullptr;
+
+
+
+
+
     Cursor* mCursor = nullptr;
 
-
-
-
+    
 public:
     //Scene의 고정 값들
     

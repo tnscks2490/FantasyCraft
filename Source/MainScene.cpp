@@ -106,9 +106,6 @@ bool MainScene::init()
     //mCursor = ax::Node::create();
     //mCursor->setPosition(500, 500);
 
-
-    SetGameScale(getScale());
-
     Map = ax::TMXTiledMap::create("Map/python/python.tmx");
     addChild(Map);
 
@@ -144,7 +141,6 @@ void MainScene::onMouseDown(Event* event)
 
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
-    mousePos = mousePos / mGameScale;
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
@@ -188,8 +184,6 @@ void MainScene::onMouseMove(Event* event)
     mousepos.x = e->getCursorX();
     mousepos.y = e->getCursorY();
 
-    mousepos = mousepos / mGameScale;
-
     mCursor->GetRoot()->setPosition(mousepos);
     if (mCursor->isDraging)
     { 
@@ -204,11 +198,6 @@ void MainScene::onMouseMove(Event* event)
 void MainScene::onMouseScroll(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
-
-    if (e->getScrollY() < 0)
-        SetGameScale(mGameScale + 0.1f);
-    else if (e->getScrollY() > 0)
-        SetGameScale(mGameScale - 0.1f);
 }
 
 void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
@@ -649,15 +638,5 @@ void MainScene::ScreenMove(float delta)
         Map->setPosition(mapPos);
     }
 }
-
-void MainScene::SetGameScale(float s)
-{
-    mGameScale = s;
-    if (mGameScale < 1.f)
-        mGameScale = 1.0f;
-
-    setScale(mGameScale);
-}
-
 
 
