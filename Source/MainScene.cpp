@@ -107,7 +107,7 @@ bool MainScene::init()
     //mCursor->setPosition(500, 500);
 
 
-    //this->setScale(2.f);
+    SetGameScale(getScale());
 
     Map = ax::TMXTiledMap::create("Map/python/python.tmx");
     addChild(Map);
@@ -188,6 +188,8 @@ void MainScene::onMouseMove(Event* event)
     mousepos.x = e->getCursorX();
     mousepos.y = e->getCursorY();
 
+    mousepos = mousepos / mGameScale;
+
     mCursor->GetRoot()->setPosition(mousepos);
     if (mCursor->isDraging)
     { 
@@ -203,6 +205,10 @@ void MainScene::onMouseScroll(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
 
+    if (e->getScrollY() < 0)
+        SetGameScale(mGameScale + 0.1f);
+    else if (e->getScrollY() > 0)
+        SetGameScale(mGameScale - 0.1f);
 }
 
 void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
@@ -622,30 +628,36 @@ void MainScene::ScreenMove(float delta)
     //mTimer += delta;
 
     ax::Vec2 mapPos = Map->getPosition();
-    if (mCursorPos.x > visibleSize.x - 32 && mapPos.x > -768)
+    if (mCursorPos.x > visibleSize.x - 32)
     {
         mapPos.x -= 8;
         Map->setPosition(mapPos);
     }
-    else if (mCursorPos.x < 32 && mapPos.x < 0 )
+    else if (mCursorPos.x < 32)
     {
         mapPos.x += 8;
         Map->setPosition(mapPos);
     }
-    else if (mCursorPos.y > 672 && mapPos.y > -1328 )
+    else if (mCursorPos.y > 672)
     {
         mapPos.y -= 8;
-        printf("%f 길이\n", mapPos.y);
         Map->setPosition(mapPos);
     }
-    else if (mCursorPos.y < 48 && mapPos.y < 0)
+    else if (mCursorPos.y < 48)
     {
         mapPos.y += 8;
         Map->setPosition(mapPos);
     }
 }
 
+void MainScene::SetGameScale(float s)
+{
+    mGameScale = s;
+    if (mGameScale < 1.f)
+        mGameScale = 1.0f;
 
+    setScale(mGameScale);
+}
 
 
 

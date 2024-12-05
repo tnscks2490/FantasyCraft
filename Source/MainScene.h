@@ -71,6 +71,7 @@ public:
 public:
     // 게임 스크린 관련 코딩
     void ScreenMove(float delta);
+    void SetGameScale(float s);
     
     float mTimer = 0.f;
     float mGameScale;
