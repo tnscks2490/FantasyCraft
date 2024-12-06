@@ -29,6 +29,7 @@
 #include "World.h"
 #include "JPSPathFinder.h"
 #include "PreDefines.h"
+#include "MapLayer.h"
 
 
 
@@ -79,6 +80,10 @@ public:
     World* mWorld      = nullptr;
     PathFind* mPath;
 
+
+
+    MapLayer* mMapLayer = nullptr;
+
     ax::TMXTiledMap* Map = nullptr;
 
     Player* mPlayer      = nullptr;
@@ -92,8 +97,7 @@ public:
     ax::Vec2 visibleSize;
 
     // 총 타일의 갯수 각 타일별 16 x 16 픽셀이다
-    int width = 128;
-    int height = 128;
+    
 
     int selectidx = -1;
 

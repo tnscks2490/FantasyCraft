@@ -106,12 +106,15 @@ bool MainScene::init()
     //mCursor = ax::Node::create();
     //mCursor->setPosition(500, 500);
 
-    Map = ax::TMXTiledMap::create("Map/python/python.tmx");
-    addChild(Map);
 
-    mPath     = new PathFind(width, height);
+    mMapLayer = MapLayer::create();
+    mMapLayer->mPhysicsWorld = getPhysicsWorld();
+    this->addChild(mMapLayer);
 
-    auto wall = Map->getLayer("MetaInfo");
+
+    mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
+
+    auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
     mPath->DefaultSetting(wall);
 
     // 플레이어 생성
@@ -127,8 +130,6 @@ bool MainScene::init()
     drawNode->setPosition(Vec2(0, 0));
     addChild(drawNode);
     drawNode->drawRect(safeArea.origin + Vec2(1, 1), safeArea.origin + safeArea.size, Color4B::BLUE);
-
-
 
     scheduleUpdate();
     return true;
@@ -477,7 +478,7 @@ void MainScene::Decording()
 
             if (data.ClientID == TcpClient::get()->GetID())
             {
-                Actor* actor = World::get()->CreateActor(this,data);
+                Actor* actor = World::get()->CreateActor(mMapLayer,data);
             }
             if (true)
             {
@@ -553,26 +554,26 @@ void MainScene::ScreenMove(float delta)
     if (ScreenMoveTimer > 0.02f)
     {
         ScreenMoveTimer = 0;
-        ax::Vec2 mapPos = Map->getPosition();
+        ax::Vec2 mapPos = mMapLayer->GetMap()->getPosition();
         if (mCursorPos.x > visibleSize.x - 32 && mapPos.x > -768)
         {
             mapPos.x -= 8;
-            Map->setPosition(mapPos);
+            mMapLayer->GetMap()->setPosition(mapPos);
         }
         else if (mCursorPos.x < 32 && mapPos.x < 0)
         {
             mapPos.x += 8;
-            Map->setPosition(mapPos);
+            mMapLayer->GetMap()->setPosition(mapPos);
         }
         else if (mCursorPos.y > 672 && mapPos.y > -1328)
         {
             mapPos.y -= 8;
-            Map->setPosition(mapPos);
+            mMapLayer->GetMap()->setPosition(mapPos);
         }
         else if (mCursorPos.y < 48 && mapPos.y < 0)
         {
             mapPos.y += 8;
-            Map->setPosition(mapPos);
+            mMapLayer->GetMap()->setPosition(mapPos);
         }
     }
 

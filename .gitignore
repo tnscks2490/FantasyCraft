@@ -13,3 +13,8 @@
 /run.bat.in
 /build
 /run.bat
+/Source/Cgdi.cpp
+/Source/Cgdi.h
+/Source/Vector2d.cpp
+/Source/Vector2D.h
+/Source/Wall2D.h

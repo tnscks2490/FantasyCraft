@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "DetectionComp.h"
 
 DetectionComp::~DetectionComp() {}

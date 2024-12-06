@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.0" name="TMXTileSet_Animations" tilewidth="16" tileheight="16" tilecount="7308" columns="126">
- <image source="TMXTileSet_Animations.png" width="2016" height="928"/>
+ <image source="../../../../TestClient/Content/TMXMap/Python/TMXTileSet_Animations.png" width="2016" height="928"/>
  <tile id="0">
   <animation>
    <frame tileid="724" duration="200"/>
@@ -130,5 +130,10 @@
    <frame tileid="998" duration="200"/>
    <frame tileid="1003" duration="200"/>
   </animation>
+ </tile>
+ <tile id="4996">
+  <properties>
+   <property name="ConectedNum" type="int" value="1"/>
+  </properties>
  </tile>
 </tileset>

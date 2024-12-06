@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "GatheringComp.h"
 
 GatheringComp::GatheringComp(Actor* actor)

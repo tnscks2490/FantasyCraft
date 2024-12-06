@@ -1,4 +1,6 @@
+#include "pch.h"
 #include <algorithm>	
+
 
 #include "JPSPathFinder.h"
 
