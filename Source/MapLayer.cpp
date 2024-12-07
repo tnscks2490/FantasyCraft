@@ -23,14 +23,23 @@ void MapLayer::CreateWalls()
 {
     auto wallLayer = mMap->getLayer("MetaInfo");
 
-    auto  t = wallLayer->getProperty("Wall");
-
+    
 
     for (int i = 0; i < mHeight; i++)
     {
         for (int j = 0; j < mWidth; j++)
         {
+            auto t = wallLayer->getTileGIDAt(ax::Vec2(j,i));
+            if (t == 0)
+                printf("O ");
+            else
+            {
+                printf("%d|", t);
+            }
+            
+
         }
+        printf("\n");
     }
 
 
