@@ -57,6 +57,7 @@ public:
     std::list<ax::Vec2> mTargetList;
 
     ax::Vec2 mTarget;
+    ax::Vec2 mLastTarget;
     ax::Vec2 mVelocity;
     ax::Vec2 mCurFrameMovement;
     ax::Vec2 mHeading;

@@ -274,24 +274,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
     if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
-        UserData* userDataA = (UserData*)A->getUserData();
-        UserData* userDataB = (UserData*)B->getUserData();
-
-        Actor* actorA = userDataA->mActor;
-        Actor* actorB = userDataB->mActor;
-
-        if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
-            actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
-        {
-            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
-        }
-        else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
-                 actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
-        {
-            actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
-        }
-
-        return true;
+        
     }
 
     return true;
@@ -326,19 +309,25 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
 
-        if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
-            actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+
+       
+
+        //actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
+        /*if (!actorA->mMoveComp->IsMoving)
+            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
+        else if (!actorB->mMoveComp->IsMoving)
+            actorA->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
+        else if (actorB->mMoveComp->IsMoving && actorA->mMoveComp->IsMoving)
+            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);*/
+        if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) <
+            actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
-            actorB->mMoveComp->mTargetList.clear();
-            actorB->mMoveComp->IsMoving = false;
-            //actorB->mMoveComp->mTarget  = ax::Vec2::ZERO;
+            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
         }
-        else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
-                 actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        else if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) >
+                 actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
-            actorA->mMoveComp->mTargetList.clear();
-            actorA->mMoveComp->IsMoving = false;
-            //actorA->mMoveComp->mTarget  = ax::Vec2::ZERO;
+            actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
         }
 
         return true;
@@ -360,13 +349,15 @@ void MainScene::onContactSeparate(ax::PhysicsContact& contact)
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
 
-        if (actorA->mMoveComp->IsCollision)
+        if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) <
+            actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
-            actorA->mMoveComp->SetPath(World::get()->mPath, actorA->mMoveComp->mTarget);
+            actorB->mMoveComp->SetPath(World::get()->mPath, actorB->mMoveComp->mLastTarget);
         }
-        else if (actorB->mMoveComp->IsCollision)
+        else if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) >
+                 actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
-            actorB->mMoveComp->SetPath(World::get()->mPath, actorB->mMoveComp->mTarget);
+            actorA->mMoveComp->SetPath(World::get()->mPath, actorA->mMoveComp->mLastTarget);
         }
     }
 }

@@ -46,8 +46,6 @@ ax::Node* DrawComp::CreateRootNode()
 
         node->setName("Root");
 
-        auto met = ax::PhysicsMaterial(0.1,1.0f,0.f);
-
         ax::Vec2 bodysize(16, 16);
 
 

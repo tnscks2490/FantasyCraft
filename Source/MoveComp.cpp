@@ -74,7 +74,7 @@ bool MoveComp::IsArrive()
             int x = (int)mypos.x / 16;
             int y = (int)mypos.y / 16;
             World::get()->mPath->mColMap->SetAt(x, y);
-            World::get()->mPath->DebugMap();
+            //World::get()->mPath->DebugMap();
         }
         return true;
     }
@@ -290,30 +290,31 @@ void MoveComp::CollisionMove(Border other)
 
     ax::Vec2 movePos = mActor->GetPosition();
 
-    if (right <= 0 && left <= 0 && top <= 0 && bottom <= 0)
+    if (right <= 0 || left <= 0 || top <= 0 || bottom <= 0)
     {
-        if (right >= left && right >= top && right >= bottom)
+        if (right >= left || right >= top || right >= bottom)
         {
             movePos.x += right;
             //sx += right
         }
-        else if (left >= right && left >= top && left >= bottom)
+        else if (left >= right || left >= top || left >= bottom)
         {
             movePos.x -= left;
             //sx -= left
         }
-        else if (top >= right && top >= left && top >= bottom)
+        else if (top >= right || top >= left || top >= bottom)
         {
             movePos.y -= top;
             //sy -= top
         }
-        else
+        else if (bottom >= right || bottom >= top || bottom >= left)
         {
             movePos.y += bottom;
             // sy += bottom
         }
     }
-    mActor->SetPosition(movePos);
+
+    SetTarget(movePos);
 }
 
 bool MoveComp::IsContacted(Border other)
@@ -371,6 +372,7 @@ void MoveComp::SetPath(PathFind* path, ax::Vec2 targetPos)
         mTargetList.push_back(pos);
     }
     mTargetList.pop_front();
+    mLastTarget = targetPos;
 }
 
 float MoveComp::length(ax::Vec2 v1, ax::Vec2 v2)
