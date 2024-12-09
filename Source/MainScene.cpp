@@ -112,10 +112,10 @@ bool MainScene::init()
     this->addChild(mMapLayer);
 
 
-    mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
+    World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 
     auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
-    mPath->DefaultSetting(wall);
+    World::get()->mPath->DefaultSetting(wall);
 
     // 플레이어 생성
     mPlayer   = new Player;
@@ -207,11 +207,11 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     {
 
         printf("\n");
-        for (int i = 0; i < mPath->mColMap->GetHeight(); i++)
+        for (int i = 0; i < World::get()->mPath->mColMap->GetHeight(); i++)
         {
-            for (int j = 0; j < mPath->mColMap->GetWidth(); j++)
+            for (int j = 0; j < World::get()->mPath->mColMap->GetWidth(); j++)
             {
-                if (mPath->mColMap->IsCollision(j, i))
+                if (World::get()->mPath->mColMap->IsCollision(j, i))
                     printf("O");
                 else
                     printf(" ");
@@ -271,18 +271,30 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
-    //if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
-    //{
 
-    //    /*UserData* userDataA = (UserData*)A->getUserData();
-    //    UserData* userDataB = (UserData*)B->getUserData();
+    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    {
+        UserData* userDataA = (UserData*)A->getUserData();
+        UserData* userDataB = (UserData*)B->getUserData();
 
-    //    Actor* actorA               = userDataA->mActor;
-    //    Actor* actorB               = userDataB->mActor;
+        Actor* actorA = userDataA->mActor;
+        Actor* actorB = userDataB->mActor;
 
-    //    actorA->mMoveComp->IsMoving = false;
-    //    actorA->mMoveComp->SetPath(mPath, actorA->mMoveComp->mTarget);  */ 
-    //}
+        if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
+            actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        {
+            actorB->mMoveComp->Avoid();
+            actorB->mMoveComp->IsCollision = true;
+        }
+        else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
+                 actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        {
+            actorA->mMoveComp->Avoid();
+            actorA->mMoveComp->IsCollision = true;
+        }
+
+        return true;
+    }
 
     return true;
 }
@@ -308,29 +320,30 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
             mPlayer->Selected(userData->mActor);
         return false;
     }
-    else if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
-    {      
-        //UserData* userDataA = (UserData*)A->getUserData();
-        //UserData* userDataB = (UserData*)B->getUserData();
+    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    {
+        UserData* userDataA = (UserData*)A->getUserData();
+        UserData* userDataB = (UserData*)B->getUserData();
 
-        //Actor* actorA = userDataA->mActor;
-        //Actor* actorB = userDataB->mActor;
+        Actor* actorA = userDataA->mActor;
+        Actor* actorB = userDataB->mActor;
 
+        if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
+            actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        {
+            actorB->mMoveComp->mTargetList.clear();
+            actorB->mMoveComp->IsMoving = false;
+            //actorB->mMoveComp->mTarget  = ax::Vec2::ZERO;
+        }
+        else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
+                 actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
+        {
+            actorA->mMoveComp->mTargetList.clear();
+            actorA->mMoveComp->IsMoving = false;
+            //actorA->mMoveComp->mTarget  = ax::Vec2::ZERO;
+        }
 
-        //if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
-        //    actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
-        //{
-        //    actorB->mMoveComp->IfCollisionMove(actorA->mMoveComp->mBodyBorder);  
-        //    actorB->mMoveComp->IsMoving = false;
-        //}
-        //else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
-        //         actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
-        //{
-        //    actorA->mMoveComp->IfCollisionMove(actorB->mMoveComp->mBodyBorder);  
-        //    actorA->mMoveComp->IsMoving = false;
-        //}
-
-        //return true;
+        return true;
     }
     return true;
 }
@@ -349,13 +362,13 @@ void MainScene::onContactSeparate(ax::PhysicsContact& contact)
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
 
-        if (!actorA->mMoveComp->IsMoving)
+        if (actorA->mMoveComp->IsCollision)
         {
-            actorA->mMoveComp->IsMoving = true;
+            actorA->mMoveComp->SetPath(World::get()->mPath, actorA->mMoveComp->mTarget);
         }
-        else if (!actorB->mMoveComp->IsMoving)
+        else if (actorB->mMoveComp->IsCollision)
         {
-            actorB->mMoveComp->IsMoving = true;
+            actorB->mMoveComp->SetPath(World::get()->mPath, actorB->mMoveComp->mTarget);
         }
     }
 }
@@ -508,7 +521,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(mPath,data.pos);
+                    actor->mMoveComp->SetPath(World::get()->mPath, data.pos);
                 }
             }
         }
@@ -530,7 +543,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(mPath, data.pos);
+                    actor->mMoveComp->SetPath(World::get()->mPath, data.pos);
                 }
             }
             break;

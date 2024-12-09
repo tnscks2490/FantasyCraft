@@ -33,24 +33,46 @@ public:
     void CheckTargetList();
     void UpdateBodyRect();
 
-    //void IfCollisionMove(Border other);
+    ax::Vec2 CalcVelocity(ax::Vec2 force);
+
+    ax::Vec2 Separation(std::vector<Actor*>& actor);
+    ax::Vec2 Alignment(std::vector<Actor*>& actors);
+    ax::Vec2 Cohesion(std::vector<Actor*>& actor);
+    void TagNeighbors(std::vector<Actor*> ActorList, double radius);
+    bool AccumulateForce(ax::Vec2 RunningTot, ax::Vec2 ForceToAdd);
+
+    bool IsContacted(Border other);
+    void Avoid();
 
 public:
     //멤버 변수
 
     bool IsMoving     = false;
+    bool IsCollision  = false;
     bool IsPathMoving = false;
+    bool mTag       = false;
 
     std::list<ax::Vec2> mTargetList;
 
     ax::Vec2 mTarget;
     ax::Vec2 mVelocity;
     ax::Vec2 mCurFrameMovement;
+    ax::Vec2 mHeading;
+   
+
     Border mBodyBorder;
 
 public:
     //정해진 값
     float mSpeed = 100.0f;
     float mTimer = 0.f;
+
+    double mWeightSeparation = 200.0;
+    double mWeightAlignment  = 200.0;
+    double mWeightCohesion   = 400.0;
+    double mMaxForce         = 400;
+    double mMaxSpeed = 50;
+    double mMass = 1.0;  
+
 };
 

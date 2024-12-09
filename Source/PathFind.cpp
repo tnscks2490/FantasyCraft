@@ -38,3 +38,22 @@ void PathFind::DefaultSetting(ax::TMXLayer* wall)
         }
     }
 }
+
+void PathFind::DebugMap()
+{
+    for (int i = 0; i < mHeight; i++)
+    {
+        for (int j = 0; j < mWidth; j++)
+        {
+            if (mColMap->IsCollision(j, i))
+            {
+                printf("1");
+            }
+            else
+            {
+                printf("0");
+            }
+        }
+        printf("\n");
+    }
+}

@@ -2,6 +2,8 @@
 #include "PrePacket.h"
 
 class Actor;
+class PathFind;
+
 struct UserData
 {
     Actor* mActor;
@@ -24,5 +26,6 @@ public:
 
 public:
     std::vector<Actor*> w_ActorList;
+    PathFind* mPath;
 };
 

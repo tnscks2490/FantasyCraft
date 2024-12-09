@@ -11,7 +11,8 @@ public:
     ~PathFind() {}
 
     void DefaultSetting(ax::TMXLayer* wall);
-    
+    void DebugMap();
+
 public:
 
     jpspath::CollisionMap::SharedPtr mColMap = nullptr;

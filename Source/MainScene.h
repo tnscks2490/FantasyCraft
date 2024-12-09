@@ -78,7 +78,6 @@ public:
 public:
     TcpClient* mClient = nullptr;
     World* mWorld      = nullptr;
-    PathFind* mPath;
 
 
 
