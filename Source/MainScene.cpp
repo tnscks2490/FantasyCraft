@@ -283,14 +283,12 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
         if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) <
             actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
         {
-            actorB->mMoveComp->Avoid();
-            actorB->mMoveComp->IsCollision = true;
+            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
         }
         else if (actorA->GetPosition().distance(actorA->mMoveComp->mTarget) >
                  actorB->GetPosition().distance(actorB->mMoveComp->mTarget))
         {
-            actorA->mMoveComp->Avoid();
-            actorA->mMoveComp->IsCollision = true;
+            actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
         }
 
         return true;

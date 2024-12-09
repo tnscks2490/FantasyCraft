@@ -40,7 +40,7 @@ void MoveComp::update(float delta)
 
 
         // 충돌했을때 겹치지 않게 하는 코드 
-        //UpdateBodyRect();
+        UpdateBodyRect();
     }
 }
 
@@ -70,6 +70,7 @@ bool MoveComp::IsArrive()
     {
         if (mTargetList.size() < 1)
         {
+
             int x = (int)mypos.x / 16;
             int y = (int)mypos.y / 16;
             World::get()->mPath->mColMap->SetAt(x, y);
@@ -276,6 +277,43 @@ bool MoveComp::AccumulateForce(ax::Vec2 RunningTot, ax::Vec2 ForceToAdd)
 
         return true;
     }
+}
+
+void MoveComp::CollisionMove(Border other)
+{
+    
+    float left   = mBodyBorder.left - other.right;
+    float right  = other.left - mBodyBorder.right;
+    float top    = mBodyBorder.top - other.bottom;
+    float bottom = other.top - mBodyBorder.bottom;
+
+
+    ax::Vec2 movePos = mActor->GetPosition();
+
+    if (right <= 0 && left <= 0 && top <= 0 && bottom <= 0)
+    {
+        if (right >= left && right >= top && right >= bottom)
+        {
+            movePos.x += right;
+            //sx += right
+        }
+        else if (left >= right && left >= top && left >= bottom)
+        {
+            movePos.x -= left;
+            //sx -= left
+        }
+        else if (top >= right && top >= left && top >= bottom)
+        {
+            movePos.y -= top;
+            //sy -= top
+        }
+        else
+        {
+            movePos.y += bottom;
+            // sy += bottom
+        }
+    }
+    mActor->SetPosition(movePos);
 }
 
 bool MoveComp::IsContacted(Border other)

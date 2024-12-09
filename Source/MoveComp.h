@@ -41,6 +41,8 @@ public:
     void TagNeighbors(std::vector<Actor*> ActorList, double radius);
     bool AccumulateForce(ax::Vec2 RunningTot, ax::Vec2 ForceToAdd);
 
+
+    void CollisionMove(Border other);
     bool IsContacted(Border other);
     void Avoid();
 
