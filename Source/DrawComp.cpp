@@ -173,8 +173,52 @@ ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
 
 
     float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
+    float x     = 22.5;
+    float a     = 11.25;
+    if (mVelocity.y >= 0)
+    {
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a)))
+            return ECharDir::E;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+x)))
+            return ECharDir::ENE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+(x*2))))
+            return ECharDir::NE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+(x*3))))
+            return ECharDir::NNE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+(x*4))))
+            return ECharDir::N;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+(x*5))))
+            return ECharDir::NNW;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+(x*6))))
+            return ECharDir::NW;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a+(x*7))))
+            return ECharDir::WNW;
+        
+        return ECharDir::W;
+    }
+    else
+    {
+        x *= -1;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a +(x*1))))
+            return ECharDir::E;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 2))))
+            return ECharDir::ESE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 3))))
+            return ECharDir::SE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 4))))
+            return ECharDir::SSE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 5))))
+            return ECharDir::S;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 6))))
+            return ECharDir::SSW;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 7))))
+            return ECharDir::SW;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(a + (x * 8))))
+            return ECharDir::WSW;
 
-    if (mVelocity.y > 0)
+        return ECharDir::W;
+    }
+    /*if (mVelocity.y >= 0)
     {
         if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(11.25)))
             return ECharDir::E;
@@ -188,39 +232,17 @@ ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
             return ECharDir::N;
         if (mVelocity.x > -cos(AX_DEGREES_TO_RADIANS(78.75)))
             return ECharDir::N;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::NNW;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(56.25)))
-            return ECharDir::NW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(11.25)))
+            return ECharDir::W;
         if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(33.75)))
             return ECharDir::WNW;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(11.25)))
-            return ECharDir::W;
-
-    }
-    else
-    {
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(11.25)))
-            return ECharDir::E;
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(33.75)))
-            return ECharDir::ESE;
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(56.25)))
-            return ECharDir::SE;
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::SSE;
-        if (mVelocity.x < cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::S;
-        if (mVelocity.x > -cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::S;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::SSW;
         if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(56.25)))
-            return ECharDir::SW;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(33.75)))
-            return ECharDir::WSW;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(11.25)))
-            return ECharDir::W;
-    }
+            return ECharDir::NW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::NNW;
+        
+    }*/
+    
 
     return ECharDir::S;
 }
