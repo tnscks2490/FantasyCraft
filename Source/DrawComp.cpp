@@ -101,7 +101,8 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
 {
     if (mRoot.isNotNull())
     {
-        AnimInfo& info = FindAnimInfo(name,ECharAct::Idle,ECharDir::Face);
+        //AnimInfo& info = FindAnimInfo(name,ECharAct::Idle,ECharDir::Face);
+        AnimInfo& info = FindAnimInfo(name, ECharAct::Idle, ECharDir::S); // 마린전용
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
@@ -159,7 +160,7 @@ void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
 
 ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
 {
-    float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
+    /*float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
 
     if (mVelocity.x > cos45)
         return ECharDir::Right;
@@ -168,7 +169,60 @@ ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
     if (mVelocity.y > 0)
         return ECharDir::Back;
 
-    return ECharDir::Face;
+    return ECharDir::Face;*/
+
+
+    float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
+
+    if (mVelocity.y > 0)
+    {
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(11.25)))
+            return ECharDir::E;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(33.75)))
+            return ECharDir::ENE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(56.25)))
+            return ECharDir::NE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::NNE;
+        if (mVelocity.x < cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::N;
+        if (mVelocity.x > -cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::N;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::NNW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(56.25)))
+            return ECharDir::NW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(33.75)))
+            return ECharDir::WNW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(11.25)))
+            return ECharDir::W;
+
+    }
+    else
+    {
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(11.25)))
+            return ECharDir::E;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(33.75)))
+            return ECharDir::ESE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(56.25)))
+            return ECharDir::SE;
+        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::SSE;
+        if (mVelocity.x < cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::S;
+        if (mVelocity.x > -cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::S;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(78.75)))
+            return ECharDir::SSW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(56.25)))
+            return ECharDir::SW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(33.75)))
+            return ECharDir::WSW;
+        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(11.25)))
+            return ECharDir::W;
+    }
+
+    return ECharDir::S;
 }
 
 void DrawComp::isSelected()
@@ -176,7 +230,7 @@ void DrawComp::isSelected()
     if (selected)
     {
         auto selectNode = (ax::DrawNode*)mRoot->getChildByName("SelectNode");
-        selectNode->setVisible(true);
+        //selectNode->setVisible(true);
     }
     else
     {

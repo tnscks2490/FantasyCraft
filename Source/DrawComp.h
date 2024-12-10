@@ -22,9 +22,9 @@ public:
 
     float Timer = 0.f;
     //TODO:추후에 수정할것 생성하는 액터에 따라서
-    ECharName mCurAnim  = ECharName::Farmer;
+    ECharName mCurAnim  = ECharName::Marin;
     ECharAct mCurAction = ECharAct::Idle;
-    ECharDir mCurDir    = ECharDir::Face;
+    ECharDir mCurDir    = ECharDir::S;
 
 
     void isSelected();

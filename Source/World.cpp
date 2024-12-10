@@ -50,7 +50,7 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
     // 몸통부분 생성 및 루트노드에 붙이기
     //auto body = draw->CreatePhysicsNode(ax::Vec2(16,16));
-    auto anim = draw->CreateAnimNode(ECharName::Farmer);
+    auto anim = draw->CreateAnimNode(ECharName::Marin);
     auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);
     /////////////////////////////////////////////////

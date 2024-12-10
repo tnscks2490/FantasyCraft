@@ -9,6 +9,22 @@ enum class ECharDir
     Right,
     Face,
     Back,
+    N,
+    NNE,
+    NE,
+    ENE,
+    E,
+    ESE,
+    SE,
+    SSE,
+    S,
+    SSW,
+    SW,
+    WSW,
+    W,
+    WNW,
+    NW,
+    NNW,
 
 
 
@@ -22,7 +38,7 @@ enum class ECharName
     // 아래에 이미지 추가할때마다 추가하기
     Farmer,
     Select,
-
+    Marin,
 
     ///////
     Name_Count,
