@@ -74,7 +74,9 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
     // 유저데이터 넣기
     // 나중에 위치변경할것
     UserData* mUserData = new UserData;
+
     mUserData->mActor = actor;
+
     node->setUserData(mUserData);
 
     // 월드 엑터리스트에 이 엑터 넣어주기
