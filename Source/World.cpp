@@ -63,15 +63,8 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
     // 무브컴포넌트 생성
     auto move = new MoveComp(actor);
 
-
     // 유닛컴포넌트 생성
     auto unit = new UnitComp(actor);
-
-
-
-
-
-
 
     // 단순 루트노드 찾기용 코드
     auto drawNode = ax::DrawNode::create();

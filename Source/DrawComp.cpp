@@ -218,32 +218,6 @@ ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
 
         return ECharDir::W;
     }
-    /*if (mVelocity.y >= 0)
-    {
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(11.25)))
-            return ECharDir::E;
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(33.75)))
-            return ECharDir::ENE;
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(56.25)))
-            return ECharDir::NE;
-        if (mVelocity.x > cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::NNE;
-        if (mVelocity.x < cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::N;
-        if (mVelocity.x > -cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::N;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(11.25)))
-            return ECharDir::W;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(33.75)))
-            return ECharDir::WNW;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(56.25)))
-            return ECharDir::NW;
-        if (mVelocity.x < -cos(AX_DEGREES_TO_RADIANS(78.75)))
-            return ECharDir::NNW;
-        
-    }*/
-    
-
     return ECharDir::S;
 }
 
@@ -252,7 +226,7 @@ void DrawComp::isSelected()
     if (selected)
     {
         auto selectNode = (ax::DrawNode*)mRoot->getChildByName("SelectNode");
-        //selectNode->setVisible(true);
+        selectNode->setVisible(true);
     }
     else
     {

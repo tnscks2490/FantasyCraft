@@ -114,6 +114,7 @@ bool MainScene::init()
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 
+    
     auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
     World::get()->mPath->DefaultSetting(wall);
 
@@ -123,7 +124,7 @@ bool MainScene::init()
     // 커서 생성
     mCursor = new Cursor(this);
 
-
+    //DebugPath();
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -418,6 +419,29 @@ void MainScene::menuCloseCallback(ax::Object* sender)
      //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
 
+void MainScene::DebugPath()
+{
+    for (int i = 0; i < 128; i++)
+    {
+        for (int j = 0; j < 128; j++)
+        {
+            if (World::get()->mPath->mColMap->IsCollision(j, i))
+            {
+                auto node = DrawNode::create();
+                node->setPosition(ax::Vec2(j * 16, i * 16));
+                node->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::RED);
+                addChild(node);
+            }
+            else
+            {
+                auto node = DrawNode::create();
+                node->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::BLACK);
+                addChild(node);
+            }
+        }
+    }
+}
+
 void MainScene::Decording()
 {
     char buf[1024] = {0};
@@ -578,8 +602,6 @@ void MainScene::ScreenMove(float delta)
             mMapLayer->GetMap()->setPosition(mapPos);
         }
     }
-
-   
 }
 
 

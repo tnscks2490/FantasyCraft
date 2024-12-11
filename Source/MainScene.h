@@ -68,6 +68,9 @@ public:
     void menuCloseCallback(ax::Object* sender);
 
 
+    void DebugPath();
+
+
     void Decording();
 
     void ScreenMove(float delta);

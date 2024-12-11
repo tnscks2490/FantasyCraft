@@ -12,6 +12,7 @@ public:
 
     void DefaultSetting(ax::TMXLayer* wall);
     void DebugMap();
+    void DebugMap2();
 
 public:
 
