@@ -17,12 +17,17 @@ public:
     ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
 
+
+
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
 
-    float Timer = 0.f;
+
+
+
+
     //TODO:추후에 수정할것 생성하는 액터에 따라서
-    ECharName mCurAnim  = ECharName::Marin;
+    ECharName mCurAnim  = ECharName::Marine;
     ECharAct mCurAction = ECharAct::Idle;
     ECharDir mCurDir    = ECharDir::S;
 
@@ -30,9 +35,10 @@ public:
     void isSelected();
 
     bool selected = false;
-
+    float Timer = 0.f;
 
 public:
     Ptr<ax::Node> mRoot = nullptr;
+
 };
 

@@ -13,16 +13,40 @@ enum class PlayerRace
 
 enum class PlayerCommand
 {
-    Idle,
+    // 공용 명령
+    None,
     Move,
     Stop,
     Attack,
     Patrol,
     Hold,
-    ExtraCommand1,
-    ExtraCommand2,
-    ExtraCommand3,
-    ExtraCommand4,
+    Cancel,
+    SetRallyPoint,
+
+    // 테란 명령
+    //CommandCenter
+    Build_SCV,
+
+    //SCV
+    Build_Structure,
+    Build_Advance_Structure,
+    //SCV Structure,
+    Build_Command_Center,
+    Build_Supply_Depot,
+    Build_Refinery,
+    Build_Barracks,
+    Build_Engineering_Bay,
+    Build_Missile_Turret,
+    Build_Academy,
+    Build_Bunker,
+    //SCV Advence Structure,
+    Build_Factory,
+    Build_Starport,
+    Build_Science_Facility,
+    Build_Armory,
+
+    
+    Liftoff,
 };
 
 class Player
@@ -36,7 +60,7 @@ public:
     void Selected(Actor* actor);
     bool isSelected();
 
-    PlayerCommand mCommand = PlayerCommand::Idle;
+    PlayerCommand mCommand[9] = {PlayerCommand::None,};
     PlayerRace mRace       = PlayerRace::None;
 
 public:

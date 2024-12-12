@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "DrawComp.h"
+#include "World.h"
 #include "MoveComp.h"
 
 
@@ -45,16 +46,16 @@ ax::Node* DrawComp::CreateRootNode()
         mRoot     = node;
 
         node->setName("Root");
-
-        ax::Vec2 bodysize(16, 16);
-
-
-        auto body = ax::PhysicsBody::createBox(bodysize);
-        body->setTag(10);
-        body->setContactTestBitmask(0xFFFFFFFF);
-        body->setDynamic(false);      
-        node->setAnchorPoint(ax::Vec2(0.5f, 0.5f));
-        node->setPhysicsBody(body);
+        //
+        //ax::Vec2 bodysize(16, 16);
+        //
+        //
+        //auto body = ax::PhysicsBody::createBox(bodysize);
+        //body->setTag(10);
+        //body->setContactTestBitmask(0xFFFFFFFF);
+        //body->setDynamic(false);      
+        //node->setAnchorPoint(ax::Vec2(0.5f, 0.5f));
+        //node->setPhysicsBody(body);
        
         auto draw = ax::DrawNode::create();
         draw->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::RED);
@@ -141,6 +142,7 @@ ax::Node* DrawComp::CreateSelectedNode()
     }
     return nullptr;
 }
+
 
 void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
 {

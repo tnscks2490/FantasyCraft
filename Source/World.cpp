@@ -36,8 +36,8 @@ void World::update(float delta)
 Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 {
     // 빈 엑터 생성
-    Actor* actor = new Actor();
-
+    Actor* actor = new Actor;
+     
     // 드로우컴포넌트 및 루트 노드 생성 후 씬에 붙이기
     auto draw = new DrawComp(actor);
 
@@ -49,8 +49,8 @@ Actor* World::CreateActor(ax::Node* parent, PK_Data data)
 
 
     // 몸통부분 생성 및 루트노드에 붙이기
-    //auto body = draw->CreatePhysicsNode(ax::Vec2(16,16));
-    auto anim = draw->CreateAnimNode(ECharName::Marin);
+    auto body = draw->CreatePhysicsNode(ax::Vec2(16,16));
+    auto anim = draw->CreateAnimNode(ECharName::SCV);
     auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);
     /////////////////////////////////////////////////
@@ -106,5 +106,7 @@ World::World()
 }
 
 World::~World() {}
+
+
 
 

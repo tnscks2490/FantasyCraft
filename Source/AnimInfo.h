@@ -38,7 +38,9 @@ enum class ECharName
     // 아래에 이미지 추가할때마다 추가하기
     Farmer,
     Select,
-    Marin,
+    Marine,
+    SCV,
+    CommandCenter,
 
     ///////
     Name_Count,
