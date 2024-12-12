@@ -5,11 +5,11 @@
 
 
 
-class MarineComp : public UnitComp
+class CommandCenter : public UnitComp
 {
 public:
-    MarineComp(Actor* actor);
-    ~MarineComp();
+    CommandCenter(Actor* actor);
+    ~CommandCenter();
 
     virtual void update(float delta) override;
 

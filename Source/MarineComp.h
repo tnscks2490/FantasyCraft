@@ -1,7 +1,6 @@
 #pragma once
 #include "UnitComp.h"
 
-class Actor;
 
 class MarineComp : public UnitComp
 {

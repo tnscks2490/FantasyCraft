@@ -2,7 +2,8 @@
 #include "Actor.h"
 #include "MarineComp.h"
 
-MarineComp::MarineComp(Actor* actor):UnitComp(actor)
+MarineComp::MarineComp(Actor* actor)
+    : UnitComp(actor)
 {
     actor->mUnitComp = this;
 }

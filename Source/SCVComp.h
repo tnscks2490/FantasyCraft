@@ -19,7 +19,6 @@ public:
 
 
 public:
-    bool IsBuilding = false;
-    bool IsReparing = false;
+    bool IsWorking = false;
     short mPop      = 1;
 };
