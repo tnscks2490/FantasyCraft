@@ -4,7 +4,8 @@
 #include "MoveComp.h"
 #include "DrawComp.h"
 #include "UnitComp.h"
-
+#include "SCVComp.h"
+#include "CommandCenterComp.h"
 
 
 
@@ -107,6 +108,76 @@ World::World()
 
 World::~World() {}
 
+Actor* SpawnSCV(ax::Node* parent, PK_Data data)
+{
+    Actor* actor = new Actor;
+
+    actor->mID     = data.ClientID;
+    actor->charNum = data.input;
 
 
+    // 드로우컴포넌트 및 루트 노드 생성 후 씬에 붙이기
+    auto draw = new DrawComp(actor);
+    draw->mCurAnim = ECharName::SCV;
 
+    // 루트 노드 생성 및 메인씬에 붙이기(그리기 위함)
+    auto node = draw->CreateRootNode();
+
+    draw->mRoot->setPosition(500, 500);
+    parent->addChild(node);
+
+    // 몸통부분 생성 및 루트노드에 붙이기
+    auto body       = draw->CreatePhysicsNode(ax::Vec2(23, 23));
+    auto anim       = draw->CreateAnimNode(ECharName::SCV);
+    auto effect     = draw->CreateAnimNode(ECharName::Effect,ECharAct::SCVSpark,ECharDir::Face);
+    effect->setVisible(false);
+    effect->setPosition(ax::Vec2(16, 16));
+    auto selectanim = draw->CreateSelectedNode();
+
+    // 무브컴포넌트 생성
+    auto move = new MoveComp(actor);
+
+    // 유닛컴포넌트 생성
+    auto unit = new SCVComp(actor);
+
+    // 월드 엑터리스트에 이 엑터 넣어주기
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnMarine(ax::Node* parent, PK_Data data)
+{
+    return nullptr;
+}
+
+Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
+{
+    Actor* actor = new Actor;
+
+    actor->mID     = data.ClientID;
+    actor->charNum = data.input;
+
+    // 드로우컴포넌트 및 루트 노드 생성 후 씬에 붙이기
+    auto draw      = new DrawComp(actor);
+    draw->mCurAnim = ECharName::CommandCenter;
+
+    // 루트 노드 생성 및 메인씬에 붙이기(그리기 위함)
+    auto node = draw->CreateRootNode();
+    draw->mRoot->setPosition(500, 500);
+    parent->addChild(node);
+
+    // 몸통부분 생성 및 루트노드에 붙이기
+    auto body   = draw->CreatePhysicsNode(ax::Vec2(23, 23));
+    auto anim   = draw->CreateAnimNode(ECharName::CommandCenter,ECharAct::Idle,ECharDir::Face);
+    auto selectanim = draw->CreateSelectedNode();
+
+    // 무브컴포넌트 생성
+    auto move = new MoveComp(actor);
+
+    // 유닛컴포넌트 생성
+    auto unit = new CommandCenterComp(actor);
+
+    // 월드 엑터리스트에 이 엑터 넣어주기
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}

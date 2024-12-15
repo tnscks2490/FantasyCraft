@@ -1,5 +1,5 @@
 #pragma once
-#include "axmol.h"
+#include "Actor.h"
 
 
 class Actor;

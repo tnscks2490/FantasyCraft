@@ -1,8 +1,6 @@
 #pragma once
 #include "IActorComp.h"
 
-class Actor;
-
 enum class UnitRace
 {
     None,

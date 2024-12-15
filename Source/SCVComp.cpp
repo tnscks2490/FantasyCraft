@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Actor.h"
 #include "SCVComp.h"
+#include "World.h"
 
 
 
@@ -12,7 +13,17 @@ SCVComp::SCVComp(Actor* actor)
 
 SCVComp::~SCVComp() {}
 
-void SCVComp::update(float delta) {}
+void SCVComp::update(float delta)
+{
+    mTimer += delta;
+    if (mTimer >= 5)
+    {
+
+        Building();
+
+        mTimer = -300;
+    }
+}
 
 void SCVComp::Repair()
 {
@@ -21,5 +32,10 @@ void SCVComp::Repair()
 
 void SCVComp::Building()
 {
+    PK_Data data;
+    data.ClientID = mActor->mID;
+    data.input    = 0;
 
+    Actor* CC = SpawnCommandCenter(mActor->GetRoot()->getParent(),data);
+    CC->SetPosition(ax::Vec2(200,200));
 }

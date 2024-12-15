@@ -2,17 +2,15 @@
 #include "UnitComp.h"
 
 
-
-
-
-class CommandCenter : public UnitComp
+class CommandCenterComp : public UnitComp
 {
 public:
-    CommandCenter(Actor* actor);
-    ~CommandCenter();
+    CommandCenterComp(Actor* actor);
+    ~CommandCenterComp();
 
     virtual void update(float delta) override;
 
 public:
-    short mPop      = 1;
+
+
 };

@@ -29,14 +29,6 @@ int Goal_Composite::ProcessSubgoals()
     return completed_t;
 }
 
-bool Goal_Composite::SendToFirstSubGoal(const ActorMessage& msg)
-{
-    if (!m_SubGoals.empty())
-    {
-        return m_SubGoals.front()->handleMessage(msg);
-    }
-    return false;
-}
 
 int Goal_Composite::Do()
 {
@@ -56,10 +48,6 @@ void Goal_Composite::Render(int step)
     }
 }
 
-bool Goal_Composite::handleMessage(const ActorMessage& msg)
-{
-    return SendToFirstSubGoal(msg);
-}
 
 void Goal_Composite::RemoveAllSubgoals()
 {

@@ -288,7 +288,9 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
 
     if (A->getName() == "CursorCheckNode" )
     {
-        UserData* userData = (UserData*)B->getUserData();
+        auto bRoot         = B->getParent();
+
+        UserData* userData = (UserData*)bRoot->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
             mPlayer->Selected(userData->mActor);
@@ -296,7 +298,8 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
     }
     else if (B->getName() == "CursorCheckNode")
     {
-        UserData* userData = (UserData*)A->getUserData();
+        auto aRoot         = A->getParent();
+        UserData* userData = (UserData*)aRoot->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
             mPlayer->Selected(userData->mActor);
@@ -304,22 +307,12 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
     }
     if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
-        UserData* userDataA = (UserData*)A->getUserData();
+      /*  UserData* userDataA = (UserData*)A->getUserData();
         UserData* userDataB = (UserData*)B->getUserData();
 
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
-
-
-       
-
-        //actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
-        /*if (!actorA->mMoveComp->IsMoving)
-            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
-        else if (!actorB->mMoveComp->IsMoving)
-            actorA->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
-        else if (actorB->mMoveComp->IsMoving && actorA->mMoveComp->IsMoving)
-            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);*/
+ 
         if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) <
             actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
@@ -331,7 +324,7 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
             actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
         }
 
-        return true;
+        return true;*/
     }
     return true;
 }
@@ -339,13 +332,15 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
 void MainScene::onContactSeparate(ax::PhysicsContact& contact)
 {
 
-    auto A = contact.getShapeA()->getBody()->getNode();
+    /*auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
     if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
-        UserData* userDataA = (UserData*)A->getUserData();
-        UserData* userDataB = (UserData*)B->getUserData();
+        auto aRoot          = A->getParent();
+        auto bRoot          = B->getParent();
+        UserData* userDataA = (UserData*)aRoot->getUserData();
+        UserData* userDataB = (UserData*)bRoot->getUserData();
 
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
@@ -360,7 +355,7 @@ void MainScene::onContactSeparate(ax::PhysicsContact& contact)
         {
             actorA->mMoveComp->SetPath(World::get()->mPath, actorA->mMoveComp->mLastTarget);
         }
-    }
+    }*/
 }
 
 void MainScene::update(float delta)
@@ -504,7 +499,8 @@ void MainScene::Decording()
 
             if (data.ClientID == TcpClient::get()->GetID())
             {
-                Actor* actor = World::get()->CreateActor(mMapLayer,data);
+                //Actor* actor = World::get()->CreateActor(mMapLayer,data);
+                Actor* actor = SpawnSCV(mMapLayer,data);
             }
             if (true)
             {

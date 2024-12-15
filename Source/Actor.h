@@ -1,11 +1,13 @@
 #pragma once
-#include "axmol.h"
+#include "pch.h"
 #include "AnimInfo.h"
 
 class MoveComp;
 class DrawComp;
 class UnitComp;
+class GoalComp;
 class ProjectileComp;
+class PK_Data;
 
 
 
@@ -16,6 +18,7 @@ class Actor
 {
 public:
     Actor();
+    Actor(PK_Data data);
     ~Actor();
 
     void update(float delta);
@@ -38,6 +41,7 @@ public:
     MoveComp* mMoveComp = nullptr;
     DrawComp* mDrawComp = nullptr;
     UnitComp* mUnitComp = nullptr;
+    GoalComp* mGoalComp = nullptr;
 
 };
 

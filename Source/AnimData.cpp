@@ -58,57 +58,73 @@ AnimInfo g_AnimInfo_Marin_Idle[] = {
 };
 
 AnimInfo g_AnimInfo_SCV_Idle[] = {
-    {ECharName::SCV, ECharAct::Idle, ECharDir::N, "Plist/SCV.plist", "SCV/Idle/1/0001.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::NNE, "Plist/SCV.plist", "SCV/Idle/2/0002.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::NE, "Plist/SCV.plist", "SCV/Idle/3/0003.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::ENE, "Plist/SCV.plist", "SCV/Idle/4/0004.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::E, "Plist/SCV.plist", "SCV/Idle/5/0005.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::ESE, "Plist/SCV.plist", "SCV/Idle/6/0006.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::SE, "Plist/SCV.plist", "SCV/Idle/7/0007.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::SSE, "Plist/SCV.plist", "SCV/Idle/8/0008.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::S, "Plist/SCV.plist", "SCV/Idle/9/0009.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::SSW, "Plist/SCV.plist", "SCV/Idle/10/0010.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::SW, "Plist/SCV.plist", "SCV/Idle/11/0011.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::WSW, "Plist/SCV.plist", "SCV/Idle/12/0012.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::W, "Plist/SCV.plist", "SCV/Idle/13/0013.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::WNW, "Plist/SCV.plist", "SCV/Idle/14/0014.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::NW, "Plist/SCV.plist", "SCV/Idle/15/0015.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Idle, ECharDir::NNW, "Plist/SCV.plist", "SCV/Idle/16/0016.png", 1, 1, (1.f / 1),
-     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::N, "Plist/SCV.plist", "SCV/Idle/1/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::NNE, "Plist/SCV.plist", "SCV/Idle/2/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::NE, "Plist/SCV.plist", "SCV/Idle/3/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::ENE, "Plist/SCV.plist", "SCV/Idle/4/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::E, "Plist/SCV.plist", "SCV/Idle/5/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::ESE, "Plist/SCV.plist", "SCV/Idle/6/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::SE, "Plist/SCV.plist", "SCV/Idle/7/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::SSE, "Plist/SCV.plist", "SCV/Idle/8/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::S, "Plist/SCV.plist", "SCV/Idle/9/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::SSW, "Plist/SCV.plist", "SCV/Idle/10/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::SW, "Plist/SCV.plist", "SCV/Idle/11/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::WSW, "Plist/SCV.plist", "SCV/Idle/12/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::W, "Plist/SCV.plist", "SCV/Idle/13/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::WNW, "Plist/SCV.plist", "SCV/Idle/14/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::NW, "Plist/SCV.plist", "SCV/Idle/15/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Idle, ECharDir::NNW, "Plist/SCV.plist", "SCV/Idle/16/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_SCV_Move[] = {
     {ECharName::SCV, ECharAct::Move, ECharDir::N, "Plist/SCV.plist", "SCV/Move/1/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::NNE, "Plist/SCV.plist", "SCV/Move/2/0002.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::NE, "Plist/SCV.plist", "SCV/Move/3/0003.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::ENE, "Plist/SCV.plist", "SCV/Move/4/0004.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::E, "Plist/SCV.plist", "SCV/Move/5/0005.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::ESE, "Plist/SCV.plist", "SCV/Move/6/0006.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::SE, "Plist/SCV.plist", "SCV/Move/7/0007.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::SSE, "Plist/SCV.plist", "SCV/Move/8/0008.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::S, "Plist/SCV.plist", "SCV/Move/9/0009.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::SSW, "Plist/SCV.plist", "SCV/Move/10/0010.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::SW, "Plist/SCV.plist", "SCV/Move/11/0011.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::WSW, "Plist/SCV.plist", "SCV/Move/12/0012.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::W, "Plist/SCV.plist", "SCV/Move/13/0013.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::WNW, "Plist/SCV.plist", "SCV/Move/14/0014.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::NW, "Plist/SCV.plist", "SCV/Move/15/0015.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::SCV, ECharAct::Move, ECharDir::NNW, "Plist/SCV.plist", "SCV/Move/16/0016.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::NNE, "Plist/SCV.plist", "SCV/Move/2/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::NE, "Plist/SCV.plist", "SCV/Move/3/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::ENE, "Plist/SCV.plist", "SCV/Move/4/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::E, "Plist/SCV.plist", "SCV/Move/5/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::ESE, "Plist/SCV.plist", "SCV/Move/6/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::SE, "Plist/SCV.plist", "SCV/Move/7/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::SSE, "Plist/SCV.plist", "SCV/Move/8/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::S, "Plist/SCV.plist", "SCV/Move/9/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::SSW, "Plist/SCV.plist", "SCV/Move/10/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::SW, "Plist/SCV.plist", "SCV/Move/11/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::WSW, "Plist/SCV.plist", "SCV/Move/12/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::W, "Plist/SCV.plist", "SCV/Move/13/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::WNW, "Plist/SCV.plist", "SCV/Move/14/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::NW, "Plist/SCV.plist", "SCV/Move/15/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Move, ECharDir::NNW, "Plist/SCV.plist", "SCV/Move/16/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
 };
+
+AnimInfo g_AnimInfo_SCV_Gathering[] = {
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::N, "Plist/SCV.plist", "SCV/Gathering/1/1.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::NNE, "Plist/SCV.plist", "SCV/Gathering/2/2.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::NE, "Plist/SCV.plist", "SCV/Gathering/3/3.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::ENE, "Plist/SCV.plist", "SCV/Gathering/4/4.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::E, "Plist/SCV.plist", "SCV/Gathering/5/5.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::ESE, "Plist/SCV.plist", "SCV/Gathering/6/6.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::SE, "Plist/SCV.plist", "SCV/Gathering/7/7.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::SSE, "Plist/SCV.plist", "SCV/Gathering/8/8.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::S, "Plist/SCV.plist", "SCV/Gathering/9/9.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::SSW, "Plist/SCV.plist", "SCV/Gathering/10/10.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::SW, "Plist/SCV.plist", "SCV/Gathering/11/11.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::WSW, "Plist/SCV.plist", "SCV/Gathering/12/12.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::W, "Plist/SCV.plist", "SCV/Gathering/13/13.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::WNW, "Plist/SCV.plist", "SCV/Gathering/14/14.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::NW, "Plist/SCV.plist", "SCV/Gathering/15/15.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::Gathering, ECharDir::NNW, "Plist/SCV.plist", "SCV/Gathering/16/16.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
+};
+
+AnimInfo g_AnimInfo_Effect_SCVSpark[] = {
+    {ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face, "Plist/SCVSpark.plist", "SCVSpark/%04d.png", 1, 10, (0.5f / 10), Vec2(0.5, 0.5), nullptr},
+};
+
+AnimInfo g_animInfo_CommandCenter_Build[] = {
+        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/03.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/04.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/05.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+
 
 
 AnimInfo g_AnimInfo_Select_Idle[] = {{ECharName::Select, ECharAct::Move, ECharDir::Face, "Plist/Select.plist",
@@ -147,23 +163,22 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
     case ECharName::Marine:
         switch (action)
         {
+
         case ECharAct::Idle:
             for (int i = 0; i < 16; i++)
             {
                 if (g_AnimInfo_Marin_Idle[i].dir == dir)
                     return g_AnimInfo_Marin_Idle[i];
-            }
-            break;
+            } break;
+
         case ECharAct::Move:
             for (int i = 0; i < 16; i++)
             {
                 if (g_AnimInfo_Marin_Move[i].dir == dir)
                     return g_AnimInfo_Marin_Move[i];
-            }
-            break;
-        default:
-            break;
-        }
+            } break;
+
+        } break;
     case ECharName::SCV:
         switch (action)
         {
@@ -176,10 +191,61 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         case ECharAct::Move:
             for (int i = 0; i < 16; i++)
             {
-                if (g_AnimInfo_SCV_Idle[i].dir == dir)
-                    return g_AnimInfo_SCV_Idle[i];
+                if (g_AnimInfo_SCV_Move[i].dir == dir)
+                    return g_AnimInfo_SCV_Move[i];
+            }
+            break;
+        case ECharAct::Gathering:
+            for (int i = 0; i < 4; ++i)
+            {
+                if (g_AnimInfo_SCV_Gathering[i].dir == dir)
+                    return g_AnimInfo_SCV_Gathering[i];
             }
             break;
         }break;
+
+
+
+
+
+
+
+    // 여기는 이펙트의 영역
+    case ECharName::Effect:
+    {
+        switch (action)
+        {
+        case ECharAct::SCVSpark:
+            return g_AnimInfo_Effect_SCVSpark[0];
+            break;
+        default:
+            break;
+        }
     }
+    break;
+    case ECharName::CommandCenter:
+        return g_animInfo_CommandCenter_Build[0];
+        break;
+    }
+
+    return g_AnimInfo_Effect_SCVSpark[0];
+}
+
+AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int idx)
+{
+    switch (name)
+    {
+    case ECharName::Marine:
+        break;
+    case ECharName::SCV:
+        break;
+    case ECharName::CommandCenter:
+
+        break;
+    case ECharName::Effect:
+        break;
+    default:
+        break;
+    }
+    return g_AnimInfo_Effect_SCVSpark[idx];
 }

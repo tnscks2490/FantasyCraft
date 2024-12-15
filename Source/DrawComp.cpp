@@ -28,8 +28,8 @@ void DrawComp::update(float delta)
         }
         else
         {
-            mCurAction = ECharAct::Idle;
-            ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
+           //mCurAction = ECharAct::Idle;
+           //ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
            /* if (mCurAction == ECharAct::Move)
             {
                 
@@ -44,23 +44,16 @@ ax::Node* DrawComp::CreateRootNode()
     {
         auto node = ax::Node::create();
         mRoot     = node;
-
         node->setName("Root");
-        //
-        //ax::Vec2 bodysize(16, 16);
-        //
-        //
-        //auto body = ax::PhysicsBody::createBox(bodysize);
-        //body->setTag(10);
-        //body->setContactTestBitmask(0xFFFFFFFF);
-        //body->setDynamic(false);      
-        //node->setAnchorPoint(ax::Vec2(0.5f, 0.5f));
-        //node->setPhysicsBody(body);
-       
+
+        AddUserData();
+
+        ///////////////////////////////
+        // 루트노드 확인용 드로우 노드 //
+        ///////////////////////////////
         auto draw = ax::DrawNode::create();
         draw->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::RED);
         node->addChild(draw);
-        
         
         return node;
     }
@@ -88,7 +81,8 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
 
 
         auto drawNode = ax::DrawNode::create();
-        drawNode->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4F::RED);
+        drawNode->drawRect(ax::Vec2(-bodysize.x / 2, -bodysize.y / 2), ax::Vec2(bodysize.x / 2, bodysize.y / 2),
+                           ax::Color4F::RED);
         bodyNode->addChild(drawNode);
 
         //루트노드에 피직스노드붙여주기
@@ -102,7 +96,6 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
 {
     if (mRoot.isNotNull())
     {
-        //AnimInfo& info = FindAnimInfo(name,ECharAct::Idle,ECharDir::Face);
         AnimInfo& info = FindAnimInfo(name, ECharAct::Idle, ECharDir::S); // 마린전용
         info.CreateAnimation();
 
@@ -117,6 +110,28 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
         node->runAction(action);
 
         return node;  
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir, std::string_view nodeName)
+{
+     if (mRoot.isNotNull())
+    {
+         AnimInfo& info = FindAnimInfo(name, action, dir);  
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName(nodeName);
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+
+        ax::Action* action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        return node;
     }
     return nullptr;
 }
@@ -138,9 +153,21 @@ ax::Node* DrawComp::CreateSelectedNode()
         action->setTag(20202);
         node->runAction(action);
 
+        node->setVisible(false);
+
         return node;
     }
     return nullptr;
+}
+
+void DrawComp::AddUserData()
+{
+    if (mRoot.isNotNull())
+    {
+        UserData* mUserData = new UserData;
+        mUserData->mActor   = mActor;
+        mRoot->setUserData(mUserData);
+    }
 }
 
 

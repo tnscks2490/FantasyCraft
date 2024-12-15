@@ -15,8 +15,13 @@ public:
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
     ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
+    ax::Node* CreateAnimNode(ECharName name,
+                             ECharAct action,
+                             ECharDir dir,
+                             std::string_view nodeName = "Effect");
     ax::Node* CreateSelectedNode();
 
+    void AddUserData();
 
 
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);
@@ -27,7 +32,7 @@ public:
 
 
     //TODO:추후에 수정할것 생성하는 액터에 따라서
-    ECharName mCurAnim  = ECharName::Marine;
+    ECharName mCurAnim  = ECharName::None;
     ECharAct mCurAction = ECharAct::Idle;
     ECharDir mCurDir    = ECharDir::S;
 

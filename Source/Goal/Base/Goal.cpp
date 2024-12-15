@@ -18,9 +18,3 @@ void Goal::Render(int step)
     tab[step]  = 0;
     AXLOG("%s %s", tab, getName());
 }
-
-
-bool Goal::handleMessage(const ActorMessage& msg)
-{
-    return false;
-}

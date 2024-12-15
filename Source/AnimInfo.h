@@ -42,7 +42,20 @@ enum class ECharName
     SCV,
     CommandCenter,
 
-    ///////
+
+
+
+
+
+
+
+
+    // 이펙트는 다음과 같이 정의한다.
+    // ECharName == Effect
+    // ECharAct == ~~의 이펙트(ex SCVSpark)
+    // ECharDir == Face (기준점 항상 나옴)
+    Effect,
+    /////////////
     Name_Count,
 };
 
@@ -50,6 +63,7 @@ enum class ECharAct
 {
     Idle = 0,
     Move,
+    Gathering,
     //////////
     // 행동들 추가하기
 
@@ -59,7 +73,8 @@ enum class ECharAct
 
 
 
-
+    //Effect 용 Action
+    SCVSpark,
 
     //////////
     Act_Count,
@@ -90,3 +105,4 @@ struct AnimInfo
 
 
 AnimInfo& FindAnimInfo(ECharName name, ECharAct act, ECharDir dir);
+AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int idx);

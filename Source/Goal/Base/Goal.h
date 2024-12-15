@@ -1,7 +1,6 @@
 #pragma once
 #include "preDefines.h"
 #include "Goal_Types.h"
-#include "ActorMessage.h"
 
 
 
@@ -34,7 +33,6 @@ public:
     virtual void Render(int step);
     virtual const char* getName() = 0;
 
-    virtual bool handleMessage(const ActorMessage& msg);
 
     virtual void AddSubGoal(Goal* g) { AXLOG("adsf"); }
 

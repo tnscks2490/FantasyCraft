@@ -3,10 +3,17 @@
 #include "TcpClient.h"
 #include "MoveComp.h"
 #include "DrawComp.h"
+#include "UnitComp.h"
+#include "GoalComp.h"
 
 
 Actor::Actor()
+{}
+
+Actor::Actor(PK_Data data)
 {
+    mID    = data.ClientID;
+    charNum = data.input;
 }
 
 Actor::~Actor()
@@ -16,6 +23,8 @@ Actor::~Actor()
 
 void Actor::update(float delta)
 {
+    if (mGoalComp) mGoalComp->update(delta);
+    if (mUnitComp) mUnitComp->update(delta);
     if (mMoveComp) mMoveComp->update(delta);
     if (mDrawComp) mDrawComp->update(delta);
 }
