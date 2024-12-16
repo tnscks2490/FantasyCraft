@@ -111,6 +111,9 @@ bool MainScene::init()
     mMapLayer->mPhysicsWorld = getPhysicsWorld();
     this->addChild(mMapLayer);
 
+    mUILayer = UILayer::create();
+    addChild(mUILayer);
+
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 

@@ -30,6 +30,7 @@
 #include "JPSPathFinder.h"
 #include "PreDefines.h"
 #include "MapLayer.h"
+#include "UILayer.h"
 
 
 
@@ -83,7 +84,7 @@ public:
     World* mWorld      = nullptr;
 
 
-
+    UILayer* mUILayer = nullptr;
     MapLayer* mMapLayer = nullptr;
 
     ax::TMXTiledMap* Map = nullptr;
