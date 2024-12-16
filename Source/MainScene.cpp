@@ -106,13 +106,18 @@ bool MainScene::init()
     //mCursor = ax::Node::create();
     //mCursor->setPosition(500, 500);
 
+    
 
     mMapLayer = MapLayer::create();
     mMapLayer->mPhysicsWorld = getPhysicsWorld();
-    this->addChild(mMapLayer);
+    //this->addChild(mMapLayer);
+
+    auto python = ax::Sprite::create("python.png"sv);
+    addChild(python);
 
     mUILayer = UILayer::create();
     addChild(mUILayer);
+    mUILayer->setPosition(ax::Vec2(640,480));
 
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());

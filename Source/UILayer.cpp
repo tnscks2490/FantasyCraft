@@ -10,7 +10,7 @@ bool UILayer::init()
         return false;
     }
 
-
-
+    mUISprite = ax::Sprite::create("tconsole.png"sv);
+    addChild(mUISprite);
     return true;
 }

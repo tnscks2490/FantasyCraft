@@ -9,6 +9,8 @@ public:
 
     virtual bool init() override;
 
-public:
 
+
+public:
+    ax::Sprite* mUISprite;
 };
