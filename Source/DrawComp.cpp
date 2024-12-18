@@ -68,15 +68,13 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         auto bodyNode = ax::Node::create();
         bodyNode->setName("Body");
         
+        
         //피직스바디생성 및 노드에 붙여주기
 
         auto body = ax::PhysicsBody::createBox(bodysize);
-        body->setGravityEnable(false);
-
         body->setContactTestBitmask(0xFFFFFFFF);
-        body->setCollisionBitmask(0xFFFFFFFF);
-        body->setCategoryBitmask(0xFFFFFFFF);
-        body->setDynamic(true);
+        body->setDynamic(false);
+        body->setTag(10);
         bodyNode->setPhysicsBody(body);
 
 
@@ -131,6 +129,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir
         action->setTag(20202);
         node->runAction(action);
 
+        mCurAnim = name;
         return node;
     }
     return nullptr;

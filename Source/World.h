@@ -20,13 +20,19 @@ public:
 
 
     void Actor_PushBack(Actor* actor);
-    Actor* CreateActor(ax::Node* parent, PK_Data data);
-
     void PrintActorList();
 
+
 public:
+    std::vector<Actor*> w_Wait_AddActors;
     std::vector<Actor*> w_ActorList;
+    std::vector<Actor*> w_Wait_DeleteActors;
     PathFind* mPath;
+
+
+public:
+    bool IsAddActors = false;
+    bool IsDeleteActors = false;
 };
 
 

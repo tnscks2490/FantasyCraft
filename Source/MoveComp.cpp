@@ -44,20 +44,7 @@ void MoveComp::update(float delta)
     }
 }
 
-std::list<jpspath::Coord> MoveComp::PathSearch(PathFind* path, ax::Vec2 targetPos)
-{
-    std::list<jpspath::Coord> ResultNodes;
-    jpspath::Path jps;
-    jps.Init(path->mColMap);
 
-    int32_t sx = mActor->GetRoot()->getPosition().x / 16;
-    int32_t sy = mActor->GetRoot()->getPosition().y / 16;
-    int32_t ex = targetPos.x / 16;
-    int32_t ey = targetPos.y / 16;
-
-    jps.Search(sx, sy, ex, ey, ResultNodes);
-    return ResultNodes;
-}
 
 bool MoveComp::IsArrive()
 {
@@ -347,31 +334,31 @@ void MoveComp::SetTarget(ax::Vec2 target)
     IsMoving = true;
 }
 
-void MoveComp::SetPath(PathFind* path, ax::Vec2 targetPos)
+void MoveComp::SetPath(ax::Vec2 targetPos)
 {
-    auto resultNode = PathSearch(path,targetPos);
+    // 이 둘은 비슷한 결과를 가져옴(이동중 다른곳을 클릭하면
+    // 지금 진행중인 이동을 정지하고 새로운 길을 찾고 이동함
 
+    if (IsMoving)
+    {
+        SetTarget(mActor->GetPosition());
+    }
     if (mTargetList.size() > 0)
     {
         mTargetList.clear();
     }
 
-    if (resultNode.size() < 1)
+    mTargetList = World::get()->mPath->GetTargetList(mActor->GetPosition(),targetPos);
+
+    if (mTargetList.size() < 1)
         return;
 
     int x, y;
     x = (int)mActor->GetPosition().x / 16;
     y = (int)mActor->GetPosition().y / 16;
-    path->mColMap->ClrAt(x, y);
 
+    World::get()->mPath->mColMap->ClrAt(x, y);
 
-    for (auto t : resultNode)
-    {
-        ax::Vec2 pos;
-        pos.x = (float)t.m_x * 16;
-        pos.y = (float)t.m_y * 16;
-        mTargetList.push_back(pos);
-    }
     mTargetList.pop_front();
     mLastTarget = targetPos;
 }

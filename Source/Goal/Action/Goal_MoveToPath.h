@@ -3,7 +3,7 @@
 #include "Goal/Base/Goal_Think.h"
 #include "PathFind.h"
 
-class Goal_MoveToPath : public Goal
+class Goal_MoveToPath : public Goal_Composite
 {
 public:
 

@@ -64,27 +64,10 @@ bool MainScene::init()
 
     TcpClient::get();
 
-    //콘솔창에 이동가는 한 곳 띄우는 디버깅용 코드
-    /*for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            printf("%d ", mPath->mColMap->IsCollision(j, i));
-        }
-        printf("\n");
-    }*/
-
     visibleSize = _director->getVisibleSize();
     auto origin = _director->getVisibleOrigin();
     auto safeArea = _director->getSafeAreaRect();
     auto safeOrigin = safeArea.origin;    
-
-    // touch Listner::PC전용이므로 필요없음
-    //auto touchListener = EventListenerTouchAllAtOnce::create();
-    //touchListener->onTouchesBegan = AX_CALLBACK_2(MainScene::onTouchesBegan, this);
-    //touchListener->onTouchesMoved = AX_CALLBACK_2(MainScene::onTouchesMoved, this);
-    //touchListener->onTouchesEnded = AX_CALLBACK_2(MainScene::onTouchesEnded, this);
-    //_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
     auto mouseListener           = EventListenerMouse::create();
     mouseListener->onMouseMove   = AX_CALLBACK_1(MainScene::onMouseMove, this);
@@ -103,8 +86,6 @@ bool MainScene::init()
     contactListener->onContactPreSolve = AX_CALLBACK_2(MainScene::onContactPreSolve, this);
     contactListener->onContactSeparate = AX_CALLBACK_1(MainScene::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-    //mCursor = ax::Node::create();
-    //mCursor->setPosition(500, 500);
 
 
     mMapLayer                = MapLayer::create();
@@ -116,24 +97,16 @@ bool MainScene::init()
     addChild(mUILayer);
     mUILayer->setPosition(ax::Vec2(640, 480));
 
-   
-
-   
-
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 
-    
     auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
     World::get()->mPath->DefaultSetting(wall);
 
     // 플레이어 생성
     mPlayer   = new Player;
-
     // 커서 생성
     mCursor = new Cursor(this);
-
-    //DebugPath();
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -316,8 +289,8 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
     }
     if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
-      /*  UserData* userDataA = (UserData*)A->getUserData();
-        UserData* userDataB = (UserData*)B->getUserData();
+        UserData* userDataA = (UserData*)A->getParent()->getUserData();
+        UserData* userDataB = (UserData*)B->getParent()->getUserData();
 
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
@@ -333,7 +306,7 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
             actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
         }
 
-        return true;*/
+        return true;
     }
     return true;
 }
@@ -540,7 +513,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(World::get()->mPath, data.pos);
+                    actor->mMoveComp->SetPath(data.pos);
                 }
             }
         }
@@ -562,7 +535,7 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(World::get()->mPath, data.pos);
+                    actor->mMoveComp->SetPath(data.pos);
                 }
             }
             break;

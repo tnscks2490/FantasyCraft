@@ -22,10 +22,9 @@ public:
 
     virtual void update(float delta) override;
 
-    std::list<jpspath::Coord> PathSearch(PathFind* path, ax::Vec2 targetPos);
 
     void SetTarget(ax::Vec2 target);
-    void SetPath(PathFind* path, ax::Vec2 targetPos);
+    void SetPath(ax::Vec2 targetPos);
     float length(ax::Vec2 v1, ax::Vec2 v2);
     ax::Vec2 Vec2DNormalized(ax::Vec2 target);
     bool IsArrive();
@@ -53,6 +52,8 @@ public:
     bool IsCollision  = false;
     bool IsPathMoving = false;
     bool mTag       = false;
+    bool testing      = false;
+
 
     std::list<ax::Vec2> mTargetList;
 

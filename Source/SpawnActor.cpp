@@ -17,7 +17,7 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     parent->addChild(node);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
-    auto anim = draw->CreateAnimNode(ECharName::SCV);
+    auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
     auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);
 

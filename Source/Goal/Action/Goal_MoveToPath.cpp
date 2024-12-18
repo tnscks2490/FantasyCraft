@@ -9,9 +9,9 @@
 
 
 Goal_MoveToPath::Goal_MoveToPath(Actor* actor, PathFind* path, ax::Vec2 dest)
-    : Goal(actor,GoalType::MoveToPath)
+    : Goal_Composite(actor,GoalType::MoveToPath)
 {
-
+    mLastDest = dest;
 
 }
 
@@ -21,7 +21,7 @@ void Goal_MoveToPath::Start()
     mActor->mGoalComp->mCurGoal = GoalType::MoveToPath;
 
 
-
+    // 고민을 해야할 필요가 있다.
 
 }
 

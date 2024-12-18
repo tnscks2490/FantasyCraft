@@ -57,3 +57,39 @@ void PathFind::DebugMap()
         printf("\n");
     }
 }
+
+std::list<ax::Vec2> PathFind::GetTargetList(ax::Vec2 start, ax::Vec2 dest)
+{
+    auto resultNode = PathSearch(start, dest);
+
+    std::list<ax::Vec2> targetList;
+
+    for (auto t : resultNode)
+    {
+        ax::Vec2 pos;
+        pos.x = (float)t.m_x * 16;
+        pos.y = (float)t.m_y * 16;
+        targetList.push_back(pos);
+    }
+    return targetList;
+}
+
+std::list<jpspath::Coord> PathFind::PathSearch(ax::Vec2 start, ax::Vec2 dest)
+{
+    if (!mColMap)
+        return std::list<jpspath::Coord> ();
+
+
+    std::list<jpspath::Coord> ResultNodes;
+    jpspath::Path jps;
+    
+    jps.Init(mColMap);
+
+    int32_t sx = start.x / 16;
+    int32_t sy = start.y / 16;
+    int32_t ex = dest.x / 16;
+    int32_t ey = dest.y / 16;
+
+    jps.Search(sx, sy, ex, ey, ResultNodes);
+    return ResultNodes;
+}
