@@ -13,7 +13,7 @@ public:
 public:
     GoalType m_iType;
     int m_Status;
-    Actor* m_pOwner;
+    Actor* mActor;
 
 
 
@@ -22,7 +22,7 @@ public:
 
 public:
 
-    Goal(Actor* pE, GoalType type) : m_iType(type), m_pOwner(pE), m_Status(inactive_t) {}
+    Goal(Actor* pE, GoalType type) : m_iType(type), mActor(pE), m_Status(inactive_t) {}
     virtual ~Goal() {}
 
     virtual void Start() = 0;  // Goal이 시작할 때, 먼저 활성화 시키고 시작
@@ -31,10 +31,9 @@ public:
 
 
     virtual void Render(int step);
-    virtual const char* getName() = 0;
 
 
-    virtual void AddSubGoal(Goal* g) { AXLOG("adsf"); }
+    virtual void AddSubGoal(Goal* g) { AXLOG("AddGoal"); }
 
     bool isComplete() const { return m_Status == completed_t; }
     bool isActive() const { return m_Status == active_t; }

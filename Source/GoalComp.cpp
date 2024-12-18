@@ -16,4 +16,7 @@ GoalComp::GoalComp(Actor* actor)
 
 GoalComp::~GoalComp()
 {
+
 }
+
+void GoalComp::update(float delta) {}

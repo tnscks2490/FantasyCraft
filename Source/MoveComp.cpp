@@ -363,6 +363,8 @@ void MoveComp::SetPath(PathFind* path, ax::Vec2 targetPos)
     x = (int)mActor->GetPosition().x / 16;
     y = (int)mActor->GetPosition().y / 16;
     path->mColMap->ClrAt(x, y);
+
+
     for (auto t : resultNode)
     {
         ax::Vec2 pos;

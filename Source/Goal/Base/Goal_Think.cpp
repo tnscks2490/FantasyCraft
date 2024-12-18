@@ -2,8 +2,6 @@
 #include "Goal_Think.h"
 #include "Actor.h"
 
-const char* Goal_Think::GOAL_NAME = "Goal_Think";
-
 Goal_Think::Goal_Think(Actor* pE)
     :Goal_Composite(pE,GoalType::Think)
 {
@@ -17,7 +15,7 @@ void Goal_Think::SelectTactic()
 
     for (Goal_Evaluator* it : m_Evaluators)
     {
-        double desirability = it->CalculateDesirability(m_pOwner);
+        double desirability = it->CalculateDesirability(mActor);
 
         if (desirability >= best)
         {
@@ -27,7 +25,7 @@ void Goal_Think::SelectTactic()
     }
 
     if (best > 0.5)
-        MostDesirable->SetGoal(m_pOwner);
+        MostDesirable->SetGoal(mActor);
 }
 
 void Goal_Think::Start()

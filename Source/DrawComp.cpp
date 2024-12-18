@@ -28,8 +28,8 @@ void DrawComp::update(float delta)
         }
         else
         {
-           //mCurAction = ECharAct::Idle;
-           //ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
+           mCurAction = ECharAct::Idle;
+           ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
            /* if (mCurAction == ECharAct::Move)
             {
                 

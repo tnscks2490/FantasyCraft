@@ -106,18 +106,19 @@ bool MainScene::init()
     //mCursor = ax::Node::create();
     //mCursor->setPosition(500, 500);
 
-    
 
-    mMapLayer = MapLayer::create();
+    mMapLayer                = MapLayer::create();
     mMapLayer->mPhysicsWorld = getPhysicsWorld();
-    //this->addChild(mMapLayer);
-
-    auto python = ax::Sprite::create("python.png"sv);
-    addChild(python);
+    mMapLayer->setPosition(ax::Vec2(0, 210));
+    this->addChild(mMapLayer);
 
     mUILayer = UILayer::create();
     addChild(mUILayer);
-    mUILayer->setPosition(ax::Vec2(640,480));
+    mUILayer->setPosition(ax::Vec2(640, 480));
+
+   
+
+   
 
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
@@ -159,7 +160,7 @@ void MainScene::onMouseDown(Event* event)
             PK_Data data;
             data.ClientID = TcpClient::get()->GetID();
             data.input    = 'r';
-            data.pos      = mousePos;
+            data.pos      = mousePos - (ax::Vec2(0, 210));
             TcpClient::get()->SendActorMessage(data);
         }
     }
@@ -509,6 +510,7 @@ void MainScene::Decording()
             {
                 //Actor* actor = World::get()->CreateActor(mMapLayer,data);
                 Actor* actor = SpawnSCV(mMapLayer,data);
+                actor->SetPosition(ax::Vec2(500, 500));
             }
             if (true)
             {
@@ -595,17 +597,15 @@ void MainScene::ScreenMove(float delta)
             mapPos.x += 8;
             mMapLayer->GetMap()->setPosition(mapPos);
         }
-        else if (mCursorPos.y > 672 && mapPos.y > -1328)
+        else if (mCursorPos.y > visibleSize.y - 32  && mapPos.y > -1296)
         {
             mapPos.y -= 8;
             mMapLayer->GetMap()->setPosition(mapPos);
         }
-        else if (mCursorPos.y < 48 && mapPos.y < 0)
+        else if (mCursorPos.y < 32 && mapPos.y < 0)
         {
             mapPos.y += 8;
             mMapLayer->GetMap()->setPosition(mapPos);
         }
     }
 }
-
-
