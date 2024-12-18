@@ -154,9 +154,9 @@ void MainScene::onMouseUp(Event* event)
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         mCursor->CursorUp();
+        mPlayer->Clear();
     }
-    printf("현재 선택된 엑터 수 : %d \n", mPlayer->PlayerActors.size());
-     //mPlayer->Clear();
+
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
 //따라서 드래그했을때 해당 사각형 안에 있는 노드(즉 엑터)들이 플레이어의 엑터리스트에 들어가야함
@@ -211,6 +211,9 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     case ax::EventKeyboard::KeyCode::KEY_2:
         selectidx = 2;
         break;
+    case ax::EventKeyboard::KeyCode::KEY_SPACE:
+        mPlayer->PrintSelectActors();
+        break;
     case ax::EventKeyboard::KeyCode::KEY_C:
     {
         PK_Data data;
@@ -240,8 +243,6 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     default:
         break;
     }
-
-    World::get()->PrintActorList();
 }
 
 void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
@@ -275,7 +276,10 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
         UserData* userData = (UserData*)bRoot->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
+        {
+            //mPlayer->Clear();
             mPlayer->Selected(userData->mActor);
+        }
         return false;
     }
     else if (B->getName() == "CursorCheckNode")
@@ -284,7 +288,10 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
         UserData* userData = (UserData*)aRoot->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
+        {
+            //mPlayer->Clear();
             mPlayer->Selected(userData->mActor);
+        }
         return false;
     }
     if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
@@ -509,7 +516,7 @@ void MainScene::Decording()
         break;
         case 90:
         {
-            for (auto actor : World::get()->w_ActorList)
+            for (auto actor : mPlayer->PlayerActors)
             {
                 if (actor && actor->mID == data.ClientID)
                 {
@@ -531,7 +538,7 @@ void MainScene::Decording()
         }
         break;*/
         case 114:
-            for (auto actor : World::get()->w_ActorList)
+                for (auto actor : mPlayer->PlayerActors)
             {
                 if (actor && actor->mID == data.ClientID)
                 {

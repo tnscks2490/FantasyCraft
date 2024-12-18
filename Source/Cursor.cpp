@@ -64,6 +64,7 @@ ax::DrawNode* Cursor::GetDrawNode()
 
 void Cursor::CursorUp()
 {
+
     GetDrawNode()->clear();
     CheckNodeInDrag();
     isDraging = false;

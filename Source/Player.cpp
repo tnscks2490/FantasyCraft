@@ -47,3 +47,17 @@ bool Player::isSelected()
     else
         return false;
 }
+
+void Player::PrintSelectActors()
+{
+    int i = 0;
+    for (auto ac : PlayerActors)
+    {
+        if (ac)
+        {
+            i++;
+        }
+    }
+
+    printf("현재 선택된 엑터의 수 : %d \n", i);
+}

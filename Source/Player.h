@@ -59,6 +59,7 @@ public:
     void Clear();
     void Selected(Actor* actor);
     bool isSelected();
+    void PrintSelectActors();
 
     PlayerCommand mCommand[9] = {PlayerCommand::None,};
     PlayerRace mRace       = PlayerRace::None;

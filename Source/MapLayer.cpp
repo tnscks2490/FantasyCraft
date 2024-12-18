@@ -9,6 +9,7 @@ bool MapLayer::init()
     {
         return false;
     }
+
     mMap = ax::TMXTiledMap::create("Map/Python/python.tmx");
     this->addChild(mMap);
 
