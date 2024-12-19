@@ -56,6 +56,7 @@ enum class ECharName
     // ECharDir == Face (기준점 항상 나옴)
     Effect,
     /////////////
+    Cursor,
     Name_Count,
 };
 

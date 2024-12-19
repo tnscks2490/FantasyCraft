@@ -16,8 +16,9 @@ void Player::Clear()
     {
         if (ac)
         {
-            ac->mDrawComp->selected = false;
+            ac->mDrawComp->selected = false;         
             ac->mDrawComp->isSelected();
+            ac = nullptr;
         }
     }
     PlayerActors.clear();

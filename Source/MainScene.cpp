@@ -93,9 +93,12 @@ bool MainScene::init()
     mMapLayer->setPosition(ax::Vec2(0, 210));
     this->addChild(mMapLayer);
 
+
     mUILayer = UILayer::create();
     addChild(mUILayer);
     mUILayer->setPosition(ax::Vec2(640, 480));
+    
+ 
 
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
@@ -153,8 +156,8 @@ void MainScene::onMouseUp(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        mCursor->CursorUp();
         mPlayer->Clear();
+        mCursor->CursorUp();
     }
 
 }
@@ -188,7 +191,6 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 {
     if (code == ax::EventKeyboard::KeyCode::KEY_P)
     {
-
         printf("\n");
         for (int i = 0; i < World::get()->mPath->mColMap->GetHeight(); i++)
         {
@@ -256,28 +258,15 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    if (A->getName() == "CursorCheckNode")
     {
-        
-    }
-
-    return true;
-}
-
-bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContactPreSolve& solve)
-{
-    auto A = contact.getShapeA()->getBody()->getNode();
-    auto B = contact.getShapeB()->getBody()->getNode();
-
-    if (A->getName() == "CursorCheckNode" )
-    {
-        auto bRoot         = B->getParent();
+        auto bRoot = B->getParent();
 
         UserData* userData = (UserData*)bRoot->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
         {
-            //mPlayer->Clear();
+            // mPlayer->Clear();
             mPlayer->Selected(userData->mActor);
         }
         return false;
@@ -289,11 +278,45 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
         {
-            //mPlayer->Clear();
+            // mPlayer->Clear();
             mPlayer->Selected(userData->mActor);
         }
         return false;
     }
+
+    return true;
+}
+
+bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContactPreSolve& solve)
+{
+    auto A = contact.getShapeA()->getBody()->getNode();
+    auto B = contact.getShapeB()->getBody()->getNode();
+
+    //if (A->getName() == "CursorCheckNode" )
+    //{
+    //    auto bRoot         = B->getParent();
+
+    //    UserData* userData = (UserData*)bRoot->getUserData();
+
+    //    if (userData->mActor->mID == TcpClient::get()->GetID())
+    //    {
+    //        //mPlayer->Clear();
+    //        mPlayer->Selected(userData->mActor);
+    //    }
+    //    return false;
+    //}
+    //else if (B->getName() == "CursorCheckNode")
+    //{
+    //    auto aRoot         = A->getParent();
+    //    UserData* userData = (UserData*)aRoot->getUserData();
+
+    //    if (userData->mActor->mID == TcpClient::get()->GetID())
+    //    {
+    //        //mPlayer->Clear();
+    //        mPlayer->Selected(userData->mActor);
+    //    }
+    //    return false;
+    //}
     if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
     {
         UserData* userDataA = (UserData*)A->getParent()->getUserData();

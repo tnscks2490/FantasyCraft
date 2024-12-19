@@ -117,7 +117,7 @@ AnimInfo g_AnimInfo_Effect_SCVSpark[] = {
     {ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face, "Plist/SCVSpark.plist", "SCVSpark/%04d.png", 1, 10, (0.5f / 10), Vec2(0.5, 0.5), nullptr},
 };
 
-AnimInfo g_animInfo_CommandCenter_Build[] = {
+AnimInfo g_AnimInfo_CommandCenter_Build[] = {
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/03.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -130,6 +130,13 @@ AnimInfo g_animInfo_CommandCenter_Build[] = {
 AnimInfo g_AnimInfo_Select_Idle[] = {{ECharName::Select, ECharAct::Move, ECharDir::Face, "Plist/Select.plist",
                                       "Select/%04d.png", 1, 2, (1.f / 2), Vec2(0.5, 0.5), nullptr}
 };
+
+// 커서 Plist 추가하기 리소스 추가하기
+
+AnimInfo g_AnimInfo_Cursor_Idle[] = {{ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Plist/Select.plist",
+                                      "Select/%04d.png", 1, 4, (1.f / 1), Vec2(0.5, 0.5), nullptr}};
+
+
 
 
 AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)

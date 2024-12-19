@@ -23,9 +23,9 @@ bool MapLayer::init()
 void MapLayer::CreateWalls()
 {
     auto wallLayer = mMap->getLayer("MetaInfo");
-    auto wall      = mMap->getObjectGroup("Wall");
+    auto wall      = mMap->getObjectGroup("wall2");
 
-   
+    AXLOG("asdfasdf");
 
     //for (int i = 1; i < mHeight-1; i++)
     //{

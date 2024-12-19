@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="21">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="36">
  <tileset firstgid="1" name="TMXTileSet_Animations" tilewidth="16" tileheight="16" tilecount="7308" columns="126">
   <image source="../../../../TestClient/Content/TMXMap/Python/TMXTileSet_Animations.png" width="2016" height="928"/>
   <tile id="0">
