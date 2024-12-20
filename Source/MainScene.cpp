@@ -64,6 +64,7 @@ bool MainScene::init()
 
     TcpClient::get();
 
+
     visibleSize = _director->getVisibleSize();
     auto origin = _director->getVisibleOrigin();
     auto safeArea = _director->getSafeAreaRect();
@@ -87,16 +88,23 @@ bool MainScene::init()
     contactListener->onContactSeparate = AX_CALLBACK_1(MainScene::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
+    
+    // 플레이어 생성
+    mPlayer                  = new Player;
+    mPlayer->mRace = PlayerRace::Terran;
+
+
 
     mMapLayer                = MapLayer::create();
     mMapLayer->mPhysicsWorld = getPhysicsWorld();
     mMapLayer->setPosition(ax::Vec2(0, 210));
-    this->addChild(mMapLayer);
+    addChild(mMapLayer);
 
 
     mUILayer = UILayer::create();
+    mUILayer->SetUI(mPlayer->mRace);
     addChild(mUILayer);
-    mUILayer->setPosition(ax::Vec2(640, 480));
+    
     
  
 
@@ -106,8 +114,7 @@ bool MainScene::init()
     auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
     World::get()->mPath->DefaultSetting(wall);
 
-    // 플레이어 생성
-    mPlayer   = new Player;
+    
     // 커서 생성
     mCursor = new Cursor(this);
 
@@ -510,8 +517,6 @@ void MainScene::Decording()
                 if (actor && actor->idx == selectidx)
                 {
                     actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
-                    //auto body = actor->GetRoot()->getChildByName("Body")->getPhysicsBody();
-                    // body->setVelocity(data.pos);
                 }
             }
         }
@@ -534,7 +539,6 @@ void MainScene::Decording()
 
             if (data.ClientID == TcpClient::get()->GetID())
             {
-                //Actor* actor = World::get()->CreateActor(mMapLayer,data);
                 Actor* actor = SpawnSCV(mMapLayer,data);
                 actor->SetPosition(ax::Vec2(500, 500));
             }

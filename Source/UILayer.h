@@ -1,8 +1,7 @@
 #pragma once
 #include "PreDefines.h"
+#include "Player.h"
 
-
-class Player;
 
 class UILayer : public ax::Layer
 {
@@ -11,10 +10,16 @@ public:
 
     virtual bool init() override;
 
+    void SetUI(PlayerRace race);
+
 
 
 public:
-    ax::Sprite* mUISprite;
+    ax::Sprite* mConsoleUI;
+    ax::Sprite* mMineralIcon;
+    ax::Sprite* mGasIcon;
+    ax::Sprite* mPopIcon;
+
 
 
     Player* mPlayer = nullptr;
