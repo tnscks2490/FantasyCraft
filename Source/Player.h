@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Actor.h"
 class Actor;
 class PlayerController;
 
@@ -22,6 +22,8 @@ enum class PlayerCommand
     Hold,
     Cancel,
     SetRallyPoint,
+    Repair,
+    Gather,
 
     // 테란 명령
     //CommandCenter
@@ -50,6 +52,16 @@ enum class PlayerCommand
 };
 
 
+enum class ActionIcon
+{
+    None,
+    SCV,
+    SCV_BuildStructure,
+    SCV_BuildAdvanceStructure,
+    SCV_Attack,
+
+};
+
 
 class Player
 {
@@ -68,6 +80,10 @@ public:
 
 public:
     std::vector<Actor*> PlayerActors;
+
     PlayerController* mPC = nullptr;
+    ActionIcon mCurActionICon    = ActionIcon::None;
+
+
 };
 

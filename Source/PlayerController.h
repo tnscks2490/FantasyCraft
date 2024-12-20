@@ -10,9 +10,8 @@ public:
     PlayerController(Player* player);
     ~PlayerController();
 
-
-
-
+    void Reset_ActionIcon();
+    void SetActorIcon();
 
 
 public:

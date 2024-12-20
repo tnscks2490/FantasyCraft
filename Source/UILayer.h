@@ -20,7 +20,7 @@ public:
     ax::Sprite* mGasIcon;
     ax::Sprite* mPopIcon;
 
-
+    ax::MenuItemSprite mAllActionIcon[9];
 
     Player* mPlayer = nullptr;
 };
