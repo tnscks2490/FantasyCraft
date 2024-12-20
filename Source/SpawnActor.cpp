@@ -8,8 +8,11 @@
 Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 {
     Actor* actor = new Actor;
+    actor->mActorType = ActorType::SCV;
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
+
+
 
     auto draw = new DrawComp(actor);
 

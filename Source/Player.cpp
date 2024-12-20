@@ -2,10 +2,11 @@
 #include "Player.h"
 #include "Actor.h"
 #include "DrawComp.h"
+#include "PlayerController.h"
 
 Player::Player()
 {
-
+    mPC = new PlayerController(this);
 }
 
 Player::~Player() {}

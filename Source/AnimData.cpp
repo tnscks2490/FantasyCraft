@@ -230,9 +230,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         }
     }
     break;
-    case ECharName::CommandCenter:
-        return g_animInfo_CommandCenter_Build[0];
-        break;
     }
 
     return g_AnimInfo_Effect_SCVSpark[0];

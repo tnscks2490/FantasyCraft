@@ -10,7 +10,12 @@ class ProjectileComp;
 class PK_Data;
 
 
-
+enum class ActorType
+{
+    None,
+    SCV,
+    Marine,
+};
 
 
 
@@ -42,6 +47,9 @@ public:
     DrawComp* mDrawComp = nullptr;
     UnitComp* mUnitComp = nullptr;
     GoalComp* mGoalComp = nullptr;
+
+public:
+    ActorType mActorType = ActorType::None;
 
 };
 

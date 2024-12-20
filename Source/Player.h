@@ -1,7 +1,7 @@
 #pragma once
 
 class Actor;
-
+class PlayerController;
 
 enum class PlayerRace
 {
@@ -49,6 +49,8 @@ enum class PlayerCommand
     Liftoff,
 };
 
+
+
 class Player
 {
 public:
@@ -66,5 +68,6 @@ public:
 
 public:
     std::vector<Actor*> PlayerActors;
+    PlayerController* mPC = nullptr;
 };
 

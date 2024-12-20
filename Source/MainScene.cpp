@@ -207,15 +207,36 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 
     switch (code)
     {
+    case ax::EventKeyboard::KeyCode::KEY_O:
+    {
+        if (mPlayer->PlayerActors.size() == 1)
+        {
+            if (mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
+            {
+                Actor* actor = mPlayer->PlayerActors[0];
+
+                PK_Data data;
+                data.ClientID = TcpClient::get()->GetID();
+                data.pos      = actor->GetPosition();
+                data.input    = 77;
+                TcpClient::get()->SendActorMessage(data);
+               
+            }
+        }
+    } break;
+
     case ax::EventKeyboard::KeyCode::KEY_1:
         selectidx = 1;
         break;
+
     case ax::EventKeyboard::KeyCode::KEY_2:
         selectidx = 2;
         break;
+
     case ax::EventKeyboard::KeyCode::KEY_SPACE:
         mPlayer->PrintSelectActors();
         break;
+
     case ax::EventKeyboard::KeyCode::KEY_C:
     {
         PK_Data data;
@@ -224,6 +245,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.input    = 77;
         TcpClient::get()->SendActorMessage(data);
     } break;
+
     case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
     {
         PK_Data data;
@@ -231,8 +253,8 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.pos      = Vec2(16, 0);
         data.input    = 6;
         TcpClient::get()->SendActorMessage(data);
-    }
-        break;
+    } break;
+
     case ax::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
     {
         PK_Data data;
@@ -240,8 +262,9 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.pos      = Vec2(-16,0);
         data.input    = 4;
         TcpClient::get()->SendActorMessage(data);
-    }
-        break;
+    } break;
+
+
     default:
         break;
     }

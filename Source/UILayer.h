@@ -2,6 +2,8 @@
 #include "PreDefines.h"
 
 
+class Player;
+
 class UILayer : public ax::Layer
 {
 public:
@@ -13,4 +15,7 @@ public:
 
 public:
     ax::Sprite* mUISprite;
+
+
+    Player* mPlayer = nullptr;
 };
