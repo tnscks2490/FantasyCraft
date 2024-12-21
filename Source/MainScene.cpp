@@ -163,7 +163,6 @@ void MainScene::onMouseUp(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        mPlayer->Clear();
         mCursor->CursorUp();
     }
 

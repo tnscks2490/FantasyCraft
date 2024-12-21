@@ -137,6 +137,10 @@ AnimInfo g_AnimInfo_Cursor_Idle[] = {{ECharName::Cursor, ECharAct::Idle, ECharDi
                                       "Select/%04d.png", 1, 4, (1.f / 1), Vec2(0.5, 0.5), nullptr}};
 
 
+AnimInfo g_AnimInfo_Action_Icon[] = {
+    {ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Plist/Select.plist","Select/%04d.png", 1, 4, (1.f / 1), Vec2(0.5, 0.5), nullptr}
+};
+
 
 
 AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)

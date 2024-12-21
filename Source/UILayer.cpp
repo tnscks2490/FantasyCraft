@@ -30,11 +30,11 @@ void UILayer::SetUI(PlayerRace race)
         addChild(mMineralIcon);
 
         mGasIcon = ax::Sprite::create("TGasIcon.png"sv);
-        mGasIcon->setPosition(ax::Vec2(350, 450));
+        mGasIcon->setPosition(ax::Vec2(400, 450));
         addChild(mGasIcon);
 
         mPopIcon = ax::Sprite::create("TPopIcon.png"sv);
-        mPopIcon->setPosition(ax::Vec2(400, 450));
+        mPopIcon->setPosition(ax::Vec2(500, 450));
         addChild(mPopIcon);
 
 

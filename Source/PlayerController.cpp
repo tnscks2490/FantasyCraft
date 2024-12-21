@@ -46,7 +46,10 @@ void PlayerController::SetActorIcon()
 
     case ActionIcon::SCV_BuildStructure:
     {
-
+        //각 건물마다 필요한 조건이 있다면 그걸 조건을 걸고 해당되면 지을수있게한다.
+        // 내가 지은 건물들을 맵으로 저장해두고 find함수를 찾아서 사용한다.
+        // 만약 있다면 조건이 충족되어 다음 건물을지을수 있게되는거고
+        // 아니라면 지을수없게 해놓는다.
     } break;
 
 
