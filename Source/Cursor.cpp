@@ -62,6 +62,14 @@ ax::DrawNode* Cursor::GetDrawNode()
     return nullptr;
 }
 
+void Cursor::update(float delta)
+{
+    if (ac != nullptr)
+    {
+        ac->SetPosition(mRoot->getPosition());
+    }
+}
+
 void Cursor::CursorUp()
 {
 

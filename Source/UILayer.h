@@ -11,7 +11,7 @@ public:
     virtual bool init() override;
 
     void SetUI(PlayerRace race);
-
+    void build();
 
 
 public:
@@ -20,7 +20,8 @@ public:
     ax::Sprite* mGasIcon;
     ax::Sprite* mPopIcon;
 
-    ax::MenuItemSprite mAllActionIcon[9];
+
+    ax::MenuItemImage mAllActionIcon[9];
 
     Player* mPlayer = nullptr;
 };

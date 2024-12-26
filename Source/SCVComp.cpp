@@ -30,7 +30,7 @@ void SCVComp::Repair()
 
 }
 
-void SCVComp::Building()
+void SCVComp::Building(ax::Vec2 pos)
 {
     PK_Data data;
     data.ClientID = mActor->mID;

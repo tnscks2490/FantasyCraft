@@ -66,7 +66,7 @@ TcpClient* TcpClient::get()
 
 
 
-bool TcpClient::SendActorMessage(PK_Data data)
+bool TcpClient::SendMessageToServer(PK_Data data)
 {
     char buf[1024] = {0};
     int bufLen     = 0;

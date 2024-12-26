@@ -1,5 +1,19 @@
 #pragma once
 #include "PreDefines.h"
+#include "Actor.h"
+
+enum class CursorState
+{
+    None,
+    Idle,
+    Drag,
+    Move,
+    Click,
+    BluePrint,
+
+};
+
+
 
 class Cursor 
 {
@@ -12,6 +26,7 @@ public:
     ax::Vec2 GetPosition();
     ax::DrawNode* GetDrawNode();
 
+    void update(float delta);
 
     void CursorUp();
 
@@ -25,8 +40,17 @@ public:
 public:
     Ptr<ax::Node> mRoot;
 
+
+    Actor* ac = nullptr;
+    ax::Sprite* sp = nullptr;
+
     ax::Vec2 sPos;
     ax::Vec2 ePos;
 
     bool isDraging = false;
+
+
+    CursorState mState = CursorState::None;
+
+
 };

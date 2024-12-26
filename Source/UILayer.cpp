@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "UILayer.h"
-
+#include "World.h"
+#include "TcpClient.h"
 
 
 bool UILayer::init()
@@ -36,6 +37,20 @@ void UILayer::SetUI(PlayerRace race)
         mPopIcon = ax::Sprite::create("TPopIcon.png"sv);
         mPopIcon->setPosition(ax::Vec2(500, 450));
         addChild(mPopIcon);
+
+
+        auto before = ax::Sprite::create("Attack_Release.png"sv);
+        auto after  = ax::Sprite::create("Attack_Down.png"sv);
+
+        auto item = ax::MenuItemImage::create("Attack_Release.png", "Attack_Down.png", AX_CALLBACK_0(UILayer::build, this));
+
+        item->setScale(2.0f);
+        item->setPosition(ax::Vec2(410,-270));
+
+        auto menu = ax::Menu::create(item, NULL);
+        menu->setPosition(ax::Vec2::ZERO);
+        this->addChild(menu, 1);
+
 
 
     } break;
@@ -85,4 +100,13 @@ void UILayer::SetUI(PlayerRace race)
     
 
     setPosition(ax::Vec2(640, 480));
+}
+
+void UILayer::build()
+{
+    PK_Data data;
+    data.ClientID = TcpClient::get()->GetID();
+    data.input    = 10;
+    data.pos      = ax::Vec2::ZERO;
+    TcpClient::get()->SendMessageToServer(data);
 }

@@ -11,7 +11,7 @@ public:
     virtual void update(float delta) override;
 
     void Repair();
-    void Building();
+    void Building(ax::Vec2 pos);
 
 
 

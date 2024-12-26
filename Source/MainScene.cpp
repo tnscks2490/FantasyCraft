@@ -144,7 +144,7 @@ void MainScene::onMouseDown(Event* event)
             data.ClientID = TcpClient::get()->GetID();
             data.input    = 'r';
             data.pos      = mousePos - (ax::Vec2(0, 210));
-            TcpClient::get()->SendActorMessage(data);
+            TcpClient::get()->SendMessageToServer(data);
         }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
@@ -164,6 +164,7 @@ void MainScene::onMouseUp(Event* event)
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         mCursor->CursorUp();
+        mPlayer->Clear();
     }
 
 }
@@ -225,7 +226,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
                 data.ClientID = TcpClient::get()->GetID();
                 data.pos      = actor->GetPosition();
                 data.input    = 77;
-                TcpClient::get()->SendActorMessage(data);
+                TcpClient::get()->SendMessageToServer(data);
                
             }
         }
@@ -249,7 +250,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.ClientID = TcpClient::get()->GetID();
         data.pos      = Vec2(500, 500);
         data.input    = 77;
-        TcpClient::get()->SendActorMessage(data);
+        TcpClient::get()->SendMessageToServer(data);
     } break;
 
     case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
@@ -258,7 +259,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.ClientID = TcpClient::get()->GetID();
         data.pos      = Vec2(16, 0);
         data.input    = 6;
-        TcpClient::get()->SendActorMessage(data);
+        TcpClient::get()->SendMessageToServer(data);
     } break;
 
     case ax::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -267,7 +268,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.ClientID = TcpClient::get()->GetID();
         data.pos      = Vec2(-16,0);
         data.input    = 4;
-        TcpClient::get()->SendActorMessage(data);
+        TcpClient::get()->SendMessageToServer(data);
     } break;
 
 
@@ -300,7 +301,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
         }
         return false;
     }
-    else if (B->getName() == "CursorCheckNode")
+    else if (B->getName() == "CursorCheckNode" )
     {
         auto aRoot         = A->getParent();
         UserData* userData = (UserData*)aRoot->getUserData();
@@ -404,8 +405,9 @@ void MainScene::update(float delta)
     
     // 마우스가 화면 끝으로 갔을 때 화면 전체를 옮긴다.
     // 해당기능은 마우스의 위치백터만큼 화면에 더해야한다.
-    ScreenMove(delta);
+    //ScreenMove(delta);
 
+    mCursor->update(delta);
 
     switch (_gameState)
     {
@@ -529,8 +531,22 @@ void MainScene::Decording()
                     actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
                 }
             }
-        }
-            break;
+        } break;
+
+        case 10:
+        {
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+
+                /*Actor* actor = SpawnCommandCenter(mMapLayer, data);
+                mCursor->ac  = actor;*/
+                mCursor->sp = ax::Sprite::create("123.png"sv);
+                mCursor->mRoot->addChild(mCursor->sp);
+
+
+            }
+        }  break;
+
         case 77:
         case 78:
         case 79:
