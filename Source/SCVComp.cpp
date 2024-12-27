@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "SCVComp.h"
 #include "World.h"
+#include "ActorMessage.h"
 
 
 
@@ -14,16 +15,18 @@ SCVComp::SCVComp(Actor* actor)
 
 SCVComp::~SCVComp() {}
 
-void SCVComp::update(float delta)
+void SCVComp::MessageProc(ActorMessage& msg)
 {
-    mTimer += delta;
-    if (mTimer >= 5)
+    switch (msg.msgType)
     {
-
-        //Building();
-
-        mTimer = -300;
+    case MsgType::Build:
+    default:
+        break;
     }
+}
+
+void SCVComp::update(float delta) {
+
 }
 
 void SCVComp::Repair()
