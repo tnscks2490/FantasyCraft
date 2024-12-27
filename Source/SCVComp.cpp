@@ -9,6 +9,7 @@ SCVComp::SCVComp(Actor* actor)
     : UnitComp(actor)
 {
     actor->mUnitComp = this;
+    
 }
 
 SCVComp::~SCVComp() {}
@@ -19,7 +20,7 @@ void SCVComp::update(float delta)
     if (mTimer >= 5)
     {
 
-        Building();
+        //Building();
 
         mTimer = -300;
     }

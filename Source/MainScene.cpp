@@ -520,8 +520,8 @@ void MainScene::Decording()
                     actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
                 }
             }
-        }
-            break;
+        } break;
+
         case 4:
         {
             for (auto actor : World::get()->w_ActorList)

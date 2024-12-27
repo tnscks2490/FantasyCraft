@@ -52,7 +52,9 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     selectanim->setVisible(false);
 
     auto move = new MoveComp(actor);
-    //auto unit = new MarineComp(actor);
+    auto unit = new MarineComp(actor);
+    unit->SetUnitStatus(40, 0, 0, 6, 0);
+
 
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;
