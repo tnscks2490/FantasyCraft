@@ -2,7 +2,7 @@
 #include "UILayer.h"
 #include "World.h"
 #include "TcpClient.h"
-
+#include "ActorMessage.h"
 
 bool UILayer::init()
 {
@@ -104,9 +104,14 @@ void UILayer::SetUI(PlayerRace race)
 
 void UILayer::build()
 {
-    PK_Data data;
+    ActorMessage msg;
+    msg.msgType = MsgType::Build;
+    msg.data = nullptr;
+    msg.sender  = nullptr;
+
+    /*PK_Data data;
     data.ClientID = TcpClient::get()->GetID();
     data.input    = 10;
     data.pos      = ax::Vec2::ZERO;
-    TcpClient::get()->SendMessageToServer(data);
+    TcpClient::get()->SendMessageToServer(data);*/
 }

@@ -33,6 +33,7 @@
 #include "TileNode.h"
 #include "Player.h"
 #include "Cursor.h"
+#include "UnitComp.h"
 
 
 using namespace ax;
@@ -138,20 +139,47 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-        if (mPlayer->isSelected())
+        if (mCursor->sp)
         {
-            PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
-            data.input    = 'r';
-            data.pos      = mousePos - (ax::Vec2(0, 210));
-            TcpClient::get()->SendMessageToServer(data);
+            mCursor->ReleaseSp();
         }
+        else
+        {
+            if (mPlayer->isSelected())
+            {
+                PK_Data data;
+                data.ClientID = TcpClient::get()->GetID();
+                data.input    = 'r';
+                data.pos      = mousePos - (ax::Vec2(0, 210));
+                TcpClient::get()->SendMessageToServer(data);
+            }
+        }
+        
+
+        
+
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
+        mCursor->LeftClickDown();
         mCursor->isDraging = true;
         mCursor->sPos      = mousePos;
         mCursor->setPosition(mCursor->sPos);
+
+        if (mCursor->sp)
+        {
+            if (mPlayer->PlayerActors.size() == 1 && mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
+            {
+                Actor* actor = mPlayer->PlayerActors[0];
+                ActorMessage msg;
+                msg.msgType = MsgType::Build;
+                msg.sender  = nullptr;
+                msg.data    = nullptr;
+
+                SendActorMessage(actor,msg);
+
+            }
+        }
     }
 }
 
@@ -163,8 +191,9 @@ void MainScene::onMouseUp(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
+        mCursor->LeftClickUp();
         mCursor->CursorUp();
-        mPlayer->Clear();
+       
     }
 
 }
@@ -288,7 +317,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    if (A->getName() == "CursorCheckNode")
+    if (A->getName() == "CursorCheckNode" && B->getTag()==10)
     {
         auto bRoot = B->getParent();
 
@@ -296,19 +325,17 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
         {
-            // mPlayer->Clear();
             mPlayer->Selected(userData->mActor);
         }
         return false;
     }
-    else if (B->getName() == "CursorCheckNode" )
+    else if (B->getName() == "CursorCheckNode" && A->getTag() == 10)
     {
         auto aRoot         = A->getParent();
         UserData* userData = (UserData*)aRoot->getUserData();
 
         if (userData->mActor->mID == TcpClient::get()->GetID())
         {
-            // mPlayer->Clear();
             mPlayer->Selected(userData->mActor);
         }
         return false;
@@ -322,32 +349,7 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    //if (A->getName() == "CursorCheckNode" )
-    //{
-    //    auto bRoot         = B->getParent();
-
-    //    UserData* userData = (UserData*)bRoot->getUserData();
-
-    //    if (userData->mActor->mID == TcpClient::get()->GetID())
-    //    {
-    //        //mPlayer->Clear();
-    //        mPlayer->Selected(userData->mActor);
-    //    }
-    //    return false;
-    //}
-    //else if (B->getName() == "CursorCheckNode")
-    //{
-    //    auto aRoot         = A->getParent();
-    //    UserData* userData = (UserData*)aRoot->getUserData();
-
-    //    if (userData->mActor->mID == TcpClient::get()->GetID())
-    //    {
-    //        //mPlayer->Clear();
-    //        mPlayer->Selected(userData->mActor);
-    //    }
-    //    return false;
-    //}
-    if (A->getPhysicsBody()->getTag() == B->getPhysicsBody()->getTag())
+    if (A->getTag() == 10 &&  B->getTag() == 10)
     {
         UserData* userDataA = (UserData*)A->getParent()->getUserData();
         UserData* userDataB = (UserData*)B->getParent()->getUserData();
@@ -536,14 +538,9 @@ void MainScene::Decording()
         case 10:
         {
             if (data.ClientID == TcpClient::get()->GetID())
-            {
-
-                /*Actor* actor = SpawnCommandCenter(mMapLayer, data);
-                mCursor->ac  = actor;*/
-                mCursor->sp = ax::Sprite::create("123.png"sv);
-                mCursor->mRoot->addChild(mCursor->sp);
-
-
+            {              
+                /*mCursor->sp = ax::Sprite::create("123.png"sv);
+                mCursor->mRoot->addChild(mCursor->sp);*/
             }
         }  break;
 

@@ -37,6 +37,14 @@ public:
     void CheckNodeInDrag();
     void DeleteCheckNode();
 
+
+    void LeftClickUp()  { isLeftClick = false;  }
+    void RightClickUp() { isRightClick = false; }
+    void LeftClickDown() { isLeftClick = true; }
+    void RightClickDown() { isRightClick = true; }
+
+    void ReleaseSp() { if (sp)sp->removeFromParent();sp = nullptr; }
+
 public:
     Ptr<ax::Node> mRoot;
 
@@ -48,9 +56,9 @@ public:
     ax::Vec2 ePos;
 
     bool isDraging = false;
+    bool isLeftClick = false;
+    bool isRightClick = false;
 
 
     CursorState mState = CursorState::None;
-
-
 };

@@ -20,6 +20,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
     switch (msg.msgType)
     {
     case MsgType::Build:
+        printf("설치");
     default:
         break;
     }

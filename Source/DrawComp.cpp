@@ -74,8 +74,8 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         auto body = ax::PhysicsBody::createBox(bodysize);
         body->setContactTestBitmask(0xFFFFFFFF);
         body->setDynamic(false);
-        body->setTag(10);
         bodyNode->setPhysicsBody(body);
+        bodyNode->setTag(10);
 
 
         auto drawNode = ax::DrawNode::create();

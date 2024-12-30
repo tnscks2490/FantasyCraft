@@ -36,6 +36,10 @@ public:
     virtual void update(float delta) override;
     virtual void SetUnitStatus(int hp,int mp, int sd, int at, int df);
 
+    virtual void Building(ax::Vec2 pos){}
+
+
+
 
     Status mStatus;
 
