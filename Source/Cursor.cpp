@@ -140,3 +140,22 @@ void Cursor::DeleteCheckNode()
     
 }
 
+void Cursor::CreateBuildingBluePrint(BuildingName name)
+{
+    if (sp == nullptr)
+    {
+        switch (name)
+        {
+        case BuildingName::None:
+            break;
+        case BuildingName::CommandCenter:
+            sp = ax::Sprite::create("123.png"sv);
+            mRoot->addChild(sp);
+            break;
+        default:
+            break;
+        }
+    }
+    
+}
+

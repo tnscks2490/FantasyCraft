@@ -2,6 +2,7 @@
 #include "UILayer.h"
 #include "World.h"
 #include "TcpClient.h"
+#include "Cursor.h"
 #include "ActorMessage.h"
 
 bool UILayer::init()
@@ -39,13 +40,10 @@ void UILayer::SetUI(PlayerRace race)
         addChild(mPopIcon);
 
 
-        auto before = ax::Sprite::create("Attack_Release.png"sv);
-        auto after  = ax::Sprite::create("Attack_Down.png"sv);
-
         auto item = ax::MenuItemImage::create("Attack_Release.png", "Attack_Down.png", AX_CALLBACK_0(UILayer::build, this));
 
         item->setScale(2.0f);
-        item->setPosition(ax::Vec2(410,-270));
+        item->setPosition(ax::Vec2(410,-272));
 
         auto menu = ax::Menu::create(item, NULL);
         menu->setPosition(ax::Vec2::ZERO);
@@ -98,20 +96,10 @@ void UILayer::SetUI(PlayerRace race)
         break;
     }
     
-
     setPosition(ax::Vec2(640, 480));
 }
 
 void UILayer::build()
 {
-    ActorMessage msg;
-    msg.msgType = MsgType::Build;
-    msg.data = nullptr;
-    msg.sender  = nullptr;
-
-    /*PK_Data data;
-    data.ClientID = TcpClient::get()->GetID();
-    data.input    = 10;
-    data.pos      = ax::Vec2::ZERO;
-    TcpClient::get()->SendMessageToServer(data);*/
+    mCursor->CreateBuildingBluePrint(BuildingName::CommandCenter);
 }

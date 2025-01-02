@@ -13,7 +13,12 @@ enum class CursorState
 
 };
 
+enum class BuildingName
+{
+    None,
+    CommandCenter,
 
+};
 
 class Cursor 
 {
@@ -44,6 +49,10 @@ public:
     void RightClickDown() { isRightClick = true; }
 
     void ReleaseSp() { if (sp)sp->removeFromParent();sp = nullptr; }
+
+    void CreateBuildingBluePrint(BuildingName name);
+
+
 
 public:
     Ptr<ax::Node> mRoot;

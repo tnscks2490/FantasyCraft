@@ -94,19 +94,19 @@ bool MainScene::init()
     mPlayer                  = new Player;
     mPlayer->mRace = PlayerRace::Terran;
 
-
-
     mMapLayer                = MapLayer::create();
     mMapLayer->mPhysicsWorld = getPhysicsWorld();
     mMapLayer->setPosition(ax::Vec2(0, 210));
     addChild(mMapLayer);
 
+    // 커서 생성
+    mCursor = new Cursor(this);
 
     mUILayer = UILayer::create();
     mUILayer->SetUI(mPlayer->mRace);
     addChild(mUILayer);
     
-    
+    mUILayer->mCursor = mCursor;
  
 
 
@@ -116,8 +116,7 @@ bool MainScene::init()
     World::get()->mPath->DefaultSetting(wall);
 
     
-    // 커서 생성
-    mCursor = new Cursor(this);
+   
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -154,8 +153,6 @@ void MainScene::onMouseDown(Event* event)
                 TcpClient::get()->SendMessageToServer(data);
             }
         }
-        
-
         
 
     }
@@ -539,8 +536,8 @@ void MainScene::Decording()
         {
             if (data.ClientID == TcpClient::get()->GetID())
             {              
-                /*mCursor->sp = ax::Sprite::create("123.png"sv);
-                mCursor->mRoot->addChild(mCursor->sp);*/
+                Actor* CC = SpawnCommandCenter(mMapLayer, data);
+                CC->SetPosition(data.pos);
             }
         }  break;
 
