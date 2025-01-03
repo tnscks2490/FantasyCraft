@@ -80,10 +80,13 @@ public:
 
 public:
     std::vector<Actor*> PlayerActors;
+    Actor* mMainActor;
 
     PlayerController* mPC = nullptr;
     ActionIcon mCurActionICon    = ActionIcon::None;
 
 
 };
+
+// 
 

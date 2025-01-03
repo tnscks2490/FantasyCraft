@@ -94,7 +94,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
 {
     if (mRoot.isNotNull())
     {
-        AnimInfo& info = FindAnimInfo(name, ECharAct::Idle, ECharDir::S); // 마린전용
+        AnimInfo& info = FindAnimInfo(name, ECharAct::Idle, ECharDir::S);
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
@@ -130,6 +130,28 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir
         node->runAction(action);
 
         mCurAnim = name;
+        return node;
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName)
+{
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& info = FindAnimInfoByIndex(name, ECharAct::Idle, ECharDir::Face,idx);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName(nodeName);
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+
+        ax::Action* action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
         return node;
     }
     return nullptr;

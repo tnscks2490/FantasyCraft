@@ -40,6 +40,7 @@ void Player::Selected(Actor* actor)
     actor->mDrawComp->selected = true;
     actor->mDrawComp->isSelected();
     PlayerActors.push_back(actor);
+
 }
 
 bool Player::isSelected()

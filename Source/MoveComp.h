@@ -78,5 +78,8 @@ public:
     double mMaxSpeed = 50;
     double mMass = 1.0;  
 
+
+public:
+    bool IsOn = true;
 };
 

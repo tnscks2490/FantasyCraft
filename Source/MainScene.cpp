@@ -167,13 +167,19 @@ void MainScene::onMouseDown(Event* event)
         {
             if (mPlayer->PlayerActors.size() == 1 && mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
             {
-                Actor* actor = mPlayer->PlayerActors[0];
+                PK_Data data;
+                data.ClientID = TcpClient::get()->GetID();
+                data.input    = 10;
+                data.pos      = mCursor->sPos;
+                TcpClient::get()->SendMessageToServer(data);
+
+                /*Actor* actor = mPlayer->PlayerActors[0];
                 ActorMessage msg;
                 msg.msgType = MsgType::Build;
                 msg.sender  = nullptr;
                 msg.data    = nullptr;
 
-                SendActorMessage(actor,msg);
+                SendActorMessage(actor,msg);*/
 
             }
         }
@@ -535,9 +541,19 @@ void MainScene::Decording()
         case 10:
         {
             if (data.ClientID == TcpClient::get()->GetID())
-            {              
+            {
+                ////메세지를 쏴야한다~
+                //ActorMessage msg;
+                //msg.msgType = MsgType::Build;
+                //msg.data = nullptr;
+                //msg.sender  = nullptr;
+
+                //SendActorMessage(nullptr,msg);
                 Actor* CC = SpawnCommandCenter(mMapLayer, data);
-                CC->SetPosition(data.pos);
+                ax::Vec2 Pos;
+                Pos = data.pos - mMapLayer->getPosition();
+                CC->SetPosition(Pos);
+                printf("설치중");
             }
         }  break;
 

@@ -19,6 +19,7 @@ public:
                              ECharAct action,
                              ECharDir dir,
                              std::string_view nodeName = "Effect");
+    ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
 
     void AddUserData();

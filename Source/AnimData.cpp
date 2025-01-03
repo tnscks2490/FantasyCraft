@@ -216,11 +216,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         }break;
 
 
-
-
-
-
-
     // 여기는 이펙트의 영역
     case ECharName::Effect:
     {
@@ -248,7 +243,7 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
     case ECharName::SCV:
         break;
     case ECharName::CommandCenter:
-
+        return g_AnimInfo_CommandCenter_Build[idx];
         break;
     case ECharName::Effect:
         break;

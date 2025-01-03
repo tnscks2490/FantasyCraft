@@ -25,7 +25,7 @@ void Actor::update(float delta)
 {
     if (mGoalComp) mGoalComp->update(delta);
     if (mUnitComp) mUnitComp->update(delta);
-    if (mMoveComp) mMoveComp->update(delta);
+    if (mMoveComp && mMoveComp->IsOn) mMoveComp->update(delta);
     if (mDrawComp) mDrawComp->update(delta);
 }
 
