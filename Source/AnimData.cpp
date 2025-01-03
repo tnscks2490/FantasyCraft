@@ -215,6 +215,12 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             break;
         }break;
 
+    case ECharName::CommandCenter:
+        switch (action)
+        {
+        case ECharAct::Idle:
+            return g_AnimInfo_CommandCenter_Build[0];
+        }
 
     // 여기는 이펙트의 영역
     case ECharName::Effect:

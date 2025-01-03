@@ -26,6 +26,7 @@ public:
 
 
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);
+    void ChangeAnimByIndex(ECharName Name, ECharAct action, ECharDir dir,int idx);
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
 
 

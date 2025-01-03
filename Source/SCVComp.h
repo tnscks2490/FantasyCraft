@@ -20,4 +20,6 @@ public:
     float mTimer    = 0;
     bool IsWorking = false;
     short mPop      = 1;
+
+    Actor* mBuilding = nullptr;
 };

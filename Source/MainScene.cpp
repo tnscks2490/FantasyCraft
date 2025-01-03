@@ -167,6 +167,7 @@ void MainScene::onMouseDown(Event* event)
         {
             if (mPlayer->PlayerActors.size() == 1 && mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
             {
+                mPlayer->mMainActor = mPlayer->PlayerActors[0];
                 PK_Data data;
                 data.ClientID = TcpClient::get()->GetID();
                 data.input    = 10;
@@ -553,6 +554,13 @@ void MainScene::Decording()
                 ax::Vec2 Pos;
                 Pos = data.pos - mMapLayer->getPosition();
                 CC->SetPosition(Pos);
+
+                ActorMessage msg;
+                msg.data = nullptr;
+                msg.msgType = MsgType::Build;
+                msg.sender  = CC;
+                SendActorMessage(mPlayer->mMainActor, msg);
+
                 printf("설치중");
             }
         }  break;

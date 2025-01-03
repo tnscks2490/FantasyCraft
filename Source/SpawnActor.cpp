@@ -77,13 +77,14 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
 
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim       = draw->CreateAnimNodeByIndex(ECharName::CommandCenter,0);
+    //auto anim       = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face);
+    // 뭐가 문젠지 모르겠음
     auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);
 
     auto command = new CommandCenterComp(actor);
     auto move = new MoveComp(actor);
     move->IsOn   = false;
-    //auto unit = new MarineComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;

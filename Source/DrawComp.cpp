@@ -14,7 +14,7 @@ DrawComp::~DrawComp() {}
 
 void DrawComp::update(float delta)
 {
-    if (mActor->mMoveComp)
+    if (mActor->mMoveComp && mActor->mMoveComp->IsOn)
     {
         if (mActor->mMoveComp->IsMoving)
         {
@@ -207,6 +207,23 @@ void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
     action->setTag(20202);
     animNode->runAction(action);
 }
+
+void DrawComp::ChangeAnimByIndex(ECharName Name, ECharAct act, ECharDir dir, int idx)
+{
+    auto animNode = mRoot->getChildByName("Anim");
+    animNode->stopActionByTag(20202);
+
+    AnimInfo& animInfo = FindAnimInfoByIndex(Name, act, dir,idx);
+    animInfo.CreateAnimation();
+
+    ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
+
+    ax::Action* action;
+    action = ax::RepeatForever::create(animate);
+    action->setTag(20202);
+    animNode->runAction(action);
+}
+
 
 ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
 {
