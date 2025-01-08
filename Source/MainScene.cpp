@@ -153,8 +153,6 @@ void MainScene::onMouseDown(Event* event)
                 TcpClient::get()->SendMessageToServer(data);
             }
         }
-        
-
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
@@ -168,19 +166,22 @@ void MainScene::onMouseDown(Event* event)
             if (mPlayer->PlayerActors.size() == 1 && mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
             {
                 mPlayer->mMainActor = mPlayer->PlayerActors[0];
-                PK_Data data;
+                //설치시 메세지를 어떻게 둬야하는가
+                //소켓을 어떻게 운영해야하는가 가 중점임
+                ActorMessage msg;
+                msg.data    = &mPlayer->mMainActor->GetPosition();
+                msg.msgType = MsgType::Build;
+                msg.sender  = nullptr;
+                SendActorMessage(mPlayer->mMainActor, msg);
+
+
+               /* PK_Data data;
                 data.ClientID = TcpClient::get()->GetID();
                 data.input    = 10;
                 data.pos      = mCursor->sPos;
-                TcpClient::get()->SendMessageToServer(data);
+                TcpClient::get()->SendMessageToServer(data);*/
 
-                /*Actor* actor = mPlayer->PlayerActors[0];
-                ActorMessage msg;
-                msg.msgType = MsgType::Build;
-                msg.sender  = nullptr;
-                msg.data    = nullptr;
-
-                SendActorMessage(actor,msg);*/
+                mCursor->ReleaseSp();
 
             }
         }
@@ -517,39 +518,11 @@ void MainScene::Decording()
 
         switch (data.input)
         {
-        case 6:
-        {
-            for (auto actor : World::get()->w_ActorList)
-            {
-                if (actor && actor->idx == selectidx)
-                {
-                    actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
-                }
-            }
-        } break;
-
-        case 4:
-        {
-            for (auto actor : World::get()->w_ActorList)
-            {
-                if (actor && actor->idx == selectidx)
-                {
-                    actor->mMoveComp->SetTarget(actor->GetRoot()->getPosition() + data.pos);
-                }
-            }
-        } break;
-
         case 10:
         {
             if (data.ClientID == TcpClient::get()->GetID())
             {
                 ////메세지를 쏴야한다~
-                //ActorMessage msg;
-                //msg.msgType = MsgType::Build;
-                //msg.data = nullptr;
-                //msg.sender  = nullptr;
-
-                //SendActorMessage(nullptr,msg);
                 Actor* CC = SpawnCommandCenter(mMapLayer, data);
                 ax::Vec2 Pos;
                 Pos = data.pos - mMapLayer->getPosition();

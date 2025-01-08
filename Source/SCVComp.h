@@ -11,7 +11,7 @@ public:
     virtual void MessageProc(ActorMessage& msg) override;
     virtual void update(float delta) override;
 
-    virtual void Building(ax::Vec2 pos) override;
+    virtual void Building(ActorMessage& msg) override;
     void Repair();
 
 

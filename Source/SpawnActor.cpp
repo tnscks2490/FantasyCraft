@@ -12,12 +12,10 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
 
-
-
     auto draw = new DrawComp(actor);
 
     auto node = draw->CreateRootNode();
-    parent->addChild(node);
+    parent->addChild(node, 1.0f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
@@ -44,7 +42,7 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     auto draw = new DrawComp(actor);
 
     auto node = draw->CreateRootNode();
-    parent->addChild(node);
+    parent->addChild(node, 0.2f);
 
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim       = draw->CreateAnimNode(ECharName::Marine);
@@ -73,7 +71,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     auto draw = new DrawComp(actor);
 
     auto node = draw->CreateRootNode();
-    parent->addChild(node);
+    parent->addChild(node,0.1f);
 
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim       = draw->CreateAnimNodeByIndex(ECharName::CommandCenter,0);

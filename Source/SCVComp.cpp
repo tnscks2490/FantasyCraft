@@ -18,20 +18,10 @@ SCVComp::~SCVComp() {}
 
 void SCVComp::MessageProc(ActorMessage& msg)
 {
-    ActorMessage Msg = msg;
-
-    mBuilding = Msg.sender;
-
-    ActorMessage tmsg;
-    tmsg.data   = nullptr;
-    tmsg.msgType = MsgType::Build;
-    tmsg.sender  = mActor;
-    SendActorMessage(mBuilding, tmsg);
-
     switch (msg.msgType)
     {
     case MsgType::Build:
-       
+        Building(msg);
     default:
         break;
     }
@@ -46,8 +36,14 @@ void SCVComp::Repair()
 
 }
 
-void SCVComp::Building(ax::Vec2 pos)
+void SCVComp::Building(ActorMessage& msg)
 {
-    
+    ax::Vec2 Pos = *(ax::Vec2*)msg.data;
+
+    PK_Data data;
+    data.ClientID = TcpClient::get()->GetID();
+    data.input    = 10;
+    data.pos      = Pos;
+    TcpClient::get()->SendMessageToServer(data);
 
 }
