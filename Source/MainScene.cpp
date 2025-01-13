@@ -52,6 +52,7 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool MainScene::init()
 {
+
     //////////////////////////////
     // 1. super init first
     if (!Scene::init())
@@ -64,7 +65,6 @@ bool MainScene::init()
     }
 
     TcpClient::get();
-
 
     visibleSize = _director->getVisibleSize();
     auto origin = _director->getVisibleOrigin();
@@ -94,18 +94,21 @@ bool MainScene::init()
     mPlayer                  = new Player;
     mPlayer->mRace = PlayerRace::Terran;
 
-    mMapLayer                = MapLayer::create();
+
+    mMapLayer                = new MapLayer(); 
     mMapLayer->mPhysicsWorld = getPhysicsWorld();
     mMapLayer->setPosition(ax::Vec2(0, 210));
     addChild(mMapLayer);
 
+
     // 커서 생성
     mCursor = new Cursor(this);
+
 
     mUILayer = UILayer::create();
     mUILayer->SetUI(mPlayer->mRace);
     addChild(mUILayer);
-    
+
     mUILayer->mCursor = mCursor;
  
 
@@ -113,7 +116,7 @@ bool MainScene::init()
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 
     auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
-    World::get()->mPath->DefaultSetting(wall);
+    //World::get()->mPath->DefaultSetting(wall);
 
     
    
@@ -123,6 +126,8 @@ bool MainScene::init()
     drawNode->setPosition(Vec2(0, 0));
     addChild(drawNode);
     drawNode->drawRect(safeArea.origin + Vec2(1, 1), safeArea.origin + safeArea.size, Color4B::BLUE);
+
+
 
     scheduleUpdate();
     return true;
@@ -168,18 +173,21 @@ void MainScene::onMouseDown(Event* event)
                 mPlayer->mMainActor = mPlayer->PlayerActors[0];
                 //설치시 메세지를 어떻게 둬야하는가
                 //소켓을 어떻게 운영해야하는가 가 중점임
-                ActorMessage msg;
-                msg.data    = &mPlayer->mMainActor->GetPosition();
+
+                
+
+                /*ActorMessage msg;
+                msg.data    = &(mPlayer->mMainActor->GetPosition());
                 msg.msgType = MsgType::Build;
                 msg.sender  = nullptr;
-                SendActorMessage(mPlayer->mMainActor, msg);
+                SendActorMessage(mPlayer->mMainActor, msg);*/
 
 
-               /* PK_Data data;
+                PK_Data data;
                 data.ClientID = TcpClient::get()->GetID();
                 data.input    = 10;
                 data.pos      = mCursor->sPos;
-                TcpClient::get()->SendMessageToServer(data);*/
+                TcpClient::get()->SendMessageToServer(data);
 
                 mCursor->ReleaseSp();
 
@@ -522,16 +530,10 @@ void MainScene::Decording()
         {
             if (data.ClientID == TcpClient::get()->GetID())
             {
-                ////메세지를 쏴야한다~
-                Actor* CC = SpawnCommandCenter(mMapLayer, data);
-                ax::Vec2 Pos;
-                Pos = data.pos - mMapLayer->getPosition();
-                CC->SetPosition(Pos);
-
                 ActorMessage msg;
                 msg.data = nullptr;
                 msg.msgType = MsgType::Build;
-                msg.sender  = CC;
+                msg.sender  = nullptr;
                 SendActorMessage(mPlayer->mMainActor, msg);
 
                 printf("설치중");

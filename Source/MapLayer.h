@@ -7,6 +7,9 @@ class MapLayer : public ax::Layer
 public:
     CREATE_FUNC(MapLayer);
 
+    MapLayer();
+    ~MapLayer();
+
     ax::TMXTiledMap* mMap           = nullptr;
     ax::PhysicsWorld* mPhysicsWorld = nullptr;
 

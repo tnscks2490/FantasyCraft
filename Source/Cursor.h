@@ -20,7 +20,7 @@ enum class BuildingName
 
 };
 
-class Cursor 
+class Cursor : public Actor
 {
 public:
     Cursor(ax::Node* parent);
@@ -34,7 +34,7 @@ public:
     void update(float delta);
 
     void CursorUp();
-
+    void BPFollowCursor();
     
 
 public:

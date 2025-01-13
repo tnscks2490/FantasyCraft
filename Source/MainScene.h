@@ -33,7 +33,6 @@
 #include "UILayer.h"
 
 
-
 class MainScene : public ax::Scene
 {
     typedef std::vector<TileNode*> TileList;

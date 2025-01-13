@@ -34,6 +34,7 @@
 
 using namespace ax;
 
+
 static ax::Size designResolutionSize = ax::Size(1280, 960);
 
 AppDelegate::AppDelegate() {}
@@ -82,7 +83,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     // create a scene. it's an autorelease object
 
     // 마우스 커서 가두기 그런데 뭔가 이상함 좀더알아볼것
-    /*ax::Rect* r = new ax::Rect();
+   /* ax::Rect* r = new ax::Rect();
     
     GetClientRect(glView->getWin32Window(),r);
     ClipCursor(r);*/

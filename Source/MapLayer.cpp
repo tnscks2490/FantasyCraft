@@ -3,16 +3,34 @@
 
 
 
+MapLayer::MapLayer()
+{
+    printf("1\n");
+    if (this->init())
+    {
+        printf("2\n");
+        this->autorelease();
+        printf("3\n");
+    }
+    printf("4\n");
+}
+
+MapLayer::~MapLayer() {}
+
 bool MapLayer::init()
 {
+    printf("11\n");
     if (!Layer::init())
     {
+        printf("22\n");
         return false;
+        printf("33\n");
     }
+    printf("44\n");
 
-    mMap = ax::TMXTiledMap::create("Map/Python/python.tmx");
+    mMap = ax::TMXTiledMap::create("Map/Python/Map.tmx");
+    printf("55\n");
     this->addChild(mMap);
-
 
     CreateWalls();
 

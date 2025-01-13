@@ -64,9 +64,9 @@ ax::DrawNode* Cursor::GetDrawNode()
 
 void Cursor::update(float delta)
 {
-    if (ac != nullptr)
+    if (sp != nullptr)
     {
-        ac->SetPosition(mRoot->getPosition());
+        BPFollowCursor();
     }
 }
 
@@ -76,6 +76,14 @@ void Cursor::CursorUp()
     GetDrawNode()->clear();
     CheckNodeInDrag();
     isDraging = false;
+}
+
+void Cursor::BPFollowCursor()
+{
+    ax::Vec2 pos;
+    pos.x = mRoot->getPosition().x / 32;
+    pos.y = mRoot->getPosition().y / 32;
+    sp->setPosition(pos*32);
 }
 
 void Cursor::setPosition(ax::Vec2 pos)

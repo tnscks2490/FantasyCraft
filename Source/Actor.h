@@ -13,6 +13,7 @@ class PK_Data;
 enum class ActorType
 {
     None,
+    Cursor,
     SCV,
     Marine,
 };

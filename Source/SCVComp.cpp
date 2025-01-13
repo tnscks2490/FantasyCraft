@@ -38,12 +38,18 @@ void SCVComp::Repair()
 
 void SCVComp::Building(ActorMessage& msg)
 {
-    ax::Vec2 Pos = *(ax::Vec2*)msg.data;
+    auto screen = mActor->GetRoot()->getParent();
+
 
     PK_Data data;
     data.ClientID = TcpClient::get()->GetID();
-    data.input    = 10;
-    data.pos      = Pos;
-    TcpClient::get()->SendMessageToServer(data);
+    data.input    = 77;
+    data.pos      = screen->getPosition();
+
+
+    Actor* CC = SpawnCommandCenter(screen, data);
+    ax::Vec2 Pos;
+    Pos = data.pos - screen->getPosition();
+    CC->SetPosition(Pos);
 
 }

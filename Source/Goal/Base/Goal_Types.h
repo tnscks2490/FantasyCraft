@@ -15,5 +15,6 @@ enum class GoalType
     CheckWorkforce,
     AddWorkforce,
     Attack,
+    Build,
     AllComplete
 };
