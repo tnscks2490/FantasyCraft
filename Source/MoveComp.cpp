@@ -24,17 +24,8 @@ void MoveComp::update(float delta)
     {
         Do_Moving();
         mVelocity.normalize();
-
-        //TagNeighbors(World::get()->w_ActorList,16.f);
-
-        //ax::Vec2 force = CalcVelocity(mVelocity);
-
         ax::Vec2 pos = mActor->GetRoot()->getPosition();
-        //mVelocity += force;
-        //mVelocity.normalize();
         mCurFrameMovement = mVelocity * delta * mSpeed;
-        //mHeading          = mCurFrameMovement;
-        //mHeading.normalize();
         pos += mCurFrameMovement;
         mActor->GetRoot()->setPosition(pos);
 

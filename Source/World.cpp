@@ -64,7 +64,7 @@ void World::update(float delta)
 
 void World::Actor_PushBack(Actor* actor)
 {
-    for (auto ac : w_Wait_AddActors)
+    /*for (auto ac : w_Wait_AddActors)
     {
         if (ac == nullptr)
         {
@@ -76,7 +76,21 @@ void World::Actor_PushBack(Actor* actor)
     }
     w_Wait_AddActors.push_back(actor);
     actor->idx = w_ActorList.size();
-    IsAddActors = true;
+    IsAddActors = true;*/
+
+    for (auto ac : w_ActorList)
+    {
+        if (ac == nullptr)
+        {
+            ac          = actor;
+            actor->idx  = w_ActorList.size();
+            IsAddActors = true;
+            return;
+        }
+    }
+    w_ActorList.push_back(actor);
+    actor->idx  = w_ActorList.size();
+    //IsAddActors = true;
 }
 
 void World::PrintActorList()

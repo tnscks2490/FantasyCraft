@@ -103,7 +103,7 @@ bool MainScene::init()
 
     // 커서 생성
     mCursor = new Cursor(this);
-
+    mCursor->cPlayer = mPlayer;
 
     mUILayer = UILayer::create();
     mUILayer->SetUI(mPlayer->mRace);
@@ -115,6 +115,7 @@ bool MainScene::init()
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 
+    // 이동불가능한 지형을 데이터로 넣기 TMX에다가쓰는방식(맵을 바꾸면서 수정해야함)
     auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
     //World::get()->mPath->DefaultSetting(wall);
 
@@ -153,7 +154,7 @@ void MainScene::onMouseDown(Event* event)
             {
                 PK_Data data;
                 data.ClientID = TcpClient::get()->GetID();
-                data.input    = 'r';
+                data.input    = 114;
                 data.pos      = mousePos - (ax::Vec2(0, 210));
                 TcpClient::get()->SendMessageToServer(data);
             }
@@ -165,34 +166,7 @@ void MainScene::onMouseDown(Event* event)
         mCursor->isDraging = true;
         mCursor->sPos      = mousePos;
         mCursor->setPosition(mCursor->sPos);
-
-        if (mCursor->sp)
-        {
-            if (mPlayer->PlayerActors.size() == 1 && mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
-            {
-                mPlayer->mMainActor = mPlayer->PlayerActors[0];
-                //설치시 메세지를 어떻게 둬야하는가
-                //소켓을 어떻게 운영해야하는가 가 중점임
-
-                
-
-                /*ActorMessage msg;
-                msg.data    = &(mPlayer->mMainActor->GetPosition());
-                msg.msgType = MsgType::Build;
-                msg.sender  = nullptr;
-                SendActorMessage(mPlayer->mMainActor, msg);*/
-
-
-                PK_Data data;
-                data.ClientID = TcpClient::get()->GetID();
-                data.input    = 10;
-                data.pos      = mCursor->sPos;
-                TcpClient::get()->SendMessageToServer(data);
-
-                mCursor->ReleaseSp();
-
-            }
-        }
+        mCursor->LeftClick(mousePos);
     }
 }
 
@@ -530,10 +504,8 @@ void MainScene::Decording()
         {
             if (data.ClientID == TcpClient::get()->GetID())
             {
-                ActorMessage msg;
-                msg.data = nullptr;
-                msg.msgType = MsgType::Build;
-                msg.sender  = nullptr;
+                ax::Vec2 pos = mCursor->GetPosition()-mMapLayer->getPosition();
+                ActorMessage msg    = {MsgType::Build,nullptr,&pos};
                 SendActorMessage(mPlayer->mMainActor, msg);
 
                 printf("설치중");
@@ -544,15 +516,16 @@ void MainScene::Decording()
         case 78:
         case 79:
         {
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            Actor* actor = SpawnSCV(mMapLayer, data);
+            actor->SetPosition(ax::Vec2(500, 500));
+            /*if (data.ClientID == TcpClient::get()->GetID())
             {
                 Actor* actor = SpawnSCV(mMapLayer,data);
                 actor->SetPosition(ax::Vec2(500, 500));
-            }
-            if (true)
+            }*/
+
             {
-                bool check = false;
+                /*bool check = false;
                 for (auto actor : World::get()->w_ActorList)
                 {
                     if (actor && actor->mID == data.ClientID)
@@ -562,13 +535,13 @@ void MainScene::Decording()
                 }
                 if (!check)
                 {
-                    /*Actor* actor = World::get()->CreateActor(this, data);
-                    PK_Data d;
-                    d.ClientID = TcpClient::get()->GetID();
-                    d.input    = player->charNum;
-                    d.pos      = player->GetRoot()->getPosition();
-                    TcpClient::get()->SendActorMessage(d);*/
-                }
+                    Actor* actor = SpawnSCV(this, data);
+                    PK_Data data;
+                    data.ClientID = TcpClient::get()->GetID();
+                    data.input    = actor->charNum;
+                    data.pos      = actor->GetRoot()->getPosition();
+                    TcpClient::get()->SendMessageToServer(data);
+                }*/
             }
         }
         break;
@@ -596,7 +569,7 @@ void MainScene::Decording()
         }
         break;*/
         case 114:
-                for (auto actor : mPlayer->PlayerActors)
+            for (auto actor : World::get()->w_ActorList)
             {
                 if (actor && actor->mID == data.ClientID)
                 {

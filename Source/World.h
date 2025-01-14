@@ -40,4 +40,4 @@ public:
 Actor* SpawnSCV(ax::Node* parent, PK_Data data);
 Actor* SpawnMarine(ax::Node* parent, PK_Data data);
 Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data);
-
+Actor* SpawnCommandCenter(ax::Node* parent);

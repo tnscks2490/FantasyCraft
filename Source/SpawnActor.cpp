@@ -91,3 +91,33 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     World::get()->Actor_PushBack(actor);
     return actor;
 }
+
+Actor* SpawnCommandCenter(ax::Node* parent)
+{
+    Actor* actor   = new Actor;
+    actor->mID     = TcpClient::get()->GetID();
+    actor->charNum = 0;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 0);
+    // auto anim       = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face);
+    //  뭐가 문젠지 모르겠음
+    auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
+    selectanim->setVisible(false);
+
+    auto command = new CommandCenterComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}

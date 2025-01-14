@@ -40,16 +40,8 @@ void SCVComp::Building(ActorMessage& msg)
 {
     auto screen = mActor->GetRoot()->getParent();
 
+    ax::Vec2* pos = (ax::Vec2*)msg.data;
 
-    PK_Data data;
-    data.ClientID = TcpClient::get()->GetID();
-    data.input    = 77;
-    data.pos      = screen->getPosition();
-
-
-    Actor* CC = SpawnCommandCenter(screen, data);
-    ax::Vec2 Pos;
-    Pos = data.pos - screen->getPosition();
-    CC->SetPosition(Pos);
-
+    Actor* CC = SpawnCommandCenter(screen);
+    CC->SetPosition(*pos);
 }

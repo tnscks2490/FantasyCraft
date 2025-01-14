@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Cursor.h"
+#include "PrePacket.h"
 
 
 
@@ -66,7 +67,7 @@ void Cursor::update(float delta)
 {
     if (sp != nullptr)
     {
-        BPFollowCursor();
+        //BPFollowCursor();
     }
 }
 
@@ -85,6 +86,27 @@ void Cursor::BPFollowCursor()
     pos.y = mRoot->getPosition().y / 32;
     sp->setPosition(pos*32);
 }
+
+void Cursor::LeftClick(ax::Vec2 pos)
+{
+    if (sp)
+    {
+        if (cPlayer->PlayerActors.size() == 1)
+        {
+            cPlayer->mMainActor = cPlayer->PlayerActors[0];
+
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 10;
+            data.pos      = sPos;
+            TcpClient::get()->SendMessageToServer(data);
+
+            ReleaseSp();
+        }
+    }
+}
+
+void Cursor::RightClick(ax::Vec2 pos) {}
 
 void Cursor::setPosition(ax::Vec2 pos)
 {
@@ -158,6 +180,7 @@ void Cursor::CreateBuildingBluePrint(BuildingName name)
             break;
         case BuildingName::CommandCenter:
             sp = ax::Sprite::create("123.png"sv);
+            sp->setPosition(0, 0);
             mRoot->addChild(sp);
             break;
         default:

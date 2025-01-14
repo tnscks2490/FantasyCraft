@@ -75,10 +75,13 @@ public:
     bool isSelected();
     void PrintSelectActors();
 
-    PlayerCommand mCommand[9] = {PlayerCommand::None,};
+    PlayerCommand mCommand[9];
     PlayerRace mRace       = PlayerRace::None;
 
 public:
+
+
+
     std::vector<Actor*> PlayerActors;
     Actor* mMainActor;
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "PreDefines.h"
 #include "Actor.h"
+#include "Player.h"
 
 enum class CursorState
 {
@@ -35,7 +36,10 @@ public:
 
     void CursorUp();
     void BPFollowCursor();
-    
+
+
+    void LeftClick(ax::Vec2 pos);
+    void RightClick(ax::Vec2 pos);
 
 public:
     void setPosition(ax::Vec2 pos);
@@ -55,10 +59,10 @@ public:
 
 
 public:
+
+    Player* cPlayer = nullptr;
+
     Ptr<ax::Node> mRoot;
-
-
-    Actor* ac = nullptr;
     ax::Sprite* sp = nullptr;
 
     ax::Vec2 sPos;
