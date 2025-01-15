@@ -26,6 +26,4 @@ public:
 
     Player* mPlayer = nullptr;
 
-    Cursor* mCursor = nullptr;
-
 };

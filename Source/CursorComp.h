@@ -1,5 +1,5 @@
 #pragma once
-#include "PreDefines.h"
+#include "IActorComp.h"
 #include "Actor.h"
 #include "Player.h"
 
@@ -21,16 +21,13 @@ enum class BuildingName
 
 };
 
-class CursorComp : public Actor
+class CursorComp : public IActorComp
 {
 public:
-    CursorComp(ax::Node* parent);
+    CursorComp(Actor* actor);
     ~CursorComp();
 
-    ax::Node* CreateCursor(ax::Node* parent);
-    ax::DrawNode* GetDrawNode();
-
-    void update(float delta);
+    virtual void update(float delta) override;
 
     void CursorUp();
     void BPFollowCursor();
@@ -52,8 +49,6 @@ public:
     void ReleaseSp() { if (sp)sp->removeFromParent();sp = nullptr; }
 
     void CreateBuildingBluePrint(BuildingName name);
-
-
 
 public:
 

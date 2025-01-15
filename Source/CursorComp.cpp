@@ -1,50 +1,22 @@
 #include "pch.h"
-#include "Cursor.h"
+#include "CursorComp.h"
+#include "Actor.h"
 #include "PrePacket.h"
 #include "DrawComp.h"
 
 
-Cursor::Cursor(ax::Node* parent)
+CursorComp::CursorComp(Actor* actor)
+    : IActorComp(actor)
 {
-    CreateCursor(parent);
+    actor->mCursorComp = this;
 }
 
-Cursor::~Cursor() {}
-
-ax::Node* Cursor::CreateCursor(ax::Node* parent)
+CursorComp::~CursorComp()
 {
-    Actor* actor = new Actor;
-    actor->mActorType = ActorType::Cursor;
-    actor->mID        = TcpClient::get()->GetID();
-
-    auto draw = new DrawComp(actor);
-
-    auto node = draw->CreateRootNode();
-    parent->addChild(node, 100.0f);
-
-    auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
-    auto anim = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
-
-    // 드래그 부분 그리기
-    auto drawnode = ax::DrawNode::create();
-    drawnode->setName("CursorDrawNode");
-    drawnode->setOpacity(70);
-    node->addChild(drawnode);
-
-    return node;
+    
 }
 
-ax::DrawNode* Cursor::GetDrawNode()
-{
-   /* if (mDrawComp->mRoot->isNotNull())
-    {
-        auto drawnode = (ax::DrawNode*)mRoot->getChildByName("CursorDrawNode");
-        return drawnode;
-    }*/
-    return nullptr;
-}
-
-void Cursor::update(float delta)
+void CursorComp::update(float delta)
 {
     if (sp != nullptr)
     {
@@ -52,15 +24,15 @@ void Cursor::update(float delta)
     }
 }
 
-void Cursor::CursorUp()
+void CursorComp::CursorUp()
 {
 
-    GetDrawNode()->clear();
+    //GetDrawNode()->clear();
     CheckNodeInDrag();
     isDraging = false;
 }
 
-void Cursor::BPFollowCursor()
+void CursorComp::BPFollowCursor()
 {
    /* ax::Vec2 pos;
     pos.x = mRoot->getPosition().x / 32;
@@ -68,12 +40,12 @@ void Cursor::BPFollowCursor()
     sp->setPosition(pos*32);*/
 }
 
-void Cursor::CursorMove(ax::Vec2 pos)
+void CursorComp::CursorMove(ax::Vec2 pos)
 {
-    mDrawComp->mRoot->setPosition(pos);
+    //mDrawComp->mRoot->setPosition(pos);
 }
 
-void Cursor::LeftClick(ax::Vec2 pos)
+void CursorComp::LeftClick(ax::Vec2 pos)
 {
     if (sp)
     {
@@ -92,10 +64,10 @@ void Cursor::LeftClick(ax::Vec2 pos)
     }
 }
 
-void Cursor::RightClick(ax::Vec2 pos) {}
+void CursorComp::RightClick(ax::Vec2 pos) {}
 
 
-void Cursor::CheckNodeInDrag()
+void CursorComp::CheckNodeInDrag()
 {
 
     int sx = sPos.x / 16;
@@ -108,7 +80,7 @@ void Cursor::CheckNodeInDrag()
     
     auto checknode = ax::Node::create();
     checknode->setName("CursorCheckNode");
-    mDrawComp->mRoot->addChild(checknode);
+    //mDrawComp->mRoot->addChild(checknode);
 
     ax::Vec2 boxSize;
     boxSize.x = std::max(sPos.x, ePos.x) - std::min(sPos.x, ePos.x);
@@ -136,20 +108,20 @@ void Cursor::CheckNodeInDrag()
     checknode->setPosition(nodepos);    
 }
 
-void Cursor::DeleteCheckNode()
+void CursorComp::DeleteCheckNode()
 {
     
-    auto node = mDrawComp->mRoot->getChildByName("CursorCheckNode");
+    //auto node = mDrawComp->mRoot->getChildByName("CursorCheckNode");
 
-    if (node != nullptr)
+   /* if (node != nullptr)
     {
         node->getChildByName("drawCheckNode")->removeFromParent();
         node->removeFromParent();
-    }
+    }*/
     
 }
 
-void Cursor::CreateBuildingBluePrint(BuildingName name)
+void CursorComp::CreateBuildingBluePrint(BuildingName name)
 {
     if (sp == nullptr)
     {
@@ -160,7 +132,7 @@ void Cursor::CreateBuildingBluePrint(BuildingName name)
         case BuildingName::CommandCenter:
             sp = ax::Sprite::create("123.png"sv);
             sp->setPosition(0, 0);
-            mDrawComp->mRoot->addChild(sp);
+            //mDrawComp->mRoot->addChild(sp);
             break;
         default:
             break;

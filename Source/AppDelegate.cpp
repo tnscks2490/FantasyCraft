@@ -88,7 +88,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     GetClientRect(glView->getWin32Window(),r);
     ClipCursor(r);*/
 
-
+    ShowCursor(false);
     auto scene = utils::createInstance<MainScene>();
     
     if (scene->getDefaultCamera())

@@ -7,6 +7,7 @@ class DrawComp;
 class UnitComp;
 class GoalComp;
 class ProjectileComp;
+class CursorComp;
 class PK_Data;
 
 
@@ -48,6 +49,8 @@ public:
     DrawComp* mDrawComp = nullptr;
     UnitComp* mUnitComp = nullptr;
     GoalComp* mGoalComp = nullptr;
+    //////////////
+    CursorComp* mCursorComp = nullptr;
 
 public:
     ActorType mActorType = ActorType::None;

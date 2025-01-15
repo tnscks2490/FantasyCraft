@@ -32,7 +32,6 @@
 #include "PathFind.h"
 #include "TileNode.h"
 #include "Player.h"
-#include "Cursor.h"
 #include "UnitComp.h"
 #include "DrawComp.h"
 
@@ -103,14 +102,14 @@ bool MainScene::init()
 
 
     // 커서 생성
-    mCursor = new Cursor(this);
-    mCursor->cPlayer = mPlayer;
+    mCursor = SpawnCursor(this);
+    mCursor->SetPosition(ax::Vec2(500,500));
 
     mUILayer = UILayer::create();
     mUILayer->SetUI(mPlayer->mRace);
     addChild(mUILayer);
 
-    mUILayer->mCursor = mCursor;
+
  
 
 
@@ -145,7 +144,7 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-        if (mCursor->sp)
+       /* if (mCursor->sp)
         {
             mCursor->ReleaseSp();
         }
@@ -159,15 +158,15 @@ void MainScene::onMouseDown(Event* event)
                 data.pos      = mousePos - (ax::Vec2(0, 210));
                 TcpClient::get()->SendMessageToServer(data);
             }
-        }
+        }*/
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        mCursor->LeftClickDown();
-        mCursor->isDraging = true;
-        mCursor->sPos      = mousePos;
-       // mCursor->mDrawCo(mCursor->sPos);
-        mCursor->LeftClick(mousePos);
+       // mCursor->LeftClickDown();
+       // mCursor->isDraging = true;
+       // mCursor->sPos      = mousePos;
+       //// mCursor->mDrawCo(mCursor->sPos);
+       // mCursor->LeftClick(mousePos);
     }
 }
 
@@ -175,14 +174,14 @@ void MainScene::onMouseUp(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
 
-    mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
+    /*mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         mCursor->LeftClickUp();
         mCursor->CursorUp();
        
-    }
+    }*/
 
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가
@@ -195,15 +194,17 @@ void MainScene::onMouseMove(Event* event)
     mousepos.x = e->getCursorX();
     mousepos.y = e->getCursorY();
 
-    mCursor->CursorMove(mousepos);
-    if (mCursor->isDraging)
-    { 
-        mCursor->GetDrawNode()->clear();
-        //mCursor->setPosition(mousepos);
-        mCursor->GetDrawNode()->drawSolidRect(mCursor->sPos - mousepos,
-            ax::Vec2::ZERO, ax::Color4B::GREEN);
-    }
-    mCursor->DeleteCheckNode();
+    mCursor->SetPosition(mousepos);
+
+    //mCursor->CursorMove(mousepos);
+    //if (mCursor->isDraging)
+    //{ 
+    //    mCursor->GetDrawNode()->clear();
+    //    //mCursor->setPosition(mousepos);
+    //    mCursor->GetDrawNode()->drawSolidRect(mCursor->sPos - mousepos,
+    //        ax::Vec2::ZERO, ax::Color4B::GREEN);
+    //}
+    //mCursor->DeleteCheckNode();
 }
 
 void MainScene::onMouseScroll(Event* event)

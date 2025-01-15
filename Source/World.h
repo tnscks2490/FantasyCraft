@@ -36,6 +36,9 @@ public:
 };
 
 
+Actor* SpawnCursor(ax::Node* parent);
+
+
 
 Actor* SpawnSCV(ax::Node* parent, PK_Data data);
 Actor* SpawnMarine(ax::Node* parent, PK_Data data);

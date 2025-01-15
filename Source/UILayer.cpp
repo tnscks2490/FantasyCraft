@@ -2,7 +2,6 @@
 #include "UILayer.h"
 #include "World.h"
 #include "TcpClient.h"
-#include "Cursor.h"
 #include "ActorMessage.h"
 
 bool UILayer::init()
@@ -101,5 +100,5 @@ void UILayer::SetUI(PlayerRace race)
 
 void UILayer::build()
 {
-    mCursor->CreateBuildingBluePrint(BuildingName::CommandCenter);
+    //mCursor->CreateBuildingBluePrint(BuildingName::CommandCenter);
 }

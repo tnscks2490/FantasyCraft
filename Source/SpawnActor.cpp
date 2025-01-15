@@ -5,6 +5,25 @@
 #include "MoveComp.h"
 #include "UnitCompList.h"
 
+Actor* SpawnCursor(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::SCV;
+    actor->mID        = TcpClient::get()->GetID();
+    actor->charNum    = 0;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.0f);
+
+    auto body       = draw->CreatePhysicsNode(ax::Vec2(32, 32));
+    auto anim       = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
+
+
+    return actor;
+}
+
 Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 {
     Actor* actor = new Actor;

@@ -89,7 +89,7 @@ public:
     ax::TMXTiledMap* Map = nullptr;
 
     Player* mPlayer      = nullptr;
-    Cursor* mCursor = nullptr;
+    Actor* mCursor = nullptr;
 
     
 public:
