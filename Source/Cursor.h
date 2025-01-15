@@ -21,15 +21,13 @@ enum class BuildingName
 
 };
 
-class Cursor : public Actor
+class CursorComp : public Actor
 {
 public:
-    Cursor(ax::Node* parent);
-    ~Cursor();
+    CursorComp(ax::Node* parent);
+    ~CursorComp();
 
     ax::Node* CreateCursor(ax::Node* parent);
-    ax::Node* GetRoot();
-    ax::Vec2 GetPosition();
     ax::DrawNode* GetDrawNode();
 
     void update(float delta);
@@ -37,12 +35,11 @@ public:
     void CursorUp();
     void BPFollowCursor();
 
-
+    void CursorMove(ax::Vec2 pos);
     void LeftClick(ax::Vec2 pos);
     void RightClick(ax::Vec2 pos);
 
 public:
-    void setPosition(ax::Vec2 pos);
     void CheckNodeInDrag();
     void DeleteCheckNode();
 
@@ -62,7 +59,6 @@ public:
 
     Player* cPlayer = nullptr;
 
-    Ptr<ax::Node> mRoot;
     ax::Sprite* sp = nullptr;
 
     ax::Vec2 sPos;

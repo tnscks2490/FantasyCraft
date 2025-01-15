@@ -116,7 +116,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir
 {
      if (mRoot.isNotNull())
     {
-         AnimInfo& info = FindAnimInfo(name, action, dir);  
+        AnimInfo& info = FindAnimInfo(name, action, dir);  
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());

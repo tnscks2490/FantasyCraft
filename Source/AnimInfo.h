@@ -63,6 +63,8 @@ enum class ECharName
 enum class ECharAct
 {
     Idle = 0,
+    
+
     Move,
     Gathering,
     //////////
@@ -74,9 +76,13 @@ enum class ECharAct
 
 
 
-    //Effect 용 Action
+    //Effect Action
     SCVSpark,
 
+
+    //Cursor Action
+    OnCursorTeam,
+    OnCursorEnemy,
     //////////
     Act_Count,
 };

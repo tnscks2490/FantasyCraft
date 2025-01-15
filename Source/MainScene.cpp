@@ -34,6 +34,7 @@
 #include "Player.h"
 #include "Cursor.h"
 #include "UnitComp.h"
+#include "DrawComp.h"
 
 
 using namespace ax;
@@ -165,7 +166,7 @@ void MainScene::onMouseDown(Event* event)
         mCursor->LeftClickDown();
         mCursor->isDraging = true;
         mCursor->sPos      = mousePos;
-        mCursor->setPosition(mCursor->sPos);
+       // mCursor->mDrawCo(mCursor->sPos);
         mCursor->LeftClick(mousePos);
     }
 }
@@ -194,11 +195,11 @@ void MainScene::onMouseMove(Event* event)
     mousepos.x = e->getCursorX();
     mousepos.y = e->getCursorY();
 
-    mCursor->GetRoot()->setPosition(mousepos);
+    mCursor->CursorMove(mousepos);
     if (mCursor->isDraging)
     { 
         mCursor->GetDrawNode()->clear();
-        mCursor->setPosition(mousepos);
+        //mCursor->setPosition(mousepos);
         mCursor->GetDrawNode()->drawSolidRect(mCursor->sPos - mousepos,
             ax::Vec2::ZERO, ax::Color4B::GREEN);
     }
@@ -518,31 +519,6 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(ax::Vec2(500, 500));
-            /*if (data.ClientID == TcpClient::get()->GetID())
-            {
-                Actor* actor = SpawnSCV(mMapLayer,data);
-                actor->SetPosition(ax::Vec2(500, 500));
-            }*/
-
-            {
-                /*bool check = false;
-                for (auto actor : World::get()->w_ActorList)
-                {
-                    if (actor && actor->mID == data.ClientID)
-                    {
-                        check = true;
-                    }
-                }
-                if (!check)
-                {
-                    Actor* actor = SpawnSCV(this, data);
-                    PK_Data data;
-                    data.ClientID = TcpClient::get()->GetID();
-                    data.input    = actor->charNum;
-                    data.pos      = actor->GetRoot()->getPosition();
-                    TcpClient::get()->SendMessageToServer(data);
-                }*/
-            }
         }
         break;
         case 90:
@@ -556,18 +532,6 @@ void MainScene::Decording()
             }
         }
             break;
-        /*case 108:
-        {
-            for (auto actor : World::get()->w_ActorList)
-            {
-                if (actor && actor->mID == data.ClientID)
-                {
-                    Actor* pro = CreateActor(data);
-                    pro->mMoveComp->SetTarget(data.pos);
-                }
-            }
-        }
-        break;*/
         case 114:
             for (auto actor : World::get()->w_ActorList)
             {

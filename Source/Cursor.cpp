@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Cursor.h"
 #include "PrePacket.h"
-
+#include "DrawComp.h"
 
 
 Cursor::Cursor(ax::Node* parent)
@@ -13,53 +13,34 @@ Cursor::~Cursor() {}
 
 ax::Node* Cursor::CreateCursor(ax::Node* parent)
 {
-    // 루트 노드 만들기
-    auto node = ax::Node::create();
-    mRoot     = node;
-    mRoot->setName("CursorRootNode");
-    parent->addChild(node);
+    Actor* actor = new Actor;
+    actor->mActorType = ActorType::Cursor;
+    actor->mID        = TcpClient::get()->GetID();
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 100.0f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
+    auto anim = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
 
     // 드래그 부분 그리기
     auto drawnode = ax::DrawNode::create();
     drawnode->setName("CursorDrawNode");
     drawnode->setOpacity(70);
-    mRoot->addChild(drawnode);
-
-   /* auto dragbody = ax::Node::create();
-    dragbody->setName("CursorBN");
-    auto ddbody     = ax::PhysicsBody::createBox(ax::Vec2(16, 16));
-    ddbody->setContactTestBitmask(0xFFFFFFFF);
-    ddbody->setDynamic(false);
-    dragbody->setPhysicsBody(ddbody);*/
-
-    // 커서스프라이트
-    auto cursorSprite = ax::Sprite::create("Cursor.png"sv);
-    cursorSprite->setName("CursorSpriteNode");
-    mRoot->addChild(cursorSprite);
-
+    node->addChild(drawnode);
 
     return node;
 }
 
-ax::Node* Cursor::GetRoot()
-{
-    if (mRoot.isNotNull())
-        return mRoot.get();
-}
-
-ax::Vec2 Cursor::GetPosition()
-{
-    if (mRoot.isNotNull())
-        return mRoot->getPosition();
-}
-
 ax::DrawNode* Cursor::GetDrawNode()
 {
-    if (mRoot.isNotNull())
+   /* if (mDrawComp->mRoot->isNotNull())
     {
         auto drawnode = (ax::DrawNode*)mRoot->getChildByName("CursorDrawNode");
         return drawnode;
-    }
+    }*/
     return nullptr;
 }
 
@@ -81,10 +62,15 @@ void Cursor::CursorUp()
 
 void Cursor::BPFollowCursor()
 {
-    ax::Vec2 pos;
+   /* ax::Vec2 pos;
     pos.x = mRoot->getPosition().x / 32;
     pos.y = mRoot->getPosition().y / 32;
-    sp->setPosition(pos*32);
+    sp->setPosition(pos*32);*/
+}
+
+void Cursor::CursorMove(ax::Vec2 pos)
+{
+    mDrawComp->mRoot->setPosition(pos);
 }
 
 void Cursor::LeftClick(ax::Vec2 pos)
@@ -108,13 +94,6 @@ void Cursor::LeftClick(ax::Vec2 pos)
 
 void Cursor::RightClick(ax::Vec2 pos) {}
 
-void Cursor::setPosition(ax::Vec2 pos)
-{
-    if (mRoot.isNotNull())
-    {
-        mRoot->setPosition(pos);
-    }
-}
 
 void Cursor::CheckNodeInDrag()
 {
@@ -129,7 +108,7 @@ void Cursor::CheckNodeInDrag()
     
     auto checknode = ax::Node::create();
     checknode->setName("CursorCheckNode");
-    mRoot->addChild(checknode);
+    mDrawComp->mRoot->addChild(checknode);
 
     ax::Vec2 boxSize;
     boxSize.x = std::max(sPos.x, ePos.x) - std::min(sPos.x, ePos.x);
@@ -160,7 +139,7 @@ void Cursor::CheckNodeInDrag()
 void Cursor::DeleteCheckNode()
 {
     
-    auto node = mRoot->getChildByName("CursorCheckNode");
+    auto node = mDrawComp->mRoot->getChildByName("CursorCheckNode");
 
     if (node != nullptr)
     {
@@ -181,7 +160,7 @@ void Cursor::CreateBuildingBluePrint(BuildingName name)
         case BuildingName::CommandCenter:
             sp = ax::Sprite::create("123.png"sv);
             sp->setPosition(0, 0);
-            mRoot->addChild(sp);
+            mDrawComp->mRoot->addChild(sp);
             break;
         default:
             break;
