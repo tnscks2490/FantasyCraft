@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "DrawComp.h"
 #include "MoveComp.h"
+#include "CursorComp.h"
 #include "UnitCompList.h"
 
 Actor* SpawnCursor(ax::Node* parent)
@@ -15,10 +16,17 @@ Actor* SpawnCursor(ax::Node* parent)
     auto draw = new DrawComp(actor);
 
     auto node = draw->CreateRootNode();
-    parent->addChild(node, 1.0f);
+    parent->addChild(node, 10.0f);
 
     auto body       = draw->CreatePhysicsNode(ax::Vec2(32, 32));
+    body->setTag(-1);
+    body->setName("Cursor");
     auto anim       = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
+    auto cursor = new CursorComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
 
 
     return actor;

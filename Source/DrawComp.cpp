@@ -2,6 +2,7 @@
 #include "DrawComp.h"
 #include "World.h"
 #include "MoveComp.h"
+#include "CursorComp.h"
 
 
 DrawComp::DrawComp(Actor* actor)
@@ -30,12 +31,31 @@ void DrawComp::update(float delta)
         {
            mCurAction = ECharAct::Idle;
            ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
-           /* if (mCurAction == ECharAct::Move)
-            {
-                
-            }*/
         }
     }
+
+    if (mActor->mCursorComp)
+    {
+        if (mActor->mCursorComp->mState == CursorState::Idle && mCurAction != ECharAct::Idle)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
+            mCurAction = ECharAct::Idle;
+        }
+        if (mActor->mCursorComp->mState == CursorState::ContactTeam
+            && mCurAction != ECharAct::OnCursorTeam)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face);
+            mCurAction = ECharAct::OnCursorTeam;
+        }
+        if (mActor->mCursorComp->mState == CursorState::ContactEnemy
+            && mCurAction != ECharAct::OnCursorEnemy)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::OnCursorEnemy, ECharDir::Face);
+            mCurAction = ECharAct::OnCursorEnemy;
+        }
+        
+    }
+
 }
 
 ax::Node* DrawComp::CreateRootNode()

@@ -11,6 +11,8 @@ enum class CursorState
     Move,
     Click,
     BluePrint,
+    ContactTeam,
+    ContactEnemy,
 
 };
 
@@ -63,6 +65,8 @@ public:
     bool isLeftClick = false;
     bool isRightClick = false;
 
+    bool OnContactTeam = false;
+    bool OnContactEnemy = false;
 
     CursorState mState = CursorState::None;
 };
