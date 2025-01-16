@@ -163,6 +163,12 @@ void MainScene::onMouseDown(Event* event)
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
+        if (mCursor->mCursorComp->mState == CursorState::Idle)
+        {
+            mCursor->mCursorComp->mState = CursorState::Drag;
+        }
+
+
        // mCursor->LeftClickDown();
        // mCursor->isDraging = true;
        // mCursor->sPos      = mousePos;
@@ -174,15 +180,20 @@ void MainScene::onMouseDown(Event* event)
 void MainScene::onMouseUp(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
+    ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
-    /*mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
+    //mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        mCursor->LeftClickUp();
-        mCursor->CursorUp();
+        if (mCursor->mCursorComp->mState == CursorState::Drag)
+        {
+            mCursor->mCursorComp->mState = CursorState::Idle;
+        }
+        //mCursor->LeftClickUp();
+        //mCursor->CursorUp();
        
-    }*/
+    }
 
 }
 //마우스를 놓을 때 노드의 크기를 시작지점과 끝지점 기준으로 넓히고 해당 크기만큼 돌면서 컨택한 노드가 있는지 확인하는 코드 추가

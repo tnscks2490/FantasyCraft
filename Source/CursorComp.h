@@ -68,5 +68,5 @@ public:
     bool OnContactTeam = false;
     bool OnContactEnemy = false;
 
-    CursorState mState = CursorState::None;
+    CursorState mState = CursorState::Idle;
 };

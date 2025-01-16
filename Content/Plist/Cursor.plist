@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Cursor/Idle/0001.png</key>
+            <key>Cursor/Drag/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/Idle/0002.png</key>
+            <key>Cursor/Drag/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/Idle/0003.png</key>
+            <key>Cursor/Drag/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/Idle/0004.png</key>
+            <key>Cursor/Drag/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/Idle/0005.png</key>
+            <key>Cursor/Idle/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0001.png</key>
+            <key>Cursor/Idle/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0002.png</key>
+            <key>Cursor/Idle/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0003.png</key>
+            <key>Cursor/Idle/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0004.png</key>
+            <key>Cursor/Idle/0005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0005.png</key>
+            <key>Cursor/OnCursorEnemy/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0006.png</key>
+            <key>Cursor/OnCursorEnemy/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0007.png</key>
+            <key>Cursor/OnCursorEnemy/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0008.png</key>
+            <key>Cursor/OnCursorEnemy/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0009.png</key>
+            <key>Cursor/OnCursorEnemy/0005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0010.png</key>
+            <key>Cursor/OnCursorEnemy/0006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0011.png</key>
+            <key>Cursor/OnCursorEnemy/0007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0012.png</key>
+            <key>Cursor/OnCursorEnemy/0008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0013.png</key>
+            <key>Cursor/OnCursorEnemy/0009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorEnemy/0014.png</key>
+            <key>Cursor/OnCursorEnemy/0010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0001.png</key>
+            <key>Cursor/OnCursorEnemy/0011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0002.png</key>
+            <key>Cursor/OnCursorEnemy/0012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0003.png</key>
+            <key>Cursor/OnCursorEnemy/0013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,7 +334,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0004.png</key>
+            <key>Cursor/OnCursorEnemy/0014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -349,7 +349,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0005.png</key>
+            <key>Cursor/OnCursorTeam/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -364,7 +364,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0006.png</key>
+            <key>Cursor/OnCursorTeam/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -379,7 +379,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0007.png</key>
+            <key>Cursor/OnCursorTeam/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -394,7 +394,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0008.png</key>
+            <key>Cursor/OnCursorTeam/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -409,7 +409,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0009.png</key>
+            <key>Cursor/OnCursorTeam/0005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -424,7 +424,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0010.png</key>
+            <key>Cursor/OnCursorTeam/0006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -439,7 +439,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0011.png</key>
+            <key>Cursor/OnCursorTeam/0007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -454,7 +454,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0012.png</key>
+            <key>Cursor/OnCursorTeam/0008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -469,7 +469,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0013.png</key>
+            <key>Cursor/OnCursorTeam/0009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -484,7 +484,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cursor/OnCursorTeam/0014.png</key>
+            <key>Cursor/OnCursorTeam/0010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -496,6 +496,66 @@
                 <string>{128,128}</string>
                 <key>textureRect</key>
                 <string>{{0,1024},{128,128}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cursor/OnCursorTeam/0011.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,128}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,128}</string>
+                <key>textureRect</key>
+                <string>{{128,1024},{128,128}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cursor/OnCursorTeam/0012.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,128}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,128}</string>
+                <key>textureRect</key>
+                <string>{{256,1024},{128,128}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cursor/OnCursorTeam/0013.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,128}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,128}</string>
+                <key>textureRect</key>
+                <string>{{384,1024},{128,128}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cursor/OnCursorTeam/0014.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,128}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,128}</string>
+                <key>textureRect</key>
+                <string>{{0,1152},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -511,9 +571,9 @@
             <key>realTextureFileName</key>
             <string>Cursor.png</string>
             <key>size</key>
-            <string>{512,1152}</string>
+            <string>{512,1280}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0a29691fa7ec5829db139463407e6473:6edd6dbed66e687f08b0e624b116a92c:a41e9d5de76d8f7db373d3b0f97eb124$</string>
+            <string>$TexturePacker:SmartUpdate:81cefaec7493fa778da3224c7f1ce28f:33a5f0e03bbe2e6fbe6cc9e1ecd99779:a41e9d5de76d8f7db373d3b0f97eb124$</string>
             <key>textureFileName</key>
             <string>Cursor.png</string>
         </dict>

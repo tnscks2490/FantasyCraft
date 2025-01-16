@@ -83,6 +83,7 @@ enum class ECharAct
     //Cursor Action
     OnCursorTeam,
     OnCursorEnemy,
+    Drag,
     //////////
     Act_Count,
 };

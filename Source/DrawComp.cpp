@@ -34,6 +34,7 @@ void DrawComp::update(float delta)
         }
     }
 
+    // 커서에 한해서 변경하는 것
     if (mActor->mCursorComp)
     {
         if (mActor->mCursorComp->mState == CursorState::Idle && mCurAction != ECharAct::Idle)
@@ -52,6 +53,11 @@ void DrawComp::update(float delta)
         {
             ChangeAnim(ECharName::Cursor, ECharAct::OnCursorEnemy, ECharDir::Face);
             mCurAction = ECharAct::OnCursorEnemy;
+        }
+        if (mActor->mCursorComp->mState == CursorState::Drag && mCurAction != ECharAct::Drag)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::Drag, ECharDir::Face);
+            mCurAction = ECharAct::Drag;
         }
         
     }
@@ -98,10 +104,9 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         bodyNode->setTag(10);
 
 
-        auto drawNode = ax::DrawNode::create();
-        drawNode->drawRect(ax::Vec2(-bodysize.x / 2, -bodysize.y / 2), ax::Vec2(bodysize.x / 2, bodysize.y / 2),
-                           ax::Color4F::RED);
-        bodyNode->addChild(drawNode);
+        /*auto drawNode = ax::DrawNode::create();
+        drawNode->drawCircle(ax::Vec2(0, 0), 10, 0.f, 1, true, ax::Color4B::GREEN);
+        bodyNode->addChild(drawNode);*/
 
         //루트노드에 피직스노드붙여주기
         mRoot->addChild(bodyNode);
