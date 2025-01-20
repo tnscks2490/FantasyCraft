@@ -141,7 +141,7 @@ void MainScene::onMouseDown(Event* event)
     EventMouse* e = static_cast<EventMouse*>(event);
 
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
-
+    ax::Vec2 realpos  = mousePos - mMapLayer->getPosition();
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
@@ -163,16 +163,18 @@ void MainScene::onMouseDown(Event* event)
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
+        
         if (mCursor->mCursorComp->mState == CursorState::Idle)
         {
             mCursor->mCursorComp->mState = CursorState::Drag;
+            mCursor->mCursorComp->sPos   = mousePos;
         }
 
-
+       
        // mCursor->LeftClickDown();
        // mCursor->isDraging = true;
        // mCursor->sPos      = mousePos;
-       //// mCursor->mDrawCo(mCursor->sPos);
+       // mCursor->mDrawCo(mCursor->sPos);
        // mCursor->LeftClick(mousePos);
     }
 }
@@ -184,14 +186,30 @@ void MainScene::onMouseUp(Event* event)
 
     //mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
+    auto func = [](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
+        // Return true from the callback to continue rect queries
+        auto A = shape.getBody()->getNode();
+       
+        return true;
+    };
+
+    ax::Vec2 sPos = mCursor->mCursorComp->sPos;
+    ax::Vec2 ePos = mCursor->mCursorComp->ePos;
+
+
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         if (mCursor->mCursorComp->mState == CursorState::Drag)
         {
+            getPhysicsWorld()->queryRect(func, Rect(sPos.x, sPos.y, ePos.x, ePos.y), nullptr);
+            printf("sPos x : %f  | y : %f\n", sPos.x, sPos.y);
+            printf("ePos x : %f  | y : %f\n", ePos.x, ePos.y);
+            printf("=================================\n");
+            ax::DrawNode* drawnode       = (ax::DrawNode*)mCursor->GetRoot()->getChildByName("GreenRect");
+            drawnode->clear();
             mCursor->mCursorComp->mState = CursorState::Idle;
         }
         //mCursor->LeftClickUp();
-        //mCursor->CursorUp();
        
     }
 
@@ -202,11 +220,17 @@ void MainScene::onMouseMove(Event* event)
 {
     EventMouse* e = static_cast<EventMouse*>(event);
 
-    ax::Vec2 mousepos;
-    mousepos.x = e->getCursorX();
-    mousepos.y = e->getCursorY();
+    ax::Vec2 mousepos = ax::Vec2(e->getCursorX(), e->getCursorY());
+
 
     mCursor->SetPosition(mousepos);
+
+
+    if (mCursor->mCursorComp->mState == CursorState::Drag)
+    {
+         mCursor->mCursorComp->ePos = mousepos;
+    }
+
 
     //mCursor->CursorMove(mousepos);
     //if (mCursor->isDraging)
@@ -476,6 +500,8 @@ void MainScene::menuCloseCallback(ax::Object* sender)
      // EventCustom customEndEvent("game_scene_close_event");
      //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
+
+
 
 void MainScene::DebugPath()
 {

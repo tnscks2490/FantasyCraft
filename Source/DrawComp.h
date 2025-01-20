@@ -22,6 +22,9 @@ public:
     ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
 
+    ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);
+    void ChangeRectSize(ax::Vec2 ePos);
+
     void AddUserData();
 
 

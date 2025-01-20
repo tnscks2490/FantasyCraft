@@ -23,6 +23,8 @@ Actor* SpawnCursor(ax::Node* parent)
     body->setName("Cursor");
     auto anim       = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
     auto cursor = new CursorComp(actor);
+    draw->CreateCursorRect(ax::Vec2(0, 0), ax::Vec2(0, 0));
+
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;

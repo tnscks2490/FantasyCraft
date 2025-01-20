@@ -115,6 +115,30 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
     return nullptr;
 }
 
+ax::Node* DrawComp::CreateCursorRect(ax::Vec2 sPos,ax::Vec2 ePos)
+{
+    if (mRoot.isNotNull())
+    {
+        auto drawnode = ax::DrawNode::create();
+        drawnode->drawRect(sPos, ePos, ax::Color4B::GREEN);
+        drawnode->setName("GreenRect");
+        mRoot->addChild(drawnode);
+    }
+    return nullptr;
+}
+
+void DrawComp::ChangeRectSize(ax::Vec2 ePos)
+{
+    if (mRoot.isNotNull())
+    {
+        if (mRoot->getChildByName("GreenRect"))
+        {
+            ax::DrawNode* dnode = (ax::DrawNode*)mRoot->getChildByName("GreenRect");
+            
+        }
+    }
+}
+
 ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
 {
     if (mRoot.isNotNull())
@@ -205,6 +229,8 @@ ax::Node* DrawComp::CreateSelectedNode()
     }
     return nullptr;
 }
+
+
 
 void DrawComp::AddUserData()
 {

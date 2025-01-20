@@ -5,6 +5,7 @@
 #include "DrawComp.h"
 #include "UnitComp.h"
 #include "GoalComp.h"
+#include "CursorComp.h"
 
 
 Actor::Actor()
@@ -26,6 +27,7 @@ void Actor::update(float delta)
     if (mGoalComp) mGoalComp->update(delta);
     if (mUnitComp) mUnitComp->update(delta);
     if (mMoveComp && mMoveComp->IsOn) mMoveComp->update(delta);
+    if (mCursorComp) mCursorComp->update(delta);
     if (mDrawComp) mDrawComp->update(delta);
 }
 

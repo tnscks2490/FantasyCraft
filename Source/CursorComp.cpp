@@ -18,9 +18,33 @@ CursorComp::~CursorComp()
 
 void CursorComp::update(float delta)
 {
-    if (sp != nullptr)
+    switch (mState)
     {
-        //BPFollowCursor();
+    case CursorState::Idle:
+        break;
+    case CursorState::Drag:
+    {
+        if (mActor->GetRoot()->getChildByName("GreenRect"))
+        {
+            ax::DrawNode* drawnode = (ax::DrawNode*)mActor->GetRoot()->getChildByName("GreenRect");
+            drawnode->clear();
+            drawnode->drawRect(sPos - drawnode->getParent()->getPosition(),
+                ePos - drawnode->getParent()->getPosition(), ax::Color4B::GREEN);
+        }
+    } break;
+
+    case CursorState::Move:
+        break;
+    case CursorState::Click:
+        break;
+    case CursorState::BluePrint:
+        break;
+    case CursorState::ContactTeam:
+        break;
+    case CursorState::ContactEnemy:
+        break;
+    default:
+        break;
     }
 }
 
