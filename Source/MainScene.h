@@ -67,7 +67,6 @@ public:
     // a selector callback
     void menuCloseCallback(ax::Object* sender);
 
-
     void DebugPath();
 
 

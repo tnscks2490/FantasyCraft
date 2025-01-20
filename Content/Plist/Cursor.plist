@@ -559,6 +559,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>Cursor/Target/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,128}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,128}</string>
+                <key>textureRect</key>
+                <string>{{128,1152},{128,128}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cursor/Target/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,128}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,128}</string>
+                <key>textureRect</key>
+                <string>{{256,1152},{128,128}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -573,7 +603,7 @@
             <key>size</key>
             <string>{512,1280}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:81cefaec7493fa778da3224c7f1ce28f:33a5f0e03bbe2e6fbe6cc9e1ecd99779:a41e9d5de76d8f7db373d3b0f97eb124$</string>
+            <string>$TexturePacker:SmartUpdate:7fd3e595e47591217d09e13ef22b5c20:5f45271d7af70a9810ac751d1d37f78d:a41e9d5de76d8f7db373d3b0f97eb124$</string>
             <key>textureFileName</key>
             <string>Cursor.png</string>
         </dict>

@@ -145,6 +145,12 @@ void CursorComp::DeleteCheckNode()
     
 }
 
+void CursorComp::GreenRectClear()
+{
+    ax::DrawNode* drawnode = (ax::DrawNode*)mActor->GetRoot()->getChildByName("GreenRect");
+    drawnode->clear();
+}
+
 void CursorComp::CreateBuildingBluePrint(BuildingName name)
 {
     if (sp == nullptr)

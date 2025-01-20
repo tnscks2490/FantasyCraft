@@ -47,9 +47,20 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     parent->addChild(node, 1.0f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
-    auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
-    auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
+
+    // 선택 표기 타원의 위치는 바디사이즈의 1/2, 반지름의 크기도 바디사이즈의 1/2로 설정할것
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 8.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
     selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+
+    auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
+    /*auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
+    selectanim->setVisible(false);*/
+    
+
 
     auto move = new MoveComp(actor);
     auto unit = new SCVComp(actor);

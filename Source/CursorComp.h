@@ -42,6 +42,8 @@ public:
     void CheckNodeInDrag();
     void DeleteCheckNode();
 
+    void GreenRectClear();
+
 
     void LeftClickUp()  { isLeftClick = false;  }
     void RightClickUp() { isRightClick = false; }

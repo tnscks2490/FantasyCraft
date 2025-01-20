@@ -104,10 +104,6 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         bodyNode->setTag(10);
 
 
-        /*auto drawNode = ax::DrawNode::create();
-        drawNode->drawCircle(ax::Vec2(0, 0), 10, 0.f, 1, true, ax::Color4B::GREEN);
-        bodyNode->addChild(drawNode);*/
-
         //루트노드에 피직스노드붙여주기
         mRoot->addChild(bodyNode);
         return bodyNode;
@@ -343,12 +339,12 @@ void DrawComp::isSelected()
 {
     if (selected)
     {
-        auto selectNode = (ax::DrawNode*)mRoot->getChildByName("SelectNode");
+        auto selectNode = (ax::DrawNode*)mRoot->getChildByName("Select");
         selectNode->setVisible(true);
     }
     else
     {
-        auto selectNode = (ax::DrawNode*)mRoot->getChildByName("SelectNode");
+        auto selectNode = (ax::DrawNode*)mRoot->getChildByName("Select");
         selectNode->setVisible(false);
     }
 }

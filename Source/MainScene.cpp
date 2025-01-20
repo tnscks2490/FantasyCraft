@@ -35,6 +35,7 @@
 #include "UnitComp.h"
 #include "DrawComp.h"
 #include "CursorComp.h"
+#include <iostream>
 
 
 using namespace ax;
@@ -102,6 +103,8 @@ bool MainScene::init()
     addChild(mMapLayer);
 
 
+
+
     // 커서 생성
     mCursor = SpawnCursor(this);
     mCursor->SetPosition(ax::Vec2(500,500));
@@ -145,9 +148,9 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-       /* if (mCursor->sp)
+        if (mCursor->mCursorComp->sp)
         {
-            mCursor->ReleaseSp();
+            mCursor->mCursorComp->ReleaseSp();
         }
         else
         {
@@ -159,7 +162,7 @@ void MainScene::onMouseDown(Event* event)
                 data.pos      = mousePos - (ax::Vec2(0, 210));
                 TcpClient::get()->SendMessageToServer(data);
             }
-        }*/
+        }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
@@ -186,15 +189,58 @@ void MainScene::onMouseUp(Event* event)
 
     //mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
-    auto func = [](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
+    auto func = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
+
+     
         // Return true from the callback to continue rect queries
-        auto A = shape.getBody()->getNode();
-       
+        auto A                = shape.getBody()->getNode();
+        std::string_view name = A->getName();
+
+        std::cout << name.data() << "\n" << std::endl;
+
+        if (A->getTag() == 10)
+        {
+            auto aRoot         = A->getParent();
+            UserData* userData = (UserData*)aRoot->getUserData();
+
+            if (userData->mActor->mID == TcpClient::get()->GetID())
+            {
+                mPlayer->Selected(userData->mActor);
+            }
+        }
         return true;
     };
 
+
+   /* if (A->getName() == "CursorCheckNode" && B->getTag() == 10)
+    {
+        auto bRoot = B->getParent();
+
+        UserData* userData = (UserData*)bRoot->getUserData();
+
+        if (userData->mActor->mID == TcpClient::get()->GetID())
+        {
+            mPlayer->Selected(userData->mActor);
+        }
+        return false;
+    }
+    else if (B->getName() == "CursorCheckNode" && A->getTag() == 10)
+    {
+        auto aRoot         = A->getParent();
+        UserData* userData = (UserData*)aRoot->getUserData();
+
+        if (userData->mActor->mID == TcpClient::get()->GetID())
+        {
+            mPlayer->Selected(userData->mActor);
+        }
+        return false;
+    }*/
+
     ax::Vec2 sPos = mCursor->mCursorComp->sPos;
     ax::Vec2 ePos = mCursor->mCursorComp->ePos;
+
+    sPos = sPos - mMapLayer->getPosition();
+    ePos = ePos - mMapLayer->getPosition();
 
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
@@ -202,12 +248,13 @@ void MainScene::onMouseUp(Event* event)
         if (mCursor->mCursorComp->mState == CursorState::Drag)
         {
             getPhysicsWorld()->queryRect(func, Rect(sPos.x, sPos.y, ePos.x, ePos.y), nullptr);
+            printf("=================================\n");
             printf("sPos x : %f  | y : %f\n", sPos.x, sPos.y);
             printf("ePos x : %f  | y : %f\n", ePos.x, ePos.y);
             printf("=================================\n");
-            ax::DrawNode* drawnode       = (ax::DrawNode*)mCursor->GetRoot()->getChildByName("GreenRect");
-            drawnode->clear();
+            mCursor->mCursorComp->GreenRectClear();
             mCursor->mCursorComp->mState = CursorState::Idle;
+            mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;
         }
         //mCursor->LeftClickUp();
        
@@ -347,32 +394,40 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
         auto bRoot = B->getParent();
         UserData* userData = (UserData*)bRoot->getUserData();
 
-        if (userData->mActor->mID == mCursor->mID)
+        if (mCursor->mCursorComp->mState != CursorState::Drag)
         {
-            mCursor->mCursorComp->mState = CursorState::ContactTeam; 
+            if (userData->mActor->mID == mCursor->mID)
+            {
+                mCursor->mCursorComp->mState = CursorState::ContactTeam;
+                printf("pos x : %f, y: %f", userData->mActor->GetPosition().x, userData->mActor->GetPosition().y);
+            }
+            else
+            {
+                mCursor->mCursorComp->mState = CursorState::ContactEnemy;
+            }
         }
-        else
-        {
-            mCursor->mCursorComp->mState = CursorState::ContactEnemy; 
-        }
+        
     }
     else if (B->getName() == "Cursor" && A->getTag() == 10)
     {
         auto aRoot         = A->getParent();
         UserData* userData = (UserData*)aRoot->getUserData();
 
-        if (userData->mActor->mID == mCursor->mID)
+        if (mCursor->mCursorComp->mState != CursorState::Drag)
         {
-            mCursor->mCursorComp->mState = CursorState::ContactTeam;
-        }
-        else
-        {
-            mCursor->mCursorComp->mState = CursorState::ContactEnemy;
+            if (userData->mActor->mID == mCursor->mID)
+            {
+                mCursor->mCursorComp->mState = CursorState::ContactTeam;
+            }
+            else
+            {
+                mCursor->mCursorComp->mState = CursorState::ContactEnemy;
+            }
         }
     }
 
 
-    if (A->getName() == "CursorCheckNode" && B->getTag()==10)
+ /*   if (A->getName() == "CursorCheckNode" && B->getTag()==10)
     {
         auto bRoot = B->getParent();
 
@@ -394,7 +449,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
             mPlayer->Selected(userData->mActor);
         }
         return false;
-    }
+    }*/
 
     return true;
 }
@@ -434,14 +489,19 @@ void MainScene::onContactSeparate(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    if (A->getName() == "Cursor" && B->getTag() == 10)
+    if (mCursor->mCursorComp->mState != CursorState::Drag)
     {
-        mCursor->mCursorComp->mState = CursorState::Idle;
+        if (A->getName() == "Cursor" && B->getTag() == 10)
+        {
+            mCursor->mCursorComp->mState = CursorState::Idle;
+        }
+        else if (B->getName() == "Cursor" && A->getTag() == 10)
+        {
+            mCursor->mCursorComp->mState = CursorState::Idle;
+        }
     }
-    else if (B->getName() == "Cursor" && A->getTag() == 10)
-    {
-       mCursor->mCursorComp->mState = CursorState::Idle;
-    }
+
+   
 }
 
 void MainScene::update(float delta)
@@ -500,6 +560,8 @@ void MainScene::menuCloseCallback(ax::Object* sender)
      // EventCustom customEndEvent("game_scene_close_event");
      //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
+
+
 
 
 
