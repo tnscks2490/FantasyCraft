@@ -130,7 +130,7 @@ AnimInfo g_AnimInfo_Cursor[] = {
     {ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face, "Plist/Cursor.plist", "Cursor/OnCursorTeam/%04d.png", 1, 14, ((2.f) / 14), Vec2(0.5f, 0.5f), nullptr},
     {ECharName::Cursor, ECharAct::OnCursorEnemy, ECharDir::Face, "Plist/Cursor.plist", "Cursor/OnCursorEnemy/%04d.png", 1, 14, ((2.f) / 14), Vec2(0.5f, 0.5f), nullptr},
     {ECharName::Cursor, ECharAct::Drag, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Drag/%04d.png", 1, 4, ((1.f) / 4), Vec2(0.5f, 0.5f), nullptr},
-    {ECharName::Cursor, ECharAct::Target, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Target/%04d.png", 1, 2, ((1.f) / 2), Vec2(0.5f, 0.5f), nullptr},
+    {ECharName::Cursor, ECharAct::Target, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Target/%04d.png", 1, 2, ((0.5f) / 2), Vec2(0.5f, 0.5f), nullptr},
 };
 
 AnimInfo g_AnimInfo_Cursor_Target[] = {
@@ -247,6 +247,8 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             return g_AnimInfo_Cursor[2];
         case ECharAct::Drag:
             return g_AnimInfo_Cursor[3];
+        case ECharAct::Target:
+            return g_AnimInfo_Cursor[4];
         default:
             break;
         }

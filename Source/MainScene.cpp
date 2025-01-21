@@ -162,6 +162,7 @@ void MainScene::onMouseDown(Event* event)
                 data.pos      = mousePos - (ax::Vec2(0, 210));
                 TcpClient::get()->SendMessageToServer(data);
             }
+                mCursor->GetRoot()->getChildByName("TargetAnim")->setVisible(true);
         }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
@@ -171,6 +172,7 @@ void MainScene::onMouseDown(Event* event)
         {
             mCursor->mCursorComp->mState = CursorState::Drag;
             mCursor->mCursorComp->sPos   = mousePos;
+            mCursor->mCursorComp->ePos   = mousePos + ax::Vec2(1,1);
         }
 
        
@@ -187,11 +189,11 @@ void MainScene::onMouseUp(Event* event)
     EventMouse* e = static_cast<EventMouse*>(event);
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
-    //mCursor->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
+    mCursor->mCursorComp->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     auto func = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
 
-     
+        //
         // Return true from the callback to continue rect queries
         auto A                = shape.getBody()->getNode();
         std::string_view name = A->getName();
@@ -239,14 +241,15 @@ void MainScene::onMouseUp(Event* event)
     ax::Vec2 sPos = mCursor->mCursorComp->sPos;
     ax::Vec2 ePos = mCursor->mCursorComp->ePos;
 
-    sPos = sPos - mMapLayer->getPosition();
-    ePos = ePos - mMapLayer->getPosition();
+    //sPos = sPos - mMapLayer->getPosition();
+    //ePos = ePos - mMapLayer->getPosition();
 
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         if (mCursor->mCursorComp->mState == CursorState::Drag)
         {
+            mPlayer->Clear();
             getPhysicsWorld()->queryRect(func, Rect(sPos.x, sPos.y, ePos.x, ePos.y), nullptr);
             printf("=================================\n");
             printf("sPos x : %f  | y : %f\n", sPos.x, sPos.y);

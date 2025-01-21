@@ -25,6 +25,9 @@ Actor* SpawnCursor(ax::Node* parent)
     auto cursor = new CursorComp(actor);
     draw->CreateCursorRect(ax::Vec2(0, 0), ax::Vec2(0, 0));
 
+    auto Tanim = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Target, ECharDir::Face, "TargetAnim");
+    Tanim->setVisible(false);
+
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -56,7 +59,11 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     node->addChild(selectanim);
 
 
+
+
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
+
+
     /*auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);*/
     
