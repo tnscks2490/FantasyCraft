@@ -69,6 +69,9 @@ public:
 
     void DebugPath();
 
+    bool test(ax::PhysicsWorld& p, ax::PhysicsShape& s, void* u);
+
+
 
     void Decording();
 

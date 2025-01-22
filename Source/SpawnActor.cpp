@@ -18,15 +18,15 @@ Actor* SpawnCursor(ax::Node* parent)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 10.0f);
 
-    auto body       = draw->CreatePhysicsNode(ax::Vec2(32, 32));
+    auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     body->setTag(-1);
     body->setName("Cursor");
     auto anim       = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
     auto cursor = new CursorComp(actor);
     draw->CreateCursorRect(ax::Vec2(0, 0), ax::Vec2(0, 0));
 
-    auto Tanim = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Target, ECharDir::Face, "TargetAnim");
-    Tanim->setVisible(false);
+    //auto Tanim = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Target, ECharDir::Face, "TargetAnim");
+    //Tanim->setVisible(false);
 
 
     UserData* mUserData = new UserData;

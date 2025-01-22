@@ -29,7 +29,7 @@ void PathFind::DefaultSetting(ax::TMXLayer* wall)
         {
             if (wall->getTileAt(ax::Vec2(j, mHeight - 1 - i)))
             {
-                auto value = wall->getProperty("Wall");
+                auto value = wall->getProperty("wall");
                 if (value.asBool())
                    mColMap->SetAt(j, i);
                 else

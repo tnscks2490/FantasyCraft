@@ -1,5 +1,5 @@
 #pragma once
-
+#include "PreDefines.h"
 
 struct AABOX
 {
@@ -10,13 +10,8 @@ struct AABOX
 };
 
 
-bool isContacted(AABOX blue,AABOX red)
-{
-    if ((blue.right > red.left) &&
-        (red.right > blue.left) &&
-        (blue.top > red.bottom) &&
-        (red.top > blue.bottom))
-        return true;
-    else
-        return false;
-}
+bool isContacted(AABOX blue, AABOX red);
+
+ax::Vec2 GetZeroPointInRect(ax::Vec2 sPos, ax::Vec2 ePos);
+float GetRectWidth(ax::Vec2 sPos, ax::Vec2 ePos);
+float GetRectHeight(ax::Vec2 sPos, ax::Vec2 ePos);

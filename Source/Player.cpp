@@ -7,7 +7,6 @@
 Player::Player()
 {
     mPC = new PlayerController(this);
-
     mCommand[0];
 }
 
@@ -27,22 +26,49 @@ void Player::Clear()
     PlayerActors.clear();
 }
 
-void Player::Selected(Actor* actor)
+void Player::Selected()
 {
-    for (auto ac : PlayerActors)
+    for (auto aa : PrePlayerActors)
+    {
+        if (aa)
+        {
+            for (auto ac : PlayerActors)
+            {
+                if (ac == nullptr)
+                {
+                    ac                         = aa;
+                    ac->mDrawComp->selected = true;
+                    ac->mDrawComp->isSelected();
+                    return;
+                } 
+            }
+            aa->mDrawComp->selected = true;
+            aa->mDrawComp->isSelected();
+            PlayerActors.push_back(aa);
+        }      
+    }   
+}
+
+void Player::PreSelected(Actor* actor)
+{
+    for (auto ac : PrePlayerActors)
     {
         if (ac == nullptr)
         {
             ac = actor;
-            actor->mDrawComp->selected = true;
-            actor->mDrawComp->isSelected();
             return;
         }
     }
-    actor->mDrawComp->selected = true;
-    actor->mDrawComp->isSelected();
-    PlayerActors.push_back(actor);
+    PrePlayerActors.push_back(actor);
+}
 
+void Player::PreClear()
+{
+    for (auto ac : PrePlayerActors)
+    {
+        if (ac){ ac = nullptr;}
+    }
+    PlayerActors.clear();
 }
 
 bool Player::isSelected()
@@ -65,4 +91,11 @@ void Player::PrintSelectActors()
     }
 
     printf("현재 선택된 엑터의 수 : %d \n", i);
+}
+
+void Player::ReSelected()
+{
+    Clear();
+    Selected();
+    PrePlayerActors.clear();
 }

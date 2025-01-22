@@ -36,6 +36,7 @@
 #include "DrawComp.h"
 #include "CursorComp.h"
 #include <iostream>
+#include "2DGeometry.h"
 
 
 using namespace ax;
@@ -91,6 +92,8 @@ bool MainScene::init()
     contactListener->onContactSeparate = AX_CALLBACK_1(MainScene::onContactSeparate, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
+
+    
     
     // 플레이어 생성
     mPlayer                  = new Player;
@@ -120,9 +123,9 @@ bool MainScene::init()
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
 
     // 이동불가능한 지형을 데이터로 넣기 TMX에다가쓰는방식(맵을 바꾸면서 수정해야함)
-    auto wall = mMapLayer->GetMap()->getLayer("MetaInfo");
-    //World::get()->mPath->DefaultSetting(wall);
-
+    auto wall = mMapLayer->GetMap()->getLayer("Wall");
+    World::get()->mPath->DefaultSetting(wall);
+    World::get()->mPath->DebugMap();
     
    
 
@@ -162,7 +165,7 @@ void MainScene::onMouseDown(Event* event)
                 data.pos      = mousePos - (ax::Vec2(0, 210));
                 TcpClient::get()->SendMessageToServer(data);
             }
-                mCursor->GetRoot()->getChildByName("TargetAnim")->setVisible(true);
+               // mCursor->GetRoot()->getChildByName("TargetAnim")->setVisible(true);
         }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
@@ -192,9 +195,6 @@ void MainScene::onMouseUp(Event* event)
     mCursor->mCursorComp->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     auto func = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
-
-        //
-        // Return true from the callback to continue rect queries
         auto A                = shape.getBody()->getNode();
         std::string_view name = A->getName();
 
@@ -207,60 +207,39 @@ void MainScene::onMouseUp(Event* event)
 
             if (userData->mActor->mID == TcpClient::get()->GetID())
             {
-                mPlayer->Selected(userData->mActor);
+                mPlayer->PreSelected(userData->mActor);
             }
         }
         return true;
     };
 
-
-   /* if (A->getName() == "CursorCheckNode" && B->getTag() == 10)
-    {
-        auto bRoot = B->getParent();
-
-        UserData* userData = (UserData*)bRoot->getUserData();
-
-        if (userData->mActor->mID == TcpClient::get()->GetID())
-        {
-            mPlayer->Selected(userData->mActor);
-        }
-        return false;
-    }
-    else if (B->getName() == "CursorCheckNode" && A->getTag() == 10)
-    {
-        auto aRoot         = A->getParent();
-        UserData* userData = (UserData*)aRoot->getUserData();
-
-        if (userData->mActor->mID == TcpClient::get()->GetID())
-        {
-            mPlayer->Selected(userData->mActor);
-        }
-        return false;
-    }*/
-
     ax::Vec2 sPos = mCursor->mCursorComp->sPos;
     ax::Vec2 ePos = mCursor->mCursorComp->ePos;
-
-    //sPos = sPos - mMapLayer->getPosition();
-    //ePos = ePos - mMapLayer->getPosition();
-
-
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         if (mCursor->mCursorComp->mState == CursorState::Drag)
         {
-            mPlayer->Clear();
-            getPhysicsWorld()->queryRect(func, Rect(sPos.x, sPos.y, ePos.x, ePos.y), nullptr);
+            float width = GetRectWidth(sPos, ePos);
+            float height = GetRectHeight(sPos, ePos);
+            ax::Vec2 zpos = GetZeroPointInRect(sPos, ePos);
+
+            getPhysicsWorld()->queryRect(func, Rect(zpos.x, zpos.y, width, height), nullptr);
+            if (mPlayer->PrePlayerActors.size() > 0)
+            {
+                printf("찾음\n");
+                mPlayer->ReSelected();
+            }
+
+
             printf("=================================\n");
-            printf("sPos x : %f  | y : %f\n", sPos.x, sPos.y);
-            printf("ePos x : %f  | y : %f\n", ePos.x, ePos.y);
+            printf("sPos x : %f  | y : %f\n", zpos.x, zpos.y);
+            printf("너비 : %f\n",width);
+            printf("높이 : %f\n",height);
             printf("=================================\n");
             mCursor->mCursorComp->GreenRectClear();
             mCursor->mCursorComp->mState = CursorState::Idle;
             mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;
-        }
-        //mCursor->LeftClickUp();
-       
+        }    
     }
 
 }
@@ -591,6 +570,12 @@ void MainScene::DebugPath()
     }
 }
 
+bool MainScene::test(ax::PhysicsWorld& p, ax::PhysicsShape& s, void* u)
+{
+
+    return true;
+}
+
 void MainScene::Decording()
 {
     char buf[1024] = {0};
@@ -658,7 +643,8 @@ void MainScene::Decording()
             {
                 if (actor && actor->mID == data.ClientID)
                 {
-                    actor->mMoveComp->SetPath(data.pos);
+                    if (actor->mDrawComp->selected)
+                        actor->mMoveComp->SetPath(data.pos);
                 }
             }
             break;

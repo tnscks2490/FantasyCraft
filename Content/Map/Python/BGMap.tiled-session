@@ -8,12 +8,34 @@
         "."
     ],
     "fileStates": {
-        "Map.tmx": {
-            "scale": 0.208740234375,
-            "selectedLayer": 0,
+        "C:/CC/TestClient/Content/TMXMap/Python/TMXTileSet_Animations.tsx": {
+            "scaleInDock": 2
+        },
+        "C:/CC/TestClient/Content/TMXMap/Python/python.tmx": {
+            "scale": 1,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 2261.183625730994,
-                "y": 2318.67134502924
+                "x": 1024.5,
+                "y": 1024.5
+            }
+        },
+        "C:/Users/lsc2490/Desktop/Map.json": {
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2057.125,
+                "y": 2047.875
+            }
+        },
+        "C:/Users/lsc2490/Desktop/Map.json#t": {
+            "scaleInDock": 1
+        },
+        "Map.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1186,
+                "y": 3632
             }
         },
         "Map.tmx#t": {
@@ -26,16 +48,19 @@
     },
     "last.imagePath": "C:/CC/FantasyCraft/Content/Map/Python",
     "map.height": 128,
-    "map.lastUsedFormat": "tmx",
+    "map.lastUsedFormat": "json",
     "map.width": 128,
     "openFiles": [
-        "Map.tmx",
-        "TMXTileSet_Animations.tsx"
+        "C:/Users/lsc2490/Desktop/Map.json",
+        "Map.tmx"
     ],
     "project": "BGMap.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
-        "TMXTileSet_Animations.tsx",
-        "Map.tmx"
+        "C:/Users/lsc2490/Desktop/Map.json",
+        "Map.tmx",
+        "C:/CC/TestClient/Content/TMXMap/Python/python.tmx",
+        "TMXTileSet_Animations.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

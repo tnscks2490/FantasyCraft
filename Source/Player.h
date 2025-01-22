@@ -71,9 +71,12 @@ public:
     ~Player();
 
     void Clear();
-    void Selected(Actor* actor);
+    void Selected();
+    void PreSelected(Actor* actor);
+    void PreClear();
     bool isSelected();
     void PrintSelectActors();
+    void ReSelected();
 
     PlayerCommand mCommand[9];
     PlayerRace mRace       = PlayerRace::None;
@@ -81,7 +84,7 @@ public:
 public:
 
 
-
+    std::vector<Actor*> PrePlayerActors;
     std::vector<Actor*> PlayerActors;
     Actor* mMainActor;
 
