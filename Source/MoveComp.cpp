@@ -5,6 +5,7 @@
 #include "Actor.h"
 #include "PathFind.h"
 #include "World.h"
+#include "2DGeometry.h"
 
 
 MoveComp::MoveComp(Actor* actor)
@@ -352,14 +353,6 @@ void MoveComp::SetPath(ax::Vec2 targetPos)
 
     mTargetList.pop_front();
     mLastTarget = targetPos;
-}
-
-float MoveComp::length(ax::Vec2 v1, ax::Vec2 v2)
-{
-    float dx = v2.x - v1.x;
-    float dy = v2.y - v1.y;
-
-    return sqrt(dx * dx + dy * dy);
 }
 
 ax::Vec2 MoveComp::Vec2DNormalized(ax::Vec2 target)

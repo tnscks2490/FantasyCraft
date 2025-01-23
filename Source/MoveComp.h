@@ -25,7 +25,6 @@ public:
 
     void SetTarget(ax::Vec2 target);
     void SetPath(ax::Vec2 targetPos);
-    float length(ax::Vec2 v1, ax::Vec2 v2);
     ax::Vec2 Vec2DNormalized(ax::Vec2 target);
     bool IsArrive();
     void Do_Moving();

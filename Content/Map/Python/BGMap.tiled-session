@@ -31,18 +31,18 @@
             "scaleInDock": 1
         },
         "Map.tmx": {
-            "scale": 0.5,
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1186,
-                "y": 3632
+                "x": 3236.363636363636,
+                "y": 2000
             }
         },
         "Map.tmx#t": {
             "scaleInDock": 1
         },
         "TMXTileSet_Animations.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
