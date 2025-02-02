@@ -48,6 +48,18 @@ void CursorComp::update(float delta)
     }
 }
 
+void CursorComp::MessageProc(ActorMessage& msg)
+{
+    switch (msg.msgType)
+    {
+    case MsgType::BPCMC:
+        CreateBuildingBP(BuildingName::CommandCenter);
+        break;
+    default:
+        break;
+    }
+}
+
 void CursorComp::CursorUp()
 {
 
@@ -71,7 +83,7 @@ void CursorComp::CursorMove(ax::Vec2 pos)
 
 void CursorComp::LeftClick(ax::Vec2 pos)
 {
-    if (sp)
+    if (bp)
     {
         if (cPlayer->PlayerActors.size() == 1)
         {
@@ -83,7 +95,7 @@ void CursorComp::LeftClick(ax::Vec2 pos)
             data.pos      = sPos;
             TcpClient::get()->SendMessageToServer(data);
 
-            ReleaseSp();
+            ReleaseBP();
         }
     }
 }
@@ -151,23 +163,23 @@ void CursorComp::GreenRectClear()
     drawnode->clear();
 }
 
-void CursorComp::CreateBuildingBluePrint(BuildingName name)
+void CursorComp::CreateBuildingBP(BuildingName name)
 {
-    if (sp == nullptr)
+    if (bp == nullptr)
     {
         switch (name)
         {
         case BuildingName::None:
             break;
         case BuildingName::CommandCenter:
-            sp = ax::Sprite::create("123.png"sv);
-            sp->setPosition(0, 0);
-            //mDrawComp->mRoot->addChild(sp);
+            bp = ax::Sprite::create("123.png"sv);
+            bp->setPosition(0, 0);
+            mActor->mDrawComp->mRoot->addChild(bp);
             break;
         default:
             break;
         }
     }
-    
 }
+
 

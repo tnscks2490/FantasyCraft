@@ -30,6 +30,7 @@ public:
     ~CursorComp();
 
     virtual void update(float delta) override;
+    virtual void MessageProc(ActorMessage& msg);
 
     void CursorUp();
     void BPFollowCursor();
@@ -50,15 +51,15 @@ public:
     void LeftClickDown() { isLeftClick = true; }
     void RightClickDown() { isRightClick = true; }
 
-    void ReleaseSp() { if (sp)sp->removeFromParent();sp = nullptr; }
+    void ReleaseBP() { if (bp)bp->removeFromParent();bp = nullptr; }
 
-    void CreateBuildingBluePrint(BuildingName name);
+    void CreateBuildingBP(BuildingName name);
 
 public:
 
     Player* cPlayer = nullptr;
 
-    ax::Sprite* sp = nullptr;
+    ax::Sprite* bp = nullptr;
 
     ax::Vec2 sPos;
     ax::Vec2 ePos;

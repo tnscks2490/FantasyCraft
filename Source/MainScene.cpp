@@ -113,6 +113,7 @@ bool MainScene::init()
     mCursor->SetPosition(ax::Vec2(500,500));
 
     mUILayer = UILayer::create();
+    mUILayer->mCursor = mCursor;
     mUILayer->SetUI(mPlayer->mRace);
     addChild(mUILayer);
 
@@ -151,9 +152,9 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-        if (mCursor->mCursorComp->sp)
+        if (mCursor->mCursorComp->bp)
         {
-            mCursor->mCursorComp->ReleaseSp();
+            mCursor->mCursorComp->ReleaseBP();
         }
         else
         {
@@ -226,16 +227,8 @@ void MainScene::onMouseUp(Event* event)
             getPhysicsWorld()->queryRect(func, Rect(zpos.x, zpos.y, width, height), nullptr);
             if (mPlayer->PrePlayerActors.size() > 0)
             {
-                printf("찾음\n");
                 mPlayer->ReSelected();
             }
-
-
-            printf("=================================\n");
-            printf("sPos x : %f  | y : %f\n", zpos.x, zpos.y);
-            printf("너비 : %f\n",width);
-            printf("높이 : %f\n",height);
-            printf("=================================\n");
             mCursor->mCursorComp->GreenRectClear();
             mCursor->mCursorComp->mState = CursorState::Idle;
             mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;
@@ -259,17 +252,6 @@ void MainScene::onMouseMove(Event* event)
     {
          mCursor->mCursorComp->ePos = mousepos;
     }
-
-
-    //mCursor->CursorMove(mousepos);
-    //if (mCursor->isDraging)
-    //{ 
-    //    mCursor->GetDrawNode()->clear();
-    //    //mCursor->setPosition(mousepos);
-    //    mCursor->GetDrawNode()->drawSolidRect(mCursor->sPos - mousepos,
-    //        ax::Vec2::ZERO, ax::Color4B::GREEN);
-    //}
-    //mCursor->DeleteCheckNode();
 }
 
 void MainScene::onMouseScroll(Event* event)
@@ -408,31 +390,6 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
             }
         }
     }
-
-
- /*   if (A->getName() == "CursorCheckNode" && B->getTag()==10)
-    {
-        auto bRoot = B->getParent();
-
-        UserData* userData = (UserData*)bRoot->getUserData();
-
-        if (userData->mActor->mID == TcpClient::get()->GetID())
-        {
-            mPlayer->Selected(userData->mActor);
-        }
-        return false;
-    }
-    else if (B->getName() == "CursorCheckNode" && A->getTag() == 10)
-    {
-        auto aRoot         = A->getParent();
-        UserData* userData = (UserData*)aRoot->getUserData();
-
-        if (userData->mActor->mID == TcpClient::get()->GetID())
-        {
-            mPlayer->Selected(userData->mActor);
-        }
-        return false;
-    }*/
 
     return true;
 }

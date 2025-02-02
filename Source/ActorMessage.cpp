@@ -2,6 +2,7 @@
 #include "ActorMessage.h"
 #include "Actor.h"
 #include "UnitComp.h"
+#include "CursorComp.h"
 
 
 void SendActorMessage(Actor* receiver, ActorMessage msg)
@@ -14,9 +15,12 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         {
             receiver->mUnitComp->MessageProc(msg);
         }
-
+    } break;
+    case MsgType::BPCMC:
+    {
+        if (receiver->mCursorComp)
+            receiver->mCursorComp->MessageProc(msg);
     }
-        break;
     default:
         break;
     }

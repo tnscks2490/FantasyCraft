@@ -12,6 +12,12 @@ enum class MsgType
     GameClick,
     Attack,
     Build,
+
+
+
+    //BP
+    BPCMC,
+    BPSD,
 };
 
 

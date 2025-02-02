@@ -18,6 +18,7 @@ MoveComp::~MoveComp() {}
 
 void MoveComp::update(float delta)
 {
+
     mVelocity = ax::Vec2(0, 0);
 
     CheckTargetList();

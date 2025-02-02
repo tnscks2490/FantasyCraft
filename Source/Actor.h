@@ -1,6 +1,6 @@
 #pragma once
-#include "pch.h"
 #include "AnimInfo.h"
+#include "SensorMemory.h"
 
 class MoveComp;
 class DrawComp;
@@ -51,6 +51,8 @@ public:
     GoalComp* mGoalComp = nullptr;
     //////////////
     CursorComp* mCursorComp = nullptr;
+
+    SensorMemory* mSM = nullptr;
 
 public:
     ActorType mActorType = ActorType::None;

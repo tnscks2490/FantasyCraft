@@ -2,7 +2,6 @@
 #include "PreDefines.h"
 #include "Player.h"
 
-class Cursor;
 
 class UILayer : public ax::Layer
 {
@@ -25,5 +24,6 @@ public:
     ax::MenuItemImage mAllActionIcon[9];
 
     Player* mPlayer = nullptr;
-
+    Actor* mCursor  = nullptr;
+   
 };

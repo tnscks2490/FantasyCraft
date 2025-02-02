@@ -100,5 +100,6 @@ void UILayer::SetUI(PlayerRace race)
 
 void UILayer::build()
 {
-    //mCursor->CreateBuildingBluePrint(BuildingName::CommandCenter);
+    ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
+    SendActorMessage(mCursor, msg);
 }
