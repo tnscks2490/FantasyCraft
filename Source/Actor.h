@@ -42,6 +42,7 @@ public:
     char charNum     = 0;
     short idx        = -1;
 
+    bool isDead = false;
     
 public:
     // 컴포넌트

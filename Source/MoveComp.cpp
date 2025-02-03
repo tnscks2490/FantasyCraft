@@ -343,6 +343,7 @@ void MoveComp::SetPath(ax::Vec2 targetPos)
 
     mTargetList = World::get()->mPath->GetTargetList(mActor->GetPosition(),targetPos);
 
+    //path에 길찾기 가능 카운팅을 해서
     if (mTargetList.size() < 1)
         return;
 

@@ -5,6 +5,7 @@
 #include "DrawComp.h"
 #include "UnitComp.h"
 #include "SCVComp.h"
+#include "PathFind.h"
 #include "CommandCenterComp.h"
 
 
@@ -23,6 +24,8 @@ World* World::get()
 
 void World::update(float delta)
 {
+    if (mPath)
+        mPath->update(delta);
     if (w_ActorList.size() > 0 || IsAddActors)
     {
 

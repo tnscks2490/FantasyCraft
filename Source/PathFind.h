@@ -12,6 +12,9 @@ public:
 
     void DefaultSetting(ax::TMXLayer* wall);
     void DebugMap();
+    void update(float delta);
+ 
+    bool Enter();
 
 public:
 
@@ -20,6 +23,7 @@ public:
     std::list<jpspath::Coord> PathSearch(ax::Vec2 start,ax::Vec2 dest);
 
 
+    int Counting = 0;
 
     int mWidth;
     int mHeight;

@@ -584,8 +584,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(ax::Vec2(500, 500));
-        }
-        break;
+        } break;
         case 90:
         {
             for (auto actor : mPlayer->PlayerActors)
@@ -595,8 +594,7 @@ void MainScene::Decording()
                     actor->mMoveComp->SetPath(data.pos);
                 }
             }
-        }
-            break;
+        } break;
         case 114:
             for (auto actor : World::get()->w_ActorList)
             {
@@ -604,6 +602,7 @@ void MainScene::Decording()
                 {
                     if (actor->mDrawComp->selected)
                         actor->mMoveComp->SetPath(data.pos);
+                    //골로 집어넣을것
                 }
             }
             break;

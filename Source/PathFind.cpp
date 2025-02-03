@@ -58,6 +58,23 @@ void PathFind::DebugMap()
     }
 }
 
+void PathFind::update(float delta)
+{
+    Counting = 0;
+}
+
+bool PathFind::Enter()
+// 골로 추가할것
+{
+    if (Counting < 3)
+    {
+        Counting++;
+        return true;
+    }
+    else
+        return false;
+}
+
 std::list<ax::Vec2> PathFind::GetTargetList(ax::Vec2 start, ax::Vec2 dest)
 {
     auto resultNode = PathSearch(start, dest);
