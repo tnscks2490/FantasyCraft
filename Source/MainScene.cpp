@@ -595,17 +595,19 @@ void MainScene::Decording()
                 }
             }
         } break;
+
         case 114:
+        {
             for (auto actor : World::get()->w_ActorList)
             {
                 if (actor && actor->mID == data.ClientID)
                 {
                     if (actor->mDrawComp->selected)
                         actor->mMoveComp->SetPath(data.pos);
-                    //골로 집어넣을것
+                    // 골로 집어넣을것
                 }
             }
-            break;
+        } break;
         ///////////////////////
         default:
             break;
