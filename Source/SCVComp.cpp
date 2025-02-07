@@ -29,6 +29,13 @@ void SCVComp::MessageProc(ActorMessage& msg)
 
 void SCVComp::update(float delta) {
 
+    mTimer += delta;
+
+    if (mTimer > 5.f)
+    {
+        auto t =  mActor->GetRoot()->getChildByName("EffectNode");
+        printf("자식확인하기");
+    }
 }
 
 void SCVComp::Repair()

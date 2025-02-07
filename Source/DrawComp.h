@@ -22,6 +22,8 @@ public:
     ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
 
+    ax::Node* CreateDemageNode(Actor* attackActor);
+
 
 
     ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);

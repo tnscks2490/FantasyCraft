@@ -226,6 +226,28 @@ ax::Node* DrawComp::CreateSelectedNode()
     return nullptr;
 }
 
+ax::Node* DrawComp::CreateDemageNode(Actor* attackActor)
+{
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& info = FindAnimInfo(ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName("EffectNode");
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+
+        ax::Action* action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        return node;
+    }
+    return nullptr;
+}
+
 
 
 void DrawComp::AddUserData()

@@ -7,7 +7,6 @@
 Player::Player()
 {
     mPC = new PlayerController(this);
-    mCommand[0];
 }
 
 Player::~Player() {}

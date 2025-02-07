@@ -13,6 +13,7 @@ public:
     void SetUI(PlayerRace race);
     void build();
 
+    void SetButton();
 
 public:
     ax::Sprite* mConsoleUI;

@@ -37,19 +37,6 @@ void UILayer::SetUI(PlayerRace race)
         mPopIcon = ax::Sprite::create("TPopIcon.png"sv);
         mPopIcon->setPosition(ax::Vec2(500, 450));
         addChild(mPopIcon);
-
-
-        auto item = ax::MenuItemImage::create("Attack_Release.png", "Attack_Down.png", AX_CALLBACK_0(UILayer::build, this));
-
-        item->setScale(2.0f);
-        item->setPosition(ax::Vec2(410,-272));
-
-        auto menu = ax::Menu::create(item, NULL);
-        menu->setPosition(ax::Vec2::ZERO);
-        this->addChild(menu, 1);
-
-
-
     } break;
 
     case PlayerRace::Protoss:
@@ -102,4 +89,15 @@ void UILayer::build()
 {
     ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
     SendActorMessage(mCursor, msg);
+}
+
+void UILayer::SetButton()
+{
+    /*auto bt1 = ax::MenuItemImage::create("Attack_Release.png", "Attack_Down.png", AX_CALLBACK_0(UILayer::build, this));
+    auto bt2 = ax::MenuItemImage::create("") item->setScale(2.0f);
+    item->setPosition(ax::Vec2(410, -272));
+
+    auto menu = ax::Menu::create(item, NULL);
+    menu->setPosition(ax::Vec2::ZERO);
+    this->addChild(menu, 1);*/
 }
