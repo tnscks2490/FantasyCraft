@@ -12,8 +12,9 @@ public:
 
     void SetUI(PlayerRace race);
     void build();
+    void ButtonMessage(ax::Object* sender);
 
-    void SetButton();
+    void CreateButton();
 
 public:
     ax::Sprite* mConsoleUI;
@@ -28,3 +29,6 @@ public:
     Actor* mCursor  = nullptr;
    
 };
+
+
+

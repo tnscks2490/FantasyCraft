@@ -3,6 +3,8 @@
 #include "World.h"
 #include "TcpClient.h"
 #include "ActorMessage.h"
+#include "ButtonInfo.h"
+#include "Player.h"
 
 bool UILayer::init()
 {
@@ -12,7 +14,7 @@ bool UILayer::init()
     }
 
 
-
+    CreateButton();
     return true;
 }
 
@@ -87,17 +89,34 @@ void UILayer::SetUI(PlayerRace race)
 
 void UILayer::build()
 {
-    ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
-    SendActorMessage(mCursor, msg);
+    /*ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
+    SendActorMessage(mCursor, msg);*/
+
+
+
 }
 
-void UILayer::SetButton()
+void UILayer::ButtonMessage(ax::Object* sender)
 {
-    /*auto bt1 = ax::MenuItemImage::create("Attack_Release.png", "Attack_Down.png", AX_CALLBACK_0(UILayer::build, this));
-    auto bt2 = ax::MenuItemImage::create("") item->setScale(2.0f);
-    item->setPosition(ax::Vec2(410, -272));
+    auto node = (ax::Node*)sender;
+    ButtonInfo* info = (ButtonInfo*)node->getUserData();
 
-    auto menu = ax::Menu::create(item, NULL);
+    if (mPlayer)
+    {
+        mPlayer->ButtonAction(info);
+    }
+
+}
+
+void UILayer::CreateButton()
+{
+    ButtonInfo* t = FindButtonInfo(ButtonType::TMove);
+    auto bt1 = ax::MenuItemImage::create(t->normal_Image, t->selected_Image, AX_CALLBACK_1(UILayer::ButtonMessage, this));
+    bt1->setUserData(t);
+    bt1->setScale(2.f);
+    bt1->setPosition(ax::Vec2(0, 0));
+
+    auto menu = ax::Menu::create(bt1, NULL);
     menu->setPosition(ax::Vec2::ZERO);
-    this->addChild(menu, 1);*/
+    this->addChild(menu, 1);
 }

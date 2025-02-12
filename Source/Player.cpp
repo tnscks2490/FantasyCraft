@@ -98,3 +98,5 @@ void Player::ReSelected()
     Selected();
     PrePlayerActors.clear();
 }
+
+void Player::ButtonAction(ButtonInfo* info) {}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include "ButtonInfo.h"
 class Actor;
 class PlayerController;
 
@@ -77,6 +78,8 @@ public:
     bool isSelected();
     void PrintSelectActors();
     void ReSelected();
+
+    void ButtonAction(ButtonInfo* info);
 
     PlayerCommand mCommand[9];
     PlayerRace mRace       = PlayerRace::None;

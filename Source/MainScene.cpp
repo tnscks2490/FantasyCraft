@@ -225,7 +225,11 @@ void MainScene::onMouseUp(Event* event)
             ax::Vec2 zpos = GetZeroPointInRect(sPos, ePos);
 
             getPhysicsWorld()->queryRect(func, Rect(zpos.x, zpos.y, width, height), nullptr);
-            if (mPlayer->PrePlayerActors.size() > 0)
+            if (mPlayer->PrePlayerActors.size() ==1)
+            {
+                printf("한명만 선택");
+            }
+            else if (mPlayer->PrePlayerActors.size() > 1)
             {
                 mPlayer->ReSelected();
             }
@@ -527,12 +531,6 @@ void MainScene::DebugPath()
             }
         }
     }
-}
-
-bool MainScene::test(ax::PhysicsWorld& p, ax::PhysicsShape& s, void* u)
-{
-
-    return true;
 }
 
 void MainScene::Decording()
