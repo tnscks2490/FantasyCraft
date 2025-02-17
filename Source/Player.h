@@ -1,8 +1,11 @@
 #pragma once
 #include "Actor.h"
 #include "ButtonInfo.h"
+#include "MessageSystem.h"
+
 class Actor;
 class PlayerController;
+class UILayer;
 
 enum class PlayerRace
 {
@@ -71,6 +74,9 @@ public:
     Player();
     ~Player();
 
+    void MessageProc(SystemMessage smsg);
+
+
     void Clear();
     void Selected();
     void PreSelected(Actor* actor);
@@ -79,7 +85,7 @@ public:
     void PrintSelectActors();
     void ReSelected();
 
-    void ButtonAction(ButtonInfo* info);
+    void ButtonAction(ax::Object* sender);
 
     PlayerCommand mCommand[9];
     PlayerRace mRace       = PlayerRace::None;
@@ -94,6 +100,7 @@ public:
     PlayerController* mPC = nullptr;
     ActionIcon mCurActionICon    = ActionIcon::None;
 
+    UILayer* ui = nullptr;
 
 };
 

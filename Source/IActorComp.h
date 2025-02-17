@@ -1,6 +1,6 @@
 #pragma once
 #include "Actor.h"
-#include "ActorMessage.h"
+#include "MessageSystem.h"
 
 class Actor;
 

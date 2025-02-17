@@ -112,8 +112,12 @@ bool MainScene::init()
     mCursor = SpawnCursor(this);
     mCursor->SetPosition(ax::Vec2(500,500));
 
+
+    //나중에 구조 꼭 수정할것 너무 복잡함
     mUILayer = UILayer::create();
     mUILayer->mCursor = mCursor;
+    mUILayer->mPlayer = mPlayer;
+    mUILayer->mPlayer->ui = mUILayer;
     mUILayer->SetUI(mPlayer->mRace);
     addChild(mUILayer);
 
@@ -227,6 +231,7 @@ void MainScene::onMouseUp(Event* event)
             getPhysicsWorld()->queryRect(func, Rect(zpos.x, zpos.y, width, height), nullptr);
             if (mPlayer->PrePlayerActors.size() ==1)
             {
+                mPlayer->ReSelected();
                 printf("한명만 선택");
             }
             else if (mPlayer->PrePlayerActors.size() > 1)

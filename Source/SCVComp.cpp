@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "SCVComp.h"
 #include "World.h"
-#include "ActorMessage.h"
+#include "MessageSystem.h"
 #include "TcpClient.h"
 
 
@@ -35,6 +35,7 @@ void SCVComp::update(float delta) {
     {
         auto t =  mActor->GetRoot()->getChildByName("EffectNode");
         printf("자식확인하기");
+        mTimer = 0.f;
     }
 }
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "PreDefines.h"
 #include "Player.h"
+#include "MessageSystem.h"
+
 
 
 class UILayer : public ax::Layer
@@ -10,11 +12,25 @@ public:
 
     virtual bool init() override;
 
-    void SetUI(PlayerRace race);
-    void build();
-    void ButtonMessage(ax::Object* sender);
+    void MessageProc(SystemMessage smsg);
 
-    void CreateButton();
+    void SetUI(PlayerRace race);
+    void SetBuildButton();
+    void SetCancelButton();
+    void ButtonMessage(ax::Object* sender);
+    void SetButton(ActorType type);
+    void ReturnButton();
+    void SetSCVButton();
+
+    ax::Vec2 SetButtonPosition(int num);
+
+
+
+
+
+
+    ax::MenuItemImage* CreateButton(ButtonType type);
+
 
 public:
     ax::Sprite* mConsoleUI;
@@ -22,8 +38,9 @@ public:
     ax::Sprite* mGasIcon;
     ax::Sprite* mPopIcon;
 
+    ax::Menu* mMenu = nullptr;
+    ButtonType buttons[9];
 
-    ax::MenuItemImage mAllActionIcon[9];
 
     Player* mPlayer = nullptr;
     Actor* mCursor  = nullptr;

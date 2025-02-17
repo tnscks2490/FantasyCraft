@@ -2,8 +2,6 @@
 #include "ButtonInfo.h"
 
 
-
-
 using namespace ax;
 
 //Common Icon
@@ -327,14 +325,82 @@ ButtonInfo g_ButtonInfo_TSupply_Depot = {
     "", ButtonType::TSupply_Depot,9
 };
 
-
-
-
-
-
-
-
-
+//Unit Icon
+ButtonInfo g_ButtonInfo_TSCV          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/SCV1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/SCV2.png",
+    "", ButtonType::TSCV,9
+};
+ButtonInfo g_ButtonInfo_TBattle       = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Battle1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Battle2.png",
+    "", ButtonType::TBattle,9
+};
+ButtonInfo g_ButtonInfo_TDropShip        = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/DropShip1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/DropShip2.png",
+    "", ButtonType::TDropShip,9
+};
+ButtonInfo g_ButtonInfo_TFireBat          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/FireBat1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/FireBat2.png",
+    "", ButtonType::TFireBat,9
+};
+ButtonInfo g_ButtonInfo_TGhost         = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Ghost1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Ghost2.png",
+    "", ButtonType::TGhost,9
+};
+ButtonInfo g_ButtonInfo_TGoliath          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Goliath1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Goliath2.png",
+    "", ButtonType::TGoliath,9
+};
+ButtonInfo g_ButtonInfo_TMarine          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Marine1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Marine2.png",
+    "", ButtonType::TMarine,9
+};
+ButtonInfo g_ButtonInfo_TMedic          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Medic1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Medic2.png",
+    "", ButtonType::TMedic,9
+};
+ButtonInfo g_ButtonInfo_TMine          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Mine1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Mine2.png",
+    "", ButtonType::TMine,9
+};
+ButtonInfo g_ButtonInfo_TSiege_Tank          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Siege_Tank1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Siege_Tank2.png",
+    "", ButtonType::TSiege_Tank,9
+};
+ButtonInfo g_ButtonInfo_TTank          = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Tank1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Tank2.png",
+    "", ButtonType::TTank,9
+};
+ButtonInfo g_ButtonInfo_TValkyrie            = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Valkyrie1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Valkyrie2.png",
+    "", ButtonType::TValkyrie,9
+};
+ButtonInfo g_ButtonInfo_TVessel             = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Vessel1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Vessel2.png",
+    "", ButtonType::TVessel,9
+};
+ButtonInfo g_ButtonInfo_TVulture = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Vulture1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Vulture2.png",
+    "", ButtonType::TVulture,9
+};
+ButtonInfo g_ButtonInfo_TWraith = {
+    "StarResource/Resource/UI/Icon/Terran/Unit/Wraith1.png",
+    "StarResource/Resource/UI/Icon/Terran/Unit/Wraith2.png",
+    "", ButtonType::TWraith,9
+};
 
 
 ButtonInfo* FindButtonInfo(ButtonType type)
@@ -404,9 +470,22 @@ ButtonInfo* FindButtonInfo(ButtonType type)
     case ButtonType::TScience_Facility: return &g_ButtonInfo_TScience_Facility;
     case ButtonType::TStarPort:         return &g_ButtonInfo_TStarPort;
     case ButtonType::TSupply_Depot:     return &g_ButtonInfo_TSupply_Depot;
-
-    default:
-        break;
+    case ButtonType::TSCV:              return &g_ButtonInfo_TSCV;
+    case ButtonType::TBattle:           return &g_ButtonInfo_TBattle;
+    case ButtonType::TDropShip:         return &g_ButtonInfo_TDropShip;
+    case ButtonType::TFireBat:          return &g_ButtonInfo_TFireBat;
+    case ButtonType::TGhost:            return &g_ButtonInfo_TGhost;
+    case ButtonType::TGoliath:          return &g_ButtonInfo_TGoliath;
+    case ButtonType::TMarine:           return &g_ButtonInfo_TMarine;
+    case ButtonType::TMedic:            return &g_ButtonInfo_TMedic;
+    case ButtonType::TMine:             return &g_ButtonInfo_TMine;
+    case ButtonType::TSiege_Tank:       return &g_ButtonInfo_TSiege_Tank;
+    case ButtonType::TTank:             return &g_ButtonInfo_TTank;
+    case ButtonType::TValkyrie:         return &g_ButtonInfo_TValkyrie;
+    case ButtonType::TVessel:           return &g_ButtonInfo_TVessel;
+    case ButtonType::TVulture:          return &g_ButtonInfo_TVulture;
+    case ButtonType::TWraith:           return &g_ButtonInfo_TWraith;
+    default:  break;
     }
     return &g_ButtonInfo_TMove;
 }

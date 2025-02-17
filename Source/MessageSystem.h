@@ -1,7 +1,9 @@
 #pragma once
 
+class UILayer;
 class Actor;
 class Player;
+
 enum class MsgType
 {
     MoveToTarget,
@@ -30,3 +32,15 @@ struct ActorMessage
 };
 
 void SendActorMessage(Actor* receiver, ActorMessage msg);
+
+
+
+struct SystemMessage
+{
+    ActorType Atype = ActorType::None;
+    ButtonType Btype = ButtonType::None;
+
+    void* data = nullptr;
+};
+
+void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg);

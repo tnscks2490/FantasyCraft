@@ -95,6 +95,9 @@ struct ButtonInfo
     std::string_view disable_Image;
     ButtonType type;
     int iconPos;
+
+
+    void* data = nullptr;
 };
 
 ButtonInfo* FindButtonInfo(ButtonType type);

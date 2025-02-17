@@ -11,6 +11,13 @@ Player::Player()
 
 Player::~Player() {}
 
+void Player::MessageProc(SystemMessage smsg)
+{
+    
+
+    printf("Player가 UI로부터 메세지를 수신받았습니다");
+}
+
 void Player::Clear()
 {
     for (auto ac : PlayerActors)
@@ -45,7 +52,18 @@ void Player::Selected()
             aa->mDrawComp->isSelected();
             PlayerActors.push_back(aa);
         }      
-    }   
+    }
+
+
+    // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
+    if (PlayerActors.size() == 1)
+    {
+        mMainActor = PlayerActors[0];
+        SystemMessage smsg;
+        smsg.Atype = mMainActor->mActorType;
+
+        SendSystemMessage(ui, this, smsg);
+    }
 }
 
 void Player::PreSelected(Actor* actor)
@@ -99,4 +117,9 @@ void Player::ReSelected()
     PrePlayerActors.clear();
 }
 
-void Player::ButtonAction(ButtonInfo* info) {}
+void Player::ButtonAction(ax::Object* sender)
+{
+    auto node        = (ax::MenuItemImage*)sender;
+    ButtonInfo* info = (ButtonInfo*)node->getUserData();
+    printf("실행");
+}
