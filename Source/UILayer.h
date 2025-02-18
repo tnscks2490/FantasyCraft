@@ -3,6 +3,10 @@
 #include "Player.h"
 #include "MessageSystem.h"
 
+#define BUTTONS 9 
+
+
+
 
 
 class UILayer : public ax::Layer
@@ -15,20 +19,17 @@ public:
     void MessageProc(SystemMessage smsg);
 
     void SetUI(PlayerRace race);
-    void SetBuildButton();
+    void SetCBButton();
+    void SetABButton();
     void SetCancelButton();
     void ButtonMessage(ax::Object* sender);
     void SetButton(ActorType type);
     void ReturnButton();
     void SetSCVButton();
+    void ClearSaveButtons();
+    
 
     ax::Vec2 SetButtonPosition(int num);
-
-
-
-
-
-
     ax::MenuItemImage* CreateButton(ButtonType type);
 
 
@@ -39,11 +40,17 @@ public:
     ax::Sprite* mPopIcon;
 
     ax::Menu* mMenu = nullptr;
-    ButtonType buttons[9];
 
+    ButtonType mCurbuttons[BUTTONS];
+    ButtonType mSavebuttons[BUTTONS];
+    bool btsave = false;
+    
+
+    ActorType mCurActorType;
 
     Player* mPlayer = nullptr;
     Actor* mCursor  = nullptr;
+
    
 };
 

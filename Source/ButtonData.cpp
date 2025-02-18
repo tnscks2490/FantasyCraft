@@ -242,27 +242,27 @@ ButtonInfo g_ButtonInfo_TNuclear_Silo       = {
 ButtonInfo g_ButtonInfo_TAcademy      = {
     "StarResource/Resource/UI/Icon/Terran/Build/Academy1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Academy2.png",
-    "", ButtonType::TAcademy,9
+    "", ButtonType::TAcademy,7
 };
 ButtonInfo g_ButtonInfo_TArmory = {
     "StarResource/Resource/UI/Icon/Terran/Build/Armory1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Armory2.png",
-    "", ButtonType::TArmory,9
+    "", ButtonType::TArmory,4
 };
 ButtonInfo g_ButtonInfo_TBarracks           = {
     "StarResource/Resource/UI/Icon/Terran/Build/Barracks1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Barracks2.png",
-    "", ButtonType::TBarracks,9
+    "", ButtonType::TBarracks,4
 };
 ButtonInfo g_ButtonInfo_TBunker       = {
     "StarResource/Resource/UI/Icon/Terran/Build/Bunker1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Bunker2.png",
-    "", ButtonType::TNuclear_Silo,9
+    "", ButtonType::TNuclear_Silo,8
 };
 ButtonInfo g_ButtonInfo_TCommand_Center     = {
     "StarResource/Resource/UI/Icon/Terran/Build/Command_Center1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Command_Center2.png",
-    "", ButtonType::TCommand_Center,9
+    "", ButtonType::TCommand_Center,1
 };
 ButtonInfo g_ButtonInfo_TComsat_Station     = {
     "StarResource/Resource/UI/Icon/Terran/Build/Comsat_Station1.png",
@@ -282,7 +282,7 @@ ButtonInfo g_ButtonInfo_TCovert_Ops         = {
 ButtonInfo g_ButtonInfo_TEngineering_Bay    = {
     "StarResource/Resource/UI/Icon/Terran/Build/Engineering_Bay1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Engineering_Bay2.png",
-    "", ButtonType::TEngineering_Bay,9
+    "", ButtonType::TEngineering_Bay,5
 };
 ButtonInfo g_ButtonInfo_TFactory            = {
     "StarResource/Resource/UI/Icon/Terran/Build/Factory1.png",
@@ -297,7 +297,7 @@ ButtonInfo g_ButtonInfo_TMachine_Shop       = {
 ButtonInfo g_ButtonInfo_TMissile_Turret     = {
     "StarResource/Resource/UI/Icon/Terran/Build/Missile_Turret1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Missile_Turret2.png",
-    "", ButtonType::TMissile_Turret,9
+    "", ButtonType::TMissile_Turret,6
 };
 ButtonInfo g_ButtonInfo_TPhysics_Lab        = {
     "StarResource/Resource/UI/Icon/Terran/Build/Physics_Lab1.png",
@@ -307,7 +307,7 @@ ButtonInfo g_ButtonInfo_TPhysics_Lab        = {
 ButtonInfo g_ButtonInfo_TRefinery           = {
     "StarResource/Resource/UI/Icon/Terran/Build/Refinery1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Refinery2.png",
-    "", ButtonType::TRefinery,9
+    "", ButtonType::TRefinery,3
 };
 ButtonInfo g_ButtonInfo_TScience_Facility   = {
     "StarResource/Resource/UI/Icon/Terran/Build/Science_Facility1.png",
@@ -322,7 +322,7 @@ ButtonInfo g_ButtonInfo_TStarPort         = {
 ButtonInfo g_ButtonInfo_TSupply_Depot = {
     "StarResource/Resource/UI/Icon/Terran/Build/Supply_Depot1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Supply_Depot2.png",
-    "", ButtonType::TSupply_Depot,9
+    "", ButtonType::TSupply_Depot,2
 };
 
 //Unit Icon
@@ -488,4 +488,91 @@ ButtonInfo* FindButtonInfo(ButtonType type)
     default:  break;
     }
     return &g_ButtonInfo_TMove;
+}
+
+int FindButtonPos(ButtonType type)
+{
+    switch (type)
+    {
+    case ButtonType::None:    break;
+    case ButtonType::TAttack: return g_ButtonInfo_TAttack.iconPos;
+    case ButtonType::TMove:   return g_ButtonInfo_TMove.iconPos;
+    case ButtonType::TSetRellyPoint: return g_ButtonInfo_TSetRellyPoint.iconPos;
+    case ButtonType::TUnLoad: return g_ButtonInfo_TUnLoad.iconPos;
+    case ButtonType::TLoad:   return g_ButtonInfo_TLoad.iconPos;
+    case ButtonType::TPatrol: return g_ButtonInfo_TPatrol.iconPos;
+    case ButtonType::TReturn: return g_ButtonInfo_TReturn.iconPos;
+    case ButtonType::THold:   return g_ButtonInfo_THold.iconPos;
+    case ButtonType::TStop:   return g_ButtonInfo_TStop.iconPos;
+    case ButtonType::TGather: return g_ButtonInfo_TGather.iconPos;
+    case ButtonType::TCancel: return g_ButtonInfo_TCancel.iconPos;
+    case ButtonType::TRepair: return g_ButtonInfo_TRepair.iconPos;
+    case ButtonType::TCommon_Build:  return g_ButtonInfo_TCommon_Build.iconPos;
+    case ButtonType::TAdvance_Build: return g_ButtonInfo_TAdvance_Build.iconPos;
+    case ButtonType::TLift:   return g_ButtonInfo_TLand.iconPos;
+    case ButtonType::TLand:   return g_ButtonInfo_TLand.iconPos;
+    case ButtonType::TEMP:    return g_ButtonInfo_TEMP.iconPos;
+    case ButtonType::TGhost_MP:      return g_ButtonInfo_TGhost_MP.iconPos;
+    case ButtonType::TGhost_Sight:   return g_ButtonInfo_TGhost_Sight.iconPos;
+    case ButtonType::TGoliath_Range: return g_ButtonInfo_TGoliath_Range.iconPos;
+    case ButtonType::TDefenciveMatrix:   return g_ButtonInfo_TDefenciveMatrix.iconPos;
+    case ButtonType::TLockDown:      return g_ButtonInfo_TLockDown.iconPos;
+    case ButtonType::TWraith_MP:     return g_ButtonInfo_TWraith_MP.iconPos;
+    case ButtonType::TRestoration:   return g_ButtonInfo_TRestoration.iconPos;
+    case ButtonType::TMarine_Range:  return g_ButtonInfo_TMarine_Range.iconPos;
+    case ButtonType::TMedic_MP:      return g_ButtonInfo_TMedic_MP.iconPos;
+    case ButtonType::TMedic_Heal:    return g_ButtonInfo_TMedic_Heal.iconPos;
+    case ButtonType::TMechanic_Aerial_AT: return g_ButtonInfo_TMechanic_Aerial_AT.iconPos;
+    case ButtonType::TMechanic_Aerial_DF: return g_ButtonInfo_TMechanic_Aerial_DF.iconPos;
+    case ButtonType::TMechanic_Ground_AT: return g_ButtonInfo_TMechanic_Ground_AT.iconPos;
+    case ButtonType::TMechanic_Ground_DF: return g_ButtonInfo_TMechanic_Ground_DF.iconPos;
+    case ButtonType::TBionic_AT:     return g_ButtonInfo_TBionic_AT.iconPos;    
+    case ButtonType::TBionic_DF:     return g_ButtonInfo_TBionic_DF.iconPos;
+    case ButtonType::TVessel_MP:     return g_ButtonInfo_TVessel_MP.iconPos;    
+    case ButtonType::TBattle_MP:     return g_ButtonInfo_TBattle_MP.iconPos;    
+    case ButtonType::TVulture_Speed: return g_ButtonInfo_TVulture_Speed.iconPos;
+    case ButtonType::TScan:          return g_ButtonInfo_TScan.iconPos;         
+    case ButtonType::TStimPack:      return g_ButtonInfo_TStimPack.iconPos;    
+    case ButtonType::TYamato:        return g_ButtonInfo_TYamato.iconPos;       
+    case ButtonType::TOptical_Flare: return g_ButtonInfo_TOptical_Flare.iconPos;
+    case ButtonType::TCloakingON:    return g_ButtonInfo_TCloakingON.iconPos;   
+    case ButtonType::TCloakingOFF:   return g_ButtonInfo_TCloakingOFF.iconPos;  
+    case ButtonType::TIrradiate:     return g_ButtonInfo_TIrradiate.iconPos;    
+    case ButtonType::TNuclear:       return g_ButtonInfo_TNuclear.iconPos;     
+    case ButtonType::TNuclear_Silo:     return g_ButtonInfo_TNuclear_Silo.iconPos;
+    case ButtonType::TAcademy:          return g_ButtonInfo_TAcademy.iconPos;
+    case ButtonType::TArmory:           return g_ButtonInfo_TArmory.iconPos;
+    case ButtonType::TBarracks:         return g_ButtonInfo_TBarracks.iconPos;
+    case ButtonType::TBunker:           return g_ButtonInfo_TBunker.iconPos;
+    case ButtonType::TCommand_Center:   return g_ButtonInfo_TCommand_Center.iconPos;
+    case ButtonType::TComsat_Station:   return g_ButtonInfo_TComsat_Station.iconPos;
+    case ButtonType::TControl_Tower:    return g_ButtonInfo_TControl_Tower.iconPos;
+    case ButtonType::TCovert_Ops:       return g_ButtonInfo_TCovert_Ops.iconPos;
+    case ButtonType::TEngineering_Bay:  return g_ButtonInfo_TEngineering_Bay.iconPos;
+    case ButtonType::TFactory:          return g_ButtonInfo_TFactory.iconPos;
+    case ButtonType::TMachine_Shop:     return g_ButtonInfo_TMachine_Shop.iconPos;
+    case ButtonType::TMissile_Turret:   return g_ButtonInfo_TMissile_Turret.iconPos;
+    case ButtonType::TPhysics_Lab:      return g_ButtonInfo_TPhysics_Lab.iconPos;
+    case ButtonType::TRefinery:         return g_ButtonInfo_TRefinery.iconPos;
+    case ButtonType::TScience_Facility: return g_ButtonInfo_TScience_Facility.iconPos;
+    case ButtonType::TStarPort:         return g_ButtonInfo_TStarPort.iconPos;
+    case ButtonType::TSupply_Depot:     return g_ButtonInfo_TSupply_Depot.iconPos;
+    case ButtonType::TSCV:              return g_ButtonInfo_TSCV.iconPos;
+    case ButtonType::TBattle:           return g_ButtonInfo_TBattle.iconPos;
+    case ButtonType::TDropShip:         return g_ButtonInfo_TDropShip.iconPos;
+    case ButtonType::TFireBat:          return g_ButtonInfo_TFireBat.iconPos;
+    case ButtonType::TGhost:            return g_ButtonInfo_TGhost.iconPos;
+    case ButtonType::TGoliath:          return g_ButtonInfo_TGoliath.iconPos;
+    case ButtonType::TMarine:           return g_ButtonInfo_TMarine.iconPos;
+    case ButtonType::TMedic:            return g_ButtonInfo_TMedic.iconPos;
+    case ButtonType::TMine:             return g_ButtonInfo_TMine.iconPos;
+    case ButtonType::TSiege_Tank:       return g_ButtonInfo_TSiege_Tank.iconPos;
+    case ButtonType::TTank:             return g_ButtonInfo_TTank.iconPos;
+    case ButtonType::TValkyrie:         return g_ButtonInfo_TValkyrie.iconPos;
+    case ButtonType::TVessel:           return g_ButtonInfo_TVessel.iconPos;
+    case ButtonType::TVulture:          return g_ButtonInfo_TVulture.iconPos;
+    case ButtonType::TWraith:           return g_ButtonInfo_TWraith.iconPos;
+    default:  break;
+    }
+    return 10;
 }

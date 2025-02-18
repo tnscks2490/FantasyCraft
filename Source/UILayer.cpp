@@ -107,18 +107,6 @@ void UILayer::SetUI(PlayerRace race)
     setPosition(ax::Vec2(640, 480));
 }
 
-void UILayer::SetBuildButton() {}
-
-
-void UILayer::SetCancelButton()
-{
-    auto CB = CreateButton(ButtonType::TCancel);
-    // 칸당 가로는 92 세로는 80픽셀이 엇비슷하게 맞음
-    CB->setPosition(ax::Vec2(184, -160));
-
-    mMenu->addChild(CB, 1);
-}
-
 
 void UILayer::ButtonMessage(ax::Object* sender)
 {
@@ -126,23 +114,54 @@ void UILayer::ButtonMessage(ax::Object* sender)
     ButtonInfo* info = (ButtonInfo*)node->getUserData();
 
     auto type = info->type;
-    if (type == ButtonType::TCommon_Build || type == ButtonType::TAdvance_Build)
+
+
+    switch (type)
     {
-        SetBuildButton();
-    }
-    else if (type == ButtonType::TCancel)
+        //이레귤러
+    case ButtonType::TCancel:
     {
         mMenu->removeAllChildren();
         ReturnButton();
-    }
-    else
+    } break;
+        // 버튼 UI가 변경되지 않는 버튼들
+    case ButtonType::THold:
+    case ButtonType::TStop:
+        break;
+        // 버튼 UI가 Cancel 하나로 변경되는 버튼들
+    case ButtonType::TAttack:
+    case ButtonType::TMove:
+    case ButtonType::TSetRellyPoint:
+    case ButtonType::TUnLoad:
+    case ButtonType::TLoad:
+    case ButtonType::TPatrol:
+    case ButtonType::TReturn:
+    case ButtonType::TGather:
+    case ButtonType::TRepair:
     {
+        mMenu->removeAllChildren();
         SetCancelButton();
+    } break;
+        // 다른 버튼 UI로 변경되는 버튼들
+    case ButtonType::TCommon_Build:
+    {
+        mMenu->removeAllChildren();
+
+        SetBuildButton();
+    } break;
+
+    case ButtonType::TAdvance_Build:
+    {
+        mMenu->removeAllChildren();
+    }
+    case ButtonType::TLift:
+    case ButtonType::TLand:
+        break;
+    default:
+        break;
     }
 
-
-
-
+      
 
 
 
@@ -155,65 +174,105 @@ void UILayer::ButtonMessage(ax::Object* sender)
 
 void UILayer::SetButton(ActorType type)
 {
-    switch (type)
+    mCurActorType = type;
+    ClearSaveButtons();
+    switch (mCurActorType)
     {
     case ActorType::SCV:
     {
         SetSCVButton();
-    }
-        break;
+    } break;
     case ActorType::Marine:
         break;
     default:
         break;
     }
 }
+void UILayer::SetCBButton()
+{
+    auto cc = CreateButton(ButtonType::TCommand_Center);
+    mMenu->addChild(cc, 1);
 
+    auto sp = CreateButton(ButtonType::TSupply_Depot);
+    mMenu->addChild(sp, 1);
+
+    auto rp = CreateButton(ButtonType::TRefinery);
+    mMenu->addChild(rp, 1);
+
+    auto br = CreateButton(ButtonType::TBarracks);
+    mMenu->addChild(br, 1);
+
+    auto eb = CreateButton(ButtonType::TEngineering_Bay);
+    mMenu->addChild(eb, 1);
+
+    auto mt = CreateButton(ButtonType::TMissile_Turret);
+    mMenu->addChild(mt, 1);
+
+    auto ad = CreateButton(ButtonType::TAcademy);
+    mMenu->addChild(ad, 1);
+
+    auto bk = CreateButton(ButtonType::TBunker);
+    mMenu->addChild(bk, 1);
+
+    SetCancelButton();
+}
+void UILayer::SetABButton()
+{
+
+}
+void UILayer::SetCancelButton()
+{
+    auto CB = CreateButton(ButtonType::TCancel);
+    // 칸당 가로는 92 세로는 80픽셀이 엇비슷하게 맞음
+    mMenu->addChild(CB, 1);
+}
 void UILayer::ReturnButton()
 {
-    for (auto bt : buttons)
+    for (int i = 0; i < BUTTONS; i++)
     {
-        if (bt != ButtonType::None)
-        {
-            auto button = CreateButton(bt);
-
-        }
+        auto bt = CreateButton(mSavebuttons[i]);
+        mMenu->addChild(bt, 1);
     }
 }
 
 void UILayer::SetSCVButton()
 {
     auto move = CreateButton(ButtonType::TMove);
+    mSavebuttons[FindButtonPos(ButtonType::TMove) - 1] = ButtonType::TMove;
     mMenu->addChild(move,1);
-    buttons[0] = ButtonType::TMove;
 
     auto stop = CreateButton(ButtonType::TStop);
+    mSavebuttons[FindButtonPos(ButtonType::TStop) - 1] = ButtonType::TStop;
     mMenu->addChild(stop, 1);
-    buttons[1] = ButtonType::TStop;
 
     auto attack = CreateButton(ButtonType::TAttack);
+    mSavebuttons[FindButtonPos(ButtonType::TAttack) - 1] = ButtonType::TAttack;
     mMenu->addChild(attack, 1);
-    buttons[2] = ButtonType::TAttack;
 
     auto repair = CreateButton(ButtonType::TRepair);
+    mSavebuttons[FindButtonPos(ButtonType::TRepair) - 1] = ButtonType::TRepair;
     mMenu->addChild(repair, 1);
-    buttons[3] = ButtonType::TRepair;
 
     auto gather = CreateButton(ButtonType::TGather);
+    mSavebuttons[FindButtonPos(ButtonType::TGather) - 1] = ButtonType::TGather;
     mMenu->addChild(gather, 1);
-    buttons[4] = ButtonType::TGather;
-
-    buttons[5] = ButtonType::None;
 
     auto cbuild = CreateButton(ButtonType::TCommon_Build);
+    mSavebuttons[FindButtonPos(ButtonType::TCommon_Build) - 1] = ButtonType::TCommon_Build;
     mMenu->addChild(cbuild, 1);
-    buttons[6] = ButtonType::TCommon_Build;
 
     auto abuild = CreateButton(ButtonType::TAdvance_Build);
+    mSavebuttons[FindButtonPos(ButtonType::TAdvance_Build) - 1] = ButtonType::TAdvance_Build;
     mMenu->addChild(abuild, 1);
-    buttons[7] = ButtonType::TAdvance_Build;
+}
 
-    buttons[8] = ButtonType::None;
+void UILayer::ClearSaveButtons()
+{
+    for (int i = 0; i < BUTTONS; i++)
+    {
+        mSavebuttons[i] = ButtonType::None;
+    }
+    mMenu->removeAllChildren();
 }
 
 ax::Vec2 UILayer::SetButtonPosition(int num)
@@ -236,7 +295,6 @@ ax::Vec2 UILayer::SetButtonPosition(int num)
     }
     return pos;
 }
-
 ax::MenuItemImage* UILayer::CreateButton(ButtonType type)
 {
     ButtonInfo* t = FindButtonInfo(type);

@@ -88,6 +88,7 @@ enum class ButtonType
     TWraith,
 };
 
+
 struct ButtonInfo
 {
     std::string_view normal_Image;
@@ -101,3 +102,4 @@ struct ButtonInfo
 };
 
 ButtonInfo* FindButtonInfo(ButtonType type);
+int FindButtonPos(ButtonType type);
