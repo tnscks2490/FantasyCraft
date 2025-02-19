@@ -1,6 +1,7 @@
 #pragma once
 #include "PreDefines.h"
 
+#define MAX_BUTTON 9 
 
 enum class ButtonType
 {
@@ -103,3 +104,13 @@ struct ButtonInfo
 
 ButtonInfo* FindButtonInfo(ButtonType type);
 int FindButtonPos(ButtonType type);
+
+
+struct UnitControlButton
+{
+    ActorType Atype;
+    ButtonType buttons[MAX_BUTTON];
+
+};
+
+UnitControlButton* FindUnitControlButton(ActorType Atype);

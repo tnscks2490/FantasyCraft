@@ -586,6 +586,7 @@ void MainScene::Decording()
         case 79:
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
+            
             actor->SetPosition(ax::Vec2(500, 500));
         } break;
         case 90:

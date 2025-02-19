@@ -135,7 +135,7 @@ ButtonInfo g_ButtonInfo_TRestoration = {
 ButtonInfo g_ButtonInfo_TMarine_Range = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Marine_Range1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Marine_Range2.png",
-    "", ButtonType::TMarine_Range,9
+    "", ButtonType::TMarine_Range,1
 };
 ButtonInfo g_ButtonInfo_TMedic_MP     = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Medic_MP1.png",
@@ -195,7 +195,7 @@ ButtonInfo g_ButtonInfo_TVulture_Speed = {
 ButtonInfo g_ButtonInfo_TScan          = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Scan1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Scan2.png",
-    "", ButtonType::TScan,9
+    "", ButtonType::TScan,1
 };
 ButtonInfo g_ButtonInfo_TStimPack      = {
     "StarResource/Resource/UI/Icon/Terran/Skill/StimPack1.png",
@@ -287,7 +287,7 @@ ButtonInfo g_ButtonInfo_TEngineering_Bay    = {
 ButtonInfo g_ButtonInfo_TFactory            = {
     "StarResource/Resource/UI/Icon/Terran/Build/Factory1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Factory2.png",
-    "", ButtonType::TFactory,9
+    "", ButtonType::TFactory,1
 };
 ButtonInfo g_ButtonInfo_TMachine_Shop       = {
     "StarResource/Resource/UI/Icon/Terran/Build/Machine_Shop1.png",
@@ -312,12 +312,12 @@ ButtonInfo g_ButtonInfo_TRefinery           = {
 ButtonInfo g_ButtonInfo_TScience_Facility   = {
     "StarResource/Resource/UI/Icon/Terran/Build/Science_Facility1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Science_Facility2.png",
-    "", ButtonType::TScience_Facility,9
+    "", ButtonType::TScience_Facility,3
 };
 ButtonInfo g_ButtonInfo_TStarPort         = {
     "StarResource/Resource/UI/Icon/Terran/Build/StarPort1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/StarPort2.png",
-    "", ButtonType::TStarPort,9
+    "", ButtonType::TStarPort,2
 };
 ButtonInfo g_ButtonInfo_TSupply_Depot = {
     "StarResource/Resource/UI/Icon/Terran/Build/Supply_Depot1.png",
@@ -575,4 +575,31 @@ int FindButtonPos(ButtonType type)
     default:  break;
     }
     return 10;
+}
+
+UnitControlButton g_UnitControlButton_TSCV = {
+    ActorType::SCV,
+    {ButtonType::TMove, ButtonType::TStop, ButtonType::TAttack,
+    ButtonType::TRepair, ButtonType::TGather, ButtonType::None,
+    ButtonType::TCommon_Build,ButtonType::TAdvance_Build,ButtonType::None}
+};
+
+UnitControlButton g_UnitControlButton_TMarine = {
+    ActorType::Marine,
+    {ButtonType::TMove, ButtonType::TStop, ButtonType::TAttack,
+    ButtonType::TPatrol, ButtonType::THold, ButtonType::None,
+    ButtonType::TStimPack,ButtonType::None,ButtonType::None}
+};
+
+
+UnitControlButton* FindUnitControlButton(ActorType Atype)
+{
+    switch (Atype)
+    {
+    case ActorType::SCV:    return &g_UnitControlButton_TSCV;
+    case ActorType::Marine: return &g_UnitControlButton_TMarine;
+    default:
+        break;
+    }
+    return &g_UnitControlButton_TSCV;
 }

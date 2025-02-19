@@ -60,9 +60,7 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 
     auto Dnode = draw->CreateDemageNode(actor);
 
-
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
-
 
     /*auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);*/

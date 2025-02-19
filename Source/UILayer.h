@@ -1,12 +1,6 @@
 #pragma once
 #include "PreDefines.h"
 #include "Player.h"
-#include "MessageSystem.h"
-
-#define BUTTONS 9 
-
-
-
 
 
 class UILayer : public ax::Layer
@@ -19,19 +13,22 @@ public:
     void MessageProc(SystemMessage smsg);
 
     void SetUI(PlayerRace race);
-    void SetCBButton();
-    void SetABButton();
-    void SetCancelButton();
     void ButtonMessage(ax::Object* sender);
+
+
     void SetButton(ActorType type);
     void ReturnButton();
-    void SetSCVButton();
     void ClearSaveButtons();
-    
+
+
+    void SetUnitControlButton(ActorType Atype);
+
+    void SetCBButton();
+    void SetABButton();
+
 
     ax::Vec2 SetButtonPosition(int num);
-    ax::MenuItemImage* CreateButton(ButtonType type);
-
+    ax::MenuItemImage* CreateAddButton(ButtonType type);
 
 public:
     ax::Sprite* mConsoleUI;
@@ -41,17 +38,12 @@ public:
 
     ax::Menu* mMenu = nullptr;
 
-    ButtonType mCurbuttons[BUTTONS];
-    ButtonType mSavebuttons[BUTTONS];
-    bool btsave = false;
+    ButtonType mCurbuttons[MAX_BUTTON];
+    ButtonType mSavebuttons[MAX_BUTTON];
     
-
     ActorType mCurActorType;
-
     Player* mPlayer = nullptr;
     Actor* mCursor  = nullptr;
-
-   
 };
 
 
