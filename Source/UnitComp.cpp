@@ -13,11 +13,7 @@ UnitComp::~UnitComp() {}
 
 void UnitComp::update(float delta) {}
 
-void UnitComp::SetUnitStatus(int hp, int mp,int sd, int at, int df)
+void UnitComp::SetUnitStatus(ActorType Atype)
 {
-    mStatus.HP = hp;
-    mStatus.MP = mp;
-    mStatus.SD = sd;
-    mStatus.AT = at;
-    mStatus.DF = df;
+   // 업그레이드때문에 추후에 할것
 }

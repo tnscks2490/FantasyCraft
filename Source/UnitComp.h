@@ -34,11 +34,9 @@ public:
     ~UnitComp();
 
     virtual void update(float delta) override;
-    virtual void SetUnitStatus(int hp,int mp, int sd, int at, int df);
+    virtual void SetUnitStatus(ActorType Atype);
 
     virtual void Building(ActorMessage& msg) {}
-
-
 
 
     Status mStatus;
