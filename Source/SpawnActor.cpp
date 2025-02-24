@@ -81,22 +81,27 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 Actor* SpawnMarine(ax::Node* parent, PK_Data data)
 {
     Actor* actor = new Actor;
+    actor->mActorType = ActorType::Marine;
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
 
     auto draw = new DrawComp(actor);
 
     auto node = draw->CreateRootNode();
-    parent->addChild(node, 0.2f);
-
+    parent->addChild(node, 1.f);
+    
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
-    auto anim       = draw->CreateAnimNode(ECharName::Marine);
-    auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
+    auto anim = draw->CreateAnimNode(ECharName::Marine, ECharAct::Idle, ECharDir::S, "Anim");
+
+    
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 8.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
     selectanim->setVisible(false);
+    node->addChild(selectanim,0.9f);
 
-    auto move = new MoveComp(actor);
-    auto unit = new MarineComp(actor);
-
+    auto move           = new MoveComp(actor);
+    auto unit           = new MarineComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;

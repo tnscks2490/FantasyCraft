@@ -21,40 +21,40 @@ AnimInfo g_AnimInfo_Farmer_Move[] = {
 };
 
 AnimInfo g_AnimInfo_Marin_Move[] = {
-    {ECharName::Marine, ECharAct::Move, ECharDir::N, "Plist/Marin.plist", "Marin/Move/1/%04d.png", 1, 9, (0.5f / 9), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NNE, "Plist/Marin.plist", "Marin/Move/2/%04d.png", 1, 9, (0.5f / 9),    Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NE, "Plist/Marin.plist", "Marin/Move/3/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::ENE, "Plist/Marin.plist", "Marin/Move/4/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::E, "Plist/Marin.plist", "Marin/Move/5/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::ESE, "Plist/Marin.plist", "Marin/Move/6/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SE, "Plist/Marin.plist", "Marin/Move/7/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SSE, "Plist/Marin.plist", "Marin/Move/8/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::S, "Plist/Marin.plist", "Marin/Move/9/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SSW, "Plist/Marin.plist", "Marin/Move/10/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SW, "Plist/Marin.plist", "Marin/Move/11/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::WSW, "Plist/Marin.plist", "Marin/Move/12/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::W, "Plist/Marin.plist", "Marin/Move/13/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::WNW, "Plist/Marin.plist", "Marin/Move/14/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NW, "Plist/Marin.plist", "Marin/Move/15/%04d.png", 1, 9, (0.5f / 9),    Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NNW, "Plist/Marin.plist", "Marin/Move/16/%04d.png", 1, 9, (0.5f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::N, "Plist/Marine.plist", "Marine/Move/1/%04d.png", 1, 9, (1.f / 9), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NNE, "Plist/Marine.plist", "Marine/Move/2/%04d.png", 1, 9, (1.f / 9),    Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NE, "Plist/Marine.plist", "Marine/Move/3/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::ENE, "Plist/Marine.plist", "Marine/Move/4/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::E, "Plist/Marine.plist", "Marine/Move/5/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::ESE, "Plist/Marine.plist", "Marine/Move/6/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SE, "Plist/Marine.plist", "Marine/Move/7/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SSE, "Plist/Marine.plist", "Marine/Move/8/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::S, "Plist/Marine.plist", "Marine/Move/9/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SSW, "Plist/Marine.plist", "Marine/Move/10/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SW, "Plist/Marine.plist", "Marine/Move/11/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::WSW, "Plist/Marine.plist", "Marine/Move/12/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::W, "Plist/Marine.plist", "Marine/Move/13/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::WNW, "Plist/Marine.plist", "Marine/Move/14/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NW, "Plist/Marine.plist", "Marine/Move/15/%04d.png", 1, 9, (1.f / 9),    Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NNW, "Plist/Marine.plist", "Marine/Move/16/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Marin_Idle[] = {
-        {ECharName::Marine, ECharAct::Idle, ECharDir::N, "Plist/Marin.plist", "Marin/Idle/1.png", 1, 1,(1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::NNE, "Plist/Marin.plist", "Marin/Idle/2.png", 1, 1,(1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::NE, "Plist/Marin.plist", "Marin/Idle/3.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::ENE, "Plist/Marin.plist", "Marin/Idle/4.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::E, "Plist/Marin.plist", "Marin/Idle/5.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::ESE, "Plist/Marin.plist", "Marin/Idle/6.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::SE, "Plist/Marin.plist", "Marin/Idle/7.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::SSE, "Plist/Marin.plist", "Marin/Idle/8.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::S, "Plist/Marin.plist", "Marin/Idle/9.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::SSW, "Plist/Marin.plist", "Marin/Idle/10.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::SW, "Plist/Marin.plist", "Marin/Idle/11.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::WSW, "Plist/Marin.plist", "Marin/Idle/12.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::W, "Plist/Marin.plist", "Marin/Idle/13.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::WNW, "Plist/Marin.plist", "Marin/Idle/14.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::NW, "Plist/Marin.plist", "Marin/Idle/15.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::Marine, ECharAct::Idle, ECharDir::NNW, "Plist/Marin.plist", "Marin/Idle/16.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::N, "Plist/Marine.plist", "Marine/Idle/1/%04d.png", 1, 5,(1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::NNE, "Plist/Marine.plist", "Marine/Idle/2/%04d.png", 1, 5,(1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::NE, "Plist/Marine.plist", "Marine/Idle/3/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::ENE, "Plist/Marine.plist", "Marine/Idle/4/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::E, "Plist/Marine.plist", "Marine/Idle/5/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::ESE, "Plist/Marine.plist", "Marine/Idle/6/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::SE, "Plist/Marine.plist", "Marine/Idle/7/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::SSE, "Plist/Marine.plist", "Marine/Idle/8/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::S, "Plist/Marine.plist", "Marine/Idle/9/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::SSW, "Plist/Marine.plist", "Marine/Idle/10/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::SW, "Plist/Marine.plist", "Marine/Idle/11/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::WSW, "Plist/Marine.plist", "Marine/Idle/12/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::W, "Plist/Marine.plist", "Marine/Idle/13/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::WNW, "Plist/Marine.plist", "Marine/Idle/14/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::NW, "Plist/Marine.plist", "Marine/Idle/15/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Idle, ECharDir::NNW, "Plist/Marine.plist", "Marine/Idle/16/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
 };
 
 AnimInfo g_AnimInfo_SCV_Idle[] = {
@@ -195,7 +195,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             {
                 if (g_AnimInfo_Marin_Idle[i].dir == dir)
                     return g_AnimInfo_Marin_Idle[i];
-            } break;
+            }
 
         case ECharAct::Move:
             for (int i = 0; i < 16; i++)
@@ -259,7 +259,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         {
         case ECharAct::SCVSpark:
             return g_AnimInfo_Effect_SCVSpark[0];
-            break;
         default:
             break;
         }
@@ -268,6 +267,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
     }
 
     return g_AnimInfo_Effect_SCVSpark[0];
+
 }
 
 AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int idx)
