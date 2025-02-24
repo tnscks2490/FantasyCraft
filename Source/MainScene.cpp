@@ -156,7 +156,7 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-        if (mCursor->mCursorComp->mState == CursorState::Target)
+        if (mCursor->mCursorComp->mState != CursorState::Idle)
         {
             mCursor->mCursorComp->mState = CursorState::Idle;
             SystemMessage smsg;
