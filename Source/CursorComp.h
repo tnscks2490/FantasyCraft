@@ -13,6 +13,8 @@ enum class CursorState
     BluePrint,
     ContactTeam,
     ContactEnemy,
+    Target,
+
 
 };
 

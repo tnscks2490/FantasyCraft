@@ -111,7 +111,7 @@ bool MainScene::init()
     // 커서 생성
     mCursor = SpawnCursor(this);
     mCursor->SetPosition(ax::Vec2(500,500));
-
+    mPlayer->cursor = mCursor;
 
     //나중에 구조 꼭 수정할것 너무 복잡함
     mUILayer = UILayer::create();
@@ -156,21 +156,32 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-        if (mCursor->mCursorComp->bp)
+        if (mCursor->mCursorComp->mState == CursorState::Target)
         {
-            mCursor->mCursorComp->ReleaseBP();
+            mCursor->mCursorComp->mState = CursorState::Idle;
+            SystemMessage smsg;
+            smsg.Atype = mPlayer->mMainActor->mActorType;
+            SendSystemMessage(mUILayer, mPlayer, smsg);
         }
         else
         {
-            if (mPlayer->isSelected())
+
+            if (mCursor->mCursorComp->bp)
             {
-                PK_Data data;
-                data.ClientID = TcpClient::get()->GetID();
-                data.input    = 114;
-                data.pos      = mousePos - (ax::Vec2(0, 210));
-                TcpClient::get()->SendMessageToServer(data);
+                mCursor->mCursorComp->ReleaseBP();
             }
-               // mCursor->GetRoot()->getChildByName("TargetAnim")->setVisible(true);
+            else
+            {
+                if (mPlayer->isSelected())
+                {
+                    PK_Data data;
+                    data.ClientID = TcpClient::get()->GetID();
+                    data.input    = 114;
+                    data.pos      = mousePos - (ax::Vec2(0, 210));
+                    TcpClient::get()->SendMessageToServer(data);
+                }
+                // mCursor->GetRoot()->getChildByName("TargetAnim")->setVisible(true);
+            }
         }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
@@ -182,13 +193,6 @@ void MainScene::onMouseDown(Event* event)
             mCursor->mCursorComp->sPos   = mousePos;
             mCursor->mCursorComp->ePos   = mousePos + ax::Vec2(1,1);
         }
-
-       
-       // mCursor->LeftClickDown();
-       // mCursor->isDraging = true;
-       // mCursor->sPos      = mousePos;
-       // mCursor->mDrawCo(mCursor->sPos);
-       // mCursor->LeftClick(mousePos);
     }
 }
 
@@ -585,10 +589,10 @@ void MainScene::Decording()
         case 78:
         case 79:
         {
-            //Actor* actor = SpawnSCV(mMapLayer, data);
-            Actor* actor = SpawnMarine(mMapLayer, data);
+            Actor* actor = SpawnSCV(mMapLayer, data);
+            //Actor* actor = SpawnMarine(mMapLayer, data);
             
-            actor->SetPosition(ax::Vec2(500, 500));
+            actor->SetPosition(data.pos);
         } break;
         case 90:
         {

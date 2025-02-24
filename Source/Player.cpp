@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "DrawComp.h"
 #include "PlayerController.h"
+#include "CursorComp.h"
 
 Player::Player()
 {
@@ -13,7 +14,16 @@ Player::~Player() {}
 
 void Player::MessageProc(SystemMessage smsg)
 {
-    
+    auto msg = smsg;
+
+    if (msg.Btype == ButtonType::TAttack)
+    {
+        cursor->mCursorComp->mState = CursorState::Target;
+    }
+    else if (msg.Btype == ButtonType::TCancel)
+    {
+        cursor->mCursorComp->mState = CursorState::Idle;
+    }
 
     printf("Player가 UI로부터 메세지를 수신받았습니다");
 }

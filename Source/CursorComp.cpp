@@ -21,6 +21,7 @@ void CursorComp::update(float delta)
     switch (mState)
     {
     case CursorState::Idle:
+        mActor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
         break;
     case CursorState::Drag:
     {
@@ -42,6 +43,9 @@ void CursorComp::update(float delta)
     case CursorState::ContactTeam:
         break;
     case CursorState::ContactEnemy:
+        break;
+    case CursorState::Target:
+        mActor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::Target, ECharDir::Face);
         break;
     default:
         break;

@@ -101,6 +101,7 @@ public:
     ActionIcon mCurActionICon    = ActionIcon::None;
 
     UILayer* ui = nullptr;
+    Actor* cursor = nullptr;
 
 };
 

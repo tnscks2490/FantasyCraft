@@ -200,7 +200,7 @@ ButtonInfo g_ButtonInfo_TScan          = {
 ButtonInfo g_ButtonInfo_TStimPack      = {
     "StarResource/Resource/UI/Icon/Terran/Skill/StimPack1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/StimPack2.png",
-    "", ButtonType::TStimPack,9
+    "", ButtonType::TStimPack,7
 };
 ButtonInfo g_ButtonInfo_TYamato        = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Yamato1.png",
