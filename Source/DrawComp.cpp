@@ -111,6 +111,32 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
     return nullptr;
 }
 
+ax::Node* DrawComp::CreateS_BPPhysicsNode()
+{
+    ax::Vec2 bodysize(32, 32);
+    if (mRoot.isNotNull())
+    {
+        auto body1 = CreatePhysicsNode(bodysize);
+        auto rect  = ax::DrawNode::create();
+        rect->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16,16), ax::Color4B::GREEN);
+        body1->addChild(rect);
+        body1->setPosition(ax::Vec2(-32, 32));
+        return body1;
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateM_BPPhysicsNode()
+{
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateB_BPPhysicsNode()
+{
+    return nullptr;
+}
+
+
 ax::Node* DrawComp::CreateCursorRect(ax::Vec2 sPos,ax::Vec2 ePos)
 {
     if (mRoot.isNotNull())

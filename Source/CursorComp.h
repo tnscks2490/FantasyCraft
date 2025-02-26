@@ -38,8 +38,8 @@ public:
     void BPFollowCursor();
 
     void CursorMove(ax::Vec2 pos);
-    void LeftClick(ax::Vec2 pos);
-    void RightClick(ax::Vec2 pos);
+    void LClick(ax::Vec2 pos);
+    void RClick(ax::Vec2 pos);
 
 public:
     void CheckNodeInDrag();

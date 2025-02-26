@@ -186,12 +186,19 @@ void MainScene::onMouseDown(Event* event)
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        
+        mCursor->mCursorComp->LClick(realpos);
         if (mCursor->mCursorComp->mState == CursorState::Idle)
         {
             mCursor->mCursorComp->mState = CursorState::Drag;
             mCursor->mCursorComp->sPos   = mousePos;
             mCursor->mCursorComp->ePos   = mousePos + ax::Vec2(1,1);
+        }
+        else
+        {
+            mCursor->mCursorComp->mState = CursorState::Idle;
+            SystemMessage smsg;
+            smsg.Atype = mPlayer->mMainActor->mActorType;
+            SendSystemMessage(mUILayer, mPlayer, smsg);
         }
     }
 }

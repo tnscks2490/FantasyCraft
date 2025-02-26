@@ -85,7 +85,8 @@ void CursorComp::CursorMove(ax::Vec2 pos)
     //mDrawComp->mRoot->setPosition(pos);
 }
 
-void CursorComp::LeftClick(ax::Vec2 pos)
+
+void CursorComp::LClick(ax::Vec2 pos)
 {
     if (bp)
     {
@@ -96,15 +97,34 @@ void CursorComp::LeftClick(ax::Vec2 pos)
             PK_Data data;
             data.ClientID = TcpClient::get()->GetID();
             data.input    = 10;
-            data.pos      = sPos;
+            data.pos      = pos;
             TcpClient::get()->SendMessageToServer(data);
 
             ReleaseBP();
         }
     }
+    if (mState == CursorState::Move)
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.input    = 114;
+        data.pos      = pos;
+        TcpClient::get()->SendMessageToServer(data);
+    }
+    else if (mState == CursorState::Target)
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.input    = 114;
+        data.pos      = pos;
+        TcpClient::get()->SendMessageToServer(data);
+    }
 }
 
-void CursorComp::RightClick(ax::Vec2 pos) {}
+void CursorComp::RClick(ax::Vec2 pos)
+{
+
+}
 
 
 void CursorComp::CheckNodeInDrag()
@@ -178,7 +198,7 @@ void CursorComp::CreateBuildingBP(BuildingName name)
         case BuildingName::CommandCenter:
             bp = ax::Sprite::create("123.png"sv);
             bp->setPosition(0, 0);
-            mActor->mDrawComp->mRoot->addChild(bp);
+            mActor->GetRoot()->addChild(bp);
             break;
         default:
             break;

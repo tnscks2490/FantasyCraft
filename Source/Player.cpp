@@ -16,13 +16,24 @@ void Player::MessageProc(SystemMessage smsg)
 {
     auto msg = smsg;
 
-    if (msg.Btype == ButtonType::TAttack)
+    switch (smsg.Btype)
     {
+    case ButtonType::TAttack:
         cursor->mCursorComp->mState = CursorState::Target;
-    }
-    else if (msg.Btype == ButtonType::TCancel)
-    {
+        break;
+    case ButtonType::TMove:
+        cursor->mCursorComp->mState = CursorState::Target;
+        break;
+    case ButtonType::TCancel:
         cursor->mCursorComp->mState = CursorState::Idle;
+        break;
+    case ButtonType::TCommand_Center:
+    {
+        ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
+        SendActorMessage(cursor, msg);
+    } break;
+    default:
+        break;
     }
 
     printf("Player가 UI로부터 메세지를 수신받았습니다");

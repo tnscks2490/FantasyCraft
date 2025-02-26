@@ -108,10 +108,12 @@ struct AnimInfo
     Ptr<ax::Animation> animation;
 
     void CreateAnimation();
-
 };
 
+struct BPInfo
+{
 
+};
 
 AnimInfo& FindAnimInfo(ECharName name, ECharAct act, ECharDir dir);
 AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int idx);
