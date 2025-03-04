@@ -29,6 +29,7 @@ void Player::MessageProc(SystemMessage smsg)
         break;
     case ButtonType::TCommand_Center:
     {
+        // 건물 블루프린트 생성하기
         ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
         SendActorMessage(cursor, msg);
     } break;

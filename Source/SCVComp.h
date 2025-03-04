@@ -22,4 +22,5 @@ public:
     short mPop      = 1;
 
     Actor* mBuilding = nullptr;
+    
 };

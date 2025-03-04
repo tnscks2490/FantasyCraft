@@ -90,18 +90,14 @@ void CursorComp::LClick(ax::Vec2 pos)
 {
     if (bp)
     {
-        if (cPlayer->PlayerActors.size() == 1)
-        {
-            cPlayer->mMainActor = cPlayer->PlayerActors[0];
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.input    = 10;
+        data.pos      = pos;
+        TcpClient::get()->SendMessageToServer(data);
 
-            PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
-            data.input    = 10;
-            data.pos      = pos;
-            TcpClient::get()->SendMessageToServer(data);
-
-            ReleaseBP();
-        }
+        ReleaseBP();
+            
     }
     if (mState == CursorState::Move)
     {

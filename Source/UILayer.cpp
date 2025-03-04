@@ -159,6 +159,12 @@ void UILayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TLift:
     case ButtonType::TLand:
         break;
+    case ButtonType::TCommand_Center:
+    {
+        mMenu->removeAllChildren();
+        CreateAddButton(ButtonType::TCancel);
+        // 만약 캔슬을 누르면 SCV에게 명령이 가도록 해야함
+    }
     default:
         break;
     }

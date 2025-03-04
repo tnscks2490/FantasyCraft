@@ -1,6 +1,17 @@
 #pragma once
 #include "IActorComp.h"
 
+
+enum class UnitState
+{
+    Idle,
+    Building,
+    Attack,
+    Move,
+
+};
+
+
 enum class UnitRace
 {
     None,
@@ -40,6 +51,7 @@ public:
 
 
     Status mStatus;
+    UnitState mState = UnitState::Idle;
 
 };
 

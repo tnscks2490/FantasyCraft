@@ -122,12 +122,16 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node,0.1f);
 
-    auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
-    auto anim       = draw->CreateAnimNodeByIndex(ECharName::CommandCenter,0);
-    //auto anim       = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face);
-    // 뭐가 문젠지 모르겠음
-    auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
     selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+
+    auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
+    auto anim       =  draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::S, "Anim");
 
     auto command = new CommandCenterComp(actor);
     auto move = new MoveComp(actor);
@@ -138,6 +142,10 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     node->setUserData(mUserData);
 
     World::get()->Actor_PushBack(actor);
+
+
+
+
     return actor;
 }
 
@@ -152,12 +160,16 @@ Actor* SpawnCommandCenter(ax::Node* parent)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+
     auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 0);
-    // auto anim       = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face);
-    //  뭐가 문젠지 모르겠음
-    auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
-    selectanim->setVisible(false);
+    
 
     auto command = new CommandCenterComp(actor);
     auto move    = new MoveComp(actor);
@@ -179,9 +191,9 @@ Actor* BPCommandCenter(ax::Node* parent)
     auto draw = new DrawComp(actor);
     auto node = draw->CreateRootNode();
     auto body = draw->CreateS_BPPhysicsNode();
-    auto node = ax::Sprite::create("");
-    node->setPosition(ax::Vec2(0, 0));
-    parent->addChild(node);
+    //auto node = ax::Sprite::create("");
+    //node->setPosition(ax::Vec2(0, 0));
+    //parent->addChild(node);
 
     return nullptr;
 }

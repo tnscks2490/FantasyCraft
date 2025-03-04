@@ -382,7 +382,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
         {
             if (userData->mActor->mID == mCursor->mID)
             {
-                //mCursor->mCursorComp->mState = CursorState::ContactTeam;
+                mCursor->mCursorComp->mState = CursorState::ContactTeam;
                 mCursor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face);
                 printf("pos x : %f, y: %f", userData->mActor->GetPosition().x, userData->mActor->GetPosition().y);
             }

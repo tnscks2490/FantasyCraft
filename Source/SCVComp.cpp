@@ -52,4 +52,12 @@ void SCVComp::Building(ActorMessage& msg)
 
     Actor* CC = SpawnCommandCenter(screen);
     CC->SetPosition(*pos);
+
+    ActorMessage rmsg;
+    rmsg.sender = mActor;
+    rmsg.data   = nullptr;
+    rmsg.msgType = MsgType::Build;
+    SendActorMessage(CC, rmsg);
+
+    mState = UnitState::Building;
 }
