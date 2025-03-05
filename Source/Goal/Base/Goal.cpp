@@ -6,7 +6,7 @@
 
 void Goal::End()
 {
-    AXLOG("~~~~~~~~~~~~~~~~~");
+    //AXLOG("~~~~~~~~~~~~~~~~~");
     mActor->mGoalComp->mThink->Render(1);
 }
 

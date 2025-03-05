@@ -20,4 +20,5 @@ public:
     GoalType mCurGoal;
 };
 
-
+void AddGoal_MoveToPath(Actor* actor,  ax::Vec2 dest);
+void PushGoal_MoveToPath(Actor* actor, ax::Vec2 dest);

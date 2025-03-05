@@ -30,6 +30,7 @@ public:
     void Do_Moving();
     void CheckTargetList();
     void UpdateBodyRect();
+    bool IsArriveComplete();
 
     ax::Vec2 CalcVelocity(ax::Vec2 force);
 

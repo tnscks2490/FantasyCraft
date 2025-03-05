@@ -3,11 +3,11 @@
 #include "Goal/Base/Goal_Think.h"
 #include "PathFind.h"
 
-class Goal_MoveToPath : public Goal_Composite
+class Goal_MoveToPath : public Goal
 {
 public:
 
-    Goal_MoveToPath(Actor* actor, PathFind* path, ax::Vec2 dest);
+    Goal_MoveToPath(Actor* actor, ax::Vec2 dest);
 
     virtual void Start() override;
     virtual int Do() override;

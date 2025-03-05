@@ -4,6 +4,7 @@
 #include "World.h"
 #include "MessageSystem.h"
 #include "TcpClient.h"
+#include "Goal/Base/GoalComp.h"
 
 
 
@@ -18,10 +19,17 @@ SCVComp::~SCVComp() {}
 
 void SCVComp::MessageProc(ActorMessage& msg)
 {
+    ax::Vec2* pos = (ax::Vec2*)msg.data;
+
+
     switch (msg.msgType)
     {
     case MsgType::Build:
+        AddGoal_MoveAndBuild(mActor, *pos, ActorType::CommandCenter);
+        break;
+    case MsgType::Do_Build:
         Building(msg);
+        break;
     default:
         break;
     }
@@ -48,10 +56,8 @@ void SCVComp::Building(ActorMessage& msg)
 {
     auto screen = mActor->GetRoot()->getParent();
 
-    ax::Vec2* pos = (ax::Vec2*)msg.data;
-
     Actor* CC = SpawnCommandCenter(screen);
-    CC->SetPosition(*pos);
+    CC->SetPosition(mActor->GetPosition());
 
     ActorMessage rmsg;
     rmsg.sender = mActor;
@@ -59,5 +65,5 @@ void SCVComp::Building(ActorMessage& msg)
     rmsg.msgType = MsgType::Build;
     SendActorMessage(CC, rmsg);
 
-    mState = UnitState::Building;
+    mCurAction = ActionState::Building;
 }

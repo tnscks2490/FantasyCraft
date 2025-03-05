@@ -31,12 +31,14 @@
 #include "MoveComp.h"
 #include "PathFind.h"
 #include "TileNode.h"
+#include "Goal/Base/GoalComp.h"
 #include "Player.h"
 #include "UnitComp.h"
 #include "DrawComp.h"
 #include "CursorComp.h"
 #include <iostream>
 #include "2DGeometry.h"
+
 
 
 using namespace ax;
@@ -369,7 +371,8 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 {
-
+    //LCSTOPHERO를 보고 충돌처리를 비긴이 아닌
+    // 각자 컴포넌트에서 해결하도록 수정할것
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
@@ -612,18 +615,30 @@ void MainScene::Decording()
             }
         } break;
 
-        case 114:
+        case 114: // MoveToPath
+        {
+            for (auto actor : World::get()->w_ActorList)
+            {
+                if (actor->mDrawComp->selected)
+                    AddGoal_MoveToPath(actor, data.pos);
+
+                if (actor && actor->mID == data.ClientID)
+                {
+                    // 골로 집어넣을것
+                }
+            }
+        } break;
+        case 115:
         {
             for (auto actor : World::get()->w_ActorList)
             {
                 if (actor && actor->mID == data.ClientID)
                 {
                     if (actor->mDrawComp->selected)
-                        actor->mMoveComp->SetPath(data.pos);
-                    // 골로 집어넣을것
+                        AddGoal_BuildStructure(actor,ActorType::Cursor);
                 }
             }
-        } break;
+        }
         ///////////////////////
         default:
             break;

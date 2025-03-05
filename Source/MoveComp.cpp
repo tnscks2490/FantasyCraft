@@ -97,6 +97,13 @@ void MoveComp::UpdateBodyRect()
     mBodyBorder.top    = mActor->GetPosition().y + 8.f;
 }
 
+bool MoveComp::IsArriveComplete()
+{
+    if (mTargetList.size() < 1 && !IsMoving)
+        return true;
+    return false;
+}
+
 ax::Vec2 MoveComp::CalcVelocity(ax::Vec2 force)
 {
     force = Separation(World::get()->w_ActorList) * mWeightSeparation;

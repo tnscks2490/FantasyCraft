@@ -18,6 +18,13 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
             receiver->mUnitComp->MessageProc(msg);
         }
     } break;
+    case MsgType::Do_Build:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    }
     case MsgType::BPCMC:
     {
         if (receiver->mCursorComp)

@@ -17,6 +17,7 @@ enum class ActorType
     Cursor,
     SCV,
     Marine,
+    CommandCenter,
 };
 
 

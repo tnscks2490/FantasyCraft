@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Actor.h"
 #include "MoveComp.h"
+#include "UnitComp.h"
 #include "GoalComp.h"
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
@@ -8,8 +9,8 @@
 #include "Goal_MoveToPath.h"
 
 
-Goal_MoveToPath::Goal_MoveToPath(Actor* actor, PathFind* path, ax::Vec2 dest)
-    : Goal_Composite(actor,GoalType::MoveToPath)
+Goal_MoveToPath::Goal_MoveToPath(Actor* actor, ax::Vec2 dest)
+    : Goal(actor,GoalType::MoveToPath)
 {
     mLastDest = dest;
 
@@ -20,6 +21,8 @@ void Goal_MoveToPath::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::MoveToPath;
 
+    if (mActor->mMoveComp)
+        mActor->mMoveComp->SetPath(mLastDest);
 
     // 고민을 해야할 필요가 있다.
 
@@ -29,15 +32,11 @@ int Goal_MoveToPath::Do()
 {
     If_Inactive_Start();
 
-    /*if (isStuck())
-    {
-        m_Status = Goal::completed_t;
-        return m_Status;
-    }*/
 
-    if (mActor->mMoveComp->IsArrive())
+    if (mActor->mMoveComp->IsArriveComplete())
     {
         m_Status                        = Goal::completed_t;
+        mActor->mUnitComp->mCurAction = ActionState::Idle;
         return m_Status;
     }
 

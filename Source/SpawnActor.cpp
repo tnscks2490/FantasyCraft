@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "DrawComp.h"
 #include "MoveComp.h"
+#include "GoalComp.h"
 #include "CursorComp.h"
 #include "UnitCompList.h"
 
@@ -66,7 +67,7 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     selectanim->setVisible(false);*/
     
 
-
+    auto goal = new GoalComp(actor);
     auto move = new MoveComp(actor);
     auto unit = new SCVComp(actor);
 
@@ -114,6 +115,7 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
 Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
 {
     Actor* actor   = new Actor;
+    actor->mActorType = ActorType::CommandCenter;
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
 

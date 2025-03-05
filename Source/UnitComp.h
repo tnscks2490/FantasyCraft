@@ -2,7 +2,7 @@
 #include "IActorComp.h"
 
 
-enum class UnitState
+enum class ActionState
 {
     Idle,
     Building,
@@ -51,7 +51,7 @@ public:
 
 
     Status mStatus;
-    UnitState mState = UnitState::Idle;
+    ActionState mCurAction = ActionState::Idle;
 
 };
 
