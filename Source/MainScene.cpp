@@ -168,7 +168,7 @@ void MainScene::onMouseDown(Event* event)
         else
         {
 
-            if (mCursor->mCursorComp->bp)
+            if (mCursor->mCursorComp->mBP)
             {
                 mCursor->mCursorComp->ReleaseBP();
             }
@@ -383,7 +383,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
         if (mCursor->mCursorComp->mState != CursorState::Drag)
         {
-            if (userData->mActor->mID == mCursor->mID)
+            if (userData!=nullptr && userData->mActor->mID == mCursor->mID)
             {
                 mCursor->mCursorComp->mState = CursorState::ContactTeam;
                 mCursor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face);
@@ -403,7 +403,7 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
         if (mCursor->mCursorComp->mState != CursorState::Drag)
         {
-            if (userData->mActor->mID == mCursor->mID)
+            if (userData != nullptr && userData->mActor->mID == mCursor->mID)
             {
                 mCursor->mCursorComp->mState = CursorState::ContactTeam;
             }
@@ -600,8 +600,6 @@ void MainScene::Decording()
         case 79:
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
-            //Actor* actor = SpawnMarine(mMapLayer, data);
-            
             actor->SetPosition(data.pos);
         } break;
         case 90:
@@ -614,6 +612,29 @@ void MainScene::Decording()
                 }
             }
         } break;
+
+        // Actor 생성 라인
+        case 100: //SCV 생성
+        {
+            Actor* actor = SpawnSCV(mMapLayer, data);
+            // Actor* actor = SpawnMarine(mMapLayer, data);
+            actor->SetPosition(data.pos);
+        } break;
+        case 101:  // 마린 생성
+        {
+            Actor* actor = SpawnMarine(mMapLayer, data);
+            // Actor* actor = SpawnMarine(mMapLayer, data);
+            actor->SetPosition(data.pos);
+        }
+        break;
+        case 102:  // 커맨드센터 생성
+        {
+            Actor* actor = SpawnCommandCenter(mMapLayer, data);
+            // Actor* actor = SpawnMarine(mMapLayer, data);
+            actor->SetPosition(data.pos);
+        }
+        break;
+
 
         case 114: // MoveToPath
         {
@@ -628,7 +649,7 @@ void MainScene::Decording()
                 }
             }
         } break;
-        case 115:
+        case 115: // 건물 건설
         {
             for (auto actor : World::get()->w_ActorList)
             {

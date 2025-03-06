@@ -11,7 +11,11 @@ DrawComp::DrawComp(Actor* actor)
     actor->mDrawComp = this;
 }
 
-DrawComp::~DrawComp() {}
+DrawComp::~DrawComp()
+{
+    AX_SAFE_RELEASE(mRoot.get());
+
+}
 
 void DrawComp::update(float delta)
 {
@@ -111,7 +115,30 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateS_BPPhysicsNode()
+ax::Node* DrawComp::CreateBPPhysicsNode(ax::Vec2 bodysize)
+{
+    if (mRoot.isNotNull())
+    {
+        auto bodyNode = ax::Node::create();
+        bodyNode->setName("BPBody");
+        // 피직스바디생성 및 노드에 붙여주기
+        auto body = ax::PhysicsBody::createBox(bodysize);
+        body->setContactTestBitmask(0xFFFFFFFF);
+        body->setDynamic(false);
+        bodyNode->setPhysicsBody(body);
+        bodyNode->setTag(11);
+
+        ax::DrawNode* rect = ax::DrawNode::create();
+        auto color         = ax::Color4B(0, 255, 0, 100);
+        rect->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+        bodyNode->addChild(rect);
+
+        return bodyNode;
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::Create_Small_BPPhysicsNode()
 {
     ax::Vec2 bodysize(32, 32);
     if (mRoot.isNotNull())
@@ -126,13 +153,79 @@ ax::Node* DrawComp::CreateS_BPPhysicsNode()
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateM_BPPhysicsNode()
+ax::Node* DrawComp::Create_Middle_BPPhysicsNode()
 {
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateB_BPPhysicsNode()
+ax::Node* DrawComp::Create_Big_BPPhysicsNode()
 {
+    ax::Vec2 bodysize(32, 32);
+    if (mRoot.isNotNull())
+    {
+        auto mainBody = ax::Node::create();
+        mainBody->setName("BPMainBody");
+        mRoot->addChild(mainBody,2.f);
+
+
+        //탐지 피직스바디
+        ////////////////////////////////////////////
+        auto body1 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body1);
+        body1->setPosition(ax::Vec2(-48, 32));
+
+        auto body2 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body2);
+        body2->setPosition(ax::Vec2(-16, 32));
+
+        auto body3 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body3);
+        body3->setPosition(ax::Vec2(16, 32));
+
+        auto body4 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body4);
+        body4->setPosition(ax::Vec2(48, 32));
+
+        /////////////////////////////////////////
+        auto body5 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body5);
+        body5->setPosition(ax::Vec2(-48, 0));
+
+        auto body6 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body6);
+        body6->setPosition(ax::Vec2(-16, 0));
+
+        auto body7 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body7);
+        body7->setPosition(ax::Vec2(16, 0));
+
+        auto body8 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body8);
+        body8->setPosition(ax::Vec2(48, 0));
+
+        ///////////////////////////////////////////
+        auto body9 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body9);
+        body9->setPosition(ax::Vec2(-48, -32));
+
+        auto body10 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body10);
+        body10->setPosition(ax::Vec2(-16, -32));
+
+        auto body11 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body11);
+        body11->setPosition(ax::Vec2(16, -32));
+
+        auto body12 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body12);
+        body12->setPosition(ax::Vec2(48, -32));
+        //////////////////////////////////////////////
+
+
+        
+
+        return mainBody;
+    }
     return nullptr;
 }
 

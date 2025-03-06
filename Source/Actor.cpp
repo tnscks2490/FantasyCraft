@@ -19,7 +19,8 @@ Actor::Actor(PK_Data data)
 
 Actor::~Actor()
 {
-    //TcpClient::get()->SendActorMessage(this, 'd');
+    if (mDrawComp)
+        mDrawComp->~DrawComp();
 }
 
 void Actor::update(float delta)

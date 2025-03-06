@@ -14,9 +14,10 @@ public:
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
-    ax::Node* CreateS_BPPhysicsNode();
-    ax::Node* CreateM_BPPhysicsNode();
-    ax::Node* CreateB_BPPhysicsNode();
+    ax::Node* CreateBPPhysicsNode(ax::Vec2 bodysize);
+    ax::Node* Create_Small_BPPhysicsNode();
+    ax::Node* Create_Middle_BPPhysicsNode();
+    ax::Node* Create_Big_BPPhysicsNode();
     ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
     ax::Node* CreateAnimNode(ECharName name,
                              ECharAct action,

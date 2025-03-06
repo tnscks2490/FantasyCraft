@@ -169,13 +169,10 @@ void UILayer::ButtonMessage(ax::Object* sender)
         break;
     }
 
-      
 
-
-
+    // 어떤 버튼을 선택했는지 플레이어에게 보내준다
     SystemMessage smsg;
     smsg.Btype = type;
-
     SendSystemMessage(this, mPlayer, smsg);
 
 }

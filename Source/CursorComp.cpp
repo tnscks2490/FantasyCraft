@@ -50,6 +50,8 @@ void CursorComp::update(float delta)
     default:
         break;
     }
+    if (mBP)
+        mBP->SetPosition(mActor->GetPosition());
 }
 
 void CursorComp::MessageProc(ActorMessage& msg)
@@ -88,7 +90,7 @@ void CursorComp::CursorMove(ax::Vec2 pos)
 
 void CursorComp::LClick(ax::Vec2 pos)
 {
-    if (bp)
+    if (mBP)
     {
         PK_Data data;
         data.ClientID = TcpClient::get()->GetID();
@@ -96,7 +98,7 @@ void CursorComp::LClick(ax::Vec2 pos)
         data.pos      = pos;
         TcpClient::get()->SendMessageToServer(data);
 
-        ReleaseBP();
+        //ReleaseBP();
             
     }
     if (mState == CursorState::Move)
@@ -185,17 +187,20 @@ void CursorComp::GreenRectClear()
 
 void CursorComp::CreateBuildingBP(BuildingName name)
 {
-    if (bp == nullptr)
+    if (mBP == nullptr)
     {
         switch (name)
         {
         case BuildingName::None:
             break;
         case BuildingName::CommandCenter:
-            bp = ax::Sprite::create("123.png"sv);
+        {
+           auto BP = BPCommandCenter(mActor->GetRoot()->getParent());
+           mBP     = BP;
+           /* bp = ax::Sprite::create("123.png"sv);
             bp->setPosition(0, 0);
-            mActor->GetRoot()->addChild(bp);
-            break;
+            mActor->GetRoot()->addChild(bp);*/
+        }   break;
         default:
             break;
         }

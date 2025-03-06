@@ -185,17 +185,20 @@ Actor* SpawnCommandCenter(ax::Node* parent)
     return actor;
 }
 
+
 // Bp생성하고 대형 중형 소형에 따라 피직스 노드 추가할것 
 Actor* BPCommandCenter(ax::Node* parent)
 {
     Actor* actor = new Actor;
 
     auto draw = new DrawComp(actor);
-    auto node = draw->CreateRootNode();
-    auto body = draw->CreateS_BPPhysicsNode();
-    //auto node = ax::Sprite::create("");
-    //node->setPosition(ax::Vec2(0, 0));
-    //parent->addChild(node);
 
-    return nullptr;
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    return actor;
+
 }

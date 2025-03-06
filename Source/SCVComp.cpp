@@ -56,14 +56,17 @@ void SCVComp::Building(ActorMessage& msg)
 {
     auto screen = mActor->GetRoot()->getParent();
 
-    Actor* CC = SpawnCommandCenter(screen);
-    CC->SetPosition(mActor->GetPosition());
+    PK_Data data;
+    data.ClientID = TcpClient::get()->GetID();
+    data.input    = 102;
+    data.pos      = mActor->GetPosition();
+    TcpClient::get()->SendMessageToServer(data);
 
-    ActorMessage rmsg;
+    /*ActorMessage rmsg;
     rmsg.sender = mActor;
     rmsg.data   = nullptr;
     rmsg.msgType = MsgType::Build;
-    SendActorMessage(CC, rmsg);
+    SendActorMessage(CC, rmsg);*/
 
     mCurAction = ActionState::Building;
 }

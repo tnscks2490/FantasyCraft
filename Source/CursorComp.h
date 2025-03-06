@@ -53,7 +53,7 @@ public:
     void LeftClickDown() { isLeftClick = true; }
     void RightClickDown() { isRightClick = true; }
 
-    void ReleaseBP() { if (bp)bp->removeFromParent();bp = nullptr; }
+    void ReleaseBP() { if (mBP){ mBP->~Actor(); mBP = nullptr;}}
 
     void CreateBuildingBP(BuildingName name);
 
@@ -61,7 +61,7 @@ public:
 
     Player* cPlayer = nullptr;
 
-    ax::Sprite* bp = nullptr;
+    Actor* mBP = nullptr;
 
     ax::Vec2 sPos;
     ax::Vec2 ePos;
