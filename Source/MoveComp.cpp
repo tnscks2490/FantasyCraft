@@ -14,7 +14,10 @@ MoveComp::MoveComp(Actor* actor)
     actor->mMoveComp = this;
 }
 
-MoveComp::~MoveComp() {}
+MoveComp::~MoveComp()
+{
+
+}
 
 void MoveComp::update(float delta)
 {

@@ -13,8 +13,8 @@ DrawComp::DrawComp(Actor* actor)
 
 DrawComp::~DrawComp()
 {
-    AX_SAFE_RELEASE(mRoot.get());
-
+    if (mRoot.isNotNull())
+        mRoot->removeFromParent();
 }
 
 void DrawComp::update(float delta)
@@ -131,6 +131,7 @@ ax::Node* DrawComp::CreateBPPhysicsNode(ax::Vec2 bodysize)
         ax::DrawNode* rect = ax::DrawNode::create();
         auto color         = ax::Color4B(0, 255, 0, 100);
         rect->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+        rect->setName("BPBodyRect");
         bodyNode->addChild(rect);
 
         return bodyNode;

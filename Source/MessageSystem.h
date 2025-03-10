@@ -24,11 +24,14 @@ enum class MsgType
 };
 
 
+
+
 struct ActorMessage
 {
     MsgType msgType;
     Actor* sender;
 
+    ax::Node* bodyNode = nullptr;
     void* data = nullptr;
 };
 

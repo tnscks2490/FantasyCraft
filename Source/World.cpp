@@ -30,19 +30,19 @@ void World::update(float delta)
     {
 
         //인덱스로 추정해서 찾아서 삭제하기
-        /*if (IsDeleteActors)
+        if (IsDeleteActors)
         {
             for (auto ac : w_Wait_DeleteActors)
             {
                 if (ac != nullptr)
                 {
-                    w_ActorList.
-                    ac == nullptr;
+                    delete ac;
+                    ac = nullptr;
                 }
             }
-            IsAddActors = false;
-            w_Wait_AddActors.clear();
-        }*/
+            //IsAddActors = false;
+            //w_Wait_AddActors.clear();
+        }
 
         for (auto actor : w_ActorList)
         {
@@ -94,6 +94,23 @@ void World::Actor_PushBack(Actor* actor)
     w_ActorList.push_back(actor);
     actor->idx  = w_ActorList.size();
     //IsAddActors = true;
+}
+
+void World::Actor_PushBackDelete(Actor* actor)
+{
+    for (auto ac : w_Wait_DeleteActors)
+    {
+        if (ac == nullptr)
+        {
+            ac          = actor;
+            IsDeleteActors = true;
+            return;
+        }
+    }
+    w_Wait_DeleteActors.push_back(actor);
+    IsDeleteActors = true;
+    //actor->idx = w_ActorList.size();
+    // IsAddActors = true;
 }
 
 void World::PrintActorList()

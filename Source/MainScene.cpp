@@ -36,6 +36,7 @@
 #include "UnitComp.h"
 #include "DrawComp.h"
 #include "CursorComp.h"
+#include "MessageSystem.h"
 #include <iostream>
 #include "2DGeometry.h"
 
@@ -371,48 +372,29 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode code, Event* event)
 
 bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 {
-    //LCSTOPHERO를 보고 충돌처리를 비긴이 아닌
-    // 각자 컴포넌트에서 해결하도록 수정할것
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    if (A->getName() == "Cursor" && B->getTag() == 10)
-    {
-        auto bRoot = B->getParent();
-        UserData* userData = (UserData*)bRoot->getUserData();
+    auto AbodyNode = A;
+    auto BbodyNode = B;
 
-        if (mCursor->mCursorComp->mState != CursorState::Drag)
-        {
-            if (userData!=nullptr && userData->mActor->mID == mCursor->mID)
-            {
-                mCursor->mCursorComp->mState = CursorState::ContactTeam;
-                mCursor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face);
-                printf("pos x : %f, y: %f", userData->mActor->GetPosition().x, userData->mActor->GetPosition().y);
-            }
-            else
-            {
-                mCursor->mCursorComp->mState = CursorState::ContactEnemy;
-            }
-        }
-        
-    }
-    else if (B->getName() == "Cursor" && A->getTag() == 10)
+    while (A->getName() != "Root")
     {
-        auto aRoot         = A->getParent();
-        UserData* userData = (UserData*)aRoot->getUserData();
-
-        if (mCursor->mCursorComp->mState != CursorState::Drag)
-        {
-            if (userData != nullptr && userData->mActor->mID == mCursor->mID)
-            {
-                mCursor->mCursorComp->mState = CursorState::ContactTeam;
-            }
-            else
-            {
-                mCursor->mCursorComp->mState = CursorState::ContactEnemy;
-            }
-        }
+        A = A->getParent();
     }
+    while (B->getName() != "Root")
+    {
+        B = B->getParent();
+    }
+
+    UserData* dataA = (UserData*)A->getUserData();
+    UserData* dataB = (UserData*)B->getUserData();
+
+    ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, AbodyNode, dataB};
+    SendActorMessage(dataA->mActor, amsgA);
+
+    ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, dataA};
+    SendActorMessage(dataB->mActor, amsgB);
 
     return true;
 }
@@ -452,18 +434,26 @@ void MainScene::onContactSeparate(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    if (mCursor->mCursorComp->mState != CursorState::Drag)
+    auto AbodyNode = A;
+    auto BbodyNode = B;
+
+    while (A->getName() != "Root")
     {
-        if (A->getName() == "Cursor" && B->getTag() == 10)
-        {
-            mCursor->mCursorComp->mState = CursorState::Idle;
-            mCursor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
-        }
-        else if (B->getName() == "Cursor" && A->getTag() == 10)
-        {
-            mCursor->mCursorComp->mState = CursorState::Idle;
-        }
+        A = A->getParent();
     }
+    while (B->getName() != "Root")
+    {
+        B = B->getParent();
+    }
+
+    UserData* dataA = (UserData*)A->getUserData();
+    UserData* dataB = (UserData*)B->getUserData();
+
+    ActorMessage amsgA = {MsgType::Separate, dataB->mActor, AbodyNode, dataB};
+    SendActorMessage(dataA->mActor, amsgA);
+
+    ActorMessage amsgB = {MsgType::Separate, dataA->mActor, BbodyNode, dataA};
+    SendActorMessage(dataB->mActor, amsgB);
 
    
 }
@@ -588,7 +578,7 @@ void MainScene::Decording()
             if (data.ClientID == TcpClient::get()->GetID())
             {
                 ax::Vec2 pos = mCursor->GetPosition()-mMapLayer->getPosition();
-                ActorMessage msg    = {MsgType::Build,nullptr,&pos};
+                ActorMessage msg = {MsgType::Build, nullptr, nullptr, &pos};
                 SendActorMessage(mPlayer->mMainActor, msg);
 
                 printf("설치중");
@@ -632,6 +622,7 @@ void MainScene::Decording()
             Actor* actor = SpawnCommandCenter(mMapLayer, data);
             // Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(data.pos);
+
         }
         break;
 

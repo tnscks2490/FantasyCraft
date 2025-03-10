@@ -20,6 +20,7 @@ public:
 
 
     void Actor_PushBack(Actor* actor);
+    void Actor_PushBackDelete(Actor* actor);
     void PrintActorList();
 
 

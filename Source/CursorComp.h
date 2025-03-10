@@ -41,6 +41,10 @@ public:
     void LClick(ax::Vec2 pos);
     void RClick(ax::Vec2 pos);
 
+
+    void ContactedUnit(ActorMessage& msg);
+    void SeparateUnit(ActorMessage& msg);
+
 public:
     void CheckNodeInDrag();
     void DeleteCheckNode();
@@ -53,7 +57,7 @@ public:
     void LeftClickDown() { isLeftClick = true; }
     void RightClickDown() { isRightClick = true; }
 
-    void ReleaseBP() { if (mBP){ mBP->~Actor(); mBP = nullptr;}}
+    void ReleaseBP();
 
     void CreateBuildingBP(BuildingName name);
 

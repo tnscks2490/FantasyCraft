@@ -6,6 +6,7 @@
 #include "UnitComp.h"
 #include "GoalComp.h"
 #include "CursorComp.h"
+#include "BPComp.h"
 
 
 Actor::Actor()
@@ -19,8 +20,12 @@ Actor::Actor(PK_Data data)
 
 Actor::~Actor()
 {
-    if (mDrawComp)
-        mDrawComp->~DrawComp();
+    if (mGoalComp) delete mGoalComp;
+    if (mUnitComp) delete mUnitComp;
+    if (mMoveComp && mMoveComp->IsOn) delete mMoveComp;
+    if (mCursorComp) delete mCursorComp;
+    if (mBPComp) delete mBPComp;
+    if (mDrawComp)  delete mDrawComp;
 }
 
 void Actor::update(float delta)
@@ -28,6 +33,7 @@ void Actor::update(float delta)
     if (mGoalComp) mGoalComp->update(delta);
     if (mUnitComp) mUnitComp->update(delta);
     if (mMoveComp && mMoveComp->IsOn) mMoveComp->update(delta);
+    if (mBPComp) mBPComp->update(delta);
     if (mCursorComp) mCursorComp->update(delta);
     if (mDrawComp) mDrawComp->update(delta);
 }

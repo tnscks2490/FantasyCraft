@@ -13,7 +13,8 @@ CursorComp::CursorComp(Actor* actor)
 
 CursorComp::~CursorComp()
 {
-    
+    if (cPlayer) cPlayer = nullptr;
+    if (mBP) delete mBP;
 }
 
 void CursorComp::update(float delta)
@@ -56,8 +57,19 @@ void CursorComp::update(float delta)
 
 void CursorComp::MessageProc(ActorMessage& msg)
 {
+
+    UserData* other = (UserData*)msg.data;
+
     switch (msg.msgType)
     {
+    case MsgType::Contacted:
+    {
+        ContactedUnit(msg);
+    } break;
+    case MsgType::Separate:
+    {
+        SeparateUnit(msg);
+    } break;
     case MsgType::BPCMC:
         CreateBuildingBP(BuildingName::CommandCenter);
         break;
@@ -124,6 +136,57 @@ void CursorComp::RClick(ax::Vec2 pos)
 
 }
 
+void CursorComp::ContactedUnit(ActorMessage& msg)
+{
+    UserData* other = (UserData*)msg.data;
+
+    if (other)
+    {
+        if (other->mActor->GetRoot()->getChildByName("Body"))
+        {
+            if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
+            {
+                auto otherRoot = other->mActor->GetRoot();
+
+                if (mState != CursorState::Drag)
+                {
+                    if (other->mActor->mID == mActor->mID)
+                        mState = CursorState::ContactTeam;
+                    else
+                        mState = CursorState::ContactEnemy;
+                }
+            }
+        }
+    }
+    
+
+}
+
+void CursorComp::SeparateUnit(ActorMessage& msg)
+{
+
+
+    UserData* other = (UserData*)msg.data;
+
+    if (other->mActor->mActorType != ActorType::BP)
+    {
+        if (other)
+        {
+            if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
+            {
+                auto otherRoot = other->mActor->GetRoot();
+
+                if (mState != CursorState::Drag)
+                {
+                    mState = CursorState::Idle;
+                }
+            }
+        }
+    }
+
+    
+}
+//BP 컴포넌트 만들기!
 
 void CursorComp::CheckNodeInDrag()
 {
@@ -183,6 +246,12 @@ void CursorComp::GreenRectClear()
 {
     ax::DrawNode* drawnode = (ax::DrawNode*)mActor->GetRoot()->getChildByName("GreenRect");
     drawnode->clear();
+}
+
+void CursorComp::ReleaseBP()
+{
+    World::get()->Actor_PushBackDelete(mBP);
+    mBP = nullptr;
 }
 
 void CursorComp::CreateBuildingBP(BuildingName name)

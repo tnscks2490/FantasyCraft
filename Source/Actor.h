@@ -9,6 +9,7 @@ class GoalComp;
 class ProjectileComp;
 class CursorComp;
 class PK_Data;
+class BPComp;
 
 
 enum class ActorType
@@ -18,6 +19,7 @@ enum class ActorType
     SCV,
     Marine,
     CommandCenter,
+    BP,
 };
 
 
@@ -51,8 +53,11 @@ public:
     DrawComp* mDrawComp = nullptr;
     UnitComp* mUnitComp = nullptr;
     GoalComp* mGoalComp = nullptr;
-    //////////////
+
+
+    ////////////// 예외적인 상황
     CursorComp* mCursorComp = nullptr;
+    BPComp* mBPComp     = nullptr;
 
     SensorMemory* mSM = nullptr;
 
