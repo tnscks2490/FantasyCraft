@@ -36,7 +36,7 @@ void World::update(float delta)
             {
                 if (ac != nullptr)
                 {
-                    delete ac;
+                    ac->~Actor();
                     ac = nullptr;
                 }
             }

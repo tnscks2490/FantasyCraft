@@ -15,6 +15,8 @@ DrawComp::~DrawComp()
 {
     if (mRoot.isNotNull())
         mRoot->removeFromParent();
+
+    mActor->mDrawComp = nullptr;
 }
 
 void DrawComp::update(float delta)
