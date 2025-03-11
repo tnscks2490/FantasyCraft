@@ -11,6 +11,13 @@ enum class ActionState
 
 };
 
+enum class BuildingSize
+{
+    Small,
+    Middle,
+    Big,
+};
+
 
 enum class UnitRace
 {

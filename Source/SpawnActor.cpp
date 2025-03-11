@@ -206,3 +206,37 @@ Actor* BPCommandCenter(ax::Node* parent)
     return actor;
 
 }
+
+Actor* BPSupplyDpot(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
+
+    return actor;
+}
+
+Actor* BPBarrucksDpot(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
+
+    return actor;
+}

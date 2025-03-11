@@ -3,11 +3,11 @@
 
 
 
-class CommandCenterComp : public UnitComp
+class SupplyDpotComp : public UnitComp
 {
 public:
-    CommandCenterComp(Actor* actor);
-    ~CommandCenterComp();
+    SupplyDpotComp(Actor* actor);
+    ~SupplyDpotComp();
     virtual void MessageProc(ActorMessage& msg) override;
 
 
@@ -26,5 +26,4 @@ public:
     int drawidx     = 0;
     float test      = 0.f;
 
-    BuildingSize Bsize = BuildingSize::Big;
 };

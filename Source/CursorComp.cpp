@@ -170,7 +170,7 @@ void CursorComp::SeparateUnit(ActorMessage& msg)
 
     if (other->mActor->mActorType != ActorType::BP)
     {
-        if (other)
+        if (other->mActor->GetRoot()->getChildByName("Body"))
         {
             if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
             {
@@ -266,10 +266,7 @@ void CursorComp::CreateBuildingBP(BuildingName name)
         {
            auto BP = BPCommandCenter(mActor->GetRoot()->getParent());
            mBP     = BP;
-           /* bp = ax::Sprite::create("123.png"sv);
-            bp->setPosition(0, 0);
-            mActor->GetRoot()->addChild(bp);*/
-        }   break;
+        }  break;
         default:
             break;
         }

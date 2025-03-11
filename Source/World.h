@@ -48,3 +48,6 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data);
 
 // 건물 설치할때 블루프린트 스폰하기
 Actor* BPCommandCenter(ax::Node* parent);
+Actor* BPSupplyDpot(ax::Node* parent);
+Actor* BPBarrucksDpot(ax::Node* parent);
+

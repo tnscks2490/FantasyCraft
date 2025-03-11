@@ -46,6 +46,13 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mCursorComp)
             receiver->mCursorComp->MessageProc(msg);
     }
+    case MsgType::SendInfo:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    }
     default:
         break;
     }

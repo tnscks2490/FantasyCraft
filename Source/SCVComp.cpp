@@ -19,17 +19,20 @@ SCVComp::~SCVComp() {}
 
 void SCVComp::MessageProc(ActorMessage& msg)
 {
-    ax::Vec2* pos = (ax::Vec2*)msg.data;
-
-
+   
     switch (msg.msgType)
     {
     case MsgType::Build:
+    {
+        ax::Vec2* pos = (ax::Vec2*)msg.data;
         AddGoal_MoveAndBuild(mActor, *pos, ActorType::CommandCenter);
+    }
         break;
     case MsgType::Do_Build:
         Building(msg);
         break;
+    case MsgType::SendInfo:
+        mBuilding = msg.sender;
     default:
         break;
     }
@@ -42,7 +45,6 @@ void SCVComp::update(float delta) {
     if (mTimer > 5.f)
     {
         auto t =  mActor->GetRoot()->getChildByName("EffectNode");
-        printf("자식확인하기");
         mTimer = 0.f;
     }
 }
@@ -56,17 +58,20 @@ void SCVComp::Building(ActorMessage& msg)
 {
     auto screen = mActor->GetRoot()->getParent();
 
-    PK_Data data;
-    data.ClientID = TcpClient::get()->GetID();
-    data.input    = 102;
-    data.pos      = mActor->GetPosition();
-    TcpClient::get()->SendMessageToServer(data);
+    int command = 0;
 
-    /*ActorMessage rmsg;
-    rmsg.sender = mActor;
-    rmsg.data   = nullptr;
-    rmsg.msgType = MsgType::Build;
-    SendActorMessage(CC, rmsg);*/
+    ActorType* buildingType = (ActorType*)msg.data;
+    
+
+    switch (*buildingType)
+    {
+    case ActorType::CommandCenter: command = 102; break;
+    case ActorType::SupplyDpot:  command = 103;  break;
+    default:
+        break;
+    }
+
+    SendPK_Data(command, mActor->GetPosition());
 
     mCurAction = ActionState::Building;
 }

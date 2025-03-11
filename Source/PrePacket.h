@@ -1,7 +1,4 @@
 #pragma once
-#include "pch.h"
-
-
 
 #pragma pack(push,1)
 
@@ -19,7 +16,7 @@ struct PK_Data
     ax::Vec2 pos;
 };
 
-
+#pragma pack(pop)
 
 //    1 : 77
 //    2 : 78
@@ -27,4 +24,5 @@ struct PK_Data
 //    R : 141
 //    L : 135
 
-#pragma pack(pop)
+
+void SendPK_Data(int command, ax::Vec2 pos);

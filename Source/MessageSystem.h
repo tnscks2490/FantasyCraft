@@ -18,6 +18,9 @@ enum class MsgType
 
 
 
+
+
+    SendInfo,
     //BP
     BPCMC,
     BPSD,

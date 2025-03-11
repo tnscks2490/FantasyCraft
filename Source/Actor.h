@@ -19,7 +19,10 @@ enum class ActorType
     SCV,
     Marine,
     CommandCenter,
+    SupplyDpot,
+
     BP,
+
 };
 
 

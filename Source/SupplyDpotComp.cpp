@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "Actor.h"
-#include "CommandCenterComp.h"
+#include "SupplyDpotComp.h"
 #include "DrawComp.h"
 
-CommandCenterComp::CommandCenterComp(Actor* actor)
+SupplyDpotComp::SupplyDpotComp(Actor* actor)
     : UnitComp(actor)
 {
     actor->mUnitComp = this;
 }
 
-CommandCenterComp::~CommandCenterComp() {}
+SupplyDpotComp::~SupplyDpotComp() {}
 
-void CommandCenterComp::MessageProc(ActorMessage& msg)
+void SupplyDpotComp::MessageProc(ActorMessage& msg)
 {
 
     switch (msg.msgType)
@@ -21,15 +21,13 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         if (mBuilder == nullptr && msg.sender->mActorType == ActorType::SCV)
             mBuilder = msg.sender;
 
-        ActorMessage Msg = {MsgType::SendInfo, mActor, nullptr, nullptr};
-        SendActorMessage(msg.sender, Msg);
     } break;
     default:
         break;
     }
 }
 
-void CommandCenterComp::update(float delta)
+void SupplyDpotComp::update(float delta)
 {
     if (!IsBuild && mBuilder)
     {
