@@ -2,6 +2,8 @@
 #include "Goal_Think.h"
 #include "Actor.h"
 
+const char* Goal_Think::GOAL_NAME = "Goal_Think";
+
 Goal_Think::Goal_Think(Actor* pE)
     :Goal_Composite(pE,GoalType::Think)
 {

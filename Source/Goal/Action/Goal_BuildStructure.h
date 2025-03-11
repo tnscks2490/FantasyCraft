@@ -6,12 +6,14 @@
 class Goal_BuildStructure : public Goal
 {
 public:
-
+    static const char* GOAL_NAME;
     Goal_BuildStructure(Actor* actor, ActorType type);
 
     virtual void Start() override;
     virtual int Do() override;
     virtual void End() override;
+
+    const char* getName() override { return GOAL_NAME; }
 
 public:
 

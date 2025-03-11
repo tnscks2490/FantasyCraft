@@ -33,6 +33,8 @@ public:
     ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);
     void ChangeRectSize(ax::Vec2 ePos);
 
+    void Turn_ChangeAnim(ax::Vec2 );
+
     void AddUserData();
 
 

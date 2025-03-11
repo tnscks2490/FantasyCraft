@@ -6,10 +6,14 @@
 
 void Goal::End()
 {
-    //AXLOG("~~~~~~~~~~~~~~~~~");
+    AXLOG("Goal 종료 : %s",getName());
+    AXLOG("~~~~~~~~~~~~~~~~~");
     mActor->mGoalComp->mThink->Render(1);
 }
 
 void Goal::Render(int step)
 {
+    char tab[] = {'\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t', '\t'};
+    tab[step]  = 0;
+    AXLOG("%s %s", tab, getName());
 }

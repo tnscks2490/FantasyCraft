@@ -418,17 +418,6 @@ void DrawComp::ChangeAnimByIndex(ECharName Name, ECharAct act, ECharDir dir, int
 
 ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
 {
-    /*float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
-
-    if (mVelocity.x > cos45)
-        return ECharDir::Right;
-    if (mVelocity.x < -cos45)
-        return ECharDir::Left;
-    if (mVelocity.y > 0)
-        return ECharDir::Back;
-
-    return ECharDir::Face;*/
-
 
     float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
     float x     = 22.5;

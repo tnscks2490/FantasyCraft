@@ -8,7 +8,7 @@
 #include "Goal/Base/All_Goals.h"
 #include "Goal_MoveAndBuild.h"
 
-
+const char* Goal_MoveAndBuild::GOAL_NAME = "Goal_MoveAndBuild";
 Goal_MoveAndBuild::Goal_MoveAndBuild(Actor* actor, ax::Vec2 dest, ActorType type)
     : Goal_Composite(actor, GoalType::Build)
 {
@@ -27,8 +27,8 @@ void Goal_MoveAndBuild::Start()
         PushSubGoal(new Goal_MoveToPath(mActor, m_Dest));
         PushSubGoal(new Goal_BuildStructure(mActor,mStructure));
         // 여기를 손볼것!
-        PushSubGoal(new Goal_DoingBuild(mActor,m_Dest));
     }
+    PushSubGoal(new Goal_DoingBuild(mActor,m_Dest));
 }
 
 int Goal_MoveAndBuild::Do()

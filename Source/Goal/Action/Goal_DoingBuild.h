@@ -7,16 +7,21 @@ class Goal_DoingBuild : public Goal_Composite
 {
 public:
 
+    static const char* GOAL_NAME;
+
     Goal_DoingBuild(Actor* actor,ax::Vec2 Dest);
 
     virtual void Start() override;
     virtual int Do() override;
     virtual void End() override;
 
+    const char* getName() override { return GOAL_NAME; }
+
 public:
 
     double delayTime =0.f;
     ax::Vec2 m_Dest;
+
 
 };
 

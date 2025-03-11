@@ -5,3 +5,5 @@
 #include "Goal/Action/Goal_MoveToTarget.h"
 #include "Goal/Action/Goal_MoveAndBuild.h"
 #include "Goal/Action/Goal_DoingBuild.h"
+#include "Goal/Action/Goal_WaitTime.h"
+#include "Goal/Action/Goal_ChangeAnim.h"

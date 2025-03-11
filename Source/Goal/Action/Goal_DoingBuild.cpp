@@ -8,7 +8,7 @@
 #include "Goal/Base/Goal_Think.h"
 #include "Goal_DoingBuild.h"
 
-
+const char* Goal_DoingBuild::GOAL_NAME = "Goal_DoingBuild";
 Goal_DoingBuild::Goal_DoingBuild(Actor* actor, ax::Vec2 Dest)
     : Goal_Composite(actor, GoalType::Build)
 {
@@ -20,22 +20,21 @@ void Goal_DoingBuild::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal   = GoalType::Build;
 
+    
+    ax::Vec2 randPos = GetRandomPosToBuild(BuildingSize::Big, m_Dest);
+    ax::Vec2 dest    = m_Dest + randPos;
 
-    if (mActor->mUnitComp->mCurAction == ActionState::Building)
-    {
-        ax::Vec2 randPos = GetRandomPosToBuild(BuildingSize::Big, m_Dest);
-        m_Dest += randPos*2;
-        PushSubGoal(new Goal_MoveToPath(mActor, m_Dest));
-    }
-
+    PushSubGoal(new Goal_MoveToPath(mActor, dest));
+    PushSubGoal(new Goal_ChangeAnim(mActor, m_Dest));
+    PushSubGoal(new Goal_WaitTime(mActor));
+        
 }
 
 int Goal_DoingBuild::Do()
 {
     If_Inactive_Start();
 
-
-    m_Status = Goal::completed_t;
+    m_Status = ProcessSubgoals();
 
     return m_Status;
 }

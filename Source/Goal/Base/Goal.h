@@ -32,7 +32,7 @@ public:
 
     virtual void Render(int step);
 
-
+    virtual const char* getName() = 0;
     virtual void AddSubGoal(Goal* g) { AXLOG("AddGoal"); }
 
     bool isComplete() const { return m_Status == completed_t; }

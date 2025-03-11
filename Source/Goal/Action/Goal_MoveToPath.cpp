@@ -8,7 +8,7 @@
 #include "Goal_MoveToTarget.h"
 #include "Goal_MoveToPath.h"
 
-
+const char* Goal_MoveToPath::GOAL_NAME = "Goal_MoveToPath";
 Goal_MoveToPath::Goal_MoveToPath(Actor* actor, ax::Vec2 dest)
     : Goal(actor,GoalType::MoveToPath)
 {
@@ -24,8 +24,7 @@ void Goal_MoveToPath::Start()
     if (mActor->mMoveComp)
         mActor->mMoveComp->SetPath(mLastDest);
 
-    // 고민을 해야할 필요가 있다.
-
+    printf("이동중\n");
 }
 
 int Goal_MoveToPath::Do()
@@ -43,4 +42,7 @@ int Goal_MoveToPath::Do()
     return m_Status;
 }
 
-void Goal_MoveToPath::End() {}
+void Goal_MoveToPath::End()
+{
+    __super::End();
+}

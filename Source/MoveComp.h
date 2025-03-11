@@ -45,6 +45,10 @@ public:
     bool IsContacted(Border other);
     void Avoid();
 
+    void Start_ElapsedTime() { mTimer = 0.0; }
+    void Stop_ElapsedTime() { mTimer = -1.0; }
+
+
 public:
     //멤버 변수
 
@@ -69,7 +73,7 @@ public:
 public:
     //정해진 값
     float mSpeed = 100.0f;
-    float mTimer = 0.f;
+    double mTimer = -1.f;
 
     double mWeightSeparation = 200.0;
     double mWeightAlignment  = 200.0;

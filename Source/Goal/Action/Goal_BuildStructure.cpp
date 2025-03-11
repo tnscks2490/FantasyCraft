@@ -8,6 +8,7 @@
 #include "Goal_BuildStructure.h"
 
 
+const char* Goal_BuildStructure::GOAL_NAME = "Goal_BuildStructure";
 Goal_BuildStructure::Goal_BuildStructure(Actor* actor, ActorType type)
     : Goal(actor, GoalType::Build)
 {
@@ -37,5 +38,8 @@ int Goal_BuildStructure::Do()
     return m_Status;
 }
 
-void Goal_BuildStructure::End() {}
+void Goal_BuildStructure::End()
+{
+    __super::End();
+}
 

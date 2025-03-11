@@ -23,7 +23,8 @@ void MoveComp::update(float delta)
 {
 
     mVelocity = ax::Vec2(0, 0);
-
+    if (mTimer != -1.0)
+        mTimer += delta;
     CheckTargetList();
     if (IsMoving)
     {

@@ -1,13 +1,12 @@
 #pragma once
-#include "Actor.h"
-#include "Goal/Base/Goal_Composite.h"
+#include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
 
-class Goal_MoveAndBuild : public Goal_Composite
+class Goal_ChangeAnim : public Goal
 {
 public:
     static const char* GOAL_NAME;
-    Goal_MoveAndBuild(Actor* actor, ax::Vec2 dest,ActorType type);
+    Goal_ChangeAnim(Actor* actor,ax::Vec2 dest);
 
     virtual void Start() override;
     virtual int Do() override;
@@ -15,13 +14,10 @@ public:
 
     const char* getName() override { return GOAL_NAME; }
 
+
 public:
 
-    double mExpectedTime;
     ax::Vec2 m_Dest;
-
-    ActorType mStructure;
-
 };
 
 

@@ -70,3 +70,18 @@ void PushGoal_MoveAndBuild(Actor* actor, ax::Vec2 dest, ActorType type)
     if (actor->mGoalComp)
         actor->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndBuild(actor,dest, type));
 }
+
+void AddGoal_DoingBuild(Actor* actor, ax::Vec2 dest)
+{
+    if (actor->mGoalComp)
+    {
+        actor->mGoalComp->mThink->RemoveAllSubgoals();
+        actor->mGoalComp->mThink->AddSubGoal(new Goal_DoingBuild(actor, dest));
+    }
+}
+
+void PushGoal_DoingBuild(Actor* actor, ax::Vec2 dest)
+{
+    if (actor->mGoalComp)
+        actor->mGoalComp->mThink->PushSubGoal(new Goal_DoingBuild(actor, dest));
+}
