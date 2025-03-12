@@ -5,28 +5,27 @@
 #include "DrawComp.h"
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
-#include "Goal_ChangeAnim.h"
+#include "Goal_ChangeDir.h"
 
-const char* Goal_ChangeAnim::GOAL_NAME = "Goal_ChangeAnim";
+const char* Goal_ChangeDir::GOAL_NAME = "Goal_ChangeDir";
 
 
-Goal_ChangeAnim::Goal_ChangeAnim(Actor* actor,ax::Vec2 dest)
+Goal_ChangeDir::Goal_ChangeDir(Actor* actor, ax::Vec2 dest)
     : Goal(actor,GoalType::AnimChange) {
 
     m_Dest = dest;
 }
 
-void Goal_ChangeAnim::Start()
+void Goal_ChangeDir::Start()
 {
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::AnimChange;
 
-
-    mActor->mDrawComp->ChangeAnim(mActor->mDrawComp->mCurAnim, mActor->mDrawComp->mCurAction,
-                                  mActor->mDrawComp->CalcAniDir(m_Dest));
+    ax::Vec2 velocity = m_Dest / m_Dest.getLength();
+    mActor->mDrawComp->mCurDir = mActor->mDrawComp->CalcAniDir(velocity);
 }
 
-int Goal_ChangeAnim::Do()
+int Goal_ChangeDir::Do()
 {
     If_Inactive_Start();
 
@@ -35,8 +34,7 @@ int Goal_ChangeAnim::Do()
     return m_Status;
 }
 
-void Goal_ChangeAnim::End()
-{
+void Goal_ChangeDir::End() {
 
 }
 

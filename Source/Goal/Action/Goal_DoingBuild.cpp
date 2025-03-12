@@ -20,14 +20,12 @@ void Goal_DoingBuild::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal   = GoalType::Build;
 
-    
     ax::Vec2 randPos = GetRandomPosToBuild(BuildingSize::Big, m_Dest);
     ax::Vec2 dest    = m_Dest + randPos;
 
     PushSubGoal(new Goal_MoveToPath(mActor, dest));
-    PushSubGoal(new Goal_ChangeAnim(mActor, m_Dest));
+    PushSubGoal(new Goal_ChangeDir(mActor, -randPos));
     PushSubGoal(new Goal_WaitTime(mActor));
-        
 }
 
 int Goal_DoingBuild::Do()

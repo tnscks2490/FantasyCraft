@@ -58,6 +58,9 @@ void CommandCenterComp::update(float delta)
                     mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
                         ECharAct::Idle, ECharDir::Face, drawidx);
                     IsBuild = true;
+                    ActorMessage msg = {MsgType::SendInfo,mActor,nullptr,nullptr};
+                    SendActorMessage(mBuilder, msg);
+                    mBuilder = nullptr; 
                 }
             }
         }

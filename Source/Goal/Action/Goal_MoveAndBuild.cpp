@@ -26,9 +26,9 @@ void Goal_MoveAndBuild::Start()
     {
         PushSubGoal(new Goal_MoveToPath(mActor, m_Dest));
         PushSubGoal(new Goal_BuildStructure(mActor,mStructure));
-        // 여기를 손볼것!
+        PushSubGoal(new Goal_DoingBuild(mActor,m_Dest));
     }
-    PushSubGoal(new Goal_DoingBuild(mActor,m_Dest));
+
 }
 
 int Goal_MoveAndBuild::Do()

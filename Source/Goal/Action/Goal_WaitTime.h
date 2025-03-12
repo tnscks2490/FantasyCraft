@@ -18,7 +18,7 @@ public:
 
 public:
 
-    double mExpectedTime;
+    float randTime = 0.f;
     ax::Vec2 m_Dest;
 };
 
