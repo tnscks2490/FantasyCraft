@@ -19,11 +19,20 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     case MsgType::Contacted:
     {
         if (mBuilder == nullptr && msg.sender->mActorType == ActorType::SCV)
-            mBuilder = msg.sender;
+        {
+            if (msg.sender->mUnitComp->mCurAction == ActionState::Building)
+                mBuilder = msg.sender;
+        }
 
         ActorMessage Msg = {MsgType::SendInfo, mActor, nullptr, nullptr};
         SendActorMessage(msg.sender, Msg);
     } break;
+
+    case MsgType::Build_Cancel:
+    {
+        if (!IsBuild)
+            mBuilder = nullptr;
+    }break;
     default:
         break;
     }
@@ -58,7 +67,7 @@ void CommandCenterComp::update(float delta)
                     mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
                         ECharAct::Idle, ECharDir::Face, drawidx);
                     IsBuild = true;
-                    ActorMessage msg = {MsgType::SendInfo,mActor,nullptr,nullptr};
+                    ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
                     mBuilder = nullptr; 
                 }

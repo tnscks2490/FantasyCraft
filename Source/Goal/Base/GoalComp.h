@@ -34,3 +34,7 @@ void PushGoal_MoveAndBuild(Actor* actor, ax::Vec2 dest, ActorType type);
 
 void AddGoal_DoingBuild(Actor* actor, ax::Vec2 dest);
 void PushGoal_DoingBuild(Actor* actor, ax::Vec2 dest);
+
+
+void AddGoal_AllCancel(Actor* actor);
+void PushGoal_AllCancel(Actor* actor);

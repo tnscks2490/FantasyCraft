@@ -34,25 +34,61 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
             receiver->mUnitComp->MessageProc(msg);
         }
     } break;
+
     case MsgType::Do_Build:
     {
         if (receiver->mUnitComp)
         {
             receiver->mUnitComp->MessageProc(msg);
         }
-    }
+    }break;
+
     case MsgType::BPCMC:
     {
         if (receiver->mCursorComp)
             receiver->mCursorComp->MessageProc(msg);
-    }
+    }break;
+
     case MsgType::SendInfo:
     {
         if (receiver->mUnitComp)
         {
             receiver->mUnitComp->MessageProc(msg);
         }
-    }
+    }break;
+
+    case MsgType::Build_Complete:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    }break;
+
+    case MsgType::IsBuild_Complete:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    }break;
+
+    case MsgType::Cancel:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    } break;
+
+    case MsgType::Build_Cancel:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    }break;
+
     default:
         break;
     }

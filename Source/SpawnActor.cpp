@@ -11,7 +11,7 @@
 Actor* SpawnCursor(ax::Node* parent)
 {
     Actor* actor      = new Actor;
-    actor->mActorType = ActorType::SCV;
+    actor->mActorType = ActorType::Cursor;
     actor->mID        = TcpClient::get()->GetID();
     actor->charNum    = 0;
 

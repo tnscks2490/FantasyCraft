@@ -33,6 +33,25 @@ void SCVComp::MessageProc(ActorMessage& msg)
         break;
     case MsgType::SendInfo:
         mBuilding = msg.sender;
+        break;
+    case MsgType::Build_Complete:
+        mBuilding = nullptr;
+        break;
+    case MsgType::IsBuild_Complete:
+    {
+        if (mBuilding)
+            AddGoal_DoingBuild(mActor, mBuilding->GetPosition());
+    }break;
+
+    case MsgType::Cancel:
+    {
+        if (mBuilding)
+        {
+            AddGoal_AllCancel(mActor);
+            ActorMessage msg = {MsgType::Build_Cancel, mActor, nullptr, nullptr};
+            SendActorMessage(mBuilding, msg);
+        }
+    }
     default:
         break;
     }
@@ -47,6 +66,7 @@ void SCVComp::update(float delta) {
         auto t =  mActor->GetRoot()->getChildByName("EffectNode");
         mTimer = 0.f;
     }
+
 }
 
 void SCVComp::Repair()
@@ -56,13 +76,9 @@ void SCVComp::Repair()
 
 void SCVComp::Building(ActorMessage& msg)
 {
-    auto screen = mActor->GetRoot()->getParent();
-
     int command = 0;
-
     ActorType* buildingType = (ActorType*)msg.data;
     
-
     switch (*buildingType)
     {
     case ActorType::CommandCenter: command = 102; break;
@@ -70,8 +86,6 @@ void SCVComp::Building(ActorMessage& msg)
     default:
         break;
     }
-
     SendPK_Data(command, mActor->GetPosition());
-
     mCurAction = ActionState::Building;
 }

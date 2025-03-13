@@ -25,7 +25,11 @@ void Player::MessageProc(SystemMessage smsg)
         cursor->mCursorComp->mState = CursorState::Target;
         break;
     case ButtonType::TCancel:
+    {
         cursor->mCursorComp->mState = CursorState::Idle;
+        ActorMessage msg            = {MsgType::Cancel, mMainActor, nullptr, nullptr};
+        SendActorMessage(mMainActor, msg);
+    }
         break;
     case ButtonType::TCommand_Center:
     {

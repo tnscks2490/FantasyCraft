@@ -14,12 +14,14 @@ enum class MsgType
     GameClick,
     Attack,
     Build,
-    Do_Build,
+    Do_Build,  // 건설물 생성하기
+    Build_Complete,
+    IsBuild_Complete,
+    Build_Cancel,
 
 
 
-
-
+    Cancel,
     SendInfo,
     //BP
     BPCMC,

@@ -34,6 +34,12 @@ int Goal_DoingBuild::Do()
 
     m_Status = ProcessSubgoals();
 
+    if (m_Status == Goal::completed_t)
+    {
+        ActorMessage msg = {MsgType::IsBuild_Complete, mActor, nullptr, nullptr};
+        SendActorMessage(mActor, msg);
+    }
+
     return m_Status;
 }
 
