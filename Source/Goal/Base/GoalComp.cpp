@@ -71,19 +71,34 @@ void PushGoal_MoveAndBuild(Actor* actor, ax::Vec2 dest, ActorType type)
         actor->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndBuild(actor,dest, type));
 }
 
-void AddGoal_DoingBuild(Actor* actor, ax::Vec2 dest)
+void AddGoal_DoingBuild(Actor* Builder, Actor* structure)
 {
-    if (actor->mGoalComp)
+    if (Builder->mGoalComp)
     {
-        actor->mGoalComp->mThink->RemoveAllSubgoals();
-        actor->mGoalComp->mThink->AddSubGoal(new Goal_DoingBuild(actor, dest));
+        Builder->mGoalComp->mThink->RemoveAllSubgoals();
+        Builder->mGoalComp->mThink->AddSubGoal(new Goal_DoingBuild(Builder, structure));
     }
 }
 
-void PushGoal_DoingBuild(Actor* actor, ax::Vec2 dest)
+void PushGoal_DoingBuild(Actor* Builder, Actor* structure)
 {
-    if (actor->mGoalComp)
-        actor->mGoalComp->mThink->PushSubGoal(new Goal_DoingBuild(actor, dest));
+    if (Builder->mGoalComp)
+        Builder->mGoalComp->mThink->PushSubGoal(new Goal_DoingBuild(Builder, structure));
+}
+
+void AddGoal_MoveAndContinueBuild(Actor* Builder, Actor* structure)
+{
+    if (Builder->mGoalComp)
+    {
+        Builder->mGoalComp->mThink->RemoveAllSubgoals();
+        Builder->mGoalComp->mThink->AddSubGoal(new Goal_MoveAndContinueBuild(Builder, structure));
+    }
+}
+
+void PushGoal_MoveAndContinueBuild(Actor* Builder, Actor* structure)
+{
+    if (Builder->mGoalComp)
+        Builder->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndContinueBuild(Builder, structure));
 }
 
 void AddGoal_AllCancel(Actor* actor)

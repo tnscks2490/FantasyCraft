@@ -18,6 +18,9 @@ enum class MsgType
     Build_Complete,
     IsBuild_Complete,
     Build_Cancel,
+    Build_Continue,
+    Build_Start,
+    Build_GetBuilder,
 
 
 

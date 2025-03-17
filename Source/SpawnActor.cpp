@@ -125,6 +125,8 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node,0.1f);
 
+    auto body       = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -133,7 +135,6 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     node->addChild(selectanim);
 
 
-    auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim       =  draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::S, "Anim");
 
     auto command = new CommandCenterComp(actor);

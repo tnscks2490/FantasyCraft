@@ -110,6 +110,16 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         bodyNode->setTag(10);
 
 
+        ///실제 피직스 노드의 위치를 파악하기 위한 코드
+        ax::DrawNode* dNode = ax::DrawNode::create();
+        dNode->drawRect((bodysize / 2) * (-1), bodysize / 2, ax::Color4B::RED);
+        bodyNode->addChild(dNode);
+
+
+
+
+
+
         //루트노드에 피직스노드붙여주기
         mRoot->addChild(bodyNode);
         return bodyNode;

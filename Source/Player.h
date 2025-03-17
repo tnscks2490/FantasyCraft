@@ -95,7 +95,8 @@ public:
 
     std::vector<Actor*> PrePlayerActors;
     std::vector<Actor*> PlayerActors;
-    Actor* mMainActor;
+    Actor* mMainActor = nullptr;
+
 
     PlayerController* mPC = nullptr;
     ActionIcon mCurActionICon    = ActionIcon::None;

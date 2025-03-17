@@ -114,6 +114,7 @@ bool MainScene::init()
     // 커서 생성
     mCursor = SpawnCursor(this);
     mCursor->SetPosition(ax::Vec2(500,500));
+    mCursor->mCursorComp->cPlayer = mPlayer;
     mPlayer->cursor = mCursor;
 
     //나중에 구조 꼭 수정할것 너무 복잡함
@@ -161,30 +162,18 @@ void MainScene::onMouseDown(Event* event)
     {
         if (mCursor->mCursorComp->mState != CursorState::Idle)
         {
-            mCursor->mCursorComp->mState = CursorState::Idle;
-            SystemMessage smsg;
-            smsg.Atype = mPlayer->mMainActor->mActorType;
-            SendSystemMessage(mUILayer, mPlayer, smsg);
+            /*mCursor->mCursorComp->mState = CursorState::Idle;
+            if (mPlayer->mMainActor)
+            {
+                SystemMessage smsg;
+                smsg.Atype = mPlayer->mMainActor->mActorType;
+                SendSystemMessage(mUILayer, mPlayer, smsg);
+            }*/
+            
         }
         else
         {
-
-            if (mCursor->mCursorComp->mBP)
-            {
-                mCursor->mCursorComp->ReleaseBP();
-            }
-            else
-            {
-                if (mPlayer->isSelected())
-                {
-                    PK_Data data;
-                    data.ClientID = TcpClient::get()->GetID();
-                    data.input    = 114;
-                    data.pos      = mousePos - (ax::Vec2(0, 210));
-                    TcpClient::get()->SendMessageToServer(data);
-                }
-                // mCursor->GetRoot()->getChildByName("TargetAnim")->setVisible(true);
-            }
+            mCursor->mCursorComp->RClick(mousePos);   
         }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
@@ -199,9 +188,13 @@ void MainScene::onMouseDown(Event* event)
         else
         {
             mCursor->mCursorComp->mState = CursorState::Idle;
-            SystemMessage smsg;
-            smsg.Atype = mPlayer->mMainActor->mActorType;
-            SendSystemMessage(mUILayer, mPlayer, smsg);
+            if (mPlayer->mMainActor)
+            {
+                SystemMessage smsg;
+                smsg.Atype = mPlayer->mMainActor->mActorType;
+                SendSystemMessage(mUILayer, mPlayer, smsg);
+            }
+            
         }
     }
 }
@@ -212,8 +205,13 @@ void MainScene::onMouseUp(Event* event)
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
 
     mCursor->mCursorComp->ePos = ax::Vec2(e->getCursorX(), e->getCursorY());
+    ax::Vec2 sPos              = mCursor->mCursorComp->sPos;
+    ax::Vec2 ePos              = mCursor->mCursorComp->ePos;
 
-    auto func = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
+
+    // TODO: 나중에 꼭 정리할것 
+    // LeftClick
+    auto Lfunc = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
         auto A                = shape.getBody()->getNode();
         std::string_view name = A->getName();
 
@@ -231,9 +229,36 @@ void MainScene::onMouseUp(Event* event)
         }
         return true;
     };
+    //RightClick
+    auto Rfunc = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
+        auto A                = shape.getBody()->getNode();
+        std::string_view name = A->getName();
 
-    ax::Vec2 sPos = mCursor->mCursorComp->sPos;
-    ax::Vec2 ePos = mCursor->mCursorComp->ePos;
+        std::cout << name.data() << "\n" << std::endl;
+
+        if (A->getTag() == 10)
+        {
+            auto aRoot         = A->getParent();
+            UserData* userData = (UserData*)aRoot->getUserData();
+
+            auto ac = userData->mActor;
+            if (ac->mUnitComp)
+            {
+                auto builder = mPlayer->mMainActor;
+                if (builder->mActorType == ActorType::SCV)
+                {
+                    ActorMessage msg = {MsgType::Build_Continue, ac, nullptr, nullptr};
+                    SendActorMessage(builder, msg);
+                }
+            }
+           
+        }
+        return true;
+    };
+
+
+
+    
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         if (mCursor->mCursorComp->mState == CursorState::Drag)
@@ -242,7 +267,8 @@ void MainScene::onMouseUp(Event* event)
             float height = GetRectHeight(sPos, ePos);
             ax::Vec2 zpos = GetZeroPointInRect(sPos, ePos);
 
-            getPhysicsWorld()->queryRect(func, Rect(zpos.x, zpos.y, width, height), nullptr);
+            getPhysicsWorld()->queryRect(Lfunc, Rect(zpos.x, zpos.y, width, height), nullptr);
+
             if (mPlayer->PrePlayerActors.size() ==1)
             {
                 mPlayer->ReSelected();
@@ -256,6 +282,11 @@ void MainScene::onMouseUp(Event* event)
             mCursor->mCursorComp->mState = CursorState::Idle;
             mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;
         }    
+    }
+    else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
+    {
+
+        getPhysicsWorld()->queryRect(Rfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
     }
 
 }
@@ -607,22 +638,24 @@ void MainScene::Decording()
         case 100: //SCV 생성
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
-            // Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(data.pos);
         } break;
         case 101:  // 마린 생성
         {
             Actor* actor = SpawnMarine(mMapLayer, data);
-            // Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(data.pos);
         }
         break;
         case 102:  // 커맨드센터 생성
         {
             Actor* actor = SpawnCommandCenter(mMapLayer, data);
-            // Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(data.pos);
 
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
         }
         break;
 
@@ -631,13 +664,10 @@ void MainScene::Decording()
         {
             for (auto actor : World::get()->w_ActorList)
             {
-                if (actor->mDrawComp->selected)
+                if (actor->mDrawComp->selected
+                    && actor->mUnitComp->mCurAction != ActionState::Building)
                     AddGoal_MoveToPath(actor, data.pos);
 
-                if (actor && actor->mID == data.ClientID)
-                {
-                    // 골로 집어넣을것
-                }
             }
         } break;
         case 115: // 건물 건설

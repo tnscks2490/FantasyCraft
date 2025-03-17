@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "IActorComp.h"
 #include "BPComp.h"
+#include "DrawComp.h"
 
 
 
@@ -41,6 +42,8 @@ void BPComp::update(float delta)
 
 }
 
+
+
 void BPComp::ContactedUnit(ActorMessage& msg)
 {
     auto bodyNode = msg.bodyNode;
@@ -56,6 +59,7 @@ void BPComp::ContactedUnit(ActorMessage& msg)
                 dNode->clear();
                 auto color = ax::Color4B(255, 0, 0, 100);
                 dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+                BuildPossible = false;
             }
         }
     }
@@ -76,6 +80,7 @@ void BPComp::SeparatedUnit(ActorMessage& msg)
                 dNode->clear();
                 auto color = ax::Color4B(0, 255, 0, 100);
                 dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+                BuildPossible = true;
             }
         }
     }

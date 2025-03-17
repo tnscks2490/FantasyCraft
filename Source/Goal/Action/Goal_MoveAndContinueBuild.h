@@ -3,13 +3,11 @@
 #include "Goal/Base/Goal_Composite.h"
 #include "Goal/Base/Goal_Think.h"
 
-class Goal_DoingBuild : public Goal_Composite
+class Goal_MoveAndContinueBuild : public Goal_Composite
 {
 public:
-
     static const char* GOAL_NAME;
-
-    Goal_DoingBuild(Actor* Builder, Actor* structure);
+    Goal_MoveAndContinueBuild(Actor* builder, Actor* structure);
 
     virtual void Start() override;
     virtual int Do() override;
@@ -18,13 +16,8 @@ public:
     const char* getName() override { return GOAL_NAME; }
 
 public:
-
-    double delayTime =0.f;
     ax::Vec2 m_Dest;
-
-    Actor* m_Structure = nullptr;
-
-
+    Actor* m_structure = nullptr;
 };
 
 

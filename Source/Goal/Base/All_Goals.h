@@ -8,3 +8,4 @@
 #include "Goal/Action/Goal_WaitTime.h"
 #include "Goal/Action/Goal_ChangeDir.h"
 #include "Goal/Action/Goal_AllCancel.h"
+#include "Goal/Action/Goal_MoveAndContinueBuild.h"

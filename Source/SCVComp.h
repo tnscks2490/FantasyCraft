@@ -15,6 +15,8 @@ public:
     void Repair();
 
 
+    void Build_Continue(ActorMessage& msg);
+
     
 
 

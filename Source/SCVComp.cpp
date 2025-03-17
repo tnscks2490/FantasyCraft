@@ -32,7 +32,10 @@ void SCVComp::MessageProc(ActorMessage& msg)
         Building(msg);
         break;
     case MsgType::SendInfo:
+    {
         mBuilding = msg.sender;
+        AddGoal_DoingBuild(mActor, mBuilding);
+    }
         break;
     case MsgType::Build_Complete:
         mBuilding = nullptr;
@@ -40,7 +43,12 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::IsBuild_Complete:
     {
         if (mBuilding)
-            AddGoal_DoingBuild(mActor, mBuilding->GetPosition());
+            AddGoal_DoingBuild(mActor, mBuilding);
+    }break;
+
+    case MsgType::Build_Continue:
+    {
+        Build_Continue(msg);
     }break;
 
     case MsgType::Cancel:
@@ -50,6 +58,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
             AddGoal_AllCancel(mActor);
             ActorMessage msg = {MsgType::Build_Cancel, mActor, nullptr, nullptr};
             SendActorMessage(mBuilding, msg);
+            mBuilding = nullptr;
         }
     }
     default:
@@ -72,6 +81,15 @@ void SCVComp::update(float delta) {
 void SCVComp::Repair()
 {
 
+}
+
+void SCVComp::Build_Continue(ActorMessage& msg)
+{
+    if (mBuilding == nullptr)
+    {
+        mBuilding = msg.sender;
+        AddGoal_MoveAndContinueBuild(mActor, msg.sender);
+    }
 }
 
 void SCVComp::Building(ActorMessage& msg)

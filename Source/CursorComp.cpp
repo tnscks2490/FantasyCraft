@@ -2,6 +2,7 @@
 #include "CursorComp.h"
 #include "Actor.h"
 #include "PrePacket.h"
+#include "BPComp.h"
 #include "DrawComp.h"
 
 
@@ -104,14 +105,17 @@ void CursorComp::LClick(ax::Vec2 pos)
 {
     if (mBP)
     {
-        PK_Data data;
-        data.ClientID = TcpClient::get()->GetID();
-        data.input    = 10;
-        data.pos      = pos;
-        TcpClient::get()->SendMessageToServer(data);
 
-        //ReleaseBP();
-            
+        if (mBP->mBPComp->CheckBuildPossible())
+        {
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 10;
+            data.pos      = pos;
+            TcpClient::get()->SendMessageToServer(data);
+
+            ReleaseBP();
+        }           
     }
     if (mState == CursorState::Move)
     {
@@ -133,7 +137,22 @@ void CursorComp::LClick(ax::Vec2 pos)
 
 void CursorComp::RClick(ax::Vec2 pos)
 {
+    if (mBP)
+    {
+        ReleaseBP();
+    }
+    else
+    {
+        if (cPlayer->isSelected())
+        {
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 114;
+            data.pos      = pos - (ax::Vec2(0, 210));
+            TcpClient::get()->SendMessageToServer(data);
+        }
 
+    }
 }
 
 void CursorComp::ContactedUnit(ActorMessage& msg)

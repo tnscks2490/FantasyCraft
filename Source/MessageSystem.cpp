@@ -81,6 +81,30 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         }
     } break;
 
+    case MsgType::Build_GetBuilder:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    } break;
+
+    case MsgType::Build_Continue:
+    {
+        if (receiver->mUnitComp)
+        {
+            receiver->mUnitComp->MessageProc(msg);
+        }
+    } break;
+
+    case MsgType::Build_Start:
+    {
+        if (receiver->mUnitComp)
+        {
+           receiver->mUnitComp->MessageProc(msg);
+        }
+    } break;
+
     case MsgType::Build_Cancel:
     {
         if (receiver->mUnitComp)

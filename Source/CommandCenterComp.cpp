@@ -18,6 +18,10 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     {
     case MsgType::Contacted:
     {
+        
+    } break;
+    case MsgType::Build_Start:
+    {
         if (mBuilder == nullptr && msg.sender->mActorType == ActorType::SCV)
         {
             if (msg.sender->mUnitComp->mCurAction == ActionState::Building)
@@ -26,7 +30,23 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
 
         ActorMessage Msg = {MsgType::SendInfo, mActor, nullptr, nullptr};
         SendActorMessage(msg.sender, Msg);
+    }
+    break;
+    case MsgType::Build_GetBuilder:
+    {
+        if (mBuilder == nullptr)
+            mBuilder = msg.sender;
     } break;
+
+    case MsgType::Build_Continue:
+    {
+        if (mBuilder == nullptr)
+        {
+            mBuilder = msg.sender;
+        }
+    }
+    break;
+
 
     case MsgType::Build_Cancel:
     {

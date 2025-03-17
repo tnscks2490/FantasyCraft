@@ -6,18 +6,18 @@
 #include "Goal/Base/Goal_Composite.h"
 #include "Goal/Base/Goal_Think.h"
 #include "Goal/Base/All_Goals.h"
-#include "Goal_MoveAndBuild.h"
+#include "Goal_MoveAndContinueBuild.h"
 
-const char* Goal_MoveAndBuild::GOAL_NAME = "Goal_MoveAndBuild";
-Goal_MoveAndBuild::Goal_MoveAndBuild(Actor* actor, ax::Vec2 dest, ActorType type)
-    : Goal_Composite(actor, GoalType::Build)
+const char* Goal_MoveAndContinueBuild::GOAL_NAME = "Goal_MoveAndContinueBuild";
+
+Goal_MoveAndContinueBuild::Goal_MoveAndContinueBuild(Actor* builder, Actor* structure)
+    : Goal_Composite(builder, GoalType::Build)
 {
-    mStructure = type;
-    m_Dest     = dest;
-
+    m_Dest = structure->GetPosition();
+    m_structure = structure;
 }
 
-void Goal_MoveAndBuild::Start()
+void Goal_MoveAndContinueBuild::Start()
 {
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal   = GoalType::Build;
@@ -25,12 +25,12 @@ void Goal_MoveAndBuild::Start()
     if (mActor->mUnitComp->mCurAction != ActionState::Building)
     {
         PushSubGoal(new Goal_MoveToPath(mActor, m_Dest));
-        PushSubGoal(new Goal_BuildStructure(mActor,mStructure));
+        PushSubGoal(new Goal_DoingBuild(mActor, m_structure));
     }
 
 }
 
-int Goal_MoveAndBuild::Do()
+int Goal_MoveAndContinueBuild::Do()
 {
     If_Inactive_Start();
 
@@ -39,5 +39,5 @@ int Goal_MoveAndBuild::Do()
     return m_Status;
 }
 
-void Goal_MoveAndBuild::End() {}
+void Goal_MoveAndContinueBuild::End() {}
 
