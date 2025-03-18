@@ -21,22 +21,26 @@ void Player::MessageProc(SystemMessage smsg)
     case ButtonType::TAttack:
         cursor->mCursorComp->mState = CursorState::Target;
         break;
+
     case ButtonType::TMove:
         cursor->mCursorComp->mState = CursorState::Target;
         break;
+
     case ButtonType::TCancel:
     {
         cursor->mCursorComp->mState = CursorState::Idle;
         ActorMessage msg            = {MsgType::Cancel, mMainActor, nullptr, nullptr};
         SendActorMessage(mMainActor, msg);
-    }
-        break;
+    } break;
+
     case ButtonType::TCommand_Center:
     {
         // 건물 블루프린트 생성하기
         ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
         SendActorMessage(cursor, msg);
     } break;
+
+
     default:
         break;
     }
