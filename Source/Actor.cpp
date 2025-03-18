@@ -5,6 +5,7 @@
 #include "DrawComp.h"
 #include "UnitComp.h"
 #include "GoalComp.h"
+#include "WeaponComp.h"
 #include "CursorComp.h"
 #include "BPComp.h"
 
@@ -22,6 +23,7 @@ Actor::~Actor()
 {
     if (mGoalComp) delete mGoalComp;
     if (mUnitComp) delete mUnitComp;
+    if (mWeaponComp)  delete mWeaponComp;
     if (mMoveComp && mMoveComp->IsOn) delete mMoveComp;
     if (mCursorComp) delete mCursorComp;
     if (mBPComp) delete mBPComp;
@@ -32,6 +34,7 @@ void Actor::update(float delta)
 {
     if (mGoalComp) mGoalComp->update(delta);
     if (mUnitComp) mUnitComp->update(delta);
+    if (mWeaponComp) mWeaponComp->update(delta);
     if (mMoveComp && mMoveComp->IsOn) mMoveComp->update(delta);
     if (mBPComp) mBPComp->update(delta);
     if (mCursorComp) mCursorComp->update(delta);

@@ -6,6 +6,7 @@ class MoveComp;
 class DrawComp;
 class UnitComp;
 class GoalComp;
+class WeaponComp;
 class ProjectileComp;
 class CursorComp;
 class PK_Data;
@@ -56,7 +57,7 @@ public:
     DrawComp* mDrawComp = nullptr;
     UnitComp* mUnitComp = nullptr;
     GoalComp* mGoalComp = nullptr;
-
+    WeaponComp* mWeaponComp = nullptr;
 
     ////////////// 예외적인 상황
     CursorComp* mCursorComp = nullptr;

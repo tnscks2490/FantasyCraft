@@ -66,6 +66,7 @@ enum class ECharAct
     
 
     Move,
+    Attack,
     Gathering,
     //////////
     // 행동들 추가하기

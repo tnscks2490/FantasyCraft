@@ -298,7 +298,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName(nodeName);
-        mRoot->addChild(node);
+        mRoot->addChild(node,1.f);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
 

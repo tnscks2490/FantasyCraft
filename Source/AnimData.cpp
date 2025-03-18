@@ -56,6 +56,26 @@ AnimInfo g_AnimInfo_Marin_Idle[] = {
         {ECharName::Marine, ECharAct::Idle, ECharDir::NW, "Plist/Marine.plist", "Marine/Idle/15/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
         {ECharName::Marine, ECharAct::Idle, ECharDir::NNW, "Plist/Marine.plist", "Marine/Idle/16/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_Marine_Attack[] = {
+        {ECharName::Marine, ECharAct::Attack, ECharDir::N, "Plist/Marine.plist", "Marine/Attack/1/%04d.png", 1, 1,(1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::NNE, "Plist/Marine.plist", "Marine/Attack/2/%04d.png", 1, 1,(1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::NE, "Plist/Marine.plist", "Marine/Attack/3/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::ENE, "Plist/Marine.plist", "Marine/Attack/4/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::E, "Plist/Marine.plist", "Marine/Attack/5/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::ESE, "Plist/Marine.plist", "Marine/Attack/6/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::SE, "Plist/Marine.plist", "Marine/Attack/7/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::SSE, "Plist/Marine.plist", "Marine/Attack/8/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::S, "Plist/Marine.plist", "Marine/Attack/9/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::SSW, "Plist/Marine.plist", "Marine/Attack/10/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::SW, "Plist/Marine.plist", "Marine/Attack/11/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::WSW, "Plist/Marine.plist", "Marine/Attack/12/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::W, "Plist/Marine.plist", "Marine/Attack/13/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::WNW, "Plist/Marine.plist", "Marine/Attack/14/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::NW, "Plist/Marine.plist", "Marine/Attack/15/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Marine, ECharAct::Attack, ECharDir::NNW, "Plist/Marine.plist", "Marine/Attack/16/%04d.png", 1, 1, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+
+
+};
 
 AnimInfo g_AnimInfo_SCV_Idle[] = {
     {ECharName::SCV, ECharAct::Idle, ECharDir::N, "Plist/SCV.plist", "SCV/Idle/1/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -133,29 +153,20 @@ AnimInfo g_AnimInfo_Cursor[] = {
     {ECharName::Cursor, ECharAct::Target, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Target/%04d.png", 1, 2, ((0.5f) / 2), Vec2(0.5f, 0.5f), nullptr},
 };
 
-AnimInfo g_AnimInfo_Cursor_Target[] = {
-    {ECharName::Cursor, ECharAct::Target, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Target/%04d.png", 1, 2, ((1.f) / 2), Vec2(0.5f, 0.5f), nullptr},
-};
 
 AnimInfo g_AnimInfo_Actor_Select[] = {
     {ECharName::Cursor, ECharAct::Target, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Target/%04d.png", 1, 2, ((1.f) / 2), Vec2(0.5f, 0.5f), nullptr},
 };
 
-
-AnimInfo g_AnimInfo_Select_Idle[] = {{ECharName::Select, ECharAct::Move, ECharDir::Face, "Plist/Select.plist",
-                                      "Select/%04d.png", 1, 2, (1.f / 2), Vec2(0.5, 0.5), nullptr}
-};
-
 // 커서 Plist 추가하기 리소스 추가하기
-
 AnimInfo g_AnimInfo_Cursor_Idle[] = {{ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Plist/Select.plist",
                                       "Select/%04d.png", 1, 4, (1.f / 1), Vec2(0.5, 0.5), nullptr}};
-
-
+AnimInfo g_AnimInfo_Cursor_Target[] = {
+    {ECharName::Cursor, ECharAct::Target, ECharDir::Face, "Plist/Cursor.plist", "Cursor/Target/%04d.png", 1, 2, ((1.f) / 2), Vec2(0.5f, 0.5f), nullptr},
+};
 AnimInfo g_AnimInfo_Action_Icon[] = {
     {ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Plist/Select.plist","Select/%04d.png", 1, 4, (1.f / 1), Vec2(0.5, 0.5), nullptr}
 };
-
 
 
 AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
@@ -183,9 +194,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             break;
         }
         break;
-    /// farmer
-    case ECharName::Select:
-        return g_AnimInfo_Select_Idle[0];
+
     case ECharName::Marine:
         switch (action)
         {
@@ -202,6 +211,13 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             {
                 if (g_AnimInfo_Marin_Move[i].dir == dir)
                     return g_AnimInfo_Marin_Move[i];
+            } break;
+
+        case ECharAct::Attack:
+            for (int i = 0; i < 16; i++)
+            {
+                if (g_AnimInfo_Marine_Attack[i].dir == dir)
+                    return g_AnimInfo_Marine_Attack[i];
             } break;
 
         } break;

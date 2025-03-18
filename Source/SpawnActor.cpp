@@ -106,7 +106,7 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     auto goal           = new GoalComp(actor);
     auto move           = new MoveComp(actor);
     auto unit           = new MarineComp(actor);
-    auto Wsystem        = new WeaponSystem(actor);
+    //auto Wsystem        = new WeaponSystem(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;

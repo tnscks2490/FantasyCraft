@@ -22,10 +22,12 @@ public:
     virtual ~Weapon() {}
 
     virtual void update(float delta) {}
-    virtual bool AimAt(Vec2 target) { return true; }
-    virtual void ShootAt(Vec2 pos) {}
+    virtual bool AimAt(ax::Vec2 target) { return true; }
+    virtual void ShootAt(ax::Vec2 pos) {}
     virtual double GetDesirability(double DistToTarget) { return true; }
     virtual void Use() {}
+
+    void SetCoolTime(float coolTime) { mCoolTime = coolTime; }
 
 
     void CoolTime(float cooltime,float delta);
