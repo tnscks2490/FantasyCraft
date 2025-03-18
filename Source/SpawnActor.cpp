@@ -102,8 +102,11 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     selectanim->setVisible(false);
     node->addChild(selectanim,0.9f);
 
+
+    auto goal           = new GoalComp(actor);
     auto move           = new MoveComp(actor);
     auto unit           = new MarineComp(actor);
+    auto Wsystem        = new WeaponSystem(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;

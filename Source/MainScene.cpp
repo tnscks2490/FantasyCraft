@@ -363,14 +363,26 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         mPlayer->PrintSelectActors();
         break;
 
+
+    // SCV 생성
     case ax::EventKeyboard::KeyCode::KEY_C:
     {
         PK_Data data;
         data.ClientID = TcpClient::get()->GetID();
         data.pos      = Vec2(500, 500);
-        data.input    = 77;
+        data.input    = 100;
         TcpClient::get()->SendMessageToServer(data);
     } break;
+
+    // Marine 생성
+    case ax::EventKeyboard::KeyCode::KEY_V:
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.pos      = Vec2(500, 500);
+        data.input    = 101;
+        TcpClient::get()->SendMessageToServer(data);
+    }break;
 
     case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
     {
@@ -640,12 +652,13 @@ void MainScene::Decording()
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(data.pos);
         } break;
+
         case 101:  // 마린 생성
         {
             Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(data.pos);
-        }
-        break;
+        } break;
+
         case 102:  // 커맨드센터 생성
         {
             Actor* actor = SpawnCommandCenter(mMapLayer, data);
