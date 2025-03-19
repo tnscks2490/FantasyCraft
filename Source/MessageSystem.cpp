@@ -113,6 +113,12 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         }
     }break;
 
+    case MsgType::Attack:
+    {
+        if (receiver->mUnitComp) receiver->mUnitComp->MessageProc(msg);
+        
+    }
+
     default:
         break;
     }

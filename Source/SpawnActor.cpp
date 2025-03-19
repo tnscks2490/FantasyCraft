@@ -4,6 +4,7 @@
 #include "DrawComp.h"
 #include "MoveComp.h"
 #include "GoalComp.h"
+#include "WeaponComp.h"
 #include "BPComp.h"
 #include "CursorComp.h"
 #include "UnitCompList.h"
@@ -67,10 +68,13 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     /*auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
     selectanim->setVisible(false);*/
     
-
     auto goal = new GoalComp(actor);
     auto move = new MoveComp(actor);
     auto unit = new SCVComp(actor);
+    auto weapon = new WeaponComp(actor);
+    weapon->AddWeapon(WeaponType::Normal);
+
+    unit->SetUnitStatus(ActorType::SCV);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -106,7 +110,11 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     auto goal           = new GoalComp(actor);
     auto move           = new MoveComp(actor);
     auto unit           = new MarineComp(actor);
-    //auto Wsystem        = new WeaponSystem(actor);
+    auto weapon        = new WeaponComp(actor);
+    weapon->AddWeapon(WeaponType::Normal);
+
+    unit->SetUnitStatus(ActorType::Marine);
+
 
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;

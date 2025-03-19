@@ -2,6 +2,11 @@
 #include "Actor.h"
 #include "WeaponComp.h"
 #include "Weapon/Weapon.h"
+#include "Weapon/Weapon_Normal.h"
+#include "Weapon/Weapon_Explosive.h"
+#include "Weapon/Weapon_Concussive.h"
+#include "Weapon/Weapon_Spell.h"
+
 
 const std::string WeaponComp::COMPONENT_NAME = "WeaponComp";
 
@@ -12,6 +17,11 @@ WeaponComp::WeaponComp(Actor* actor)
 }
 
 WeaponComp::~WeaponComp() {
+
+}
+
+void WeaponComp::MessageProc(ActorMessage& msg)
+{
 
 }
 
@@ -30,23 +40,23 @@ void WeaponComp::TakeAimAndShoot() const {
 
 void WeaponComp::AddWeapon(WeaponType type)
 {
-    Weapon* weapon;
+    Weapon* weapon = nullptr;
 
     switch (type)
     {
     case WeaponType::None:
         break;
-    case WeaponType::Sword:
+    case WeaponType::Normal:
+        weapon = new Weapon_Normal(mActor);
         break;
-    case WeaponType::Pick:
+    case WeaponType::Explosive:
+        weapon = new Weapon_Explosive(mActor);
         break;
-    case WeaponType::Axe:
+    case WeaponType::Concussive:
+        weapon = new Weapon_Concussive(mActor);
         break;
-    case WeaponType::WateringCan:
-        break;
-    case WeaponType::Bow:
-        break;
-    case WeaponType::Torch:
+    case WeaponType::Spell:
+        weapon = new Weapon_Spell(mActor);
         break;
     default:
         break;

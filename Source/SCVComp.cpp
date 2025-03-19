@@ -61,12 +61,25 @@ void SCVComp::MessageProc(ActorMessage& msg)
             mBuilding = nullptr;
         }
     }
+    break;
+
+    case MsgType::Attack:
+    {
+        mActor->mUnitComp->mStatus.HP -= msg.sender->mUnitComp->mStatus.AT;
+        printf("남은 체력 : %d\n" ,mActor->mUnitComp->mStatus.HP);
+    }
+    break;
     default:
         break;
     }
 }
 
 void SCVComp::update(float delta) {
+
+    if (mStatus.HP == 0)
+    {
+        printf("해당유닛 사망");
+    }
 
     mTimer += delta;
 

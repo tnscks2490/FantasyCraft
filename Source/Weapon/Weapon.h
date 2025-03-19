@@ -4,12 +4,10 @@
 enum class WeaponType
 {
     None,
-    Sword,
-    Pick,
-    Axe,
-    WateringCan,
-    Bow,
-    Torch,
+    Normal,
+    Explosive,
+    Concussive,
+    Spell
 
 };
 
@@ -30,7 +28,7 @@ public:
     void SetCoolTime(float coolTime) { mCoolTime = coolTime; }
 
 
-    void CoolTime(float cooltime,float delta);
+    void CoolTime(float delta);
 
 public:
 
@@ -38,7 +36,9 @@ public:
     Actor* mActor = nullptr;
 
     bool IsUsing = false;
-    float mCoolTime = 0.f;
+    float mCoolTime = 100.f;
+    float mTimer    = 0.f;
+
 };
 
 

@@ -13,8 +13,11 @@ enum class MsgType
     MoveClick,
     GameClick,
     Attack,
+    Demaged,
+
+    // 건설물 생성하기
     Build,
-    Do_Build,  // 건설물 생성하기
+    Do_Build,
     Build_Complete,
     IsBuild_Complete,
     Build_Cancel,

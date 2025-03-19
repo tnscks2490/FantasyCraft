@@ -185,6 +185,11 @@ void MainScene::onMouseDown(Event* event)
             mCursor->mCursorComp->sPos   = mousePos;
             mCursor->mCursorComp->ePos   = mousePos + ax::Vec2(1,1);
         }
+        else if (mCursor->mCursorComp->mState == CursorState::Target)
+        {
+
+            printf("이게 문제야 문제");
+        }
         else
         {
             mCursor->mCursorComp->mState = CursorState::Idle;
@@ -196,6 +201,7 @@ void MainScene::onMouseDown(Event* event)
             }
             
         }
+        
     }
 }
 
@@ -222,10 +228,25 @@ void MainScene::onMouseUp(Event* event)
             auto aRoot         = A->getParent();
             UserData* userData = (UserData*)aRoot->getUserData();
 
-            if (userData->mActor->mID == TcpClient::get()->GetID())
+            if (mCursor->mCursorComp->mState == CursorState::Target)
             {
-                mPlayer->PreSelected(userData->mActor);
+                /*ActorMessage msg = {MsgType::Attack, nullptr, nullptr, nullptr};
+                SendActorMessage(userData->mActor, msg);*/
+                mPlayer->mMainActor->mUnitComp->mCurAction = ActionState::Attack;
+                mPlayer->mMainActor->mDrawComp->ChangeAnim(ECharName::Marine, ECharAct::Attack,
+                                                           mPlayer->mMainActor->mDrawComp->mCurDir);
+
+                ActorMessage msg = {MsgType::Attack, mPlayer->mMainActor, nullptr, nullptr};
+                SendActorMessage(userData->mActor, msg);
             }
+            else
+            {
+                if (userData->mActor->mID == TcpClient::get()->GetID())
+                {
+                    mPlayer->PreSelected(userData->mActor);
+                }
+            }
+            
         }
         return true;
     };
@@ -261,7 +282,11 @@ void MainScene::onMouseUp(Event* event)
     
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        if (mCursor->mCursorComp->mState == CursorState::Drag)
+        if (mCursor->mCursorComp->mState == CursorState::Target)
+        {
+            getPhysicsWorld()->queryRect(Lfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
+        }
+        else if (mCursor->mCursorComp->mState == CursorState::Drag)
         {
             float width = GetRectWidth(sPos, ePos);
             float height = GetRectHeight(sPos, ePos);

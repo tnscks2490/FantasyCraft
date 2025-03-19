@@ -127,11 +127,11 @@ void CursorComp::LClick(ax::Vec2 pos)
     }
     else if (mState == CursorState::Target)
     {
-        PK_Data data;
+        /*PK_Data data;
         data.ClientID = TcpClient::get()->GetID();
         data.input    = 114;
         data.pos      = pos;
-        TcpClient::get()->SendMessageToServer(data);
+        TcpClient::get()->SendMessageToServer(data);*/
     }
 }
 
@@ -167,7 +167,12 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
             {
                 auto otherRoot = other->mActor->GetRoot();
 
-                if (mState != CursorState::Drag)
+
+                if (mState == CursorState::Target)
+                {
+                    
+                }
+                else if (mState != CursorState::Drag)
                 {
                     if (other->mActor->mID == mActor->mID)
                         mState = CursorState::ContactTeam;
