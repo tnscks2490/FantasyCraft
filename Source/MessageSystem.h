@@ -15,6 +15,8 @@ enum class MsgType
     Attack,
     Demaged,
 
+    SetTarget,
+
     // 건설물 생성하기
     Build,
     Do_Build,

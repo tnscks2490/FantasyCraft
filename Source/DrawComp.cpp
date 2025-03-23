@@ -21,52 +21,62 @@ DrawComp::~DrawComp()
 
 void DrawComp::update(float delta)
 {
-    if (mActor->mMoveComp && mActor->mMoveComp->IsOn)
+    
+    // 커서에 한해서 변경하는 것
+    if (mActor->mActorType == ActorType::Cursor)
     {
-        if (mActor->mMoveComp->IsMoving)
+        if (mActor->mCursorComp->mState == CursorState::Idle && mCurAnimInfo->act != ECharAct::Idle)
         {
-            ECharDir newdir = CalcAniDir(mActor->GetVelocity());
-            if (mCurDir != newdir)
-            {
-                mCurDir = newdir;
-                mCurAction = ECharAct::Move;
-                ChangeAnim(mCurAnim, ECharAct::Move, mCurDir);
-            }
+            ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
         }
-        else
+        if (mActor->mCursorComp->mState == CursorState::ContactTeam && mCurAnimInfo->act != ECharAct::OnCursorTeam)
         {
-           mCurAction = ECharAct::Idle;
-           ChangeAnim(mCurAnim, ECharAct::Idle, mCurDir);
+            ChangeAnim(ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face);
+        }
+        if (mActor->mCursorComp->mState == CursorState::ContactEnemy && mCurAnimInfo->act != ECharAct::OnCursorEnemy)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::OnCursorEnemy, ECharDir::Face);
+        }
+        if (mActor->mCursorComp->mState == CursorState::Drag && mCurAnimInfo->act != ECharAct::Drag)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::Drag, ECharDir::Face);
+        }
+    }
+    else
+    {
+        ax::Vec2 dirV = mActor->mMoveComp->GetVelocity();
+
+        ECharName anim        = mCurAnimInfo->name;
+        ECharAct action       = mCurAnimInfo->act;
+        ECharDir dir          = mCurAnimInfo->dir;
+        ActionState curAction = mActor->mUnitComp->mCurAction;
+
+        if (mActionState == curAction && mCurAnimInfo->dir == CalcAniDir(dirV))
+            return;
+
+        switch (curAction)
+        {
+        case ActionState::Idle:
+            ChangeAnim(anim, ECharAct::Idle, dir);
+            mActionState = curAction;   
+            break;
+        case ActionState::Move:
+        {
+            dir        = CalcAniDir(dirV);
+            ChangeAnim(anim, ECharAct::Move, dir);
+            mActionState = curAction;
+        }
+        break;
+        case ActionState::Attack:
+            ChangeAnim(anim, ECharAct::Attack, dir);
+            mActionState = curAction;
+            break;
+        default:
+            break;
         }
     }
 
-    // 커서에 한해서 변경하는 것
-    if (mActor->mCursorComp)
-    {
-        if (mActor->mCursorComp->mState == CursorState::Idle && mCurAction != ECharAct::Idle)
-        {
-            ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
-            mCurAction = ECharAct::Idle;
-        }
-        if (mActor->mCursorComp->mState == CursorState::ContactTeam
-            && mCurAction != ECharAct::OnCursorTeam)
-        {
-            ChangeAnim(ECharName::Cursor, ECharAct::OnCursorTeam, ECharDir::Face);
-            mCurAction = ECharAct::OnCursorTeam;
-        }
-        if (mActor->mCursorComp->mState == CursorState::ContactEnemy
-            && mCurAction != ECharAct::OnCursorEnemy)
-        {
-            ChangeAnim(ECharName::Cursor, ECharAct::OnCursorEnemy, ECharDir::Face);
-            mCurAction = ECharAct::OnCursorEnemy;
-        }
-        if (mActor->mCursorComp->mState == CursorState::Drag && mCurAction != ECharAct::Drag)
-        {
-            ChangeAnim(ECharName::Cursor, ECharAct::Drag, ECharDir::Face);
-            mCurAction = ECharAct::Drag;
-        }
-        
-    }
+    
 
 }
 
@@ -284,6 +294,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
         action->setTag(20202);
         node->runAction(action);
 
+        if(mCurAnimInfo == nullptr) mCurAnimInfo = &info;
         return node;  
     }
     return nullptr;
@@ -306,7 +317,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir
         action->setTag(20202);
         node->runAction(action);
 
-        mCurAnim = name;
+        if(mCurAnimInfo == nullptr) mCurAnimInfo = &info;
         return node;
     }
     return nullptr;
@@ -329,6 +340,7 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, int idx, std::string_v
         action->setTag(20202);
         node->runAction(action);
 
+       if(mCurAnimInfo == nullptr) mCurAnimInfo = &info;
         return node;
     }
     return nullptr;
@@ -407,6 +419,8 @@ void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
     action = ax::RepeatForever::create(animate);
     action->setTag(20202);
     animNode->runAction(action);
+
+    mCurAnimInfo = &animInfo;
 }
 
 void DrawComp::ChangeAnimByIndex(ECharName Name, ECharAct act, ECharDir dir, int idx)

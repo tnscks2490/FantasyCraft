@@ -24,6 +24,8 @@ void Goal_MoveToPath::Start()
     if (mActor->mMoveComp)
         mActor->mMoveComp->SetPath(mLastDest);
 
+    mActor->mUnitComp->mCurAction = ActionState::Move;
+
     printf("이동중\n");
 }
 

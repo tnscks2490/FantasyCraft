@@ -9,7 +9,10 @@ public:
     ~MarineComp();
 
     virtual void update(float delta) override;
+    virtual void MessageProc(ActorMessage& msg) override;
 
 public:
+
+    Actor* mTarget = nullptr;
     short mPop      = 1;
 };

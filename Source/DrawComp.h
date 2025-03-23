@@ -47,10 +47,8 @@ public:
 
 
     //TODO:추후에 수정할것 생성하는 액터에 따라서
-    ECharName mCurAnim  = ECharName::None;
-    ECharAct mCurAction = ECharAct::Idle;
-    ECharDir mCurDir    = ECharDir::S;
-
+    AnimInfo* mCurAnimInfo   = nullptr;
+    ActionState mActionState = ActionState::Idle;
 
     void isSelected();
 

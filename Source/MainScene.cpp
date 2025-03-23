@@ -230,14 +230,9 @@ void MainScene::onMouseUp(Event* event)
 
             if (mCursor->mCursorComp->mState == CursorState::Target)
             {
-                /*ActorMessage msg = {MsgType::Attack, nullptr, nullptr, nullptr};
-                SendActorMessage(userData->mActor, msg);*/
-                mPlayer->mMainActor->mUnitComp->mCurAction = ActionState::Attack;
-                mPlayer->mMainActor->mDrawComp->ChangeAnim(ECharName::Marine, ECharAct::Attack,
-                                                           mPlayer->mMainActor->mDrawComp->mCurDir);
 
-                ActorMessage msg = {MsgType::Attack, mPlayer->mMainActor, nullptr, nullptr};
-                SendActorMessage(userData->mActor, msg);
+                ActorMessage msg = {MsgType::SetTarget, userData->mActor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
             }
             else
             {

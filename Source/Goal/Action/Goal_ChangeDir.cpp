@@ -22,7 +22,7 @@ void Goal_ChangeDir::Start()
     mActor->mGoalComp->mCurGoal = GoalType::AnimChange;
 
     ax::Vec2 velocity = m_Dest / m_Dest.getLength();
-    mActor->mDrawComp->mCurDir = mActor->mDrawComp->CalcAniDir(velocity);
+    mActor->mDrawComp->mCurAnimInfo->dir = mActor->mDrawComp->CalcAniDir(velocity);
 }
 
 int Goal_ChangeDir::Do()

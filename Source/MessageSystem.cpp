@@ -117,7 +117,14 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
     {
         if (receiver->mUnitComp) receiver->mUnitComp->MessageProc(msg);
         
+    } break;
+
+    case MsgType::SetTarget:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
     }
+    break;
 
     default:
         break;
