@@ -137,6 +137,10 @@ AnimInfo g_AnimInfo_Effect_SCVSpark[] = {
     {ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face, "Plist/SCVSpark.plist", "SCVSpark/%04d.png", 1, 10, (0.5f / 10), Vec2(0.5, 0.5), nullptr},
 };
 
+AnimInfo g_AnimInfo_Effect_MarineSpark[] = {
+    {ECharName::Effect, ECharAct::MarineSpark, ECharDir::Face, "Plist/MarineSpark.plist", "MarineSpark/%04d.png", 1, 15, (0.5f / 15), Vec2(0.5, 0.5), nullptr},
+};
+
 AnimInfo g_AnimInfo_CommandCenter_Build[] = {
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -275,6 +279,8 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         {
         case ECharAct::SCVSpark:
             return g_AnimInfo_Effect_SCVSpark[0];
+        case ECharAct::MarineSpark:
+            return g_AnimInfo_Effect_MarineSpark[0];
         default:
             break;
         }

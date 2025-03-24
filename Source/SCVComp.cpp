@@ -5,6 +5,7 @@
 #include "MessageSystem.h"
 #include "TcpClient.h"
 #include "Goal/Base/GoalComp.h"
+#include "DrawComp.h"
 
 
 
@@ -67,6 +68,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
     {
         mActor->mUnitComp->mStatus.HP -= msg.sender->mUnitComp->mStatus.AT;
         printf("남은 체력 : %d\n" ,mActor->mUnitComp->mStatus.HP);
+
+        mActor->mDrawComp->CreateDemageNode(msg.sender);
     }
     break;
     default:

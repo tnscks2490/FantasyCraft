@@ -28,8 +28,6 @@ public:
 
     ax::Node* CreateDemageNode(Actor* attackActor);
 
-
-
     ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);
     void ChangeRectSize(ax::Vec2 ePos);
 
@@ -48,6 +46,7 @@ public:
 
     //TODO:추후에 수정할것 생성하는 액터에 따라서
     AnimInfo* mCurAnimInfo   = nullptr;
+    ECharDir mCurDir         = ECharDir::S;
     ActionState mActionState = ActionState::Idle;
 
     void isSelected();

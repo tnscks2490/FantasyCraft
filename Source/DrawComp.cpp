@@ -44,21 +44,23 @@ void DrawComp::update(float delta)
     }
     else
     {
-        ax::Vec2 dirV = mActor->mMoveComp->GetVelocity();
-
+        ECharDir dir  = mCurAnimInfo->dir;
         ECharName anim        = mCurAnimInfo->name;
         ECharAct action       = mCurAnimInfo->act;
-        ECharDir dir          = mCurAnimInfo->dir;
         ActionState curAction = mActor->mUnitComp->mCurAction;
 
-        if (mActionState == curAction && mCurAnimInfo->dir == CalcAniDir(dirV))
+        ax::Vec2 dirV = mActor->mMoveComp->GetVelocity();
+
+        if (mActionState == curAction && mCurAnimInfo->dir == mCurDir)
             return;
 
         switch (curAction)
         {
         case ActionState::Idle:
+        {
             ChangeAnim(anim, ECharAct::Idle, dir);
             mActionState = curAction;   
+        }
             break;
         case ActionState::Move:
         {
@@ -68,15 +70,17 @@ void DrawComp::update(float delta)
         }
         break;
         case ActionState::Attack:
+        {
             ChangeAnim(anim, ECharAct::Attack, dir);
             mActionState = curAction;
+        }
             break;
         default:
             break;
         }
     }
 
-    
+    mCurDir = mCurAnimInfo->dir;
 
 }
 
@@ -374,7 +378,23 @@ ax::Node* DrawComp::CreateDemageNode(Actor* attackActor)
 {
     if (mRoot.isNotNull())
     {
-        AnimInfo& info = FindAnimInfo(ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face);
+        ECharAct effectType;
+        switch (attackActor->mActorType)
+        {
+        case ActorType::Marine:
+        {
+            effectType = ECharAct::MarineSpark;
+        } break;
+        case ActorType::SCV:
+        {
+            effectType = ECharAct::SCVSpark;
+        } break;
+        default:
+            break;
+        }
+
+
+        AnimInfo& info = FindAnimInfo(ECharName::Effect, effectType, ECharDir::Face);
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());

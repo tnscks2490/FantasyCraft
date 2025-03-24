@@ -24,10 +24,9 @@ void MarineComp::MessageProc(ActorMessage& msg)
 
         ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
         SendActorMessage(mTarget, msg);
-
+        auto pos   = mTarget->GetPosition() - mActor->GetPosition();
+        mActor->mDrawComp->mCurAnimInfo->dir = mActor->mDrawComp->CalcAniDir(pos/pos.length());
         mCurAction = ActionState::Attack;
-
-
     }
     break;
     default:
