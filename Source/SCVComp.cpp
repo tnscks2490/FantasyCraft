@@ -13,7 +13,7 @@ SCVComp::SCVComp(Actor* actor)
     : UnitComp(actor)
 {
     actor->mUnitComp = this;
-    
+    SetUnitStatus(ActorType::SCV);
 }
 
 SCVComp::~SCVComp() {}
@@ -66,10 +66,13 @@ void SCVComp::MessageProc(ActorMessage& msg)
 
     case MsgType::Attack:
     {
-        mActor->mUnitComp->mStatus.HP -= msg.sender->mUnitComp->mStatus.AT;
+        int damage = msg.sender->mUnitComp->mStatus.AT - mActor->mUnitComp->mStatus.DF;
+        if (damage  <= 0 ) damage = 1;
+
+        mActor->mUnitComp->mStatus.HP -= damage;
         printf("남은 체력 : %d\n" ,mActor->mUnitComp->mStatus.HP);
 
-        mActor->mDrawComp->CreateDemageNode(msg.sender);
+        mActor->mDrawComp->CreateDemageNode(msg.sender->mActorType);
 
         if (mActor->mUnitComp->mStatus.HP <= 0)
         {

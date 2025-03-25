@@ -27,13 +27,17 @@ void UnitComp::SetUnitStatus(ActorType Atype)
    case ActorType::Cursor:
        break;
    case ActorType::SCV:
-       mStatus.AT = 1;
-       mStatus.HP = 3;
+       mStatus.AT = 5;
+       mStatus.HP = 60;
+       mStatus.RA = 1;
+       mStatus.SI = 7;
        
        break;
    case ActorType::Marine:
-       mStatus.AT = 1;
-       mStatus.HP = 3;
+       mStatus.AT = 6;
+       mStatus.HP = 40;
+       mStatus.RA = 4;
+       mStatus.SI = 7;
        break;
    case ActorType::CommandCenter:
        break;

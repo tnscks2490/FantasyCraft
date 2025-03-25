@@ -61,7 +61,6 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     selectanim->setVisible(false);
     node->addChild(selectanim);
 
-    auto Dnode = draw->CreateDemageNode(actor);
 
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
 
@@ -98,13 +97,8 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim = draw->CreateAnimNode(ECharName::Marine, ECharAct::Idle, ECharDir::S, "Anim");
+    auto selectanim = draw->CreateSelectedNode(); 
 
-    
-    auto selectanim = ax::DrawNode::create();
-    selectanim->drawCircle(ax::Vec2(0, -8), 8.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
-    selectanim->setName("Select");
-    selectanim->setVisible(false);
-    node->addChild(selectanim,0.9f);
 
 
     auto goal           = new GoalComp(actor);
@@ -113,7 +107,6 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     auto weapon        = new WeaponComp(actor);
     weapon->AddWeapon(WeaponType::Normal);
 
-    unit->SetUnitStatus(ActorType::Marine);
 
 
     UserData* mUserData = new UserData;

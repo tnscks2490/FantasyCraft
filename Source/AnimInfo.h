@@ -68,6 +68,7 @@ enum class ECharAct
     Move,
     Attack,
     Gathering,
+    Death,
     //////////
     // 행동들 추가하기
 
@@ -80,7 +81,6 @@ enum class ECharAct
     //Effect Action
     SCVSpark,
     MarineSpark,
-    SCVExplo,
 
 
     //Cursor Action

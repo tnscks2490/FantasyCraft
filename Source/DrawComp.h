@@ -14,25 +14,23 @@ public:
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
+
     ax::Node* CreateBPPhysicsNode(ax::Vec2 bodysize);
     ax::Node* Create_Small_BPPhysicsNode();
     ax::Node* Create_Middle_BPPhysicsNode();
     ax::Node* Create_Big_BPPhysicsNode();
+
     ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
-    ax::Node* CreateAnimNode(ECharName name,
-                             ECharAct action,
-                             ECharDir dir,
+    ax::Node* CreateAnimNode(ECharName name, ECharAct action, ECharDir dir,
                              std::string_view nodeName = "Effect");
    
     ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
 
-    ax::Node* CreateDemageNode(Actor* attackActor);
+    ax::Node* CreateDemageNode(ActorType type);
 
     ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);
     void ChangeRectSize(ax::Vec2 ePos);
-
-    void Turn_ChangeAnim(ax::Vec2 );
 
     void AddUserData();
 
@@ -57,6 +55,5 @@ public:
 
 public:
     Ptr<ax::Node> mRoot = nullptr;
-
 };
 

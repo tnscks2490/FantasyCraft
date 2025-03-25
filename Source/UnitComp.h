@@ -42,6 +42,8 @@ struct Status
     int SD = 0;
     int AT = 0;
     int DF = 0;
+    int RA = 0;
+    int SI = 0;
 };
 
 
@@ -55,11 +57,10 @@ public:
     virtual void update(float delta) override;
     virtual void SetUnitStatus(ActorType Atype);
 
-    virtual void Building(ActorMessage& msg) {}
-
 
     Status mStatus;
     ActionState mCurAction = ActionState::Idle;
+    UnitArea mUnitArea     = UnitArea::None;
 
 };
 

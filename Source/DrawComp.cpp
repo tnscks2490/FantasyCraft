@@ -22,10 +22,6 @@ DrawComp::~DrawComp()
 void DrawComp::update(float delta)
 {
 
-    if (mActor->mActorType == ActorType::Marine)
-    {
-        printf("%d || ", mCurAnimInfo->dir);
-    }
 
     // 커서에 한해서 변경하는 것
     if (mActor->mActorType == ActorType::Cursor)
@@ -56,8 +52,29 @@ void DrawComp::update(float delta)
 
         ax::Vec2 dirV = mActor->mMoveComp->GetVelocity();
 
-        if (mActionState == curAction && mCurAnimInfo->dir == CalcAniDir(dirV))
-            return;
+       
+        if (mActionState == curAction)
+        {
+            if (dirV == ax::Vec2::ZERO)
+            {
+                if (mCurAnimInfo->dir == mCurDir)
+                    return;
+            }
+            else
+            {
+                if (mCurAnimInfo->dir == CalcAniDir(dirV))
+                    return;
+            }       
+        } 
+            
+
+
+
+        if (dirV == ax::Vec2::ZERO)
+            mCurAnimInfo->dir = mCurDir;
+         
+
+        mCurDir = CalcAniDir(dirV);
 
         switch (curAction)
         {
@@ -65,37 +82,36 @@ void DrawComp::update(float delta)
         {
             ChangeAnim(anim, ECharAct::Idle, dir);
             mActionState = curAction;   
-        }
-            break;
+        } break;
+
         case ActionState::Move:
         {
             dir        = CalcAniDir(dirV);
             ChangeAnim(anim, ECharAct::Move, dir);
             mActionState = curAction;
-        }
-        break;
+        } break;
+
         case ActionState::Attack:
         {
-            ChangeAnim(anim, ECharAct::Attack, dir);
+            ChangeAnim(anim, ECharAct::Attack, dir,false);
             mActionState = curAction;
         } break;
 
         case ActionState::Death:
         {
-            ChangeAnim(ECharName::Effect, ECharAct::SCVExplo, ECharDir::Face);
+            ChangeAnim(anim, ECharAct::Death, ECharDir::Face, false);
             mActionState = curAction;
-        }
-        break;
+            mCurDir      = ECharDir::Face;
+            return;
+        } break;
+
         default:
             break;
         }
-    }
 
-    if (mActor->mActorType == ActorType::Marine)
-    {
-        printf("%d || ", mCurAnimInfo->dir);
+        mCurDir = dir;
     }
-    mCurDir = mCurAnimInfo->dir;
+    
 }
 
 ax::Node* DrawComp::CreateRootNode()
@@ -368,47 +384,29 @@ ax::Node* DrawComp::CreateSelectedNode()
 {
     if (mRoot.isNotNull())
     {
-        AnimInfo& info = FindAnimInfo(ECharName::Select, ECharAct::Idle, ECharDir::Face);
-        info.CreateAnimation();
-
-        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
-        node->setName("SelectNode");
-        mRoot->addChild(node);
-
-        ax::Animate* animate = ax::Animate::create(info.animation.get());
-
-        ax::Action* action = ax::RepeatForever::create(animate);
-        action->setTag(20202);
-        node->runAction(action);
-
-        node->setVisible(false);
-
-        return node;
+        auto selectanim = ax::DrawNode::create();
+        selectanim->drawCircle(ax::Vec2(0, -8), 8.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+        selectanim->setName("Select");
+        selectanim->setVisible(false);
+        mRoot->addChild(selectanim, 0.9f);
     }
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateDemageNode(Actor* attackActor)
+ax::Node* DrawComp::CreateDemageNode(ActorType type)
 {
     if (mRoot.isNotNull())
     {
-        ECharAct effectType;
-        switch (attackActor->mActorType)
+        ECharAct animType = ECharAct::Idle;
+        switch (type)
         {
-        case ActorType::Marine:
-        {
-            effectType = ECharAct::MarineSpark;
-        } break;
-        case ActorType::SCV:
-        {
-            effectType = ECharAct::SCVSpark;
-        } break;
-        default:
-            break;
+        case ActorType::Marine: animType = ECharAct::MarineSpark; break;
+        case ActorType::SCV: animType = ECharAct::SCVSpark; break;
+        default: break;
         }
 
 
-        AnimInfo& info = FindAnimInfo(ECharName::Effect, effectType, ECharDir::Face);
+        AnimInfo& info = FindAnimInfo(ECharName::Effect, animType, ECharDir::Face);
         info.CreateAnimation();
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
@@ -416,7 +414,6 @@ ax::Node* DrawComp::CreateDemageNode(Actor* attackActor)
         mRoot->addChild(node);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
-
         ax::Action* action = ax::Repeat::create(animate,1);
         action->setTag(20202);
         node->runAction(action);
@@ -449,20 +446,13 @@ void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir, bool repea
 
     ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
     ax::Action* action;
-    if (repeat)
-    {
-        action = ax::RepeatForever::create(animate);
-        action->setTag(20202);
-        animNode->runAction(action);
-        mCurAnimInfo = &animInfo;
-    }
-    else
-    {
-        action = ax::Repeat::create(animate,1);
-        action->setTag(20202);
-        animNode->runAction(action);
-        mCurAnimInfo = &animInfo;
-    } 
+
+    if (repeat) { action = ax::RepeatForever::create(animate);}
+    else { action = ax::Repeat::create(animate,1);}
+
+    action->setTag(20202);
+    animNode->runAction(action);
+    mCurAnimInfo = &animInfo;
 }
 
 void DrawComp::ChangeAnimByIndex(ECharName Name, ECharAct act, ECharDir dir, int idx)

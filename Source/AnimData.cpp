@@ -3,23 +3,6 @@
 
 using namespace ax;
 
-
-AnimInfo g_AnimInfo_Farmer_Idle[] = {
-    {ECharName::Farmer, ECharAct::Idle, ECharDir::Face, "Plist/Farmer.plist","Farmer/Idle/Face/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Idle, ECharDir::Back, "Plist/Farmer.plist","Farmer/Idle/Back/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Idle, ECharDir::Left, "Plist/Farmer.plist","Farmer/Idle/Left/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Idle, ECharDir::Right, "Plist/Farmer.plist","Farmer/Idle/Right/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-
-};
-
-AnimInfo g_AnimInfo_Farmer_Move[] = {
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Face, "Plist/Farmer.plist", "Farmer/Move/Face/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Back, "Plist/Farmer.plist", "Farmer/Move/Back/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Left, "Plist/Farmer.plist", "Farmer/Move/Left/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Farmer, ECharAct::Move, ECharDir::Right, "Plist/Farmer.plist", "Farmer/Move/Right/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
-
-};
-
 AnimInfo g_AnimInfo_Marin_Move[] = {
     {ECharName::Marine, ECharAct::Move, ECharDir::N, "Plist/Marine.plist", "Marine/Move/1/%04d.png", 1, 9, (0.9f / 9), Vec2(0.5, 0.5), nullptr},
     {ECharName::Marine, ECharAct::Move, ECharDir::NNE, "Plist/Marine.plist", "Marine/Move/2/%04d.png", 1, 9, (0.9f / 9),    Vec2(0.5, 0.5), nullptr},
@@ -76,6 +59,10 @@ AnimInfo g_AnimInfo_Marine_Attack[] = {
 
 
 };
+AnimInfo g_AnimInfo_Marine_Death[] = {
+        {ECharName::Marine, ECharAct::Death, ECharDir::Face, "Plist/Marine.plist", "Marine/Death/%04d.png", 1, 8, (1.f / 8), Vec2(0.5, 0.5), nullptr},
+
+};
 
 AnimInfo g_AnimInfo_SCV_Idle[] = {
     {ECharName::SCV, ECharAct::Idle, ECharDir::N, "Plist/SCV.plist", "SCV/Idle/1/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -113,7 +100,9 @@ AnimInfo g_AnimInfo_SCV_Move[] = {
     {ECharName::SCV, ECharAct::Move, ECharDir::NW, "Plist/SCV.plist", "SCV/Move/15/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
     {ECharName::SCV, ECharAct::Move, ECharDir::NNW, "Plist/SCV.plist", "SCV/Move/16/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
 };
-
+AnimInfo g_AnimInfo_SCV_Death[] = {
+    {ECharName::SCV, ECharAct::Death, ECharDir::Face, "Plist/SCV.plist", "SCV/Death/%04d.png", 1, 9, (1.f / 9), Vec2(0.5, 0.5), nullptr},
+};
 AnimInfo g_AnimInfo_SCV_Gathering[] = {
     {ECharName::SCV, ECharAct::Gathering, ECharDir::N, "Plist/SCV.plist", "SCV/Gathering/1/1.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
     {ECharName::SCV, ECharAct::Gathering, ECharDir::NNE, "Plist/SCV.plist", "SCV/Gathering/2/2.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
@@ -133,17 +122,15 @@ AnimInfo g_AnimInfo_SCV_Gathering[] = {
     {ECharName::SCV, ECharAct::Gathering, ECharDir::NNW, "Plist/SCV.plist", "SCV/Gathering/16/16.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
 };
 
+
 AnimInfo g_AnimInfo_Effect_SCVSpark[] = {
     {ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face, "Plist/SCVSpark.plist", "SCVSpark/%04d.png", 1, 10, (0.5f / 10), Vec2(0.5, 0.5), nullptr},
 };
-
 AnimInfo g_AnimInfo_Effect_MarineSpark[] = {
     {ECharName::Effect, ECharAct::MarineSpark, ECharDir::Face, "Plist/MarineSpark.plist", "MarineSpark/%04d.png", 1, 15, (0.5f / 15), Vec2(0.5, 0.5), nullptr},
 };
 
-AnimInfo g_AnimInfo_Effect_SCVExplo[]     = {
-     {ECharName::Effect, ECharAct::SCVExplo, ECharDir::Face, "Plist/SCVExplo.plist", "SCVExplo/%04d.png", 1, 9, (2.f / 9), Vec2(0.5, 0.5), nullptr},
-};
+
 AnimInfo g_AnimInfo_CommandCenter_Build[] = {
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -180,28 +167,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
 {
     switch (Name)
     {
-    case ECharName::Farmer:
-        switch (action)
-        {
-        case ECharAct::Idle:
-            for (int i = 0; i < 4; ++i)
-            {
-                if (g_AnimInfo_Farmer_Idle[i].dir == dir)
-                    return g_AnimInfo_Farmer_Idle[i];
-            }
-            break;
-        case ECharAct::Move:
-            for (int i = 0; i < 4; ++i)
-            {
-                if (g_AnimInfo_Farmer_Move[i].dir == dir)
-                    return g_AnimInfo_Farmer_Move[i];
-            }
-            break;
-        default:
-            break;
-        }
-        break;
-
     case ECharName::Marine:
         switch (action)
         {
@@ -226,8 +191,12 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
                 if (g_AnimInfo_Marine_Attack[i].dir == dir)
                     return g_AnimInfo_Marine_Attack[i];
             } break;
+        case ECharAct::Death:return g_AnimInfo_Marine_Death[0];
 
-        } break;
+        }
+        break;
+
+
     case ECharName::SCV:
         switch (action)
         {
@@ -251,7 +220,11 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
                     return g_AnimInfo_SCV_Gathering[i];
             }
             break;
-        }break;
+        case ECharAct::Death:
+            return g_AnimInfo_SCV_Death[0];
+
+        }
+        break;
 
     case ECharName::CommandCenter:
         switch (action)
@@ -284,8 +257,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             return g_AnimInfo_Effect_SCVSpark[0];
         case ECharAct::MarineSpark:
             return g_AnimInfo_Effect_MarineSpark[0];
-        case ECharAct::SCVExplo:
-            return g_AnimInfo_Effect_SCVExplo[0];
         default:
             break;
         }
