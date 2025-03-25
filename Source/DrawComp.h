@@ -23,6 +23,7 @@ public:
                              ECharAct action,
                              ECharDir dir,
                              std::string_view nodeName = "Effect");
+   
     ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
 
@@ -36,7 +37,7 @@ public:
     void AddUserData();
 
 
-    void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir);
+    void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir, bool repeat = true);
     void ChangeAnimByIndex(ECharName Name, ECharAct action, ECharDir dir,int idx);
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
 

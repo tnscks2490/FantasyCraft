@@ -8,6 +8,7 @@ enum class ActionState
     Building,
     Attack,
     Move,
+    Death,
 
 };
 

@@ -21,7 +21,12 @@ DrawComp::~DrawComp()
 
 void DrawComp::update(float delta)
 {
-    
+
+    if (mActor->mActorType == ActorType::Marine)
+    {
+        printf("%d || ", mCurAnimInfo->dir);
+    }
+
     // 커서에 한해서 변경하는 것
     if (mActor->mActorType == ActorType::Cursor)
     {
@@ -51,7 +56,7 @@ void DrawComp::update(float delta)
 
         ax::Vec2 dirV = mActor->mMoveComp->GetVelocity();
 
-        if (mActionState == curAction && mCurAnimInfo->dir == mCurDir)
+        if (mActionState == curAction && mCurAnimInfo->dir == CalcAniDir(dirV))
             return;
 
         switch (curAction)
@@ -73,15 +78,24 @@ void DrawComp::update(float delta)
         {
             ChangeAnim(anim, ECharAct::Attack, dir);
             mActionState = curAction;
+        } break;
+
+        case ActionState::Death:
+        {
+            ChangeAnim(ECharName::Effect, ECharAct::SCVExplo, ECharDir::Face);
+            mActionState = curAction;
         }
-            break;
+        break;
         default:
             break;
         }
     }
 
+    if (mActor->mActorType == ActorType::Marine)
+    {
+        printf("%d || ", mCurAnimInfo->dir);
+    }
     mCurDir = mCurAnimInfo->dir;
-
 }
 
 ax::Node* DrawComp::CreateRootNode()
@@ -403,7 +417,7 @@ ax::Node* DrawComp::CreateDemageNode(Actor* attackActor)
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
 
-        ax::Action* action = ax::RepeatForever::create(animate);
+        ax::Action* action = ax::Repeat::create(animate,1);
         action->setTag(20202);
         node->runAction(action);
 
@@ -425,7 +439,7 @@ void DrawComp::AddUserData()
 }
 
 
-void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
+void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir, bool repeat)
 {
     auto animNode = mRoot->getChildByName("Anim");
     animNode->stopActionByTag(20202);
@@ -434,13 +448,21 @@ void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir)
     animInfo.CreateAnimation();
 
     ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
-
     ax::Action* action;
-    action = ax::RepeatForever::create(animate);
-    action->setTag(20202);
-    animNode->runAction(action);
-
-    mCurAnimInfo = &animInfo;
+    if (repeat)
+    {
+        action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        animNode->runAction(action);
+        mCurAnimInfo = &animInfo;
+    }
+    else
+    {
+        action = ax::Repeat::create(animate,1);
+        action->setTag(20202);
+        animNode->runAction(action);
+        mCurAnimInfo = &animInfo;
+    } 
 }
 
 void DrawComp::ChangeAnimByIndex(ECharName Name, ECharAct act, ECharDir dir, int idx)

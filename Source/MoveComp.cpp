@@ -57,7 +57,6 @@ bool MoveComp::IsArrive()
             int x = (int)mypos.x / 16;
             int y = (int)mypos.y / 16;
             World::get()->mPath->mColMap->SetAt(x, y);
-            //World::get()->mPath->DebugMap();
         }
         return true;
     }

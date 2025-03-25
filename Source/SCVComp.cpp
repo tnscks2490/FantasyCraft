@@ -70,6 +70,12 @@ void SCVComp::MessageProc(ActorMessage& msg)
         printf("남은 체력 : %d\n" ,mActor->mUnitComp->mStatus.HP);
 
         mActor->mDrawComp->CreateDemageNode(msg.sender);
+
+        if (mActor->mUnitComp->mStatus.HP <= 0)
+        {
+            mCurAction = ActionState::Death;
+
+        }
     }
     break;
     default:

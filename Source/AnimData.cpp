@@ -21,22 +21,22 @@ AnimInfo g_AnimInfo_Farmer_Move[] = {
 };
 
 AnimInfo g_AnimInfo_Marin_Move[] = {
-    {ECharName::Marine, ECharAct::Move, ECharDir::N, "Plist/Marine.plist", "Marine/Move/1/%04d.png", 1, 9, (1.f / 9), Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NNE, "Plist/Marine.plist", "Marine/Move/2/%04d.png", 1, 9, (1.f / 9),    Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NE, "Plist/Marine.plist", "Marine/Move/3/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::ENE, "Plist/Marine.plist", "Marine/Move/4/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::E, "Plist/Marine.plist", "Marine/Move/5/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::ESE, "Plist/Marine.plist", "Marine/Move/6/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SE, "Plist/Marine.plist", "Marine/Move/7/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SSE, "Plist/Marine.plist", "Marine/Move/8/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::S, "Plist/Marine.plist", "Marine/Move/9/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SSW, "Plist/Marine.plist", "Marine/Move/10/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::SW, "Plist/Marine.plist", "Marine/Move/11/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::WSW, "Plist/Marine.plist", "Marine/Move/12/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::W, "Plist/Marine.plist", "Marine/Move/13/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::WNW, "Plist/Marine.plist", "Marine/Move/14/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NW, "Plist/Marine.plist", "Marine/Move/15/%04d.png", 1, 9, (1.f / 9),    Vec2(0.5, 0.5), nullptr},
-    {ECharName::Marine, ECharAct::Move, ECharDir::NNW, "Plist/Marine.plist", "Marine/Move/16/%04d.png", 1, 9, (1.f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::N, "Plist/Marine.plist", "Marine/Move/1/%04d.png", 1, 9, (0.9f / 9), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NNE, "Plist/Marine.plist", "Marine/Move/2/%04d.png", 1, 9, (0.9f / 9),    Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NE, "Plist/Marine.plist", "Marine/Move/3/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::ENE, "Plist/Marine.plist", "Marine/Move/4/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::E, "Plist/Marine.plist", "Marine/Move/5/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::ESE, "Plist/Marine.plist", "Marine/Move/6/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SE, "Plist/Marine.plist", "Marine/Move/7/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SSE, "Plist/Marine.plist", "Marine/Move/8/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::S, "Plist/Marine.plist", "Marine/Move/9/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SSW, "Plist/Marine.plist", "Marine/Move/10/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::SW, "Plist/Marine.plist", "Marine/Move/11/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::WSW, "Plist/Marine.plist", "Marine/Move/12/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::W, "Plist/Marine.plist", "Marine/Move/13/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::WNW, "Plist/Marine.plist", "Marine/Move/14/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NW, "Plist/Marine.plist", "Marine/Move/15/%04d.png", 1, 9, (0.9f / 9),    Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::Move, ECharDir::NNW, "Plist/Marine.plist", "Marine/Move/16/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Marin_Idle[] = {
         {ECharName::Marine, ECharAct::Idle, ECharDir::N, "Plist/Marine.plist", "Marine/Idle/1/%04d.png", 1, 5,(1.f / 5), Vec2(0.5, 0.5), nullptr},
@@ -141,6 +141,9 @@ AnimInfo g_AnimInfo_Effect_MarineSpark[] = {
     {ECharName::Effect, ECharAct::MarineSpark, ECharDir::Face, "Plist/MarineSpark.plist", "MarineSpark/%04d.png", 1, 15, (0.5f / 15), Vec2(0.5, 0.5), nullptr},
 };
 
+AnimInfo g_AnimInfo_Effect_SCVExplo[]     = {
+     {ECharName::Effect, ECharAct::SCVExplo, ECharDir::Face, "Plist/SCVExplo.plist", "SCVExplo/%04d.png", 1, 9, (2.f / 9), Vec2(0.5, 0.5), nullptr},
+};
 AnimInfo g_AnimInfo_CommandCenter_Build[] = {
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -281,6 +284,8 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             return g_AnimInfo_Effect_SCVSpark[0];
         case ECharAct::MarineSpark:
             return g_AnimInfo_Effect_MarineSpark[0];
+        case ECharAct::SCVExplo:
+            return g_AnimInfo_Effect_SCVExplo[0];
         default:
             break;
         }

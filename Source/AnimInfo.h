@@ -80,6 +80,7 @@ enum class ECharAct
     //Effect Action
     SCVSpark,
     MarineSpark,
+    SCVExplo,
 
 
     //Cursor Action
