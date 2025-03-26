@@ -56,6 +56,13 @@ enum class ECharName
     // ECharDir == Face (기준점 항상 나옴)
     Effect,
     /////////////
+    //UI
+    LoadBar,
+
+
+
+
+    /////////////////
     Cursor,
     Name_Count,
 };
@@ -81,6 +88,11 @@ enum class ECharAct
     //Effect Action
     SCVSpark,
     MarineSpark,
+
+
+    //LoadBar
+    Load,
+    Empty,
 
 
     //Cursor Action
@@ -120,3 +132,4 @@ struct BPInfo
 
 AnimInfo& FindAnimInfo(ECharName name, ECharAct act, ECharDir dir);
 AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int idx);
+AnimInfo& ChangeFrameTime();

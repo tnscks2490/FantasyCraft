@@ -2,6 +2,20 @@
 #include "AnimInfo.h"
 
 using namespace ax;
+// Playable UI
+
+AnimInfo g_AnimInfo_UnitLoadBar_Load[] = {
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/%04d.png", 1, 68, (1.f / 68), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_UnitLoadBar_Empty[] = {
+    {ECharName::LoadBar, ECharAct::Empty, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Empty/%04d.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+
+
+
+
+
+
 
 AnimInfo g_AnimInfo_Marin_Move[] = {
     {ECharName::Marine, ECharAct::Move, ECharDir::N, "Plist/Marine.plist", "Marine/Move/1/%04d.png", 1, 9, (0.9f / 9), Vec2(0.5, 0.5), nullptr},
@@ -196,7 +210,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         }
         break;
 
-
     case ECharName::SCV:
         switch (action)
         {
@@ -260,8 +273,23 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         default:
             break;
         }
+    } break;
+
+    case ECharName::LoadBar:
+    {
+        switch (action)
+        {
+        case ECharAct::Load:
+            return g_AnimInfo_UnitLoadBar_Load[0];
+        case ECharAct::Empty:
+            return g_AnimInfo_UnitLoadBar_Empty[0];
+
+        default:
+            break;
+        }
     }
-    break;
+
+
     }
 
     return g_AnimInfo_Effect_SCVSpark[0];
