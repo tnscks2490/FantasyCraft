@@ -283,7 +283,6 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             return g_AnimInfo_UnitLoadBar_Load[0];
         case ECharAct::Empty:
             return g_AnimInfo_UnitLoadBar_Empty[0];
-
         default:
             break;
         }
@@ -313,4 +312,11 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
         break;
     }
     return g_AnimInfo_Effect_SCVSpark[idx];
+}
+
+AnimInfo& ChangeFrameTime(AnimInfo* animInfo, float time)
+{
+    animInfo->perFrameTime = time;
+
+    return *animInfo;
 }

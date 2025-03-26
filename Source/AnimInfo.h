@@ -125,11 +125,7 @@ struct AnimInfo
     void CreateAnimation();
 };
 
-struct BPInfo
-{
-
-};
 
 AnimInfo& FindAnimInfo(ECharName name, ECharAct act, ECharDir dir);
 AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int idx);
-AnimInfo& ChangeFrameTime();
+AnimInfo& ChangeFrameTime(AnimInfo* animInfo, float time);
