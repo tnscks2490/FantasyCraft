@@ -30,6 +30,9 @@ public:
     ax::Vec2 SetButtonPosition(int num);
     ax::MenuItemImage* CreateAddButton(ButtonType type);
 
+    
+
+
 public:
     ax::Sprite* mConsoleUI;
     ax::Sprite* mMineralIcon;

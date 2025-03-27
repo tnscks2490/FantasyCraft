@@ -94,6 +94,9 @@ enum class ECharAct
     Load,
     Empty,
 
+    //HP_Bar
+    HPBar,
+
 
     //Cursor Action
     OnCursorTeam,

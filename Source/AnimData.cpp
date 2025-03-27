@@ -77,8 +77,17 @@ AnimInfo g_AnimInfo_Marine_Death[] = {
         {ECharName::Marine, ECharAct::Death, ECharDir::Face, "Plist/Marine.plist", "Marine/Death/%04d.png", 1, 8, (1.f / 8), Vec2(0.5, 0.5), nullptr},
 
 };
+AnimInfo g_AnimInfo_Marine_HP_Bar[] = {
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0005.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0006.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Marine, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Marine/0007.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
-AnimInfo g_AnimInfo_SCV_Idle[] = {
+AnimInfo g_AnimInfo_SCV_Idle[]      = {
     {ECharName::SCV, ECharAct::Idle, ECharDir::N, "Plist/SCV.plist", "SCV/Idle/1/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::SCV, ECharAct::Idle, ECharDir::NNE, "Plist/SCV.plist", "SCV/Idle/2/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
     {ECharName::SCV, ECharAct::Idle, ECharDir::NE, "Plist/SCV.plist", "SCV/Idle/3/0001.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
@@ -135,7 +144,14 @@ AnimInfo g_AnimInfo_SCV_Gathering[] = {
     {ECharName::SCV, ECharAct::Gathering, ECharDir::NW, "Plist/SCV.plist", "SCV/Gathering/15/15.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
     {ECharName::SCV, ECharAct::Gathering, ECharDir::NNW, "Plist/SCV.plist", "SCV/Gathering/16/16.png", 1, 1, (1.f / 1),     Vec2(0.5, 0.5), nullptr},
 };
-
+AnimInfo g_AnimInfo_SCV_HP_Bar[] = {
+    {ECharName::SCV, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/SCV/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/SCV/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/SCV/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/SCV/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/SCV/0005.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::SCV, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/SCV/0006.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
 AnimInfo g_AnimInfo_Effect_SCVSpark[] = {
     {ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face, "Plist/SCVSpark.plist", "SCVSpark/%04d.png", 1, 10, (0.5f / 10), Vec2(0.5, 0.5), nullptr},
@@ -300,8 +316,20 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
     switch (name)
     {
     case ECharName::Marine:
+        switch (act)
+        {
+        case ECharAct::HPBar: return g_AnimInfo_Marine_HP_Bar[idx];
+        default:
+            break;
+        }
         break;
     case ECharName::SCV:
+        switch (act)
+        {
+        case ECharAct::HPBar: return g_AnimInfo_SCV_HP_Bar[idx];
+        default:
+            break;
+        }
         break;
     case ECharName::CommandCenter:
         return g_AnimInfo_CommandCenter_Build[idx];
