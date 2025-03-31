@@ -61,11 +61,11 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     selectanim->setVisible(false);
     node->addChild(selectanim);
 
+    auto hpbar = draw->CreateHPBarByIndex(ECharName::SCV, 0);
+    hpbar->setPosition(ax::Vec2(0, -20));
 
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
 
-    /*auto selectanim = draw->CreateAnimNode(ECharName::Select, "SelectNode");
-    selectanim->setVisible(false);*/
     
     auto goal = new GoalComp(actor);
     auto move = new MoveComp(actor);
@@ -98,7 +98,8 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim = draw->CreateAnimNode(ECharName::Marine, ECharAct::Idle, ECharDir::S, "Anim");
     auto selectanim = draw->CreateSelectedNode(); 
-
+    auto hpbar      = draw->CreateHPBarByIndex(ECharName::Marine, 0);
+    hpbar->setPosition(ax::Vec2(0, -20));
 
 
     auto goal           = new GoalComp(actor);

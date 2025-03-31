@@ -26,6 +26,7 @@ public:
    
     ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
+    ax::Node* CreateHPBarByIndex(ECharName name, int idx, std::string_view nodeName = "HpBar");
 
     ax::Node* CreateDemageNode(ActorType type);
 
