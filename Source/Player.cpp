@@ -60,6 +60,8 @@ void Player::Clear()
         }
     }
     PlayerActors.clear();
+    if (mMainActor)
+        mMainActor = nullptr;
 }
 
 void Player::Selected()
@@ -145,6 +147,15 @@ void Player::ReSelected()
     Clear();
     Selected();
     PrePlayerActors.clear();
+
+    if (PlayerActors.size() == 0)
+    {
+
+    }
+    else if (PlayerActors.size() > 0)
+    {
+
+    }
 }
 
 void Player::ButtonAction(ax::Object* sender)

@@ -66,13 +66,18 @@ void SCVComp::MessageProc(ActorMessage& msg)
 
     case MsgType::Attack:
     {
-        int damage = msg.sender->mUnitComp->mStatus.AT - mActor->mUnitComp->mStatus.DF;
+        int damage = msg.sender->mUnitComp->mStatus.AT - mStatus.DF;
         if (damage  <= 0 ) damage = 1;
 
-        mActor->mUnitComp->mStatus.HP -= damage;
-        printf("남은 체력 : %d\n" ,mActor->mUnitComp->mStatus.HP);
+        mStatus.HP -= damage;
+        printf("남은 체력 : %d\n" ,mStatus.HP);
 
+        SCVHpChange();
         mActor->mDrawComp->CreateDemageNode(msg.sender->mActorType);
+
+
+
+
 
         if (mActor->mUnitComp->mStatus.HP <= 0)
         {
@@ -106,6 +111,15 @@ void SCVComp::update(float delta) {
 void SCVComp::Repair()
 {
 
+}
+
+void SCVComp::SCVHpChange()
+{
+    int hp = mStatus.HP;
+
+    int t = 6 - (hp / 9);
+
+    mActor->mDrawComp->ChangeHpBarByIndex(ECharName::SCV, t);
 }
 
 void SCVComp::Build_Continue(ActorMessage& msg)

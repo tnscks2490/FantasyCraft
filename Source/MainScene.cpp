@@ -232,7 +232,10 @@ void MainScene::onMouseUp(Event* event)
             {
 
                 ActorMessage msg = {MsgType::SetTarget, userData->mActor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                for (auto ac : mPlayer->PlayerActors)
+                {
+                    SendActorMessage(ac, msg);
+                }
             }
             else
             {
@@ -287,9 +290,12 @@ void MainScene::onMouseUp(Event* event)
             float height = GetRectHeight(sPos, ePos);
             ax::Vec2 zpos = GetZeroPointInRect(sPos, ePos);
 
+            // 여러개가 선택된다면 해당 함수만 여러번 호출된다.
             getPhysicsWorld()->queryRect(Lfunc, Rect(zpos.x, zpos.y, width, height), nullptr);
 
-            if (mPlayer->PrePlayerActors.size() ==1)
+
+            mPlayer->ReSelected();
+            /*if (mPlayer->PrePlayerActors.size() ==1)
             {
                 mPlayer->ReSelected();
                 printf("한명만 선택");
@@ -297,7 +303,7 @@ void MainScene::onMouseUp(Event* event)
             else if (mPlayer->PrePlayerActors.size() > 1)
             {
                 mPlayer->ReSelected();
-            }
+            }*/
             mCursor->mCursorComp->GreenRectClear();
             mCursor->mCursorComp->mState = CursorState::Idle;
             mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;

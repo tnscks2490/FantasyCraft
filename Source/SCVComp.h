@@ -14,7 +14,7 @@ public:
     void Building(ActorMessage& msg);
     void Repair();
 
-
+    void SCVHpChange();
     void Build_Continue(ActorMessage& msg);
 
     

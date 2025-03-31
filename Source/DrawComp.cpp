@@ -389,6 +389,7 @@ ax::Node* DrawComp::CreateSelectedNode()
         selectanim->setName("Select");
         selectanim->setVisible(false);
         mRoot->addChild(selectanim, 0.9f);
+        return selectanim;
     }
     return nullptr;
 }
@@ -402,7 +403,7 @@ ax::Node* DrawComp::CreateHPBarByIndex(ECharName name, int idx, std::string_view
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName(nodeName);
-        mRoot->addChild(node);
+        
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
 
@@ -485,6 +486,22 @@ void DrawComp::ChangeAnimByIndex(ECharName Name, ECharAct act, ECharDir dir, int
     animNode->stopActionByTag(20202);
 
     AnimInfo& animInfo = FindAnimInfoByIndex(Name, act, dir,idx);
+    animInfo.CreateAnimation();
+
+    ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
+
+    ax::Action* action;
+    action = ax::RepeatForever::create(animate);
+    action->setTag(20202);
+    animNode->runAction(action);
+}
+
+void DrawComp::ChangeHpBarByIndex(ECharName Name, int idx)
+{
+    auto animNode = mRoot->getChildByName("Select")->getChildByName("HpBar");
+    animNode->stopActionByTag(20202);
+
+    AnimInfo& animInfo = FindAnimInfoByIndex(Name, ECharAct::HPBar, ECharDir::Face, idx);
     animInfo.CreateAnimation();
 
     ax::Animate* animate = ax::Animate::create(animInfo.animation.get());

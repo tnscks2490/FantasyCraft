@@ -27,7 +27,7 @@ public:
     ax::Node* CreateAnimNodeByIndex(ECharName name, int idx, std::string_view nodeName = "Anim");
     ax::Node* CreateSelectedNode();
     ax::Node* CreateHPBarByIndex(ECharName name, int idx, std::string_view nodeName = "HpBar");
-
+    
     ax::Node* CreateDemageNode(ActorType type);
 
     ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);
@@ -38,6 +38,8 @@ public:
 
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir, bool repeat = true);
     void ChangeAnimByIndex(ECharName Name, ECharAct action, ECharDir dir,int idx);
+    void ChangeHpBarByIndex(ECharName Name, int idx);
+
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
 
 

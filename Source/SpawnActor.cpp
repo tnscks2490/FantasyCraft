@@ -54,17 +54,14 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
 
-    // 선택 표기 타원의 위치는 바디사이즈의 1/2, 반지름의 크기도 바디사이즈의 1/2로 설정할것
-    auto selectanim = ax::DrawNode::create();
-    selectanim->drawCircle(ax::Vec2(0, -8), 8.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
-    selectanim->setName("Select");
-    selectanim->setVisible(false);
-    node->addChild(selectanim);
-
-    auto hpbar = draw->CreateHPBarByIndex(ECharName::SCV, 0);
-    hpbar->setPosition(ax::Vec2(0, -20));
-
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
+    // 선택 표기 타원의 위치는 바디사이즈의 1/2, 반지름의 크기도 바디사이즈의 1/2로 설정할것
+    auto selectanim = draw->CreateSelectedNode();
+
+    auto hpbar = draw->CreateHPBarByIndex(ECharName::Marine, 0);
+    hpbar->setPosition(ax::Vec2(0, -20));
+    selectanim->addChild(hpbar);
+
 
     
     auto goal = new GoalComp(actor);
@@ -97,9 +94,11 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim = draw->CreateAnimNode(ECharName::Marine, ECharAct::Idle, ECharDir::S, "Anim");
-    auto selectanim = draw->CreateSelectedNode(); 
+    auto selectanim = draw->CreateSelectedNode();
+
     auto hpbar      = draw->CreateHPBarByIndex(ECharName::Marine, 0);
     hpbar->setPosition(ax::Vec2(0, -20));
+    selectanim->addChild(hpbar);
 
 
     auto goal           = new GoalComp(actor);

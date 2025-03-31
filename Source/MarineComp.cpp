@@ -7,6 +7,7 @@ MarineComp::MarineComp(Actor* actor)
     : UnitComp(actor)
 {
     actor->mUnitComp = this;
+    SetUnitStatus(ActorType::Marine);
 }
 
 MarineComp::~MarineComp() {}
