@@ -133,18 +133,33 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
 
 void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
 {
-    if (smsg.Atype == ActorType::None && smsg.Btype != ButtonType::None)
+    switch (smsg.smsgType)
     {
-        // UI -> Player
-        if (player)
-            player->MessageProc(smsg);
-    }
-    else if (smsg.Btype == ButtonType::None && smsg.Atype != ActorType::None)
+    case SMsgType::None:
     {
-        // Player ->UI
-        if (ui)
-            ui->MessageProc(smsg);
+        if (smsg.Atype == ActorType::None && smsg.Btype != ButtonType::None)
+        {
+            // UI -> Player
+            if (player)
+                player->MessageProc(smsg);
+        }
+        else if (smsg.Btype == ButtonType::None && smsg.Atype != ActorType::None)
+        {
+            // Player ->UI
+            if (ui)
+                ui->MessageProc(smsg);
+        }
     }
+    break;
+    case SMsgType::STUI:
+    {
+         if (ui) ui->MessageProc(smsg);
+    }
+        break;
+    default:
+        break;
+    }
+    
 }
 
 

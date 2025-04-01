@@ -16,34 +16,50 @@ void Player::MessageProc(SystemMessage smsg)
 {
     auto msg = smsg;
 
-    switch (smsg.Btype)
+    switch (msg.smsgType)
     {
-    case ButtonType::TAttack:
-        cursor->mCursorComp->mState = CursorState::Target;
+    case SMsgType::None:
+    {
+        switch (smsg.Btype)
+        {
+        case ButtonType::TAttack:
+            cursor->mCursorComp->mState = CursorState::Target;
+            break;
+
+        case ButtonType::TMove:
+            cursor->mCursorComp->mState = CursorState::Target;
+            break;
+
+        case ButtonType::TCancel:
+        {
+            cursor->mCursorComp->mState = CursorState::Idle;
+            ActorMessage msg            = {MsgType::Cancel, mMainActor, nullptr, nullptr};
+            SendActorMessage(mMainActor, msg);
+        }
         break;
 
-    case ButtonType::TMove:
-        cursor->mCursorComp->mState = CursorState::Target;
+        case ButtonType::TCommand_Center:
+        {
+            // 건물 블루프린트 생성하기
+            ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
+            SendActorMessage(cursor, msg);
+        }
         break;
 
-    case ButtonType::TCancel:
+        default:
+            break;
+        }
+    }
+    break;
+    case SMsgType::STUI:
     {
-        cursor->mCursorComp->mState = CursorState::Idle;
-        ActorMessage msg            = {MsgType::Cancel, mMainActor, nullptr, nullptr};
-        SendActorMessage(mMainActor, msg);
-    } break;
 
-    case ButtonType::TCommand_Center:
-    {
-        // 건물 블루프린트 생성하기
-        ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
-        SendActorMessage(cursor, msg);
-    } break;
-
-
+    }
     default:
         break;
     }
+
+    
 
     printf("Player가 UI로부터 메세지를 수신받았습니다");
 }
@@ -78,16 +94,6 @@ void Player::Selected()
         }
     }
 
-
-    // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
-    if (PlayerActorsNum() == 1)
-    {
-        mMainActor = PlayerActors[0];
-        SystemMessage smsg;
-        smsg.Atype = mMainActor->mActorType;
-
-        SendSystemMessage(ui, this, smsg);
-    }
 }
 
 void Player::PreSelected(Actor* actor)
@@ -141,12 +147,22 @@ void Player::ReSelected()
 
     if (PlayerActorsNum() == 1)
     {
+        // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
+        mMainActor = PlayerActors[0];
+        SystemMessage smsg;
+        smsg.Atype = mMainActor->mActorType;
+        SendSystemMessage(ui, this, smsg);
+        ///// 단일 선택에 관한 와이어프레임 UI출력하는 함수 추가할것
 
     }
     else if (PlayerActorsNum() > 1)
     {
         for (int i = 0; i < PlayerActorsNum(); i++)
         {
+            SystemMessage smsg =
+            {SMsgType::STUI,ActorType::None,ButtonType::None,PlayerActors};
+            
+            SendSystemMessage(ui, this, smsg);
             //ui->mSelectRects[i]->addChild(PlayerActors[i]->mUnitComp->mWireFrame,2);
         }
     }

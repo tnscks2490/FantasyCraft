@@ -50,7 +50,30 @@ void UILayer::MessageProc(SystemMessage smsg)
 {
     printf("UI가 플레이어로부터 메세지를 수신받았습니다.");
     auto msg = smsg;
-    SetButton(msg.Atype);
+
+    switch (msg.smsgType)
+    {
+    case SMsgType::None:
+        SetButton(msg.Atype);
+        break;
+    case SMsgType::STUI:
+    {
+        Actor** sActors = (Actor**)msg.data;
+
+        Actor* test[12] = {nullptr};
+        for (int i = 0; i < 12; i++)
+        {
+            test[i] = sActors[i];
+        }
+        printf("체크");
+    }
+        break;
+    default:
+        break;
+    }
+
+
+    
 }
 
 

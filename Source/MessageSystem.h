@@ -52,8 +52,23 @@ void SendActorMessage(Actor* receiver, ActorMessage msg);
 
 
 
+enum class SMsgType
+{
+    None,
+    //Status UI
+    //현재 선택된 엑터의 상태를 알려주는 UI
+    //단일선택인 경우 체력 마나 쉴드 강화상태 등 모든 것을 알려주고
+    //다중선택인 경우 체력만 와이어프레임으로 나타냄 
+    STUI,
+    
+
+};
+
+
 struct SystemMessage
 {
+    SMsgType smsgType = SMsgType::None;
+
     ActorType Atype = ActorType::None;
     ButtonType Btype = ButtonType::None;
 
