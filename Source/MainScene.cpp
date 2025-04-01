@@ -361,7 +361,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     {
     case ax::EventKeyboard::KeyCode::KEY_O:
     {
-        if (mPlayer->PlayerActors.size() == 1)
+        if (mPlayer->PlayerActorsNum() == 1)
         {
             if (mPlayer->PlayerActors[0]->mActorType == ActorType::SCV)
             {

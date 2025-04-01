@@ -59,36 +59,28 @@ void Player::Clear()
             ac = nullptr;
         }
     }
-    PlayerActors.clear();
+    PlayerActorsClear();
     if (mMainActor)
         mMainActor = nullptr;
 }
 
 void Player::Selected()
 {
-    for (auto aa : PrePlayerActors)
+    for (int i = 0; i < 12; i++)
     {
-        if (aa)
+        if (PrePlayerActors[i] == nullptr)
+            break;
+        else
         {
-            for (auto ac : PlayerActors)
-            {
-                if (ac == nullptr)
-                {
-                    ac                         = aa;
-                    ac->mDrawComp->selected = true;
-                    ac->mDrawComp->isSelected();
-                    return;
-                } 
-            }
-            aa->mDrawComp->selected = true;
-            aa->mDrawComp->isSelected();
-            PlayerActors.push_back(aa);
-        }      
+            PlayerActors[i] = PrePlayerActors[i];
+            PlayerActors[i]->mDrawComp->selected = true;
+            PlayerActors[i]->mDrawComp->isSelected();
+        }
     }
 
 
     // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
-    if (PlayerActors.size() == 1)
+    if (PlayerActorsNum() == 1)
     {
         mMainActor = PlayerActors[0];
         SystemMessage smsg;
@@ -100,15 +92,14 @@ void Player::Selected()
 
 void Player::PreSelected(Actor* actor)
 {
-    for (auto ac : PrePlayerActors)
+    for (int i = 0; i < 12; i++)
     {
-        if (ac == nullptr)
+        if (PrePlayerActors[i] == nullptr)
         {
-            ac = actor;
+            PrePlayerActors[i] = actor;
             return;
         }
     }
-    PrePlayerActors.push_back(actor);
 }
 
 void Player::PreClear()
@@ -117,12 +108,12 @@ void Player::PreClear()
     {
         if (ac){ ac = nullptr;}
     }
-    PlayerActors.clear();
+    PlayerActorsClear();
 }
 
 bool Player::isSelected()
 {
-    if (PlayerActors.size() > 0)
+    if (PlayerActorsNum() > 0)
         return true;
     else
         return false;
@@ -146,15 +137,45 @@ void Player::ReSelected()
 {
     Clear();
     Selected();
-    PrePlayerActors.clear();
+    PrePlayerActorsClear();
 
-    if (PlayerActors.size() == 0)
+    if (PlayerActorsNum() == 1)
     {
 
     }
-    else if (PlayerActors.size() > 0)
+    else if (PlayerActorsNum() > 1)
     {
+        for (int i = 0; i < PlayerActorsNum(); i++)
+        {
+            //ui->mSelectRects[i]->addChild(PlayerActors[i]->mUnitComp->mWireFrame,2);
+        }
+    }
+}
 
+int Player::PlayerActorsNum()
+{
+    int num = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (PlayerActors[i] != nullptr)
+            num++;
+    }
+    return num;
+}
+
+void Player::PlayerActorsClear()
+{
+    for (int i = 0; i < 12; i++)
+    {
+        PlayerActors[i] = nullptr;
+    }
+}
+
+void Player::PrePlayerActorsClear()
+{
+    for (int i = 0; i < 12; i++)
+    {
+        PrePlayerActors[i] = nullptr;
     }
 }
 

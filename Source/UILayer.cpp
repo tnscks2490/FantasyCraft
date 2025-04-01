@@ -12,25 +12,36 @@ bool UILayer::init()
     {
         return false;
     }
+    BottomUI = ax::Node::create();
+    BottomUI->setPosition(ax::Vec2(0, -380));
+    addChild(BottomUI,2);
 
-    
+    auto drawrect = ax::DrawNode::create();
+    drawrect->drawRect(ax::Vec2(-300, -80), ax::Vec2(300, 80), ax::Color4B::RED);
+    BottomUI->addChild(drawrect,10);
+
+
+    for (int i = 0; i < 12; i++)
+    {
+        auto selectrect = ax::Sprite::create("selectRect.png"sv);
+
+        selectrect->setScale(2.0f);
+        //selectrect->setVisible(false);
+
+        if (i % 2 == 0)
+        {
+            selectrect->setPosition(ax::Vec2(i*35 - 260, 40));
+        }
+        else
+        {
+            selectrect->setPosition(ax::Vec2((i*35 - 35)-260, -40));
+        }
+        mSelectRects.push_back(selectrect);
+        //addChild(selectrect,1.1f);
+        BottomUI->addChild(selectrect, 2);
+    }
 
     SetUI(PlayerRace::Terran);
-   /* mMenu->addChild(CreateAddButton(ButtonType::TMove));
-
-    auto bt = CreateAddButton(ButtonType::TAttack);
-    bt->setPosition(ax::Vec2(92, 0));
-    auto stop = CreateAddButton(ButtonType::TStop);
-    stop->setPosition(ax::Vec2(184, 0));
-
-    auto tt = CreateAddButton(ButtonType::TArmory);
-    tt->setPosition(ax::Vec2(0, -80));
-
-    mMenu->addChild(tt, 1);
-    mMenu->addChild(stop, 1);
-    mMenu->addChild(bt,1);
-    */
-    
 
     return true;
 }
@@ -48,12 +59,14 @@ void UILayer::SetUI(PlayerRace race)
 {
     mMenu = ax::Menu::create();
     mMenu->setPosition(ax::Vec2(408, -270));
-    this->addChild(mMenu, 1);
+    addChild(mMenu, 1);
     switch (race)
     {
     case PlayerRace::Terran:
     {
         mConsoleUI = ax::Sprite::create("TerranConsole.png"sv);
+        mConsoleUI->setPosition(ax::Vec2(0,0));
+        //BottomUI->addChild(mConsoleUI);
         addChild(mConsoleUI);
 
         mMineralIcon = ax::Sprite::create("MineralIcon.png"sv);

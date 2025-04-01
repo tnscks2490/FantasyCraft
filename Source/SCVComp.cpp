@@ -14,6 +14,7 @@ SCVComp::SCVComp(Actor* actor)
 {
     actor->mUnitComp = this;
     SetUnitStatus(ActorType::SCV);
+    mWireFrame = ax::Sprite::create("SCV.png"sv);
 }
 
 SCVComp::~SCVComp() {}

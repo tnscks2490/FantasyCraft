@@ -39,6 +39,11 @@ public:
     ax::Sprite* mGasIcon;
     ax::Sprite* mPopIcon;
 
+
+
+    ax::Node* BottomUI = nullptr;
+    std::vector<ax::Sprite*> mSelectRects;
+
     ax::Menu* mMenu = nullptr;
 
     ButtonType mCurbuttons[MAX_BUTTON];

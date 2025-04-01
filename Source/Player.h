@@ -85,6 +85,9 @@ public:
     void PrintSelectActors();
     void ReSelected();
 
+    int PlayerActorsNum();
+    void PlayerActorsClear();
+    void PrePlayerActorsClear();
     void ButtonAction(ax::Object* sender);
 
     PlayerCommand mCommand[9];
@@ -93,8 +96,8 @@ public:
 public:
 
 
-    std::vector<Actor*> PrePlayerActors;
-    std::vector<Actor*> PlayerActors;
+    Actor* PrePlayerActors[12] = {nullptr};
+    Actor* PlayerActors[12] = {nullptr};
     Actor* mMainActor = nullptr;
 
 

@@ -59,6 +59,7 @@ public:
 
 
     Status mStatus;
+    ax::Sprite* mWireFrame = nullptr;
     ActionState mCurAction = ActionState::Idle;
     UnitArea mUnitArea     = UnitArea::None;
 
