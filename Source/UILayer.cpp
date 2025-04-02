@@ -21,25 +21,8 @@ bool UILayer::init()
     BottomUI->addChild(drawrect,10);
 
 
-    for (int i = 0; i < 12; i++)
-    {
-        auto selectrect = ax::Sprite::create("selectRect.png"sv);
+  
 
-        selectrect->setScale(2.0f);
-        //selectrect->setVisible(false);
-
-        if (i % 2 == 0)
-        {
-            selectrect->setPosition(ax::Vec2(i*35 - 260, 40));
-        }
-        else
-        {
-            selectrect->setPosition(ax::Vec2((i*35 - 35)-260, -40));
-        }
-        mSelectRects.push_back(selectrect);
-        //addChild(selectrect,1.1f);
-        BottomUI->addChild(selectrect, 2);
-    }
 
     SetUI(PlayerRace::Terran);
 
@@ -63,8 +46,38 @@ void UILayer::MessageProc(SystemMessage smsg)
         Actor* test[12] = {nullptr};
         for (int i = 0; i < 12; i++)
         {
-            test[i] = sActors[i];
+            if (sActors[i] != nullptr)
+            {
+                test[i]          = sActors[i];
+                auto wire = test[i]->mUnitComp->mWireFrame;
+                auto bg          = ax::Sprite::create("selectRect.png"sv);
+                bg->setScale(2.f);
+                wire->setScale(2.f);
+            
+                if (i % 2 == 0)
+                {
+                    bg->setPosition(ax::Vec2(i * 35 - 260, 40));
+                    wire->setPosition(ax::Vec2(i * 35 - 260, 40));
+                }
+                else
+                {
+                    bg->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
+                    wire->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
+                }
+                
+                BottomUI->addChild(bg, 2);
+                BottomUI->addChild(wire, 2);
+
+                
+
+                
+            }
+
+            else
+                break;
+
         }
+
         printf("체크");
     }
         break;

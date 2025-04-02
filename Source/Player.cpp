@@ -157,14 +157,10 @@ void Player::ReSelected()
     }
     else if (PlayerActorsNum() > 1)
     {
-        for (int i = 0; i < PlayerActorsNum(); i++)
-        {
-            SystemMessage smsg =
-            {SMsgType::STUI,ActorType::None,ButtonType::None,PlayerActors};
-            
-            SendSystemMessage(ui, this, smsg);
-            //ui->mSelectRects[i]->addChild(PlayerActors[i]->mUnitComp->mWireFrame,2);
-        }
+        SystemMessage smsg =
+        {SMsgType::STUI, ActorType::None, ButtonType::None, PlayerActors};
+
+        SendSystemMessage(ui, this, smsg);
     }
 }
 

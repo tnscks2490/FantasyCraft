@@ -40,9 +40,8 @@ public:
     ax::Sprite* mPopIcon;
 
 
-
     ax::Node* BottomUI = nullptr;
-    std::vector<ax::Sprite*> mSelectRects;
+    
 
     ax::Menu* mMenu = nullptr;
 
@@ -53,6 +52,5 @@ public:
     Player* mPlayer = nullptr;
     Actor* mCursor  = nullptr;
 };
-
 
 

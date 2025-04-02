@@ -9,6 +9,8 @@ MarineComp::MarineComp(Actor* actor)
     actor->mUnitComp = this;
     SetUnitStatus(ActorType::Marine);
     mWireFrame = ax::Sprite::create("Marine.png"sv);
+    mActor->GetRoot()->addChild(mWireFrame);
+    mWireFrame->setVisible(false);
 }
 
 MarineComp::~MarineComp() {}
