@@ -5,5 +5,5 @@
 #include "SmartPtr.h"
 #include "TcpClient.h"
 #include "2DGeometry.h"
-
+#include "ComFunction.h"
 

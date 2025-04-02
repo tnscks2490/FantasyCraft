@@ -37,8 +37,12 @@ enum class UnitArea
 
 struct Status
 {
+    int MaxHP = 0;
     int HP = 0;
+
+    int MaxMp = 0;
     int MP = 0;
+
     int SD = 0;
     int AT = 0;
     int DF = 0;
@@ -57,12 +61,18 @@ public:
     virtual void update(float delta) override;
     virtual void SetUnitStatus(ActorType Atype);
 
+    std::string_view GetUnitName() { return mUnitName; }
 
     Status mStatus;
     ActionState mCurAction = ActionState::Idle;
     UnitArea mUnitArea     = UnitArea::None;
 
+
+    int killCount          = 0;
     ax::Sprite* mWireFrame = nullptr;
+
+    std::string_view mUnitName = "";
+
 
 };
 

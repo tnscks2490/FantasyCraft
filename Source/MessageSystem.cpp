@@ -151,11 +151,15 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
         }
     }
     break;
-    case SMsgType::STUI:
+    case SMsgType::MSUI:
     {
          if (ui) ui->MessageProc(smsg);
     }
         break;
+    case SMsgType::SSUI:
+    {
+        if (ui)  ui->MessageProc(smsg);
+    }
     default:
         break;
     }

@@ -5,6 +5,7 @@
 #include "MessageSystem.h"
 #include "ButtonInfo.h"
 #include "Player.h"
+#include "UnitComp.h"
 
 bool UILayer::init()
 {
@@ -39,22 +40,37 @@ void UILayer::MessageProc(SystemMessage smsg)
     case SMsgType::None:
         SetButton(msg.Atype);
         break;
-    case SMsgType::STUI:
+    case SMsgType::MSUI:
     {
-        Actor** sActors = (Actor**)msg.data;
+        BottomUI->removeAllChildren();
+        Actor** mActors = (Actor**)msg.data;
 
         Actor* test[12] = {nullptr};
-        //고민해 볼것 깊은복사랑 그거
+
+        //고민해 볼것 깊은복사 그거
         for (int i = 0; i < 12; i++)
         {
-            if (sActors[i] != nullptr)
+            if (mActors[i] != nullptr)
             {
-                test[i]          = sActors[i];
-                auto wire = test[i]->mUnitComp->mWireFrame;
-                auto bg          = ax::Sprite::create("selectRect.png"sv);
+                test[i] = mActors[i];
+
+                ax::Sprite* wire = nullptr;
+                switch (test[i]->mActorType)
+                {
+                case ActorType::Marine:
+                    wire = ax::Sprite::create("Marine.png"sv);
+                    break;
+                case ActorType::SCV:
+                    wire = ax::Sprite::create("SCV.png"sv);
+                    break;
+                default:
+                    break;
+                }
+
+                auto bg = ax::Sprite::create("selectRect.png"sv);
                 bg->setScale(2.f);
                 wire->setScale(2.f);
-            
+
                 if (i % 2 == 0)
                 {
                     bg->setPosition(ax::Vec2(i * 35 - 260, 40));
@@ -65,23 +81,58 @@ void UILayer::MessageProc(SystemMessage smsg)
                     bg->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
                     wire->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
                 }
-                
+
                 BottomUI->addChild(bg, 2);
                 BottomUI->addChild(wire, 2);
-
-                
-
-                
             }
-
-            else
-                break;
-
         }
-
         printf("체크");
     }
         break;
+    case SMsgType::SSUI:
+    {
+        BottomUI->removeAllChildren();
+        Actor* sActor = (Actor*)msg.data;
+
+        ax::Sprite* wire = nullptr;
+        switch (sActor->mActorType)
+        {
+        case ActorType::Marine:
+            wire = ax::Sprite::create("Big_Marine.png"sv);
+            break;
+        case ActorType::SCV:
+            wire = ax::Sprite::create("Big_SCV.png"sv);
+            break;
+        default:
+            break;
+        }
+        wire->setPosition(ax::Vec2(-250, 15));
+        wire->setScale(2.f);
+        BottomUI->addChild(wire, 2);
+
+        auto status = sActor->mUnitComp->mStatus;
+
+        auto hp = NumSlashNumToString(status.HP, status.MaxHP);
+        auto hptext = ax::Label::createWithTTF(hp, "fonts/00TT.TTF", 16);
+        hptext->setPosition(ax::Vec2(-250, -60));
+        hptext->setTextColor(ax::Color4B::GREEN);
+        BottomUI->addChild(hptext, 2);
+
+        auto name = ax::Label::createWithTTF(sActor->mUnitComp->GetUnitName(), "fonts/00TT.TTF",20);
+        name->setPosition(ax::Vec2(0, 70));
+        BottomUI->addChild(name, 2);
+
+
+        std::string str = "Kills : " + std::to_string(sActor->mUnitComp->killCount);
+        auto killCount        = ax::Label::createWithTTF(str, "fonts/00TT.TTF", 20);
+        killCount->setPosition(ax::Vec2(0, 10));
+        BottomUI->addChild(killCount, 2);
+
+
+
+
+
+    } break;
     default:
         break;
     }

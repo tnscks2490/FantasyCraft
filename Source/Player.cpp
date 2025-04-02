@@ -51,7 +51,7 @@ void Player::MessageProc(SystemMessage smsg)
         }
     }
     break;
-    case SMsgType::STUI:
+    case SMsgType::MSUI:
     {
 
     }
@@ -154,11 +154,12 @@ void Player::ReSelected()
         SendSystemMessage(ui, this, smsg);
         ///// 단일 선택에 관한 와이어프레임 UI출력하는 함수 추가할것
 
+        SystemMessage ssmsg = {SMsgType::SSUI, ActorType::None, ButtonType::None, mMainActor};
+        SendSystemMessage(ui, this, ssmsg);
     }
     else if (PlayerActorsNum() > 1)
     {
-        SystemMessage smsg =
-        {SMsgType::STUI, ActorType::None, ButtonType::None, PlayerActors};
+        SystemMessage smsg = {SMsgType::MSUI, ActorType::None, ButtonType::None, PlayerActors};
 
         SendSystemMessage(ui, this, smsg);
     }

@@ -234,7 +234,8 @@ void MainScene::onMouseUp(Event* event)
                 ActorMessage msg = {MsgType::SetTarget, userData->mActor, nullptr, nullptr};
                 for (auto ac : mPlayer->PlayerActors)
                 {
-                    SendActorMessage(ac, msg);
+                    if (ac != nullptr)
+                        SendActorMessage(ac, msg);
                 }
             }
             else
