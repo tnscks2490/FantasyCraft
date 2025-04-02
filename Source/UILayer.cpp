@@ -44,6 +44,7 @@ void UILayer::MessageProc(SystemMessage smsg)
         Actor** sActors = (Actor**)msg.data;
 
         Actor* test[12] = {nullptr};
+        //고민해 볼것 깊은복사랑 그거
         for (int i = 0; i < 12; i++)
         {
             if (sActors[i] != nullptr)
