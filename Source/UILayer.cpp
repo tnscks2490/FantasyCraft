@@ -95,13 +95,20 @@ void UILayer::MessageProc(SystemMessage smsg)
         Actor* sActor = (Actor*)msg.data;
 
         ax::Sprite* wire = nullptr;
+        // 추가로 쉴드 업글이나 등등 넣어줄것(이것도 바꿔야함)임시방편임
+        ax::Sprite* atUpgrade = nullptr;
+        ax::Sprite* dfUpgrade = nullptr;
         switch (sActor->mActorType)
         {
         case ActorType::Marine:
             wire = ax::Sprite::create("Big_Marine.png"sv);
+            atUpgrade = ax::Sprite::create("BionicAT.png"sv);
+            dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
             break;
         case ActorType::SCV:
             wire = ax::Sprite::create("Big_SCV.png"sv);
+            atUpgrade = ax::Sprite::create("SCVAT.png"sv);
+            dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
             break;
         default:
             break;
@@ -130,9 +137,21 @@ void UILayer::MessageProc(SystemMessage smsg)
 
 
 
+        
+
+        dfUpgrade->setScale(2.f);
+        dfUpgrade->setPosition(ax::Vec2(-100, -55));
+        BottomUI->addChild(dfUpgrade, 2);
+
+        atUpgrade->setScale(2.f);
+        atUpgrade->setPosition(ax::Vec2(-20, -55));
+        BottomUI->addChild(atUpgrade, 2);
 
 
-    } break;
+
+
+    }
+        break;
     default:
         break;
     }
