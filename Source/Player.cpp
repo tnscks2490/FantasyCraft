@@ -176,6 +176,17 @@ int Player::PlayerActorsNum()
     return num;
 }
 
+int Player::PrePlayerActorsNum()
+{
+    int num = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (PrePlayerActors[i] != nullptr)
+            num++;
+    }
+    return num;
+}
+
 void Player::PlayerActorsClear()
 {
     for (int i = 0; i < 12; i++)

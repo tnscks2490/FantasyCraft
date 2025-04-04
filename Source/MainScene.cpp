@@ -294,17 +294,9 @@ void MainScene::onMouseUp(Event* event)
             // 여러개가 선택된다면 해당 함수만 여러번 호출된다.
             getPhysicsWorld()->queryRect(Lfunc, Rect(zpos.x, zpos.y, width, height), nullptr);
 
-
-            mPlayer->ReSelected();
-            /*if (mPlayer->PrePlayerActors.size() ==1)
-            {
+            if (mPlayer->PrePlayerActorsNum() > 0)
                 mPlayer->ReSelected();
-                printf("한명만 선택");
-            }
-            else if (mPlayer->PrePlayerActors.size() > 1)
-            {
-                mPlayer->ReSelected();
-            }*/
+            
             mCursor->mCursorComp->GreenRectClear();
             mCursor->mCursorComp->mState = CursorState::Idle;
             mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;

@@ -86,6 +86,7 @@ public:
     void ReSelected();
 
     int PlayerActorsNum();
+    int PrePlayerActorsNum();
     void PlayerActorsClear();
     void PrePlayerActorsClear();
     void ButtonAction(ax::Object* sender);

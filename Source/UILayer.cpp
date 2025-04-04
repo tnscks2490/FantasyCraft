@@ -110,6 +110,9 @@ void UILayer::MessageProc(SystemMessage smsg)
             atUpgrade = ax::Sprite::create("SCVAT.png"sv);
             dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
             break;
+        case ActorType::CommandCenter:
+            wire = ax::Sprite::create("CommandCenter.png"sv);
+            break;
         default:
             break;
         }
