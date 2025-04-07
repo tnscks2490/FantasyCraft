@@ -18,17 +18,10 @@ bool CommandLayer::init()
     dot->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::BLUE);
     addChild(dot, 1);
 
-
-
     mMenu = ax::Menu::create();
+    mMenu->setPosition(ax::Vec2::ZERO);
     addChild(mMenu, 1);
-
-    ax::DrawNode* dot2 = ax::DrawNode::create();
-    dot2->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::BLUE);
-    mMenu->addChild(dot2, 1);
-
     
-
     return true;
 }
 
@@ -52,7 +45,7 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
         // 이레귤러
     case ButtonType::TCancel:
     {
-        // mMenu->removeAllChildren();
+        mMenu->removeAllChildren();
         ReturnButton();
     }
     break;
@@ -71,14 +64,14 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TGather:
     case ButtonType::TRepair:
     {
-        // mMenu->removeAllChildren();
+        mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
     }
     break;
         // 다른 버튼 UI로 변경되는 버튼들
     case ButtonType::TCommon_Build:
     {
-        // mMenu->removeAllChildren();
+        mMenu->removeAllChildren();
 
         SetCBButton();
     }
@@ -86,7 +79,7 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
 
     case ButtonType::TAdvance_Build:
     {
-        // mMenu->removeAllChildren();
+        mMenu->removeAllChildren();
         SetABButton();
     }
     break;
@@ -96,7 +89,7 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
         break;
     case ButtonType::TCommand_Center:
     {
-        // mMenu->removeAllChildren();
+        mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
         // 만약 캔슬을 누르면 SCV에게 명령이 가도록 해야함
     }
