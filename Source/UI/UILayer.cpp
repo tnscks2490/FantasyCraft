@@ -1,11 +1,17 @@
 #include "pch.h"
-#include "UILayer.h"
+#include "UI/UILayer.h"
 #include "World.h"
 #include "TcpClient.h"
 #include "MessageSystem.h"
 #include "ButtonInfo.h"
 #include "Player.h"
 #include "UnitComp.h"
+
+#include "UI/UnitInfoLayer.h"
+#include "UI/ResourceLayer.h"
+#include "UI/MiniMapLayer.h"
+#include "UI/CommandLayer.h"
+
 
 bool UILayer::init()
 {
@@ -22,10 +28,25 @@ bool UILayer::init()
     BottomUI->addChild(drawrect,10);
 
 
-  
+    auto unitinfo = UnitInfoLayer::create();
+    unitinfo->setName("UnitInfoLayer");
+    addChild(unitinfo, 1);
 
+    auto command = CommandLayer::create();
+    command->setName("CommandLayer");
+    command->setPosition(ax::Vec2(500, -350));
+    addChild(command, 1);
 
-    SetUI(PlayerRace::Terran);
+    auto minimap = MiniMapLayer::create();
+    minimap->setName("MiniMapLayer");
+    addChild(minimap, 1);
+
+    auto resource = ResourceLayer::create();
+    resource->setName("ResourceLayer");
+    addChild(resource, 1);
+
+    printf("현재 자식 노드 확인하는 줄");
+
 
     return true;
 }
@@ -35,11 +56,16 @@ void UILayer::MessageProc(SystemMessage smsg)
     printf("UI가 플레이어로부터 메세지를 수신받았습니다.");
     auto msg = smsg;
 
+    CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+    //auto command = this->getChildByName("CommandLayer");
+
     switch (msg.smsgType)
     {
     case SMsgType::None:
-        SetButton(msg.Atype);
-        break;
+    {
+        command->SetButton(msg.Atype);
+        //SetButton(msg.Atype);
+    } break;
     case SMsgType::MSUI:
     {
         BottomUI->removeAllChildren();
@@ -62,6 +88,9 @@ void UILayer::MessageProc(SystemMessage smsg)
                     break;
                 case ActorType::SCV:
                     wire = ax::Sprite::create("SCV.png"sv);
+                    break;
+                case ActorType::CommandCenter:
+                    wire = ax::Sprite::create("CommandCenter.png"sv);
                     break;
                 default:
                     break;
@@ -141,14 +170,20 @@ void UILayer::MessageProc(SystemMessage smsg)
 
 
         
-
-        dfUpgrade->setScale(2.f);
-        dfUpgrade->setPosition(ax::Vec2(-100, -55));
-        BottomUI->addChild(dfUpgrade, 2);
-
-        atUpgrade->setScale(2.f);
-        atUpgrade->setPosition(ax::Vec2(-20, -55));
-        BottomUI->addChild(atUpgrade, 2);
+        if (dfUpgrade)
+        {
+            dfUpgrade->setScale(2.f);
+            dfUpgrade->setPosition(ax::Vec2(-100, -55));
+            BottomUI->addChild(dfUpgrade, 2);
+        }
+        
+        if (atUpgrade)
+        {
+            atUpgrade->setScale(2.f);
+            atUpgrade->setPosition(ax::Vec2(-20, -55));
+            BottomUI->addChild(atUpgrade, 2);
+        }
+        
 
 
 
@@ -167,60 +202,23 @@ void UILayer::MessageProc(SystemMessage smsg)
 
 void UILayer::SetUI(PlayerRace race)
 {
-    mMenu = ax::Menu::create();
-    mMenu->setPosition(ax::Vec2(408, -270));
-    addChild(mMenu, 1);
     switch (race)
     {
     case PlayerRace::Terran:
     {
-        mConsoleUI = ax::Sprite::create("TerranConsole.png"sv);
-        mConsoleUI->setPosition(ax::Vec2(0,0));
-        //BottomUI->addChild(mConsoleUI);
-        addChild(mConsoleUI);
-
-        mMineralIcon = ax::Sprite::create("MineralIcon.png"sv);
-        mMineralIcon->setPosition(ax::Vec2(300 ,450));
-        addChild(mMineralIcon);
-
-        mGasIcon = ax::Sprite::create("TGasIcon.png"sv);
-        mGasIcon->setPosition(ax::Vec2(400, 450));
-        addChild(mGasIcon);
-
-        mPopIcon = ax::Sprite::create("TPopIcon.png"sv);
-        mPopIcon->setPosition(ax::Vec2(500, 450));
-        addChild(mPopIcon);
+        mConsoleImage = ax::Sprite::create("TerranConsole.png"sv);
+        addChild(mConsoleImage);
     } break;
 
     case PlayerRace::Protoss:
     {
-        mConsoleUI = ax::Sprite::create("ProtossConsole.png"sv);
-        addChild(mConsoleUI);
-
-        mMineralIcon = ax::Sprite::create("MineralIcon.png"sv);
-        addChild(mMineralIcon);
-
-        mGasIcon = ax::Sprite::create("PGasIcon.png"sv);
-        addChild(mGasIcon);
-
-        mPopIcon = ax::Sprite::create("PPopIcon.png"sv);
-        addChild(mPopIcon);
-
+        mConsoleImage = ax::Sprite::create("ProtossConsole.png"sv);
+        addChild(mConsoleImage);
     } break;
-
     case PlayerRace::Zerg:
     {
-        mConsoleUI = ax::Sprite::create("ZergConsole.png"sv);
-        addChild(mConsoleUI);
-
-        mMineralIcon = ax::Sprite::create("MineralIcon.png"sv);
-        addChild(mMineralIcon);
-
-        mGasIcon = ax::Sprite::create("ZGasIcon.png"sv);
-        addChild(mGasIcon);
-
-        mPopIcon = ax::Sprite::create("ZPopIcon.png"sv);
-        addChild(mPopIcon);
+        mConsoleImage = ax::Sprite::create("ZergConsole.png"sv);
+        addChild(mConsoleImage);
     } break;
 
     default:
@@ -229,7 +227,6 @@ void UILayer::SetUI(PlayerRace race)
     }
     setPosition(ax::Vec2(640, 480));
 }
-
 
 void UILayer::ButtonMessage(ax::Object* sender)
 {
@@ -244,7 +241,7 @@ void UILayer::ButtonMessage(ax::Object* sender)
         //이레귤러
     case ButtonType::TCancel:
     {
-        mMenu->removeAllChildren();
+        //mMenu->removeAllChildren();
         ReturnButton();
     } break;
         // 버튼 UI가 변경되지 않는 버튼들
@@ -262,20 +259,20 @@ void UILayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TGather:
     case ButtonType::TRepair:
     {
-        mMenu->removeAllChildren();
+        //mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
     } break;
         // 다른 버튼 UI로 변경되는 버튼들
     case ButtonType::TCommon_Build:
     {
-        mMenu->removeAllChildren();
+        //mMenu->removeAllChildren();
 
         SetCBButton();
     } break;
 
     case ButtonType::TAdvance_Build:
     {
-        mMenu->removeAllChildren();
+        //mMenu->removeAllChildren();
         SetABButton();
     } break;
 
@@ -284,7 +281,7 @@ void UILayer::ButtonMessage(ax::Object* sender)
         break;
     case ButtonType::TCommand_Center:
     {
-        mMenu->removeAllChildren();
+        //mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
         // 만약 캔슬을 누르면 SCV에게 명령이 가도록 해야함
     }
@@ -343,7 +340,6 @@ void UILayer::ClearSaveButtons()
     {
         mSavebuttons[i] = ButtonType::None;
     }
-    mMenu->removeAllChildren();
 }
 
 void UILayer::SetUnitControlButton(ActorType Atype)
@@ -379,13 +375,11 @@ ax::Vec2 UILayer::SetButtonPosition(int num)
 ax::MenuItemImage* UILayer::CreateAddButton(ButtonType type)
 {
     ButtonInfo* t = FindButtonInfo(type);
-
+     
     auto bt = ax::MenuItemImage::create(t->normal_Image, t->selected_Image, AX_CALLBACK_1(UILayer::ButtonMessage, this));
 
     bt->setUserData(t);
     bt->setScale(2.f);
     bt->setPosition(SetButtonPosition(t->iconPos));
-
-    mMenu->addChild(bt, 1);
     return bt;
 }

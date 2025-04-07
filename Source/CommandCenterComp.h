@@ -24,7 +24,11 @@ public:
 
     Actor* mBuilder = nullptr;
     int drawidx     = 0;
-    float test      = 0.f;
+    int test      = 0;
 
     BuildingSize Bsize = BuildingSize::Big;
+
+    ActorType* BuildUnitList = nullptr;
+
+
 };

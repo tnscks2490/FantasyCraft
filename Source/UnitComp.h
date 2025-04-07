@@ -50,6 +50,18 @@ struct Status
     int SI = 0;
 };
 
+struct BuildUnitInfo
+{
+    ActorType UnitType = ActorType::None;
+    int mineral        = 0;
+    int gas            = 0;
+    float pop          = 0.f;
+};
+
+
+
+
+
 
 
 class UnitComp : public IActorComp

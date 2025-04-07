@@ -7,6 +7,11 @@ CommandCenterComp::CommandCenterComp(Actor* actor)
     : UnitComp(actor)
 {
     actor->mUnitComp = this;
+
+    BuildUnitList = new ActorType[1];
+    BuildUnitList[0] = ActorType::SCV;
+
+
 }
 
 CommandCenterComp::~CommandCenterComp() {}

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "MessageSystem.h"
 #include "Actor.h"
-#include "UILayer.h"
+#include "UI/UILayer.h"
 #include "UnitComp.h"
 #include "CursorComp.h"
 #include "BPComp.h"
@@ -133,6 +133,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
 
 void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
 {
+
     switch (smsg.smsgType)
     {
     case SMsgType::None:
@@ -146,20 +147,19 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
         else if (smsg.Btype == ButtonType::None && smsg.Atype != ActorType::None)
         {
             // Player ->UI
-            if (ui)
-                ui->MessageProc(smsg);
+            if (ui) ui->MessageProc(smsg);
         }
     }
     break;
     case SMsgType::MSUI:
     {
-         if (ui) ui->MessageProc(smsg);
+        if (ui) ui->MessageProc(smsg);
     }
         break;
     case SMsgType::SSUI:
     {
-        if (ui)  ui->MessageProc(smsg);
-    }
+        if (ui) ui->MessageProc(smsg);
+    } break;
     default:
         break;
     }

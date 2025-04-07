@@ -30,7 +30,7 @@
 #include "JPSPathFinder.h"
 #include "PreDefines.h"
 #include "MapLayer.h"
-#include "UILayer.h"
+#include "UI/UILayer.h"
 
 
 class MainScene : public ax::Scene
