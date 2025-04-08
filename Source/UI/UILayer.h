@@ -11,8 +11,11 @@ public:
 
     void MessageProc(SystemMessage smsg);
 
+
+    void StartSettingWithPlayer(Player* player);
+
     // 콘솔이미지 종족에 따라 변경
-    void SetUI(PlayerRace race);
+    void SetUI();
     void ButtonMessage(ax::Object* sender);
 
 

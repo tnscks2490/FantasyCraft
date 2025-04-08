@@ -13,7 +13,6 @@ public:
 
     void MessageProc(SystemMessage smsg);
 
-
      Player* mPlayer = nullptr;
 };
 

@@ -120,11 +120,10 @@ bool MainScene::init()
     //나중에 구조 꼭 수정할것 너무 복잡함
     mUILayer = UILayer::create();
     mUILayer->mCursor = mCursor;
-    mUILayer->mPlayer = mPlayer;
-    mUILayer->mPlayer->ui = mUILayer;
-    mUILayer->SetUI(mPlayer->mRace);
+    mUILayer->StartSettingWithPlayer(mPlayer);
     addChild(mUILayer);
 
+    mPlayer->ui = mUILayer;
 
  
 
@@ -187,7 +186,8 @@ void MainScene::onMouseDown(Event* event)
         }
         else if (mCursor->mCursorComp->mState == CursorState::Target)
         {
-
+            AddGoal_MoveToPath(mPlayer->mMainActor, realpos);
+            mCursor->mCursorComp->mState = CursorState::Idle;
             printf("이게 문제야 문제");
         }
         else

@@ -8,6 +8,8 @@
 Player::Player()
 {
     mPC = new PlayerController(this);
+
+    
 }
 
 Player::~Player() {}

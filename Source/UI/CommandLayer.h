@@ -26,6 +26,9 @@ public:
     ax::MenuItemImage* CreateAddButton(ButtonType type);
 
     Player* mPlayer = nullptr;
+
+
+
     ButtonType mCurbuttons[MAX_BUTTON];
     ButtonType mSavebuttons[MAX_BUTTON];
 

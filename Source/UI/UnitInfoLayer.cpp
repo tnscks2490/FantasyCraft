@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "UI/UnitInfoLayer.h"
+#include "UI/UILayer.h"
+#include "Player.h"
+
 
 bool UnitInfoLayer::init()
 {
@@ -7,8 +10,6 @@ bool UnitInfoLayer::init()
     {
         return false;
     }
-    setName("UnitInfoLayer");
-
 
     scheduleUpdate();
 
@@ -16,5 +17,6 @@ bool UnitInfoLayer::init()
 }
 
 void UnitInfoLayer::MessageProc(SystemMessage smsg) {}
+
 
 void UnitInfoLayer::update(float delta) {}

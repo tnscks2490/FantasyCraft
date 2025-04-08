@@ -11,12 +11,23 @@ public:
     virtual bool init() override;
 
     void MessageProc(SystemMessage smsg);
-    void update(float delta);
+    virtual void update(float delta) override;
 
 
-    ax::Sprite* mMineralIcon;
-    ax::Sprite* mGasIcon;
-    ax::Sprite* mPopIcon;
+    void SetNumText();
+
+public:
+
+    Player* mPlayer = nullptr;
+
+    ax::Sprite* mMineralIcon = nullptr;
+    ax::Sprite* mGasIcon = nullptr;
+    ax::Sprite* mPopIcon = nullptr;
+
+    ax::Label* mMineralNum = nullptr;
+    ax::Label* mGasNum     = nullptr;
+    ax::Label* mPopNum     = nullptr;
+
 };
 
 

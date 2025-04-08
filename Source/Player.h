@@ -108,6 +108,12 @@ public:
     UILayer* ui = nullptr;
     Actor* cursor = nullptr;
 
+    int mMineral = 0;
+    int mGas      = 0;
+    int MaxPop   = 200;
+    int mCurPop   = 0;
+    int mCurMaxPop = 10;
+
 };
 
 // 

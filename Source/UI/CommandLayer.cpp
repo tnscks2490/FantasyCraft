@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "UI/CommandLayer.h"
+#include "UI/UILayer.h"
 #include "ButtonInfo.h"
+#include "Player.h"
 
 bool CommandLayer::init()
 {
@@ -98,9 +100,11 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     }
 
     // 어떤 버튼을 선택했는지 플레이어에게 보내준다
-    /*SystemMessage smsg;
-    smsg.Btype = type;
-    SendSystemMessage(this, mPlayer, smsg);*/
+
+    UILayer* ui        = (UILayer*)this->getParent();
+    auto player        = ui->mPlayer;
+    SystemMessage smsg = {SMsgType::None,ActorType::None,type,nullptr};
+    SendSystemMessage(ui, player, smsg);
 }
 
 void CommandLayer::SetButton(ActorType type)

@@ -43,6 +43,7 @@ bool UILayer::init()
 
     auto resource = ResourceLayer::create();
     resource->setName("ResourceLayer");
+    resource->setPosition(ax::Vec2(400, 450));
     addChild(resource, 1);
 
     printf("현재 자식 노드 확인하는 줄");
@@ -167,9 +168,6 @@ void UILayer::MessageProc(SystemMessage smsg)
         killCount->setPosition(ax::Vec2(0, 10));
         BottomUI->addChild(killCount, 2);
 
-
-
-        
         if (dfUpgrade)
         {
             dfUpgrade->setScale(2.f);
@@ -183,11 +181,7 @@ void UILayer::MessageProc(SystemMessage smsg)
             atUpgrade->setPosition(ax::Vec2(-20, -55));
             BottomUI->addChild(atUpgrade, 2);
         }
-        
-
-
-
-
+       
     }
         break;
     default:
@@ -198,11 +192,24 @@ void UILayer::MessageProc(SystemMessage smsg)
     
 }
 
-
-
-void UILayer::SetUI(PlayerRace race)
+void UILayer::StartSettingWithPlayer(Player* player)
 {
-    switch (race)
+    mPlayer = player;
+    SetUI();
+
+    ResourceLayer* resource = (ResourceLayer*)this->getChildByName("ResourceLayer");
+    resource->mPlayer       = player;
+    resource->SetNumText();
+
+}
+
+
+
+void UILayer::SetUI()
+{
+
+
+    switch (mPlayer->mRace)
     {
     case PlayerRace::Terran:
     {
