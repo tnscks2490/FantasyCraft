@@ -186,8 +186,9 @@ void MainScene::onMouseDown(Event* event)
         }
         else if (mCursor->mCursorComp->mState == CursorState::Target)
         {
-            AddGoal_MoveToPath(mPlayer->mMainActor, realpos);
+            //AddGoal_MoveToPath(mPlayer->mMainActor, realpos);
             mCursor->mCursorComp->mState = CursorState::Idle;
+            
             printf("이게 문제야 문제");
         }
         else
@@ -276,9 +277,6 @@ void MainScene::onMouseUp(Event* event)
         return true;
     };
 
-
-
-    
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
         if (mCursor->mCursorComp->mState == CursorState::Target)
@@ -300,11 +298,10 @@ void MainScene::onMouseUp(Event* event)
             mCursor->mCursorComp->GreenRectClear();
             mCursor->mCursorComp->mState = CursorState::Idle;
             mCursor->mCursorComp->sPos   = mCursor->mCursorComp->ePos;
-        }    
+        }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
-
         getPhysicsWorld()->queryRect(Rfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
     }
 
@@ -688,9 +685,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
-
+        } break;
 
         case 114: // MoveToPath
         {
@@ -702,6 +697,7 @@ void MainScene::Decording()
 
             }
         } break;
+
         case 115: // 건물 건설
         {
             for (auto actor : World::get()->w_ActorList)

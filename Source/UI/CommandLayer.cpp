@@ -189,10 +189,10 @@ ax::MenuItemImage* CommandLayer::CreateAddButton(ButtonType type)
 
     auto bt = ax::MenuItemImage::create(t->normal_Image, t->selected_Image, AX_CALLBACK_1(CommandLayer::ButtonMessage, this));
 
+
     bt->setUserData(t);
     bt->setScale(2.f);
     bt->setPosition(SetButtonPosition(t->iconPos));
-
     mMenu->addChild(bt, 1);
 
     return bt;

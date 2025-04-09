@@ -103,6 +103,7 @@ public:
 
 
     PlayerController* mPC = nullptr;
+
     ActionIcon mCurActionICon    = ActionIcon::None;
 
     UILayer* ui = nullptr;
@@ -115,6 +116,3 @@ public:
     int mCurMaxPop = 10;
 
 };
-
-// 
-

@@ -16,24 +16,6 @@ public:
 
     // 콘솔이미지 종족에 따라 변경
     void SetUI();
-    void ButtonMessage(ax::Object* sender);
-
-
-    void SetButton(ActorType type);
-    void ReturnButton();
-    void ClearSaveButtons();
-
-
-    void SetUnitControlButton(ActorType Atype);
-
-    void SetCBButton();
-    void SetABButton(); 
-
-
-    ax::Vec2 SetButtonPosition(int num);
-    ax::MenuItemImage* CreateAddButton(ButtonType type);
-
-
 
 
 

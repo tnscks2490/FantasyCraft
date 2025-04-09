@@ -13,7 +13,16 @@ public:
 
     void MessageProc(SystemMessage smsg);
 
-     Player* mPlayer = nullptr;
+    void SwitchSelectUI(bool isMulti);
+
+    void MultiSelected(SystemMessage smsg);
+    void SingleSelected(SystemMessage smsg);
+
+
+    Player* mPlayer = nullptr;
+
+    ax::Node* mMultiSelect = nullptr;
+    ax::Node* mSingleSelect = nullptr;
 };
 
 
