@@ -19,6 +19,23 @@ public:
     void SingleSelected(SystemMessage smsg);
 
 
+    //// singleSelect 하나에 대한 함수
+    void showUnitInfoUI(Actor* actor);
+    void showUnitWire(Actor* actor);
+    void showStatus(Actor* actor);
+    void showUpgrade(Actor* actor);
+    void showName(Actor* actor);
+    //////////////////////////////////
+
+
+
+    void showBuildingConstructionUI();
+    void showProductionQueueUI();
+
+
+
+
+public:
     Player* mPlayer = nullptr;
 
     ax::Node* mMultiSelect = nullptr;

@@ -30,7 +30,10 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         if (mBuilder == nullptr && msg.sender->mActorType == ActorType::SCV)
         {
             if (msg.sender->mUnitComp->mCurAction == ActionState::Building)
+            {
                 mBuilder = msg.sender;
+                mCurAction = ActionState::Building;
+            }
         }
 
         ActorMessage Msg = {MsgType::SendInfo, mActor, nullptr, nullptr};
@@ -40,7 +43,10 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     case MsgType::Build_GetBuilder:
     {
         if (mBuilder == nullptr)
+        {
             mBuilder = msg.sender;
+            mCurAction = ActionState::Building;
+        }
     } break;
 
     case MsgType::Build_Continue:
@@ -79,8 +85,8 @@ void CommandCenterComp::update(float delta)
                 if (test != drawidx)
                 {
                     drawidx = test;
-                    mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
-                        ECharAct::Idle, ECharDir::Face, drawidx);
+                     mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
+                        ECharAct::Building, ECharDir::Face, drawidx);
                 }
                 
 
@@ -94,6 +100,7 @@ void CommandCenterComp::update(float delta)
                     IsBuild = true;
                     ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
+                    mCurAction = ActionState::Idle;
                     mBuilder = nullptr; 
                 }
             }

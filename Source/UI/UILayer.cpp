@@ -60,14 +60,13 @@ void UILayer::MessageProc(SystemMessage smsg)
     auto msg = smsg;
 
     
-    //auto command = this->getChildByName("CommandLayer");
 
     switch (msg.smsgType)
     {
     case SMsgType::None:
     {
-        CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
-        command->SetButton(msg.Atype);
+        /*CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+        command->SetButton(msg.Atype);*/
     } break;
     case SMsgType::MSUI:
     {
@@ -79,6 +78,10 @@ void UILayer::MessageProc(SystemMessage smsg)
     {
         UnitInfoLayer* UnitInfo = (UnitInfoLayer*)this->getChildByName("UnitInfoLayer");
         UnitInfo->MessageProc(msg);
+
+        CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+        command->MessageProc(msg);
+
     } break;
     default:
         break;

@@ -591,13 +591,33 @@ UnitControlButton g_UnitControlButton_TMarine = {
     ButtonType::TStimPack,ButtonType::None,ButtonType::None}
 };
 
+UnitControlButton g_UnitControlButton_TCommandCenter = {
+    ActorType::CommandCenter,
+    {ButtonType::TSCV,ButtonType::None,ButtonType::None,
+    ButtonType::None,ButtonType::None,ButtonType::None,
+    ButtonType::TComsat_Station,ButtonType::TNuclear_Silo,
+    ButtonType::TLift}
+};
 
-UnitControlButton* FindUnitControlButton(ActorType Atype)
+UnitControlButton g_UnitControlButton_OnlyCancel = {
+
+};
+
+
+UnitControlButton* FindUnitControlButton(Actor* actor)
 {
-    switch (Atype)
+    switch (actor->mActorType)
     {
     case ActorType::SCV:    return &g_UnitControlButton_TSCV;
     case ActorType::Marine: return &g_UnitControlButton_TMarine;
+    case ActorType::CommandCenter:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle: return &g_UnitControlButton_TCommandCenter;
+        }
+    }
+        return &g_UnitControlButton_TCommandCenter;
     default:
         break;
     }

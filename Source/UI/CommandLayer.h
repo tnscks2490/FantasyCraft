@@ -13,11 +13,11 @@ public:
 
     void ButtonMessage(ax::Object* sender);
 
-    void SetButton(ActorType type);
+    void SetButton(Actor* actor);
     void ReturnButton();
     void ClearSaveButtons();
 
-    void SetUnitControlButton(ActorType Atype);
+    void SetUnitControlButton(Actor* actor);
 
     void SetCBButton();
     void SetABButton(); 

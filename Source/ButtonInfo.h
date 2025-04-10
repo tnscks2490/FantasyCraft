@@ -113,4 +113,4 @@ struct UnitControlButton
 
 };
 
-UnitControlButton* FindUnitControlButton(ActorType Atype);
+UnitControlButton* FindUnitControlButton(Actor* actor);

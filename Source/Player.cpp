@@ -151,9 +151,9 @@ void Player::ReSelected()
     {
         // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
         mMainActor = PlayerActors[0];
-        SystemMessage smsg;
+        /*SystemMessage smsg;
         smsg.Atype = mMainActor->mActorType;
-        SendSystemMessage(ui, this, smsg);
+        SendSystemMessage(ui, this, smsg);*/
         ///// 단일 선택에 관한 와이어프레임 UI출력하는 함수 추가할것
 
         SystemMessage ssmsg = {SMsgType::SSUI, ActorType::None, ButtonType::None, mMainActor};

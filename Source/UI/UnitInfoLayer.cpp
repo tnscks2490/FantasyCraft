@@ -95,9 +95,6 @@ void UnitInfoLayer::MultiSelected(SystemMessage smsg)
             case ActorType::SCV:
                 wire = ax::Sprite::create("SCV.png"sv);
                 break;
-            case ActorType::CommandCenter:
-                wire = ax::Sprite::create("CommandCenter.png"sv);
-                break;
             default:
                 break;
             }
@@ -128,65 +125,109 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
     mSingleSelect->removeAllChildren();
     {
         Actor* sActor = (Actor*)smsg.data;
-
-        ax::Sprite* wire = nullptr;
-        // 추가로 쉴드 업글이나 등등 넣어줄것(이것도 바꿔야함)임시방편임
-        ax::Sprite* atUpgrade = nullptr;
-        ax::Sprite* dfUpgrade = nullptr;
-        switch (sActor->mActorType)
-        {
-        case ActorType::Marine:
-            wire      = ax::Sprite::create("Big_Marine.png"sv);
-            atUpgrade = ax::Sprite::create("BionicAT.png"sv);
-            dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
-            break;
-        case ActorType::SCV:
-            wire      = ax::Sprite::create("Big_SCV.png"sv);
-            atUpgrade = ax::Sprite::create("SCVAT.png"sv);
-            dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
-            break;
-        case ActorType::CommandCenter:
-            wire = ax::Sprite::create("CommandCenter.png"sv);
-            break;
-        default:
-            break;
-        }
-        wire->setPosition(ax::Vec2(-250, 15));
-        wire->setScale(2.f);
-        mSingleSelect->addChild(wire, 2);
-
-        auto status = sActor->mUnitComp->mStatus;
-
-        auto hp     = NumSlashNumToString(status.HP, status.MaxHP);
-        auto hptext = ax::Label::createWithTTF(hp, "fonts/00TT.TTF", 16);
-        hptext->setPosition(ax::Vec2(-250, -60));
-        hptext->setTextColor(ax::Color4B::GREEN);
-        mSingleSelect->addChild(hptext, 2);
-
-        auto name = ax::Label::createWithTTF(sActor->mUnitComp->GetUnitName(), "fonts/00TT.TTF", 20);
-        name->setPosition(ax::Vec2(0, 70));
-        mSingleSelect->addChild(name, 2);
-
-        std::string str = "Kills : " + std::to_string(sActor->mUnitComp->killCount);
-        auto killCount  = ax::Label::createWithTTF(str, "fonts/00TT.TTF", 20);
-        killCount->setPosition(ax::Vec2(0, 10));
-        mSingleSelect->addChild(killCount, 2);
-
-        if (dfUpgrade)
-        {
-            dfUpgrade->setScale(2.f);
-            dfUpgrade->setPosition(ax::Vec2(-100, -55));
-            mSingleSelect->addChild(dfUpgrade, 2);
-        }
-
-        if (atUpgrade)
-        {
-            atUpgrade->setScale(2.f);
-            atUpgrade->setPosition(ax::Vec2(-20, -55));
-            mSingleSelect->addChild(atUpgrade, 2);
-        }
+        showUnitInfoUI(sActor);
     }
 }
+
+void UnitInfoLayer::showUnitInfoUI(Actor* actor)
+{
+    showUnitWire(actor);
+    showName(actor);
+    showStatus(actor);
+    showUpgrade(actor);
+}
+
+void UnitInfoLayer::showUnitWire(Actor* actor)
+{
+    ax::Sprite* wire = nullptr;
+
+    switch (actor->mActorType)
+    {
+    case ActorType::SCV:
+        wire = ax::Sprite::create("Big_SCV.png"sv);
+        break;
+    case ActorType::Marine:
+        wire = ax::Sprite::create("Big_Marine.png"sv);
+        break;
+    case ActorType::CommandCenter:
+        wire = ax::Sprite::create("CommandCenter.png"sv);
+        break;
+    default:
+        break;
+    }
+    
+    wire->setPosition(ax::Vec2(-250, 15));
+    wire->setScale(2.f);
+    mSingleSelect->addChild(wire, 2);
+}
+
+void UnitInfoLayer::showStatus(Actor* actor)
+{
+    auto status = actor->mUnitComp->mStatus;
+
+    auto hp     = NumSlashNumToString(status.HP, status.MaxHP);
+    auto hptext = ax::Label::createWithTTF(hp, "fonts/00TT.TTF", 16);
+    hptext->setPosition(ax::Vec2(-250, -60));
+    hptext->setTextColor(ax::Color4B::GREEN);
+    mSingleSelect->addChild(hptext, 2);
+}
+
+void UnitInfoLayer::showUpgrade(Actor* actor)
+{
+
+    switch (actor->mActorType)
+    {
+    case ActorType::SCV:
+    {
+        auto atUpgrade = ax::Sprite::create("SCVAT.png"sv);
+        atUpgrade->setScale(2.f);
+        atUpgrade->setPosition(ax::Vec2(-20, -55));
+        mSingleSelect->addChild(atUpgrade, 2);
+
+        auto dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
+        dfUpgrade->setScale(2.f);
+        dfUpgrade->setPosition(ax::Vec2(-100, -55));
+        mSingleSelect->addChild(dfUpgrade, 2);
+    } break;
+
+    case ActorType::Marine:
+    {
+        auto atUpgrade = ax::Sprite::create("BionicAT.png"sv);
+        atUpgrade->setScale(2.f);
+        atUpgrade->setPosition(ax::Vec2(-20, -55));
+        mSingleSelect->addChild(atUpgrade, 2);
+
+        auto dfUpgrade = ax::Sprite::create("BionicDF.png"sv);
+        dfUpgrade->setScale(2.f);
+        dfUpgrade->setPosition(ax::Vec2(-100, -55));
+        mSingleSelect->addChild(dfUpgrade, 2);
+    }         
+        break;
+    default:
+        break;
+    }
+   
+    
+}
+
+void UnitInfoLayer::showName(Actor* actor)
+{
+    auto name = ax::Label::createWithTTF(actor->mUnitComp->GetUnitName(), "fonts/00TT.TTF", 20);
+    name->setPosition(ax::Vec2(0, 70));
+    mSingleSelect->addChild(name, 2);
+
+    std::string str = "Kills : " + std::to_string(actor->mUnitComp->killCount);
+    auto killCount  = ax::Label::createWithTTF(str, "fonts/00TT.TTF", 20);
+    killCount->setPosition(ax::Vec2(0, 10));
+    mSingleSelect->addChild(killCount, 2);
+}
+
+
+void UnitInfoLayer::showBuildingConstructionUI()
+{}
+
+void UnitInfoLayer::showProductionQueueUI()
+{}
 
 
 void UnitInfoLayer::update(float delta) {}

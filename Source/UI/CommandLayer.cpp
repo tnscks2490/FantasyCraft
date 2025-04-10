@@ -30,9 +30,12 @@ bool CommandLayer::init()
 void CommandLayer::MessageProc(SystemMessage smsg)
 {
     auto msg = smsg;
+    Actor* sActor = (Actor*)msg.data;
 
-    if (msg.smsgType == SMsgType::None)
-        SetButton(msg.Atype);
+    if (msg.smsgType == SMsgType::SSUI)
+    {
+        SetButton(sActor);
+    }
 }
 
 void CommandLayer::ButtonMessage(ax::Object* sender)
@@ -94,7 +97,11 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
         mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
         // 만약 캔슬을 누르면 SCV에게 명령이 가도록 해야함
-    }
+    } break;
+    case ButtonType::TSCV:
+    {
+        printf("SCV출력입니당~~~~~~~");
+    } break;
     default:
         break;
     }
@@ -107,11 +114,12 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     SendSystemMessage(ui, player, smsg);
 }
 
-void CommandLayer::SetButton(ActorType type)
+void CommandLayer::SetButton(Actor* actor)
 {
-    mCurActorType = type;
+    mCurActorType = actor->mActorType;
+    mMenu->removeAllChildren();
     ClearSaveButtons();
-    SetUnitControlButton(type);
+    SetUnitControlButton(actor);
 }
 
 void CommandLayer::ReturnButton()
@@ -130,9 +138,9 @@ void CommandLayer::ClearSaveButtons()
     }
 }
 
-void CommandLayer::SetUnitControlButton(ActorType Atype)
+void CommandLayer::SetUnitControlButton(Actor* actor)
 {
-    auto ctrButtons = FindUnitControlButton(Atype);
+    auto ctrButtons = FindUnitControlButton(actor);
     for (int i = 0; i < MAX_BUTTON; i++)
     {
         CreateAddButton(ctrButtons->buttons[i]);

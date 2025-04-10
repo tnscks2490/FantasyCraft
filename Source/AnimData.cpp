@@ -162,10 +162,10 @@ AnimInfo g_AnimInfo_Effect_MarineSpark[] = {
 
 
 AnimInfo g_AnimInfo_CommandCenter_Build[] = {
-        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/03.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-        {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/04.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Building, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/01.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Building, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/02.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Building, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/03.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+        {ECharName::CommandCenter, ECharAct::Building, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/04.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CommandCenter, ECharAct::Idle, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Idle/05.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 
@@ -332,7 +332,11 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
         }
         break;
     case ECharName::CommandCenter:
-        return g_AnimInfo_CommandCenter_Build[idx];
+        switch (act)
+        {
+        case ECharAct::Idle: return g_AnimInfo_CommandCenter_Build[idx];
+        case ECharAct::Building: return g_AnimInfo_CommandCenter_Build[idx];
+        }
         break;
     case ECharName::Effect:
         break;

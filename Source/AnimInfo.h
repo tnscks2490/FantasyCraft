@@ -71,11 +71,11 @@ enum class ECharAct
 {
     Idle = 0,
     
-
     Move,
     Attack,
     Gathering,
     Death,
+    Building,
     //////////
     // 행동들 추가하기
 
