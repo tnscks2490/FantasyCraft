@@ -4,6 +4,7 @@
 
 using namespace ax;
 
+
 //Common Icon
 ButtonInfo g_ButtonInfo_TAttack = {
     "StarResource/Resource/UI/Icon/Terran/Common/Attack1.png",
@@ -237,7 +238,7 @@ ButtonInfo g_ButtonInfo_TNuclear       = {
 ButtonInfo g_ButtonInfo_TNuclear_Silo       = {
     "StarResource/Resource/UI/Icon/Terran/Build/Nuclear_Silo1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Nuclear_Silo2.png",
-    "", ButtonType::TNuclear_Silo,9
+    "", ButtonType::TNuclear_Silo,8
 };
 ButtonInfo g_ButtonInfo_TAcademy      = {
     "StarResource/Resource/UI/Icon/Terran/Build/Academy1.png",
@@ -267,7 +268,7 @@ ButtonInfo g_ButtonInfo_TCommand_Center     = {
 ButtonInfo g_ButtonInfo_TComsat_Station     = {
     "StarResource/Resource/UI/Icon/Terran/Build/Comsat_Station1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Comsat_Station2.png",
-    "", ButtonType::TComsat_Station,9
+    "", ButtonType::TComsat_Station,7
 };
 ButtonInfo g_ButtonInfo_TControl_Tower      = {
     "StarResource/Resource/UI/Icon/Terran/Build/Control_Tower1.png",
@@ -329,7 +330,7 @@ ButtonInfo g_ButtonInfo_TSupply_Depot = {
 ButtonInfo g_ButtonInfo_TSCV          = {
     "StarResource/Resource/UI/Icon/Terran/Unit/SCV1.png",
     "StarResource/Resource/UI/Icon/Terran/Unit/SCV2.png",
-    "", ButtonType::TSCV,9
+    "", ButtonType::TSCV,1
 };
 ButtonInfo g_ButtonInfo_TBattle       = {
     "StarResource/Resource/UI/Icon/Terran/Unit/Battle1.png",
@@ -407,7 +408,7 @@ ButtonInfo* FindButtonInfo(ButtonType type)
 {
     switch (type)
     {
-    case ButtonType::None:    break;
+    case ButtonType::None:    return nullptr;
     case ButtonType::TAttack: return &g_ButtonInfo_TAttack;
     case ButtonType::TMove:   return &g_ButtonInfo_TMove;
     case ButtonType::TSetRellyPoint: return &g_ButtonInfo_TSetRellyPoint;
@@ -487,7 +488,7 @@ ButtonInfo* FindButtonInfo(ButtonType type)
     case ButtonType::TWraith:           return &g_ButtonInfo_TWraith;
     default:  break;
     }
-    return &g_ButtonInfo_TMove;
+    return &g_ButtonInfo_TMine;
 }
 
 int FindButtonPos(ButtonType type)
@@ -574,7 +575,7 @@ int FindButtonPos(ButtonType type)
     case ButtonType::TWraith:           return g_ButtonInfo_TWraith.iconPos;
     default:  break;
     }
-    return 10;
+    return 0;
 }
 
 UnitControlButton g_UnitControlButton_TSCV = {
@@ -594,7 +595,7 @@ UnitControlButton g_UnitControlButton_TMarine = {
 UnitControlButton g_UnitControlButton_TCommandCenter = {
     ActorType::CommandCenter,
     {ButtonType::TSCV,ButtonType::None,ButtonType::None,
-    ButtonType::None,ButtonType::None,ButtonType::None,
+    ButtonType::None,ButtonType::None,ButtonType::TSetRellyPoint,
     ButtonType::TComsat_Station,ButtonType::TNuclear_Silo,
     ButtonType::TLift}
 };
@@ -608,13 +609,23 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
 {
     switch (actor->mActorType)
     {
-    case ActorType::SCV:    return &g_UnitControlButton_TSCV;
+    case ActorType::SCV:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:
+            return &g_UnitControlButton_TSCV;
+        case ActionState::Building:
+            return ReturnOnlyCancel(actor);
+        }
+    } break;
     case ActorType::Marine: return &g_UnitControlButton_TMarine;
     case ActorType::CommandCenter:
     {
         switch (actor->mUnitComp->mCurAction)
         {
-        case ActionState::Idle: return &g_UnitControlButton_TCommandCenter;
+        case ActionState::Idle:     return &g_UnitControlButton_TCommandCenter;
+        case ActionState::Building: return ReturnOnlyCancel(actor);
         }
     }
         return &g_UnitControlButton_TCommandCenter;
@@ -622,4 +633,15 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
         break;
     }
     return &g_UnitControlButton_TSCV;
+}
+
+UnitControlButton* ReturnOnlyCancel(Actor* actor)
+{
+    UnitControlButton cancelButton = {
+        actor->mActorType,
+        {ButtonType::None, ButtonType::None, ButtonType::None,
+        ButtonType::None, ButtonType::None, ButtonType::None,
+         ButtonType::None, ButtonType::None, ButtonType::TCancel}
+    };
+    return &cancelButton;
 }

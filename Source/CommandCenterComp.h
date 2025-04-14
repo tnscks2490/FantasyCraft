@@ -13,6 +13,11 @@ public:
 
     virtual void update(float delta) override;
 
+    void AddSCV();
+    void DeleteSCV();
+    bool IsUnitArrayEmpty();
+
+
 public:
 
     int MaxHP = 1500;
@@ -21,14 +26,15 @@ public:
     bool IsBuild    = false;
 
     float mTimer = 0.f;
+    float SCVCreateTime = 13.f;
+
 
     Actor* mBuilder = nullptr;
     int drawidx     = 0;
     int test      = 0;
 
+    ActorType* CreateUnitArray;
+    bool IsCreatingUnit = false;
+
     BuildingSize Bsize = BuildingSize::Big;
-
-    ActorType* BuildUnitList = nullptr;
-
-
 };

@@ -399,6 +399,16 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.input    = 101;
         TcpClient::get()->SendMessageToServer(data);
     }break;
+    ///////////////////////////// input 나중에 정렬할것
+    case ax::EventKeyboard::KeyCode::KEY_X:
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.pos      = Vec2(500, 500);
+        data.input    = 102;
+        TcpClient::get()->SendMessageToServer(data);
+    }
+    break;
 
     case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
     {

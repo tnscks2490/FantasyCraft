@@ -8,8 +8,10 @@ CommandCenterComp::CommandCenterComp(Actor* actor)
 {
     actor->mUnitComp = this;
 
-    BuildUnitList = new ActorType[1];
-    BuildUnitList[0] = ActorType::SCV;
+    for (int i = 0; i < 5; i++)
+    {
+        CreateUnitArray[i] = ActorType::None;
+    }
 
 
 }
@@ -64,9 +66,16 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         if (!IsBuild)
             mBuilder = nullptr;
     }break;
+
+
+    case MsgType::Create_SCV:
+    {
+    }
+    break;
     default:
         break;
     }
+
 }
 
 void CommandCenterComp::update(float delta)
@@ -101,10 +110,67 @@ void CommandCenterComp::update(float delta)
                     ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
                     mCurAction = ActionState::Idle;
-                    mBuilder = nullptr; 
+                    mBuilder = nullptr;
+                    mTimer     = 0.f;
                 }
             }
         }
 
     }
+
+    if (IsBuild)
+    {
+        if (IsCreatingUnit)
+        {
+            mTimer += delta;
+            if (mTimer >= SCVCreateTime)
+            {
+                mTimer = 0.f;
+                DeleteSCV();
+                if (IsUnitArrayEmpty)
+                {
+
+                    IsCreatingUnit = false;
+                }
+                else
+                {
+
+                }
+
+            }
+        }
+    }
+
+
+}
+
+void CommandCenterComp::AddSCV()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (CreateUnitArray[i] == ActorType::None)
+        {
+            CreateUnitArray[i] = ActorType::SCV;
+            break;
+        }
+    }
+}
+
+void CommandCenterComp::DeleteSCV()
+{
+    CreateUnitArray[0] = CreateUnitArray[1];
+    CreateUnitArray[1] = CreateUnitArray[2];
+    CreateUnitArray[2] = CreateUnitArray[3];
+    CreateUnitArray[3] = CreateUnitArray[4];
+    CreateUnitArray[4] = ActorType::None;
+}
+
+bool CommandCenterComp::IsUnitArrayEmpty()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (CreateUnitArray[i] == ActorType::SCV)
+            return false;
+    }
+    return true;
 }

@@ -139,7 +139,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     node->addChild(selectanim);
 
 
-    auto anim       =  draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::Idle, ECharDir::S, "Anim");
+    auto anim       =  draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Building, 0);
 
     auto command = new CommandCenterComp(actor);
     auto move = new MoveComp(actor);

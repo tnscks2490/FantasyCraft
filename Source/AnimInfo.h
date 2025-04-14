@@ -76,6 +76,7 @@ enum class ECharAct
     Gathering,
     Death,
     Building,
+    Doing,
     //////////
     // 행동들 추가하기
 

@@ -380,6 +380,30 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, int idx, std::string_v
     return nullptr;
 }
 
+ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, ECharAct action, int idx, std::string_view nodeName)
+{
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& info = FindAnimInfoByIndex(name, action, ECharDir::Face, idx);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName(nodeName);
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+
+        ax::Action* action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        if (mCurAnimInfo == nullptr)
+            mCurAnimInfo = &info;
+        return node;
+    }
+    return nullptr;
+}
+
 ax::Node* DrawComp::CreateSelectedNode()
 {
     if (mRoot.isNotNull())

@@ -114,3 +114,5 @@ struct UnitControlButton
 };
 
 UnitControlButton* FindUnitControlButton(Actor* actor);
+
+UnitControlButton* ReturnOnlyCancel(Actor* actor);

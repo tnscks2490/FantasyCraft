@@ -77,7 +77,6 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TCommon_Build:
     {
         mMenu->removeAllChildren();
-
         SetCBButton();
     }
     break;
@@ -195,8 +194,9 @@ ax::MenuItemImage* CommandLayer::CreateAddButton(ButtonType type)
 {
     ButtonInfo* t = FindButtonInfo(type);
 
+    if (t == nullptr) return nullptr;
+ 
     auto bt = ax::MenuItemImage::create(t->normal_Image, t->selected_Image, AX_CALLBACK_1(CommandLayer::ButtonMessage, this));
-
 
     bt->setUserData(t);
     bt->setScale(2.f);

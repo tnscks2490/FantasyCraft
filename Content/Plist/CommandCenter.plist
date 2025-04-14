@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>CommandCenter/Idle/01.png</key>
+            <key>CommandCenter/Building/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>CommandCenter/Idle/02.png</key>
+            <key>CommandCenter/Building/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>CommandCenter/Idle/03.png</key>
+            <key>CommandCenter/Building/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>CommandCenter/Idle/04.png</key>
+            <key>CommandCenter/Building/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>CommandCenter/Idle/05.png</key>
+            <key>CommandCenter/Doing/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>내리기/1.png</key>
+            <key>CommandCenter/Doing/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>내리기/2.png</key>
+            <key>CommandCenter/Idle/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>내리기/3.png</key>
+            <key>내리기/1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>띄우기/1.png</key>
+            <key>내리기/2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>띄우기/2.png</key>
+            <key>내리기/3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>띄우기/3.png</key>
+            <key>띄우기/1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,6 +169,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>띄우기/2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,160}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,160}</string>
+                <key>textureRect</key>
+                <string>{{0,448},{128,160}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>띄우기/3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,160}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,160}</string>
+                <key>textureRect</key>
+                <string>{{128,448},{128,160}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>새 폴더/tccshad.bmp</key>
             <dict>
                 <key>aliases</key>
@@ -180,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,960}</string>
                 <key>textureRect</key>
-                <string>{{0,448},{128,960}}</string>
+                <string>{{288,608},{128,960}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,384}</string>
                 <key>textureRect</key>
-                <string>{{128,448},{128,384}}</string>
+                <string>{{0,608},{128,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -240,7 +270,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,384}</string>
                 <key>textureRect</key>
-                <string>{{0,1408},{160,384}}</string>
+                <string>{{128,608},{160,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -256,9 +286,9 @@
             <key>realTextureFileName</key>
             <string>CommandCenter.png</string>
             <key>size</key>
-            <string>{512,1792}</string>
+            <string>{512,1568}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4ee1a7dad879a213989b25f1b841b40f:1d637617f645a0d4ab909749500df6cd:053d2fba9ec5a131d61a7c6c032462d9$</string>
+            <string>$TexturePacker:SmartUpdate:22ad804190dc2fabcc7173699a78c067:931ddffd693d4ae4c79ff34fa7b9fb33:053d2fba9ec5a131d61a7c6c032462d9$</string>
             <key>textureFileName</key>
             <string>CommandCenter.png</string>
         </dict>

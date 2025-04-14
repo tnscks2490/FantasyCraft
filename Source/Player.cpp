@@ -45,8 +45,17 @@ void Player::MessageProc(SystemMessage smsg)
             // 건물 블루프린트 생성하기
             ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
             SendActorMessage(cursor, msg);
+        } break;
+
+        case ButtonType::TSCV:
+        {
+            if (mMainActor && mMainActor->mActorType == ActorType::CommandCenter)
+            {
+                ActorMessage msg = {MsgType::Create_SCV, nullptr, nullptr};
+                SendActorMessage(mMainActor, msg);
+               
+            }
         }
-        break;
 
         default:
             break;

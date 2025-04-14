@@ -26,7 +26,8 @@ enum class MsgType
     Build_Continue,
     Build_Start,
     Build_GetBuilder,
-
+    // 유닛생산하기
+    Create_SCV,
 
 
     Cancel,

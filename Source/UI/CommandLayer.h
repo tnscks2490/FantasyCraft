@@ -34,6 +34,8 @@ public:
 
     ActorType mCurActorType;
     ax::Menu* mMenu = nullptr;
+
+
 };
 
 
