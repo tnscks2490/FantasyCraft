@@ -127,7 +127,7 @@ void CommandCenterComp::update(float delta)
             {
                 mTimer = 0.f;
                 DeleteSCV();
-                if (IsUnitArrayEmpty)
+                if (IsUnitArrayEmpty())
                 {
 
                     IsCreatingUnit = false;
