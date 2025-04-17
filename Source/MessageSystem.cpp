@@ -126,6 +126,12 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
     }
     break;
 
+    case MsgType::Create_SCV:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    } break;
+
     default:
         break;
     }
@@ -160,6 +166,11 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     {
         if (ui) ui->MessageProc(smsg);
     } break;
+    case SMsgType::Create_Unit:
+    {
+        if (ui)
+            ui->MessageProc(smsg);
+    }
     default:
         break;
     }

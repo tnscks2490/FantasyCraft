@@ -44,6 +44,7 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 {
     Actor* actor = new Actor;
     actor->mActorType = ActorType::SCV;
+    actor->mCategory  = UnitCategory::Unit;
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
 
@@ -84,6 +85,7 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
 {
     Actor* actor = new Actor;
     actor->mActorType = ActorType::Marine;
+    actor->mCategory  = UnitCategory::Unit;
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
 
@@ -121,6 +123,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
 {
     Actor* actor   = new Actor;
     actor->mActorType = ActorType::CommandCenter;
+    actor->mCategory  = UnitCategory::Building;
     actor->mID     = data.ClientID;
     actor->charNum = data.input;
 

@@ -32,7 +32,11 @@ public:
     void showBuildingConstructionUI();
     void showProductionQueueUI();
 
+    ax::Node* CreateLoadNode(ECharName name, ECharAct action, ECharDir dir,
+                             std::string_view nodeName = "LoadBar");
 
+    void ChangeLoadBar(int idx, bool isEmpty);
+    void ShowCreatingUnit(ActorType type);
 
 
 public:
@@ -40,6 +44,16 @@ public:
 
     ax::Node* mMultiSelect = nullptr;
     ax::Node* mSingleSelect = nullptr;
+
+    ax::Node* mLoadBar = nullptr;
+
+
+    float mTimer = 0.f;
+    float mCurLoadTime = 0.f;
+    float mMaxLoadTime = 0.f;
+    float mFrame       = 0.f;
+    int mLoadIdx       = 0;
+    bool isLoad  = false;
 };
 
 

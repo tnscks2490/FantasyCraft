@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "UI/CommandLayer.h"
 #include "UI/UILayer.h"
+#include "UI/UnitInfoLayer.h"
 #include "ButtonInfo.h"
 #include "Player.h"
 
@@ -99,7 +100,9 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     } break;
     case ButtonType::TSCV:
     {
-        printf("SCV출력입니당~~~~~~~");
+        //UnitInfoLayer* UIL = (UnitInfoLayer*)this->getParent()->getChildByName("UnitInfoLayer");
+        //if (!UIL->isLoad)
+        //    UIL->isLoad = true;
     } break;
     default:
         break;
@@ -108,9 +111,8 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     // 어떤 버튼을 선택했는지 플레이어에게 보내준다
 
     UILayer* ui        = (UILayer*)this->getParent();
-    auto player        = ui->mPlayer;
     SystemMessage smsg = {SMsgType::None,ActorType::None,type,nullptr};
-    SendSystemMessage(ui, player, smsg);
+    SendSystemMessage(ui, ui->mPlayer, smsg);
 }
 
 void CommandLayer::SetButton(Actor* actor)

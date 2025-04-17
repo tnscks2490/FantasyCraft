@@ -4,8 +4,76 @@
 using namespace ax;
 // Playable UI
 
+// 총 68개
 AnimInfo g_AnimInfo_UnitLoadBar_Load[] = {
-    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/%04d.png", 1, 68, (1.f / 68), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0005.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0006.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0007.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0008.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0009.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0010.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0011.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0012.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0013.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0014.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0015.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0016.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0017.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0018.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0019.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0020.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0021.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0022.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0023.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0024.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0025.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0026.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0027.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0028.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0029.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0030.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0031.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0032.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0033.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0034.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0035.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0036.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0037.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0038.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0039.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0040.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0041.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0042.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0043.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0044.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0045.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0046.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0047.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0048.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0049.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0050.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0051.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0052.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0053.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0054.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0055.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0056.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0057.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0058.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0059.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0060.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0061.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0062.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0063.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0064.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0065.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0066.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0067.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::LoadBar, ECharAct::Load, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Load/0068.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_UnitLoadBar_Empty[] = {
     {ECharName::LoadBar, ECharAct::Empty, ECharDir::Face, "Plist/UnitLoadBar.plist", "UnitLoadBar/Empty/%04d.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -347,6 +415,17 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
         break;
     case ECharName::Effect:
         break;
+
+    case ECharName::LoadBar:
+    {
+        switch (act)
+        {
+        case ECharAct::Load: return g_AnimInfo_UnitLoadBar_Load[idx];
+        case ECharAct::Empty: return g_AnimInfo_UnitLoadBar_Empty[0];
+        default:
+            break;
+        }
+    } break;
     default:
         break;
     }

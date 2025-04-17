@@ -33,7 +33,10 @@ bool UnitInfoLayer::init()
 
 
 
-
+    mLoadBar = CreateLoadNode(ECharName::LoadBar, ECharAct::Empty, ECharDir::Face);
+    this->addChild(mLoadBar,1.f);
+    mLoadBar->setVisible(false);
+    mLoadBar->setScale(2.f);
 
     scheduleUpdate();
 
@@ -43,20 +46,47 @@ bool UnitInfoLayer::init()
 void UnitInfoLayer::MessageProc(SystemMessage smsg)
 {
     auto msg = smsg;
+    switch (msg.smsgType)
     {
-        if (msg.smsgType == SMsgType::MSUI)
-        {
-            SwitchSelectUI(true);
-            MultiSelected(msg);
+    case SMsgType::MSUI:
+    {
+        SwitchSelectUI(true);
+        MultiSelected(msg);
+    } break;
+    case SMsgType::SSUI:
+    {
+        SwitchSelectUI(false);
+        SingleSelected(msg);
+    } break;
+    case SMsgType::Create_Unit:
+    {
+        ShowCreatingUnit(smsg.Atype);
+    }
+    default:
+        break;
+    }
+}
 
-        }
-        else if (msg.smsgType == SMsgType::SSUI)
+void UnitInfoLayer::update(float delta)
+{
+    if (isLoad)
+    {
+        mCurLoadTime += delta;
+        int idx     = (int)(mCurLoadTime/mFrame);
+        if (idx != mLoadIdx)
         {
-            SwitchSelectUI(false);
-            SingleSelected(msg);
+            mLoadIdx = idx;
+            if (mLoadIdx == 68)
+            {
+                isLoad = false;
+                mLoadBar->setVisible(false);
+                return;
+            }
+            ChangeLoadBar(mLoadIdx, false);
         }
     }
 }
+
 
 void UnitInfoLayer::SwitchSelectUI(bool isMulti)
 {
@@ -123,17 +153,44 @@ void UnitInfoLayer::MultiSelected(SystemMessage smsg)
 void UnitInfoLayer::SingleSelected(SystemMessage smsg)
 {
     mSingleSelect->removeAllChildren();
+    mLoadBar->setVisible(false);
+
+    Actor* sActor = (Actor*)smsg.data;
+
+    if (sActor->mCategory == UnitCategory::Building)
     {
-        Actor* sActor = (Actor*)smsg.data;
-        showUnitInfoUI(sActor);
+        if (!sActor->mUnitComp->IsBuild())
+        {
+            showUnitWire(sActor);
+            showStatus(sActor);
+
+
+            mCurLoadTime = sActor->mUnitComp->GetCurLoadTime();
+            mMaxLoadTime = sActor->mUnitComp->GetMaxLoadTime();
+            mFrame  = mMaxLoadTime / 68.f;
+            mLoadIdx     = (int)(mCurLoadTime * mFrame);
+            mLoadBar->setVisible(true);
+            isLoad = true;
+        }
+        else
+        {
+            if (sActor->mUnitComp->mCurAction == ActionState::Create_Unit)
+            {
+                printf("여기야 여기");
+            }
+        }
     }
+     
+
+    //showUnitInfoUI(sActor);
+
 }
 
 void UnitInfoLayer::showUnitInfoUI(Actor* actor)
 {
     showUnitWire(actor);
-    showName(actor);
     showStatus(actor);
+    showName(actor);
     showUpgrade(actor);
 }
 
@@ -226,8 +283,49 @@ void UnitInfoLayer::showName(Actor* actor)
 void UnitInfoLayer::showBuildingConstructionUI()
 {}
 
-void UnitInfoLayer::showProductionQueueUI()
-{}
+void UnitInfoLayer::showProductionQueueUI() {}
 
+ax::Node* UnitInfoLayer::CreateLoadNode(ECharName name, ECharAct act, ECharDir dir, std::string_view nodeName)
+{
+    AnimInfo& info = FindAnimInfo(name, act, dir);
+    info.CreateAnimation();
 
-void UnitInfoLayer::update(float delta) {}
+    auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+    node->setName(nodeName);
+
+    ax::Animate* animate = ax::Animate::create(info.animation.get());
+
+    ax::Action* action = ax::Repeat::create(animate, 1);
+    action->setTag(20202);
+    node->runAction(action);
+
+    return node;
+}
+
+void UnitInfoLayer::ChangeLoadBar(int idx, bool isEmpty)
+{
+    mLoadBar->stopActionByTag(20202);
+
+    ECharAct act = ECharAct::Load;
+
+    if (!isEmpty)   act = ECharAct::Load;
+    else            act = ECharAct::Empty;
+
+    AnimInfo& animInfo = FindAnimInfoByIndex(ECharName::LoadBar, act,
+                                             ECharDir::Face, idx);
+    animInfo.CreateAnimation();
+
+    ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
+
+    ax::Action* action;
+    action = ax::RepeatForever::create(animate);
+    action->setTag(20202);
+    mLoadBar->runAction(action);
+}
+
+void UnitInfoLayer::ShowCreatingUnit(ActorType type)
+{
+    auto Bg = ax::Sprite::create("UnitList.png"sv);
+    addChild(Bg, 1.f);
+}
+

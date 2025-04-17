@@ -65,7 +65,7 @@ enum class SMsgType
     //현재 선택된 액터의 상태를 알려주는 UI
     //단일 선택에 대한 정보를 나타냄
     SSUI,
-
+    Create_Unit,
     
 
 };

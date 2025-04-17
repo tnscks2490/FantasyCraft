@@ -9,6 +9,7 @@ enum class ActionState
     Attack,
     Move,
     Death,
+    Create_Unit,
 
 };
 
@@ -72,6 +73,10 @@ public:
 
     virtual void update(float delta) override;
     virtual void SetUnitStatus(ActorType Atype);
+    virtual bool IsBuild() { return false; }
+    virtual float GetCurLoadTime() { return 0; }
+    virtual float GetMaxLoadTime() { return 0; }
+
 
     std::string_view GetUnitName() { return mUnitName; }
 

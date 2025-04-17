@@ -9,9 +9,12 @@ public:
     CommandCenterComp(Actor* actor);
     ~CommandCenterComp();
     virtual void MessageProc(ActorMessage& msg) override;
-
-
     virtual void update(float delta) override;
+    virtual bool IsBuild() override {return isBuild;}
+
+    
+    virtual float GetCurLoadTime() override { return BuildingTime; }
+    virtual float GetMaxLoadTime() override { return MaxBuildTime; }
 
     void AddSCV();
     void DeleteSCV();
@@ -23,7 +26,7 @@ public:
     int MaxHP = 1500;
     float MaxBuildTime = 75.f;
     float BuildingTime = 0.f;
-    bool IsBuild    = false;
+    bool isBuild    = false;
 
     float mTimer = 0.f;
     float SCVCreateTime = 13.f;

@@ -53,6 +53,9 @@ void Player::MessageProc(SystemMessage smsg)
             {
                 ActorMessage msg = {MsgType::Create_SCV, nullptr, nullptr};
                 SendActorMessage(mMainActor, msg);
+
+                SystemMessage smsg = {SMsgType::Create_Unit, ActorType::SCV, ButtonType::TSCV, nullptr};
+                SendSystemMessage(ui, ui->mPlayer, smsg);
                
             }
         }

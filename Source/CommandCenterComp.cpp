@@ -8,6 +8,7 @@ CommandCenterComp::CommandCenterComp(Actor* actor)
 {
     actor->mUnitComp = this;
 
+    CreateUnitArray = new ActorType[5];
     for (int i = 0; i < 5; i++)
     {
         CreateUnitArray[i] = ActorType::None;
@@ -63,13 +64,14 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
 
     case MsgType::Build_Cancel:
     {
-        if (!IsBuild)
+        if (!isBuild)
             mBuilder = nullptr;
     }break;
 
 
     case MsgType::Create_SCV:
     {
+        AddSCV();
     }
     break;
     default:
@@ -80,7 +82,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
 
 void CommandCenterComp::update(float delta)
 {
-    if (!IsBuild && mBuilder)
+    if (!isBuild && mBuilder)
     {
         if (mBuilder->mActorType == ActorType::SCV)
         {
@@ -106,7 +108,7 @@ void CommandCenterComp::update(float delta)
                     drawidx = test;
                     mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
                         ECharAct::Idle, ECharDir::Face, drawidx);
-                    IsBuild = true;
+                    isBuild          = true;
                     ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
                     mCurAction = ActionState::Idle;
@@ -118,7 +120,7 @@ void CommandCenterComp::update(float delta)
 
     }
 
-    if (IsBuild)
+    if (isBuild)
     {
         if (IsCreatingUnit)
         {
@@ -129,7 +131,6 @@ void CommandCenterComp::update(float delta)
                 DeleteSCV();
                 if (IsUnitArrayEmpty())
                 {
-
                     IsCreatingUnit = false;
                 }
                 else
@@ -137,6 +138,11 @@ void CommandCenterComp::update(float delta)
 
                 }
 
+                PK_Data data;
+                data.ClientID = TcpClient::get()->GetID();
+                data.pos      = mActor->GetPosition() + ax::Vec2(0, -100);
+                data.input    = 100;
+                TcpClient::get()->SendMessageToServer(data);
             }
         }
     }
@@ -146,6 +152,11 @@ void CommandCenterComp::update(float delta)
 
 void CommandCenterComp::AddSCV()
 {
+    if (!IsCreatingUnit)
+        IsCreatingUnit = true;
+
+    mCurAction = ActionState::Create_Unit;
+
     for (int i = 0; i < 5; i++)
     {
         if (CreateUnitArray[i] == ActorType::None)

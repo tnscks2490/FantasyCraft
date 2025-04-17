@@ -395,7 +395,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     {
         PK_Data data;
         data.ClientID = TcpClient::get()->GetID();
-        data.pos      = Vec2(500, 500);
+        data.pos      = ax::Vec2(500, 500);
         data.input    = 101;
         TcpClient::get()->SendMessageToServer(data);
     }break;

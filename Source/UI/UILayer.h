@@ -19,8 +19,6 @@ public:
 
 
 
-
-
 public:
     ax::Sprite* mConsoleImage;
 

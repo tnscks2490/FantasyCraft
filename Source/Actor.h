@@ -27,6 +27,13 @@ enum class ActorType
 };
 
 
+enum class UnitCategory
+{
+    None,
+    Building,
+    Unit,
+};
+
 
 class Actor
 {
@@ -67,6 +74,7 @@ public:
 
 public:
     ActorType mActorType = ActorType::None;
+    UnitCategory mCategory = UnitCategory::None;
 
 };
 

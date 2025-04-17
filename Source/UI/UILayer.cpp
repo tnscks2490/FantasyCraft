@@ -83,6 +83,12 @@ void UILayer::MessageProc(SystemMessage smsg)
         command->MessageProc(msg);
 
     } break;
+    case SMsgType::Create_Unit:
+    {
+        UnitInfoLayer* UnitInfo = (UnitInfoLayer*)this->getChildByName("UnitInfoLayer");
+        UnitInfo->MessageProc(msg);
+    }
+    break;
     default:
         break;
     } 
