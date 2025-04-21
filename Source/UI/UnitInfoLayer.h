@@ -2,6 +2,18 @@
 #include "PreDefines.h"
 #include "Player.h"
 
+enum class LayerState
+{
+    None,
+    Idle,
+    Build,
+    CreateUnit,
+    Upgrade,
+    MultiSelect,
+
+};
+
+
 
 class UnitInfoLayer : public ax::Layer
 {
@@ -13,39 +25,55 @@ public:
 
     void MessageProc(SystemMessage smsg);
 
-    void SwitchSelectUI(bool isMulti);
 
     void MultiSelected(SystemMessage smsg);
     void SingleSelected(SystemMessage smsg);
 
 
-    //// singleSelect 하나에 대한 함수
-    void showUnitInfoUI(Actor* actor);
-    void showUnitWire(Actor* actor);
-    void showStatus(Actor* actor);
-    void showUpgrade(Actor* actor);
-    void showName(Actor* actor);
-    //////////////////////////////////
+
+    // 이름은 상시 표기
+ 
+
+    void ChangeLayerState(LayerState cState);
+    ax::SpriteFrame* FindWireFrame(Actor* actor);
+    ax::SpriteFrame* FindATUpgradeSprite(Actor* actor);
+    ax::SpriteFrame* FindDFUpgradeSprite(Actor* actor);
+
+
+    // UnitInfoLayer에 출력되는 값들을 재설정해줌
+    void resetInfoData(Actor* actor);
 
 
 
-    void showBuildingConstructionUI();
-    void showProductionQueueUI();
+
+
+
+
+
+
+
 
     ax::Node* CreateLoadNode(ECharName name, ECharAct action, ECharDir dir,
                              std::string_view nodeName = "LoadBar");
 
     void ChangeLoadBar(int idx, bool isEmpty);
-    void ShowCreatingUnit(ActorType type);
 
+    void AllNodeUnVisible();
 
 public:
+    LayerState mCurState = LayerState::None;
+
+
+
+
+    /////////////////////////////////////////////
     Player* mPlayer = nullptr;
 
+    // 다중선택 이미지 넣는 노드
     ax::Node* mMultiSelect = nullptr;
-    ax::Node* mSingleSelect = nullptr;
 
-    ax::Node* mLoadBar = nullptr;
+    Actor* mActor = nullptr;
+    Actor** mActors;
 
 
     float mTimer = 0.f;
@@ -53,7 +81,21 @@ public:
     float mMaxLoadTime = 0.f;
     float mFrame       = 0.f;
     int mLoadIdx       = 0;
-    bool isLoad  = false;
+
+    int mMaxHP = 0;
+    int mCurHP = 0;
+
+
+    ax::Label* mName  = nullptr;
+    ax::Sprite* mWire = nullptr;
+    ax::Label* mHP    = nullptr;
+    ax::Node* mLoadBar = nullptr;
+    ax::Sprite* mATUpgrade = nullptr;
+    ax::Sprite* mDFUpgrade = nullptr;
+    ax::Sprite* mUnitList  = nullptr;
+    ax::Sprite* mUpgradeSprite = nullptr;
+    
+    
 };
 
 

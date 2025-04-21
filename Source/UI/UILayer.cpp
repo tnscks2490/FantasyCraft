@@ -23,9 +23,9 @@ bool UILayer::init()
     BottomUI->setPosition(ax::Vec2(0, -380));
     addChild(BottomUI,2);
 
-    auto drawrect = ax::DrawNode::create();
+    /*auto drawrect = ax::DrawNode::create();
     drawrect->drawRect(ax::Vec2(-300, -80), ax::Vec2(300, 80), ax::Color4B::RED);
-    BottomUI->addChild(drawrect,10);
+    BottomUI->addChild(drawrect,10);*/
 
 
     auto unitinfo = UnitInfoLayer::create();
