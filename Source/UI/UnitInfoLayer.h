@@ -38,43 +38,35 @@ public:
     ax::SpriteFrame* FindWireFrame(Actor* actor);
     ax::SpriteFrame* FindATUpgradeSprite(Actor* actor);
     ax::SpriteFrame* FindDFUpgradeSprite(Actor* actor);
-
+    ax::SpriteFrame* FindListUnitSprite(ActorType type);
+    ax::SpriteFrame* FindMultiSelectUnitSprite(Actor* actor);
 
     // UnitInfoLayer에 출력되는 값들을 재설정해줌
-    void resetInfoData(Actor* actor);
+    void setInfoData(Actor* actor);
+    void resetData();
 
 
-
-
-
-
-
-
-
-
+    void AddUnitSprite(ActorType unit);
 
     ax::Node* CreateLoadNode(ECharName name, ECharAct action, ECharDir dir,
                              std::string_view nodeName = "LoadBar");
 
     void ChangeLoadBar(int idx, bool isEmpty);
-
     void AllNodeUnVisible();
+
+
+    void ClearMultiSelect();
+
 
 public:
     LayerState mCurState = LayerState::None;
 
-
-
-
     /////////////////////////////////////////////
     Player* mPlayer = nullptr;
 
-    // 다중선택 이미지 넣는 노드
-    ax::Node* mMultiSelect = nullptr;
-
     Actor* mActor = nullptr;
-    Actor** mActors;
-
+    Actor* mActors[12]    = {nullptr};
+    ActorType* CreateList = nullptr;
 
     float mTimer = 0.f;
     float mCurLoadTime = 0.f;
@@ -86,6 +78,9 @@ public:
     int mCurHP = 0;
 
 
+    ActionState mActorState = ActionState::Idle;
+
+    // 단일선택에 관련한 UI 노드
     ax::Label* mName  = nullptr;
     ax::Sprite* mWire = nullptr;
     ax::Label* mHP    = nullptr;
@@ -94,8 +89,7 @@ public:
     ax::Sprite* mDFUpgrade = nullptr;
     ax::Sprite* mUnitList  = nullptr;
     ax::Sprite* mUpgradeSprite = nullptr;
-    
-    
+
+    // 다중선택에 관련한 UI 노드
+    ax::Sprite* mMultiSelects[12] = {nullptr};
 };
-
-

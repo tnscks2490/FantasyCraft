@@ -71,7 +71,6 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     auto weapon = new WeaponComp(actor);
     weapon->AddWeapon(WeaponType::Normal);
 
-    unit->SetUnitStatus(ActorType::SCV);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;

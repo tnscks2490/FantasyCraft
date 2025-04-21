@@ -7,7 +7,7 @@ CommandCenterComp::CommandCenterComp(Actor* actor)
     : UnitComp(actor)
 {
     actor->mUnitComp = this;
-
+    SetUnitStatus(ActorType::CommandCenter);
     CreateUnitArray = new ActorType[5];
     for (int i = 0; i < 5; i++)
     {
@@ -88,14 +88,14 @@ void CommandCenterComp::update(float delta)
         {
             mTimer += delta;
             BuildingTime += delta;
-            if (mTimer > 1.0f)
+            if (mTimer >= 1.0f)
             {
                 mTimer = 0.f;
                 mStatus.HP += MaxHP / MaxBuildTime;
-                test = BuildingTime / 20.f;
-                if (test != drawidx)
+                changeImageIdx = BuildingTime / 20.f;
+                if (changeImageIdx != drawidx)
                 {
-                    drawidx = test;
+                    drawidx = changeImageIdx;
                      mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
                         ECharAct::Building, ECharDir::Face, drawidx);
                 }
@@ -104,8 +104,8 @@ void CommandCenterComp::update(float delta)
                 printf("%f초 \n", BuildingTime);
                 if (BuildingTime >= MaxBuildTime)
                 {
-                    test++;
-                    drawidx = test;
+                    changeImageIdx++;
+                    drawidx = changeImageIdx;
                     mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter,
                         ECharAct::Idle, ECharDir::Face, drawidx);
                     isBuild          = true;
@@ -149,6 +149,7 @@ void CommandCenterComp::update(float delta)
 
 
 }
+
 
 void CommandCenterComp::AddSCV()
 {

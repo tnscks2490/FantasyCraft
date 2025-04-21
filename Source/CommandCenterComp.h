@@ -15,7 +15,8 @@ public:
     
     virtual float GetCurLoadTime() override { return BuildingTime; }
     virtual float GetMaxLoadTime() override { return MaxBuildTime; }
-
+    virtual ActorType* GetCreateUnitList() override { return CreateUnitArray; }
+    
     void AddSCV();
     void DeleteSCV();
     bool IsUnitArrayEmpty();
@@ -34,7 +35,7 @@ public:
 
     Actor* mBuilder = nullptr;
     int drawidx     = 0;
-    int test      = 0;
+    int changeImageIdx      = 0;
 
     ActorType* CreateUnitArray;
     bool IsCreatingUnit = false;

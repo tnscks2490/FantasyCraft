@@ -34,6 +34,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>UISprite/List_SCV.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{32,32}</string>
+                <key>spriteSourceSize</key>
+                <string>{32,32}</string>
+                <key>textureRect</key>
+                <string>{{72,0},{32,32}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>UISprite/SCVAT.png</key>
             <dict>
                 <key>aliases</key>
@@ -45,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{36,36}</string>
                 <key>textureRect</key>
-                <string>{{72,0},{36,36}}</string>
+                <string>{{104,0},{36,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{33,34}</string>
                 <key>textureRect</key>
-                <string>{{108,0},{33,34}}</string>
+                <string>{{140,0},{33,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{154,76}</string>
                 <key>textureRect</key>
-                <string>{{141,0},{154,76}}</string>
+                <string>{{0,36},{154,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{295,0},{64,64}}</string>
+                <string>{{0,112},{64,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{359,0},{64,64}}</string>
+                <string>{{64,112},{64,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{423,0},{64,64}}</string>
+                <string>{{128,112},{64,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -136,9 +151,9 @@
             <key>realTextureFileName</key>
             <string>UISprite.png</string>
             <key>size</key>
-            <string>{487,76}</string>
+            <string>{192,176}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:62a7caaaeb1752bfa2f2adadd9e59254:77cff55cb80b4a0c1c97abdb5073a080:0ed709281926e47f7d2364b77fd4e2a2$</string>
+            <string>$TexturePacker:SmartUpdate:d59aecd841557d72ef08271decf0ee05:52e86761c48567234edc8ff5caaf0ebf:0ed709281926e47f7d2364b77fd4e2a2$</string>
             <key>textureFileName</key>
             <string>UISprite.png</string>
         </dict>

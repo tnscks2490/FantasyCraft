@@ -51,6 +51,32 @@ bool UnitInfoLayer::init()
     addChild(mDFUpgrade, 1);
 
 
+    auto spritecache = ax::SpriteFrameCache::getInstance();
+    spritecache->addSpriteFramesWithFile("Plist/UISprite.plist");
+
+    auto bg = spritecache->getSpriteFrameByName("UISprite/SelectRect.png");
+
+    for (int i = 0; i < 12; i++)
+    {
+        mMultiSelects[i] = ax::Sprite::create();
+        mMultiSelects[i]->setScale(2.f);
+        mMultiSelects[i]->setVisible(false);
+        mMultiSelects[i]->setSpriteFrame(bg);
+        if (i % 2 == 0)
+            mMultiSelects[i]->setPosition(ax::Vec2(i * 35 - 260, 40)); 
+        else
+            mMultiSelects[i]->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
+        addChild(mMultiSelects[i], 1);
+    }
+
+
+    auto frame = spritecache->getSpriteFrameByName("UISprite/UnitList.png");
+    mUnitList = ax::Sprite::create();
+    mUnitList->setScale(2.f);
+    mUnitList->setPosition(ax::Vec2(0, -16));
+    mUnitList->setVisible(false);
+    mUnitList->setSpriteFrame(frame);
+    addChild(mUnitList, 1);
 
 
     mLoadBar = CreateLoadNode(ECharName::LoadBar, ECharAct::Empty, ECharDir::Face);
@@ -78,6 +104,9 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
     } break;
     case SMsgType::Create_Unit:
     {
+        ChangeLayerState(LayerState::CreateUnit);
+        CreateList = mActor->mUnitComp->GetCreateUnitList();
+        AddUnitSprite(msg.Atype);
     }
     default:
         break;
@@ -93,13 +122,38 @@ void UnitInfoLayer::update(float delta)
     if (mCurState == LayerState::Build)
     {
         mCurLoadTime += delta;
-        int idx     = (int)(mCurLoadTime/mFrame);
-        if (idx != mLoadIdx)
+        //int idx     = (int)(mCurLoadTime/mFrame);
+        //if (idx != mLoadIdx)
+        if (mCurLoadTime >= mFrame)
         {
-            mLoadIdx = idx;
+            mCurLoadTime = 0.f;
+            mMaxHP     = mActor->mUnitComp->mStatus.MaxHP;
+            mCurHP     = mActor->mUnitComp->mStatus.HP;
+            auto hpstr = NumSlashNumToString(mCurHP, mMaxHP);
+            mHP->setString(hpstr);
+
+            mLoadIdx++;
             if (mLoadIdx == 68)
             {
-                mCurState = LayerState::Idle;
+                mLoadIdx = 0;
+                ChangeLayerState(LayerState::Idle);
+                mLoadBar->setVisible(false);
+                return;
+            }
+            ChangeLoadBar(mLoadIdx, false);
+        }
+    }
+    else if (mCurState == LayerState::CreateUnit)
+    {
+        mCurLoadTime += delta;
+        if (mCurLoadTime >= mFrame)
+        {
+            mCurLoadTime = 0.f;
+            mLoadIdx++;
+            if (mLoadIdx == 68)
+            {
+                mLoadIdx = 0;
+                ChangeLayerState(LayerState::Idle);
                 mLoadBar->setVisible(false);
                 return;
             }
@@ -113,48 +167,27 @@ void UnitInfoLayer::update(float delta)
 
 void UnitInfoLayer::MultiSelected(SystemMessage smsg)
 {
-    mMultiSelect->removeAllChildren();
-    Actor** mActors = (Actor**)smsg.data;
+    Actor** acs = (Actor**)smsg.data;
 
-    Actor* test[12] = {nullptr};
+    acs[12] = {nullptr};
 
+    ChangeLayerState(LayerState::MultiSelect);
+
+    int idx = 0;
     // 고민해 볼것 깊은복사 그거
     for (int i = 0; i < 12; i++)
     {
-        if (mActors[i] != nullptr)
+        if (acs[i] != nullptr)
         {
-            test[i] = mActors[i];
-
-            ax::Sprite* wire = nullptr;
-            switch (test[i]->mActorType)
-            {
-            case ActorType::Marine:
-                wire = ax::Sprite::create("Marine.png"sv);
-                break;
-            case ActorType::SCV:
-                wire = ax::Sprite::create("SCV.png"sv);
-                break;
-            default:
-                break;
-            }
-
-            auto bg = ax::Sprite::create("selectRect.png"sv);
-            bg->setScale(2.f);
-            wire->setScale(2.f);
-
-            if (i % 2 == 0)
-            {
-                bg->setPosition(ax::Vec2(i * 35 - 260, 40));
-                wire->setPosition(ax::Vec2(i * 35 - 260, 40));
-            }
-            else
-            {
-                bg->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
-                wire->setPosition(ax::Vec2((i * 35 - 35) - 260, -40));
-            }
-
-            mMultiSelect->addChild(bg, 2);
-            mMultiSelect->addChild(wire, 2);
+            mActors[i] = acs[i];
+            auto unit  = ax::Sprite::create();
+            unit->setSpriteFrame(FindMultiSelectUnitSprite(mActors[i]));
+            mMultiSelects[i]->addChild(unit,1);
+        }
+        else
+        {
+            mActors[i] = nullptr;
+            mMultiSelects[i]->setVisible(false);
         }
     }
 }
@@ -165,8 +198,8 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
         return;
 
     mActor = (Actor*)smsg.data;
-    resetInfoData(mActor);
-    
+    setInfoData(mActor);
+    ChangeLayerState(mCurState);
 
     // 해당 유닛이 건물인지 아닌지 먼저 판별
     if (mActor->mCategory == UnitCategory::Building)
@@ -182,6 +215,7 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
         }
         else
         {
+            CreateList = mActor->mUnitComp->GetCreateUnitList();
             if (mActor->mUnitComp->mCurAction == ActionState::Create_Unit)
             {
                 printf("여기야 여기");
@@ -209,15 +243,28 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         mWire->setVisible(true);
         mHP->setVisible(true);
 
+        mUnitList->setVisible(true);
+        mLoadBar->setVisible(true);
+        mLoadBar->setPosition(ax::Vec2(36, 0));
+
         // 각 건물별로 설명이 다르기 때문에 넣어줄것
         if (mActor->mCategory == UnitCategory::Unit)
         {
             mATUpgrade->setVisible(true);
             mDFUpgrade->setVisible(true);
-        } 
+        }
+        else
+        {
+            mATUpgrade->setVisible(false);
+            mDFUpgrade->setVisible(false);
+        }
+
     } break;
     case LayerState::Build:
     {
+        mName->setVisible(true);
+        mWire->setVisible(true);
+        mHP->setVisible(true);
         mLoadBar->setVisible(true);
     } break;
     case LayerState::CreateUnit:
@@ -225,8 +272,10 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         mName->setVisible(true);
         mWire->setVisible(true);
         mHP->setVisible(true);
+
         mUnitList->setVisible(true);
         mLoadBar->setVisible(true);
+        mLoadBar->setPosition(ax::Vec2(36, 0));
     }
         break;
     case LayerState::Upgrade:
@@ -236,10 +285,18 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
     }
         break;
     case LayerState::MultiSelect:
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            mMultiSelects[i]->setVisible(true);
+        }
+    }
         break;
     default:
         break;
     }
+    mCurState = cState;
+    
 }
 
 ax::SpriteFrame* UnitInfoLayer::FindWireFrame(Actor* actor)
@@ -253,7 +310,8 @@ ax::SpriteFrame* UnitInfoLayer::FindWireFrame(Actor* actor)
     {
     case ActorType::SCV: str = "UISprite/Wire_SCV.png"; break;
     case ActorType::Marine: str = "UISprite/Wire_Marine.png"; break;
-    case ActorType::CommandCenter: str = "UISprite/Wire_CommandCenter.png"; break;
+    case ActorType::CommandCenter:
+        str = "UISprite/Wire_CommandCenter.png"; break;
     default:
         break;
     }
@@ -275,6 +333,7 @@ ax::SpriteFrame* UnitInfoLayer::FindATUpgradeSprite(Actor* actor)
         break;
     }
     auto frame = spritecache->getSpriteFrameByName(str);
+
     return frame;
 }
 ax::SpriteFrame* UnitInfoLayer::FindDFUpgradeSprite(Actor* actor)
@@ -295,21 +354,96 @@ ax::SpriteFrame* UnitInfoLayer::FindDFUpgradeSprite(Actor* actor)
     auto frame = spritecache->getSpriteFrameByName(str);
     return frame;
 }
+ax::SpriteFrame* UnitInfoLayer::FindListUnitSprite(ActorType type)
+{
+    auto spritecache = ax::SpriteFrameCache::getInstance();
+    spritecache->addSpriteFramesWithFile("Plist/UISprite.plist");
 
-void UnitInfoLayer::resetInfoData(Actor* actor)
+    std::string str = "";
+
+    switch (type)
+    {
+    case ActorType::SCV: str = "UISprite/List_SCV.png"; break;
+    case ActorType::Marine: str = "UISprite/List_Marine.png"; break;
+    default:
+        break;
+    }
+    auto frame = spritecache->getSpriteFrameByName(str);
+    return frame;
+}
+
+ax::SpriteFrame* UnitInfoLayer::FindMultiSelectUnitSprite(Actor* actor)
+{
+    auto spritecache = ax::SpriteFrameCache::getInstance();
+    spritecache->addSpriteFramesWithFile("Plist/UISprite.plist");
+
+    std::string str = "";
+
+    switch (actor->mActorType)
+    {
+    case ActorType::SCV: str = "UISprite/Multi_SCV.png"; break;
+    case ActorType::Marine: str = "UISprite/Multi_Marine.png"; break;
+    default:
+        break;
+    }
+    auto frame = spritecache->getSpriteFrameByName(str);
+    return frame;
+}
+
+
+void UnitInfoLayer::setInfoData(Actor* actor)
 {
     auto ac = actor;
+
+    mActorState = ac->mUnitComp->mCurAction;
+
     mName->setString(ac->mUnitComp->GetUnitName());
     mWire->setSpriteFrame(FindWireFrame(ac));
 
-    mATUpgrade->setSpriteFrame(FindATUpgradeSprite(ac));
-    mDFUpgrade->setSpriteFrame(FindDFUpgradeSprite(ac));
-
+  
     mMaxHP = ac->mUnitComp->mStatus.MaxHP;
     mCurHP = ac->mUnitComp->mStatus.HP;
     auto hpstr = NumSlashNumToString(mCurHP, mMaxHP);
     mHP->setString(hpstr);
-   
+
+
+    auto at = FindATUpgradeSprite(ac);
+    if (at) mATUpgrade->setSpriteFrame(at);
+
+    auto df = FindDFUpgradeSprite(ac);
+    if (df) mDFUpgrade->setSpriteFrame(df);
+        
+}
+
+void UnitInfoLayer::resetData()
+{
+    mActor         = nullptr;
+    mActors[12] = {nullptr};
+    mTimer       = 0.f;
+    mCurLoadTime = 0.f;
+    mMaxLoadTime = 0.f;
+    mFrame       = 0.f;
+    mLoadIdx       = 0;
+
+    mMaxHP = 0;
+    mCurHP = 0;
+
+    mName          = nullptr;
+    mWire          = nullptr;
+    mHP            = nullptr;
+    mLoadBar       = nullptr;
+    mATUpgrade     = nullptr;
+    mDFUpgrade     = nullptr;
+    mUnitList      = nullptr;
+    mUpgradeSprite = nullptr;
+}
+
+void UnitInfoLayer::AddUnitSprite(ActorType unit)
+{
+    auto sprite = ax::Sprite::create();
+    sprite->setSpriteFrame(FindListUnitSprite(unit));
+    
+    mUnitList->addChild(sprite, 1);
 }
 
 
@@ -361,6 +495,20 @@ void UnitInfoLayer::AllNodeUnVisible()
     if (mDFUpgrade) mDFUpgrade->setVisible(false);
     if (mUnitList)  mUnitList->setVisible(false);
     if (mUpgradeSprite) mUpgradeSprite->setVisible(false);
+
+    for (int i = 0; i < 12; i++)
+    {
+        if (mMultiSelects[i])
+            mMultiSelects[i]->setVisible(false);
+    }
+}
+
+void UnitInfoLayer::ClearMultiSelect()
+{
+    for (int i = 0; i < 12; i++)
+    {
+        mMultiSelects[i]->removeAllChildren();
+    }
 }
 
 

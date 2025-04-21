@@ -42,6 +42,8 @@ void UnitComp::SetUnitStatus(ActorType Atype)
        mStatus.SI = 7;
        break;
    case ActorType::CommandCenter:
+       mStatus.MaxHP = 1500;
+       mStatus.HP    = 150;
        break;
    case ActorType::SupplyDpot:
        break;
