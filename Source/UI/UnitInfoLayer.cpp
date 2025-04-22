@@ -84,6 +84,7 @@ bool UnitInfoLayer::init()
     mLoadBar->setVisible(false);
     mLoadBar->setScale(2.f);
 
+
     scheduleUpdate();
 
     return true;
@@ -105,7 +106,11 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
     case SMsgType::Create_Unit:
     {
         ChangeLayerState(LayerState::CreateUnit);
-        CreateList = mActor->mUnitComp->GetCreateUnitList();
+        auto OList = mActor->mUnitComp->GetCreateUnitList();
+        for (int i = 0; i < 5; i++)
+        {
+            mUnitSlot[i].UnitType = OList[i];
+        }
         AddUnitSprite(msg.Atype);
     }
     default:
@@ -133,7 +138,7 @@ void UnitInfoLayer::update(float delta)
             mHP->setString(hpstr);
 
             mLoadIdx++;
-            if (mLoadIdx == 68)
+            if (mLoadIdx == 67)
             {
                 mLoadIdx = 0;
                 ChangeLayerState(LayerState::Idle);
@@ -182,6 +187,7 @@ void UnitInfoLayer::MultiSelected(SystemMessage smsg)
             mActors[i] = acs[i];
             auto unit  = ax::Sprite::create();
             unit->setSpriteFrame(FindMultiSelectUnitSprite(mActors[i]));
+            unit->setPosition(ax::Vec2(16, 16));
             mMultiSelects[i]->addChild(unit,1);
         }
         else
@@ -215,10 +221,10 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
         }
         else
         {
-            CreateList = mActor->mUnitComp->GetCreateUnitList();
+            
             if (mActor->mUnitComp->mCurAction == ActionState::Create_Unit)
             {
-                printf("여기야 여기");
+                auto OList = mActor->mUnitComp->GetCreateUnitList();
             }
         }
     }
@@ -286,6 +292,7 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         break;
     case LayerState::MultiSelect:
     {
+        ClearMultiSelect();
         for (int i = 0; i < 12; i++)
         {
             mMultiSelects[i]->setVisible(true);
@@ -371,7 +378,6 @@ ax::SpriteFrame* UnitInfoLayer::FindListUnitSprite(ActorType type)
     auto frame = spritecache->getSpriteFrameByName(str);
     return frame;
 }
-
 ax::SpriteFrame* UnitInfoLayer::FindMultiSelectUnitSprite(Actor* actor)
 {
     auto spritecache = ax::SpriteFrameCache::getInstance();
@@ -442,7 +448,7 @@ void UnitInfoLayer::AddUnitSprite(ActorType unit)
 {
     auto sprite = ax::Sprite::create();
     sprite->setSpriteFrame(FindListUnitSprite(unit));
-    
+    sprite->setPosition(ax::Vec2(16, 16));
     mUnitList->addChild(sprite, 1);
 }
 

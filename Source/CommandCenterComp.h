@@ -37,7 +37,7 @@ public:
     int drawidx     = 0;
     int changeImageIdx      = 0;
 
-    ActorType* CreateUnitArray;
+    ActorType CreateUnitArray[5];
     bool IsCreatingUnit = false;
 
     BuildingSize Bsize = BuildingSize::Big;

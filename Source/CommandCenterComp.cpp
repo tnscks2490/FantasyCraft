@@ -8,7 +8,6 @@ CommandCenterComp::CommandCenterComp(Actor* actor)
 {
     actor->mUnitComp = this;
     SetUnitStatus(ActorType::CommandCenter);
-    CreateUnitArray = new ActorType[5];
     for (int i = 0; i < 5; i++)
     {
         CreateUnitArray[i] = ActorType::None;

@@ -14,6 +14,13 @@ enum class LayerState
 };
 
 
+struct UnitQueueSlot
+{
+    ActorType UnitType = ActorType::None;
+    float createTime     = 0.f;
+    bool isActive      = false;
+};
+
 
 class UnitInfoLayer : public ax::Layer
 {
@@ -66,7 +73,7 @@ public:
 
     Actor* mActor = nullptr;
     Actor* mActors[12]    = {nullptr};
-    ActorType* CreateList = nullptr;
+    UnitQueueSlot mUnitSlot[5];
 
     float mTimer = 0.f;
     float mCurLoadTime = 0.f;

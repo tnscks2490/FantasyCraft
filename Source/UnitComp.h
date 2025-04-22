@@ -51,7 +51,7 @@ struct Status
     int SI = 0;
 };
 
-struct BuildUnitInfo
+struct UnitQueueSlott
 {
     ActorType UnitType = ActorType::None;
     int mineral        = 0;
