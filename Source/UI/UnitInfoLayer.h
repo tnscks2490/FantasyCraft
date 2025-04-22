@@ -1,6 +1,7 @@
 #pragma once
 #include "PreDefines.h"
 #include "Player.h"
+#include "UnitBluePrint.h"
 
 enum class LayerState
 {
@@ -10,6 +11,7 @@ enum class LayerState
     CreateUnit,
     Upgrade,
     MultiSelect,
+    Transport,
 
 };
 
@@ -17,8 +19,7 @@ enum class LayerState
 struct UnitQueueSlot
 {
     ActorType UnitType = ActorType::None;
-    float createTime     = 0.f;
-    bool isActive      = false;
+    ax::Sprite* unitSprite = nullptr;
 };
 
 
@@ -36,6 +37,9 @@ public:
     void MultiSelected(SystemMessage smsg);
     void SingleSelected(SystemMessage smsg);
 
+
+    void BuildUpdate(float delta);
+    void CreateUnitUpdate(float delta);
 
 
     // 이름은 상시 표기
@@ -63,6 +67,11 @@ public:
 
 
     void ClearMultiSelect();
+    bool IsEmptyQueue();
+
+
+    //UnitSlotQueue 관련 함수들
+    void pop();
 
 
 public:
@@ -94,8 +103,10 @@ public:
     ax::Node* mLoadBar = nullptr;
     ax::Sprite* mATUpgrade = nullptr;
     ax::Sprite* mDFUpgrade = nullptr;
-    ax::Sprite* mUnitList  = nullptr;
     ax::Sprite* mUpgradeSprite = nullptr;
+    ax::Sprite* mUnitList  = nullptr;
+
+    //// 
 
     // 다중선택에 관련한 UI 노드
     ax::Sprite* mMultiSelects[12] = {nullptr};

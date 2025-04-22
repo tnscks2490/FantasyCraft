@@ -78,6 +78,18 @@ bool UnitInfoLayer::init()
     mUnitList->setSpriteFrame(frame);
     addChild(mUnitList, 1);
 
+    for (int i = 0; i < 5; i++)
+    {
+        mUnitSlot[i].unitSprite = ax::Sprite::create();
+        mUnitSlot[i].unitSprite->setSpriteFrame(FindListUnitSprite(ActorType::None));
+        mUnitList->addChild(mUnitSlot[i].unitSprite, 1);
+    }
+    mUnitSlot[0].unitSprite->setPosition(ax::Vec2(18, 58));
+    mUnitSlot[1].unitSprite->setPosition(ax::Vec2(18, 20));
+    mUnitSlot[2].unitSprite->setPosition(ax::Vec2(58, 20));
+    mUnitSlot[3].unitSprite->setPosition(ax::Vec2(96, 20));
+    mUnitSlot[4].unitSprite->setPosition(ax::Vec2(134, 20));
+
 
     mLoadBar = CreateLoadNode(ECharName::LoadBar, ECharAct::Empty, ECharDir::Face);
     addChild(mLoadBar,1.f);
@@ -109,9 +121,20 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
         auto OList = mActor->mUnitComp->GetCreateUnitList();
         for (int i = 0; i < 5; i++)
         {
-            mUnitSlot[i].UnitType = OList[i];
+            if (OList[i] != ActorType::None)
+            {
+                mUnitSlot[i].UnitType = OList[i];
+                mUnitSlot[i].unitSprite->setSpriteFrame(FindListUnitSprite(OList[i]));
+            }
+            else
+                break;
+            
         }
-        AddUnitSprite(msg.Atype);
+
+        mCurLoadTime = mActor->mUnitComp->GetUnitTimer();
+        mMaxLoadTime = FindUnitBP(mUnitSlot[0].UnitType).buildTime;
+        mFrame       = mMaxLoadTime / 68.f;
+        mLoadIdx     = (int)(mCurLoadTime / mFrame);
     }
     default:
         break;
@@ -126,44 +149,11 @@ void UnitInfoLayer::update(float delta)
 
     if (mCurState == LayerState::Build)
     {
-        mCurLoadTime += delta;
-        //int idx     = (int)(mCurLoadTime/mFrame);
-        //if (idx != mLoadIdx)
-        if (mCurLoadTime >= mFrame)
-        {
-            mCurLoadTime = 0.f;
-            mMaxHP     = mActor->mUnitComp->mStatus.MaxHP;
-            mCurHP     = mActor->mUnitComp->mStatus.HP;
-            auto hpstr = NumSlashNumToString(mCurHP, mMaxHP);
-            mHP->setString(hpstr);
-
-            mLoadIdx++;
-            if (mLoadIdx == 67)
-            {
-                mLoadIdx = 0;
-                ChangeLayerState(LayerState::Idle);
-                mLoadBar->setVisible(false);
-                return;
-            }
-            ChangeLoadBar(mLoadIdx, false);
-        }
+        BuildUpdate(delta);
     }
     else if (mCurState == LayerState::CreateUnit)
     {
-        mCurLoadTime += delta;
-        if (mCurLoadTime >= mFrame)
-        {
-            mCurLoadTime = 0.f;
-            mLoadIdx++;
-            if (mLoadIdx == 68)
-            {
-                mLoadIdx = 0;
-                ChangeLayerState(LayerState::Idle);
-                mLoadBar->setVisible(false);
-                return;
-            }
-            ChangeLoadBar(mLoadIdx, false);
-        }
+        CreateUnitUpdate(delta);
     }
     // 체력 변동 자동 적용함수 넣을 것
 }
@@ -205,7 +195,7 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
 
     mActor = (Actor*)smsg.data;
     setInfoData(mActor);
-    ChangeLayerState(mCurState);
+    ChangeLayerState(LayerState::Idle);
 
     // 해당 유닛이 건물인지 아닌지 먼저 판별
     if (mActor->mCategory == UnitCategory::Building)
@@ -216,7 +206,7 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
             mCurLoadTime = mActor->mUnitComp->GetCurLoadTime();
             mMaxLoadTime = mActor->mUnitComp->GetMaxLoadTime();
             mFrame  = mMaxLoadTime / 68.f;
-            mLoadIdx     = (int)(mCurLoadTime * mFrame);
+            mLoadIdx     = (int)(mCurLoadTime / mFrame);
             ChangeLayerState(LayerState::Build);
         }
         else
@@ -225,6 +215,15 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
             if (mActor->mUnitComp->mCurAction == ActionState::Create_Unit)
             {
                 auto OList = mActor->mUnitComp->GetCreateUnitList();
+                for (int i = 0; i < 5; i++)
+                {
+                    mUnitSlot[i].UnitType = OList[i];
+                }
+                mCurLoadTime = mActor->mUnitComp->GetUnitTimer();
+                mMaxLoadTime = FindUnitBP(mUnitSlot[0].UnitType).buildTime;
+                mFrame       = mMaxLoadTime / 68.f;
+                mLoadIdx     = (int)(mCurLoadTime / mFrame);
+                ChangeLayerState(LayerState::CreateUnit);
             }
         }
     }
@@ -233,6 +232,58 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
         ChangeLayerState(LayerState::Idle);
     }
     
+}
+
+void UnitInfoLayer::BuildUpdate(float delta)
+{
+    mCurLoadTime += delta;
+    if (mLoadIdx != (int)(mCurLoadTime / mFrame))
+    {
+        mMaxHP       = mActor->mUnitComp->mStatus.MaxHP;
+        mCurHP       = mActor->mUnitComp->mStatus.HP;
+        auto hpstr   = NumSlashNumToString(mCurHP, mMaxHP);
+        mHP->setString(hpstr);
+
+        mLoadIdx = (int)(mCurLoadTime / mFrame);
+        if (mCurLoadTime >= mMaxLoadTime)
+        {
+            mLoadIdx = 0;
+            ChangeLoadBar(mLoadIdx, false);
+            ChangeLayerState(LayerState::Idle);
+            mLoadBar->setVisible(false);
+            return;
+        }
+        ChangeLoadBar(mLoadIdx, false);
+    }
+}
+
+void UnitInfoLayer::CreateUnitUpdate(float delta)
+{
+    mCurLoadTime += delta;
+    if (mLoadIdx != (int)(mCurLoadTime / mFrame))
+    {
+        mLoadIdx = (int)(mCurLoadTime / mFrame);
+        if (mCurLoadTime >= mMaxLoadTime)
+        {
+            mLoadIdx = 0;
+            pop();
+            ChangeLoadBar(mLoadIdx, false);
+            if (IsEmptyQueue())
+            {
+                ChangeLayerState(LayerState::Idle);
+                ChangeLoadBar(mLoadIdx, false);
+                return;
+            }
+            else
+            {
+                mCurLoadTime = mActor->mUnitComp->GetUnitTimer();
+                mMaxLoadTime = FindUnitBP(mUnitSlot[0].UnitType).buildTime;
+                mFrame       = mMaxLoadTime / 68.f;
+                mLoadIdx     = (int)(mCurLoadTime / mFrame);
+            }
+        }
+        ChangeLoadBar(mLoadIdx, false);
+    }
 }
 
 
@@ -249,9 +300,9 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         mWire->setVisible(true);
         mHP->setVisible(true);
 
-        mUnitList->setVisible(true);
-        mLoadBar->setVisible(true);
-        mLoadBar->setPosition(ax::Vec2(36, 0));
+        //mUnitList->setVisible(true);
+        //mLoadBar->setVisible(true);
+        //mLoadBar->setPosition(ax::Vec2(36, 0));
 
         // 각 건물별로 설명이 다르기 때문에 넣어줄것
         if (mActor->mCategory == UnitCategory::Unit)
@@ -370,6 +421,7 @@ ax::SpriteFrame* UnitInfoLayer::FindListUnitSprite(ActorType type)
 
     switch (type)
     {
+    case ActorType::None: str = "UISprite/Empty.png"; break;
     case ActorType::SCV: str = "UISprite/List_SCV.png"; break;
     case ActorType::Marine: str = "UISprite/List_Marine.png"; break;
     default:
@@ -515,6 +567,28 @@ void UnitInfoLayer::ClearMultiSelect()
     {
         mMultiSelects[i]->removeAllChildren();
     }
+}
+
+bool UnitInfoLayer::IsEmptyQueue()
+{
+    if (mUnitSlot[0].UnitType == ActorType::None)
+        return true;
+    return false;
+}
+
+
+
+void UnitInfoLayer::pop()
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        mUnitSlot[i].UnitType = mUnitSlot[i + 1].UnitType;
+        mUnitSlot[i].unitSprite->setSpriteFrame(mUnitSlot[i + 1].unitSprite->getSpriteFrame());
+    }
+
+    mUnitSlot[4].UnitType   = ActorType::None;
+    mUnitSlot[4].unitSprite->setSpriteFrame(FindListUnitSprite(mUnitSlot[4].UnitType));
+
 }
 
 

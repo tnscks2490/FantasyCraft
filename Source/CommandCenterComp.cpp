@@ -123,25 +123,31 @@ void CommandCenterComp::update(float delta)
     {
         if (IsCreatingUnit)
         {
-            mTimer += delta;
-            if (mTimer >= SCVCreateTime)
+            unitTimer += delta;
+            if (unitTimer >= SCVCreateTime)
             {
-                mTimer = 0.f;
+                unitTimer = 0.f;
                 DeleteSCV();
-                if (IsUnitArrayEmpty())
-                {
-                    IsCreatingUnit = false;
-                }
-                else
-                {
-
-                }
 
                 PK_Data data;
                 data.ClientID = TcpClient::get()->GetID();
                 data.pos      = mActor->GetPosition() + ax::Vec2(0, -100);
                 data.input    = 100;
                 TcpClient::get()->SendMessageToServer(data);
+
+
+                if (IsUnitArrayEmpty())
+                {
+                    IsCreatingUnit = false;
+                    mCurAction     = ActionState::Idle;
+                    
+                }
+                else
+                {
+                    printf("안비었음!");
+                }
+
+                
             }
         }
     }
@@ -162,7 +168,7 @@ void CommandCenterComp::AddSCV()
         if (CreateUnitArray[i] == ActorType::None)
         {
             CreateUnitArray[i] = ActorType::SCV;
-            break;
+            return;
         }
     }
 }

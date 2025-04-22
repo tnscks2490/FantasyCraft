@@ -15,6 +15,7 @@ public:
     
     virtual float GetCurLoadTime() override { return BuildingTime; }
     virtual float GetMaxLoadTime() override { return MaxBuildTime; }
+    virtual float GetUnitTimer() override { return unitTimer; }
     virtual ActorType* GetCreateUnitList() override { return CreateUnitArray; }
     
     void AddSCV();
@@ -30,6 +31,9 @@ public:
     bool isBuild    = false;
 
     float mTimer = 0.f;
+
+
+    float unitTimer     = 0.f;
     float SCVCreateTime = 13.f;
 
 

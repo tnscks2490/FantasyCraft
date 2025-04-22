@@ -76,6 +76,7 @@ public:
     virtual bool IsBuild() { return false; }
     virtual float GetCurLoadTime() { return 0; }
     virtual float GetMaxLoadTime() { return 0; }
+    virtual float GetUnitTimer() { return 0; }
     virtual ActorType* GetCreateUnitList() { return nullptr; }
 
     std::string_view GetUnitName() { return mUnitName; }
