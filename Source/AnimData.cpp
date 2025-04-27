@@ -242,6 +242,9 @@ AnimInfo g_AnimInfo_CommandCenter_Building[] = {
 AnimInfo g_AnimInfo_CommandCenter_Doing[] = {
     {ECharName::CommandCenter, ECharAct::Doing, ECharDir::Face, "Plist/CommandCenter.plist", "CommandCenter/Doing/%04d.png", 1, 2, (0.2f / 2), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_CommandCenter_BP[] = {
+    {ECharName::CommandCenter, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/CommandCenter/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
 AnimInfo g_AnimInfo_Armory_Idle[] ={
     {ECharName::Armory, ECharAct::Idle, ECharDir::Face, "Plist/Armory.plist", "Armory/Idle/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -254,6 +257,9 @@ AnimInfo g_AnimInfo_Armory_Building[] = {
 };
 AnimInfo g_AnimInfo_Armory_Doing[] = {
     {ECharName::Armory, ECharAct::Doing, ECharDir::Face, "Plist/Armory.plist", "Armory/Doing/%04d.png", 1, 4, (1.f / 4), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Armory_BP[] = {
+    {ECharName::Armory, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Armory/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 
 AnimInfo g_AnimInfo_Barrack_Idle[] ={
@@ -268,6 +274,10 @@ AnimInfo g_AnimInfo_Barrack_Building[] ={
 AnimInfo g_AnimInfo_Barrack_Doing[] ={
     {ECharName::Barrack, ECharAct::Doing, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Doing/%04d.png", 1, 2,   (1.f / 2), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_Barrack_BP[] = {
+    {ECharName::Barrack, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Barrack/0001.png", 1, 1,
+     (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
 AnimInfo g_AnimInfo_Bunker_Idle[] = {
      {ECharName::Bunker, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
@@ -277,6 +287,10 @@ AnimInfo g_AnimInfo_Bunker_Building[] = {
      {ECharName::Bunker, ECharAct::Building, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Building/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
      {ECharName::Bunker, ECharAct::Building, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Building/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
      {ECharName::Bunker, ECharAct::Building, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Bunker_BP[] = {
+    {ECharName::Bunker, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Bunker/0001.png", 1, 1, (1.f / 1),
+     Vec2(0.5, 0.5), nullptr},
 };
 
 AnimInfo g_AnimInfo_EngineeringBay_Idle[] = {
@@ -292,6 +306,10 @@ AnimInfo g_AnimInfo_EngineeringBay_Building[] = {
 AnimInfo g_AnimInfo_EngineeringBay_Doing[] = {
     {ECharName::EngineeringBay, ECharAct::Doing, ECharDir::Face, "Plist/EngineeringBay.plist", "EngineeringBay/Doing/%04d.png", 1, 6, (1.f / 6), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_EngineeringBay_BP[] = {
+    {ECharName::EngineeringBay, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/EngineeringBay/0001.png", 1, 1, (1.f / 1),
+     Vec2(0.5, 0.5), nullptr},
+};
 
 AnimInfo g_AnimInfo_StarPort_Idle[] = {
      {ECharName::StarPort, ECharAct::Idle, ECharDir::Face, "Plist/StarPort.plist", "StarPort/Idle/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -304,6 +322,10 @@ AnimInfo g_AnimInfo_StarPort_Building[] = {
 };
 AnimInfo g_AnimInfo_StarPort_Doing[] = {
     {ECharName::StarPort, ECharAct::Doing, ECharDir::Face, "Plist/StarPort.plist", "StarPort/Doing/%04d.png", 1, 3, (0.5f / 3), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_StarPort_BP[] = {
+    {ECharName::StarPort, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/StarPort/0001.png", 1, 1,
+     (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 
 AnimInfo g_AnimInfo_Academy_Idle[] = {
@@ -318,6 +340,10 @@ AnimInfo g_AnimInfo_Academy_Building[] = {
 AnimInfo g_AnimInfo_Academy_Doing[] = {
     {ECharName::Academy, ECharAct::Doing, ECharDir::Face, "Plist/Academy.plist", "Academy/Doing/%04d.png", 1, 2, (0.5f / 2), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_Academy_BP[] = {
+    {ECharName::Academy, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Academy/0001.png", 1, 1, (1.f / 1),
+     Vec2(0.5, 0.5), nullptr},
+};
 
 
 AnimInfo g_AnimInfo_SupplyDepot_Idle[] = {
@@ -329,6 +355,11 @@ AnimInfo g_AnimInfo_SupplyDepot_Building[] = {
      {ECharName::SupplyDepot, ECharAct::Building, ECharDir::Face, "Plist/SupplyDepot.plist", "SupplyDepot/Building/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
      {ECharName::SupplyDepot, ECharAct::Building, ECharDir::Face, "Plist/SupplyDepot.plist", "SupplyDepot/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_SupplyDepot_BP[] = {
+    {ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/SupplyDepot/0001.png", 1, 1, (1.f / 1),
+     Vec2(0.5, 0.5), nullptr},
+};
+
 
 
 
@@ -424,50 +455,51 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         {
         case ECharAct::Idle:  return g_AnimInfo_CommandCenter_Idle[0];
         case ECharAct::Doing: return g_AnimInfo_CommandCenter_Doing[0];
+        case ECharAct::BP:    return g_AnimInfo_CommandCenter_BP[0];
         }
 
     case ECharName::Academy:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_Academy_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_Academy_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_Academy_BP[0];
         }
 
     case ECharName::Barrack:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_Barrack_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_Barrack_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_Barrack_BP[0];
         }
     case ECharName::Bunker:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_Bunker_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_Bunker_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_Bunker_BP[0];
         }
     case ECharName::StarPort:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_StarPort_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_StarPort_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_StarPort_BP[0];
         }
     case ECharName::Armory:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_Armory_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_Armory_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_Armory_BP[0];
         }
     case ECharName::EngineeringBay:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_EngineeringBay_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_EngineeringBay_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_EngineeringBay_BP[0];
         }
     case ECharName::SupplyDepot:
         switch (action)
         {
-        case ECharAct::Idle:
-            return g_AnimInfo_SupplyDepot_Idle[0];
+        case ECharAct::Idle:  return g_AnimInfo_SupplyDepot_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_SupplyDepot_BP[0];
         }
 
     case ECharName::Cursor:
@@ -543,7 +575,7 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
     case ECharName::CommandCenter:
         switch (act)
         {
-        case ECharAct::Idle: return g_AnimInfo_CommandCenter_Idle[0];
+        case ECharAct::Idle:     return g_AnimInfo_CommandCenter_Idle[0];
         case ECharAct::Building: return g_AnimInfo_CommandCenter_Building[idx];
         }
         break;

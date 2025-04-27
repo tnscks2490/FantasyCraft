@@ -84,6 +84,7 @@ enum class ECharAct
     Death,
     Building,
     Doing,
+    BP,
     //////////
     // 행동들 추가하기
 

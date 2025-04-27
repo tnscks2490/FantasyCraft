@@ -414,7 +414,7 @@ Actor* SpawnCommandCenter(ax::Node* parent)
 
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 0);
+    auto anim = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::BP, ECharDir::Face, "BPAnim");
     
 
     auto command = new CommandCenterComp(actor);
@@ -441,7 +441,7 @@ Actor* BPCommandCenter(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -458,7 +458,7 @@ Actor* BPEngineeringBay(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::EngineeringBay, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -475,7 +475,7 @@ Actor* BPStarPort(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::StarPort, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -491,8 +491,8 @@ Actor* BPSupplyDpot(ax::Node* parent)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 1.f);
 
-    auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto body = draw->Create_Middle_BPPhysicsNode();
+    auto anim = draw->CreateAnimNode(ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -509,7 +509,7 @@ Actor* BPAcademy(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::Academy, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -526,7 +526,7 @@ Actor* BPArmory(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::Armory, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -543,7 +543,7 @@ Actor* BPBarrack(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::Barrack, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
@@ -560,7 +560,7 @@ Actor* BPBunker(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+    auto anim = draw->CreateAnimNode(ECharName::Bunker, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
 
