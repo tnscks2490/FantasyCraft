@@ -17,6 +17,7 @@ public:
     void SeparatedUnit(ActorMessage& msg);
 
 
-
+public:
+    ActorType mBPType  = ActorType::None;
     bool BuildPossible = true;
 };

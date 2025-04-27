@@ -4,6 +4,7 @@
 #include "World.h"
 #include "MessageSystem.h"
 #include "TcpClient.h"
+#include "BPComp.h"
 #include "Goal/Base/GoalComp.h"
 #include "DrawComp.h"
 
@@ -28,7 +29,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::Build:
     {
         ax::Vec2* pos = (ax::Vec2*)msg.data;
-        AddGoal_MoveAndBuild(mActor, *pos, ActorType::CommandCenter);
+        AddGoal_MoveAndBuild(mActor, *pos, msg.sender->mBPComp->mBPType);
     }
         break;
     case MsgType::Do_Build:
@@ -142,6 +143,7 @@ void SCVComp::Building(ActorMessage& msg)
     {
     case ActorType::CommandCenter: command = 102; break;
     case ActorType::SupplyDepot:  command = 103;  break;
+    case ActorType::Barrack:      command = 104;  break;
     default:
         break;
     }

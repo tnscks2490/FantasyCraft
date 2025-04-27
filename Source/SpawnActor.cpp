@@ -444,6 +444,7 @@ Actor* BPCommandCenter(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::CommandCenter;
 
     return actor;
 }
@@ -461,6 +462,7 @@ Actor* BPEngineeringBay(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::EngineeringBay, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::EngineeringBay;
 
     return actor;
 }
@@ -478,6 +480,7 @@ Actor* BPStarPort(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::StarPort, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::StarPort;
 
     return actor;
 }
@@ -495,6 +498,7 @@ Actor* BPSupplyDpot(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::SupplyDepot;
 
     return actor;
 }
@@ -512,6 +516,7 @@ Actor* BPAcademy(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::Academy, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::Academy;
 
     return actor;
 }
@@ -529,6 +534,7 @@ Actor* BPArmory(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::Armory, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::Armory;
 
     return actor;
 }
@@ -546,6 +552,7 @@ Actor* BPBarrack(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::Barrack, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
+    bp->mBPType = ActorType::Barrack;
 
     return actor;
 }

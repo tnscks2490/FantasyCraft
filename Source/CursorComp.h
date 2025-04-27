@@ -59,7 +59,8 @@ public:
 
     void ReleaseBP();
 
-    void CreateBuildingBP(BuildingName name);
+    void CreateBuildingBP(ActorType type);
+    void CreateBuildingByBP(Actor* BP,ax::Vec2 createPos);
 
 public:
 

@@ -43,10 +43,45 @@ void Player::MessageProc(SystemMessage smsg)
         case ButtonType::TCommand_Center:
         {
             // 건물 블루프린트 생성하기
-            ActorMessage msg = {MsgType::BPCMC, nullptr, nullptr};
+            auto type        = ActorType::CommandCenter;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
             SendActorMessage(cursor, msg);
         } break;
-
+        case ButtonType::TBarracks:
+        {
+            auto type        = ActorType::Barrack;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
+        case ButtonType::TAcademy:
+        {
+            auto type        = ActorType::Academy;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
+        case ButtonType::TArmory:
+        {
+            auto type        = ActorType::Armory;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
+        case ButtonType::TBunker:
+        {
+            auto type        = ActorType::Bunker;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
+        case ButtonType::TEngineering_Bay:
+        {
+            auto type        = ActorType::EngineeringBay;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
         case ButtonType::TSCV:
         {
             if (mMainActor && mMainActor->mActorType == ActorType::CommandCenter)

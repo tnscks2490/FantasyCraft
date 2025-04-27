@@ -59,8 +59,8 @@ void CursorComp::update(float delta)
 void CursorComp::MessageProc(ActorMessage& msg)
 {
 
-    UserData* other = (UserData*)msg.data;
-
+    //UserData* other = (UserData*)msg.data;
+    ActorType* bpType = (ActorType*)msg.data;
     switch (msg.msgType)
     {
     case MsgType::Contacted:
@@ -71,8 +71,8 @@ void CursorComp::MessageProc(ActorMessage& msg)
     {
         SeparateUnit(msg);
     } break;
-    case MsgType::BPCMC:
-        CreateBuildingBP(BuildingName::CommandCenter);
+    case MsgType::CreateBP:
+        CreateBuildingBP(*bpType);
         break;
     default:
         break;
@@ -108,13 +108,7 @@ void CursorComp::LClick(ax::Vec2 pos)
 
         if (mBP->mBPComp->CheckBuildPossible())
         {
-            PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
-            data.input    = 10;
-            data.pos      = pos;
-            TcpClient::get()->SendMessageToServer(data);
-
-            ReleaseBP();
+            CreateBuildingByBP(mBP,pos);
         }           
     }
     if (mState == CursorState::Move)
@@ -188,7 +182,6 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
 
 void CursorComp::SeparateUnit(ActorMessage& msg)
 {
-
 
     UserData* other = (UserData*)msg.data;
 
@@ -278,23 +271,45 @@ void CursorComp::ReleaseBP()
     mBP = nullptr;
 }
 
-void CursorComp::CreateBuildingBP(BuildingName name)
+void CursorComp::CreateBuildingBP(ActorType type)
 {
     if (mBP == nullptr)
     {
-        switch (name)
+        switch (type)
         {
-        case BuildingName::None:
+        case ActorType::None:
             break;
-        case BuildingName::CommandCenter:
+        case ActorType::CommandCenter:
         {
            auto BP = BPCommandCenter(mActor->GetRoot()->getParent());
            mBP     = BP;
         }  break;
+        case ActorType::Barrack:
+        {
+            auto BP = BPBarrack(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        } break;
+        case ActorType::Academy:
+        {
+            auto BP = BPAcademy(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }
+        break;
+
         default:
             break;
         }
     }
+}
+
+void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos)
+{
+    auto pos = createPos - mActor->GetRoot()->getParent()->getPosition();
+
+    ActorMessage msg = {MsgType::Build, BP, nullptr, &pos};
+    SendActorMessage(cPlayer->mMainActor, msg);
+
+    ReleaseBP();
 }
 
 

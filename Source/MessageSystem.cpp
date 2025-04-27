@@ -43,7 +43,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         }
     }break;
 
-    case MsgType::BPCMC:
+    case MsgType::CreateBP:
     {
         if (receiver->mCursorComp)
             receiver->mCursorComp->MessageProc(msg);

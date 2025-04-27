@@ -646,6 +646,7 @@ void MainScene::Decording()
         {
             if (data.ClientID == TcpClient::get()->GetID())
             {
+                //data.pos를 사용하는게 더 나아보임 나중에 수정할것
                 ax::Vec2 pos = mCursor->GetPosition()-mMapLayer->getPosition();
                 ActorMessage msg = {MsgType::Build, nullptr, nullptr, &pos};
                 SendActorMessage(mPlayer->mMainActor, msg);
@@ -696,6 +697,29 @@ void MainScene::Decording()
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
         } break;
+        case 103:
+        {
+            Actor* actor = SpawnSupplyDepot(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        } break;
+        case 104:
+        {
+            Actor* actor = SpawnBarrack(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
 
         case 114: // MoveToPath
         {

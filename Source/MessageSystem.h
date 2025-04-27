@@ -33,6 +33,7 @@ enum class MsgType
     Cancel,
     SendInfo,
     //BP
+    CreateBP,
     BPCMC,
     BPSD,
 };
