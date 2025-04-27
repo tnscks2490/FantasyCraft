@@ -353,6 +353,8 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
     default:
         break;
     }
+
+
     mCurState = cState;
     
 }

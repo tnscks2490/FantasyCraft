@@ -135,7 +135,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
 
 
     auto selectanim = ax::DrawNode::create();
-    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->drawCircle(ax::Vec2(0, -8), 48.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
     selectanim->setName("Select");
     selectanim->setVisible(false);
     node->addChild(selectanim);
@@ -153,9 +153,245 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
 
     World::get()->Actor_PushBack(actor);
 
+    return actor;
+}
+
+Actor* SpawnAcademy(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Academy;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Academy, ECharAct::Building, 0);
+
+    auto command = new AcademyComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+
+    return actor;
+}
+
+Actor* SpawnArmory(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Armory;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Armory, ECharAct::Building, 0);
+
+    auto command = new ArmoryComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnBarrack(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Barrack;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Barrack, ECharAct::Building, 0);
+
+    auto command = new BarrackComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnBunker(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Bunker;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Bunker, ECharAct::Building, 0);
+
+    auto command = new BunkerComp(actor);
 
 
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
 
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnEngineeringBay(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::EngineeringBay;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::EngineeringBay, ECharAct::Building, 0);
+
+    auto command = new EngineeringBayComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnSupplyDepot(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::SupplyDepot;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::SupplyDepot, ECharAct::Building, 0);
+
+    auto command = new SupplyDepotComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnStarPort(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::StarPort;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::StarPort, ECharAct::Building, 0);
+
+    auto command = new StarPortComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
     return actor;
 }
 
@@ -209,9 +445,41 @@ Actor* BPCommandCenter(ax::Node* parent)
 
     auto bp = new BPComp(actor);
 
+    return actor;
+}
+
+Actor* BPEngineeringBay(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
 
     return actor;
+}
 
+Actor* BPStarPort(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
+
+    return actor;
 }
 
 Actor* BPSupplyDpot(ax::Node* parent)
@@ -231,7 +499,58 @@ Actor* BPSupplyDpot(ax::Node* parent)
     return actor;
 }
 
-Actor* BPBarrucksDpot(ax::Node* parent)
+Actor* BPAcademy(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
+
+    return actor;
+}
+
+Actor* BPArmory(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
+
+    return actor;
+}
+
+Actor* BPBarrack(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, 4);
+
+    auto bp = new BPComp(actor);
+
+    return actor;
+}
+
+Actor* BPBunker(ax::Node* parent)
 {
     Actor* actor      = new Actor;
     actor->mActorType = ActorType::BP;

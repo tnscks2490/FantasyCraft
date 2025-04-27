@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>새 폴더/생산중.bmp</key>
+            <key>새 폴더/생산.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>새 폴더/커멘드센터 생산.png</key>
+            <key>새 폴더/생산중.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -288,7 +288,7 @@
             <key>size</key>
             <string>{512,1568}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:22ad804190dc2fabcc7173699a78c067:931ddffd693d4ae4c79ff34fa7b9fb33:053d2fba9ec5a131d61a7c6c032462d9$</string>
+            <string>$TexturePacker:SmartUpdate:754463cf7ce6039e40ea4c568674462a:8b8322e74a219b2d9fad84c38c67641b:053d2fba9ec5a131d61a7c6c032462d9$</string>
             <key>textureFileName</key>
             <string>CommandCenter.png</string>
         </dict>

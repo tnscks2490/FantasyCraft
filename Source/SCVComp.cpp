@@ -141,7 +141,7 @@ void SCVComp::Building(ActorMessage& msg)
     switch (*buildingType)
     {
     case ActorType::CommandCenter: command = 102; break;
-    case ActorType::SupplyDpot:  command = 103;  break;
+    case ActorType::SupplyDepot:  command = 103;  break;
     default:
         break;
     }

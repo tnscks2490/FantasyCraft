@@ -104,7 +104,13 @@ void DrawComp::update(float delta)
             mCurDir      = ECharDir::Face;
             return;
         } break;
-
+        case ActionState::Create_Unit:
+        {
+            ChangeAnim(anim, ECharAct::Doing, ECharDir::Face);
+            mActionState = curAction;
+            mCurDir      = ECharDir::Face;
+            return;
+        }
         default:
             break;
         }

@@ -44,10 +44,23 @@ Actor* SpawnCursor(ax::Node* parent);
 Actor* SpawnSCV(ax::Node* parent, PK_Data data);
 Actor* SpawnMarine(ax::Node* parent, PK_Data data);
 Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data);
+Actor* SpawnAcademy(ax::Node* parent, PK_Data data);
+Actor* SpawnArmory(ax::Node* parent, PK_Data data);
+Actor* SpawnBarrack(ax::Node* parent, PK_Data data);
+Actor* SpawnBunker(ax::Node* parent, PK_Data data);
+Actor* SpawnEngineeringBay(ax::Node* parent, PK_Data data);
+Actor* SpawnSupplyDepot(ax::Node* parent, PK_Data data);
+Actor* SpawnStarPort(ax::Node* parent, PK_Data data);
 
 
 // 건물 설치할때 블루프린트 스폰하기
+
+Actor* BPAcademy(ax::Node* parent);
+Actor* BPArmory(ax::Node* parent);
+Actor* BPBarrack(ax::Node* parent);
+Actor* BPBunker(ax::Node* parent);
 Actor* BPCommandCenter(ax::Node* parent);
+Actor* BPEngineeringBay(ax::Node* parent);
+Actor* BPStarPort(ax::Node* parent);
 Actor* BPSupplyDpot(ax::Node* parent);
-Actor* BPBarrucksDpot(ax::Node* parent);
 

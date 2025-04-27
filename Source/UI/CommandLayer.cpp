@@ -24,7 +24,9 @@ bool CommandLayer::init()
     mMenu = ax::Menu::create();
     mMenu->setPosition(ax::Vec2::ZERO);
     addChild(mMenu, 1);
-    
+
+
+
     return true;
 }
 

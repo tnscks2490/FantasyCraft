@@ -20,7 +20,13 @@ enum class ActorType
     SCV,
     Marine,
     CommandCenter,
-    SupplyDpot,
+    SupplyDepot,
+    Academy,
+    Armory,
+    Barrack,
+    Bunker,
+    EngineeringBay,
+    StarPort,
 
     BP,
 

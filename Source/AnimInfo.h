@@ -41,6 +41,13 @@ enum class ECharName
     Marine,
     SCV,
     CommandCenter,
+    Armory,
+    Bunker,
+    EngineeringBay,
+    Barrack,
+    SupplyDepot,
+    StarPort,
+    Academy,
 
 
 
