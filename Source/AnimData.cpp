@@ -347,7 +347,7 @@ AnimInfo g_AnimInfo_Academy_BP[] = {
 
 
 AnimInfo g_AnimInfo_SupplyDepot_Idle[] = {
-     {ECharName::SupplyDepot, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/%04d.png", 1, 6, (1.f / 6),  Vec2(0.5, 0.5), nullptr},
+     {ECharName::SupplyDepot, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "SupplyDepot/Idle/%04d.png", 1, 6, (1.f / 6),  Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_SupplyDepot_Building[] = {
      {ECharName::SupplyDepot, ECharAct::Building, ECharDir::Face, "Plist/SupplyDepot.plist", "SupplyDepot/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},

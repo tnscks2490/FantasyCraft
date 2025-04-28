@@ -76,7 +76,7 @@ void SupplyDepotComp::update(float delta)
             {
                 mTimer = 0.f;
                 mStatus.HP += MaxHP / MaxBuildTime;
-                changeImageIdx = BuildingTime / 5.f;
+                changeImageIdx = BuildingTime / 7.f;
                 if (changeImageIdx != drawidx)
                 {
                     drawidx = changeImageIdx;
@@ -87,10 +87,9 @@ void SupplyDepotComp::update(float delta)
                 printf("%f초 \n", BuildingTime);
                 if (BuildingTime >= MaxBuildTime)
                 {
-                    changeImageIdx++;
-                    drawidx = changeImageIdx;
-                    mActor->mDrawComp->ChangeAnimByIndex(ECharName::SupplyDepot, ECharAct::Idle, ECharDir::Face,
-                                                         drawidx);
+                    //changeImageIdx++;
+                    //drawidx = changeImageIdx;
+                    //mActor->mDrawComp->ChangeAnim(ECharName::SupplyDepot, ECharAct::Idle, ECharDir::Face);
                     isBuild          = true;
                     ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
