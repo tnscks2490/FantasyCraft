@@ -18,17 +18,12 @@ public:
     virtual ActorType* GetCreateUnitList() override { return CreateUnitArray; }
 
 
-    void AddMarine();
-    void AddMedic();
-    void AddGhost();
-    void AddFireBat();
     void AddUnit(ActorType type);
+    void DeleteUnit();
 
-    void DeleteMarine();
-    void DeleteMedic();
-    void DeleteGhost();
-    void DeleteFireBat();
     bool IsUnitArrayEmpty();
+
+    float GetUnitBuildTime();
 
 public:
     int MaxHP          = 1000;
@@ -39,7 +34,7 @@ public:
     float mTimer = 0.f;
 
     float unitTimer     = 0.f;
-    float SCVCreateTime = 13.f;
+    float unitBuildTime = 0.f;
 
     Actor* mBuilder    = nullptr;
     int drawidx        = 0;

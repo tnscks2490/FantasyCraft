@@ -3,6 +3,7 @@
 #include "axmol.h"
 #include "SmartPtr.h"
 
+
 class Actor;
 class MoveComp;
 class DrawComp;

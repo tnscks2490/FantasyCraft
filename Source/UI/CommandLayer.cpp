@@ -100,12 +100,6 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
         CreateAddButton(ButtonType::TCancel);
         // 만약 캔슬을 누르면 SCV에게 명령이 가도록 해야함
     } break;
-    case ButtonType::TSCV:
-    {
-        //UnitInfoLayer* UIL = (UnitInfoLayer*)this->getParent()->getChildByName("UnitInfoLayer");
-        //if (!UIL->isLoad)
-        //    UIL->isLoad = true;
-    } break;
     default:
         break;
     }

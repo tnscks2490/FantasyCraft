@@ -368,10 +368,16 @@ ax::SpriteFrame* UnitInfoLayer::FindWireFrame(Actor* actor)
 
     switch (actor->mActorType)
     {
-    case ActorType::SCV: str = "UISprite/Wire_SCV.png"; break;
-    case ActorType::Marine: str = "UISprite/Wire_Marine.png"; break;
-    case ActorType::CommandCenter:
-        str = "UISprite/Wire_CommandCenter.png"; break;
+    case ActorType::SCV:            str = "UISprite/Wire_SCV.png";            break;
+    case ActorType::Marine:         str = "UISprite/Wire_Marine.png";         break;
+    case ActorType::Academy:        str = "UISprite/Wire_Academy.png";        break;
+    case ActorType::Armory:         str = "UISprite/Wire_Armory.png";         break;
+    case ActorType::Barrack:        str = "UISprite/Wire_Barrack.png";        break;
+    case ActorType::Bunker:         str = "UISprite/Wire_Bunker.png";         break;
+    case ActorType::CommandCenter:  str = "UISprite/Wire_CommandCenter.png";  break;
+    case ActorType::EngineeringBay: str = "UISprite/Wire_EngineeringBay.png"; break;
+    case ActorType::SupplyDepot:    str = "UISprite/Wire_SupplyDepot.png";    break;
+    case ActorType::StarPort:       str = "UISprite/Wire_StarPort.png";       break;
     default:
         break;
     }
@@ -388,6 +394,7 @@ ax::SpriteFrame* UnitInfoLayer::FindATUpgradeSprite(Actor* actor)
     switch (actor->mActorType)
     {
     case ActorType::SCV: str = "UISprite/SCVAT.png"; break;
+    case ActorType::FireBat:
     case ActorType::Marine: str = "UISprite/BionicAT.png"; break;
     default:
         break;
@@ -426,6 +433,9 @@ ax::SpriteFrame* UnitInfoLayer::FindListUnitSprite(ActorType type)
     case ActorType::None: str = "UISprite/Empty.png"; break;
     case ActorType::SCV: str = "UISprite/List_SCV.png"; break;
     case ActorType::Marine: str = "UISprite/List_Marine.png"; break;
+    case ActorType::Medic: str = "UISprite/List_Medic.png"; break;
+    case ActorType::Ghost: str = "UISprite/List_Ghost.png"; break;
+    case ActorType::FireBat: str = "UISprite/List_FireBat.png"; break;
     default:
         break;
     }

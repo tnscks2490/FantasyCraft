@@ -28,6 +28,10 @@ enum class MsgType
     Build_GetBuilder,
     // 유닛생산하기
     Create_SCV,
+    Create_Marine,
+    Create_Medic,
+    Create_FireBat,
+    Create_Ghost,
 
 
     Cancel,

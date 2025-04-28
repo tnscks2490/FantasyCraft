@@ -151,32 +151,32 @@ ButtonInfo g_ButtonInfo_TMedic_Heal     = {
 ButtonInfo g_ButtonInfo_TMechanic_Aerial_AT = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Aerial_AT1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Aerial_AT2.png",
-    "", ButtonType::TMechanic_Aerial_AT,9
+    "", ButtonType::TMechanic_Aerial_AT,4
 };
 ButtonInfo g_ButtonInfo_TMechanic_Aerial_DF = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Aerial_DF1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Aerial_DF2.png",
-    "", ButtonType::TMechanic_Aerial_DF,9
+    "", ButtonType::TMechanic_Aerial_DF,5
 };
 ButtonInfo g_ButtonInfo_TMechanic_Ground_AT = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Ground_AT1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Ground_AT2.png",
-    "", ButtonType::TMechanic_Ground_AT,9
+    "", ButtonType::TMechanic_Ground_AT,1
 };
 ButtonInfo g_ButtonInfo_TMechanic_Ground_DF = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Ground_DF1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Mechanic_Ground_DF2.png",
-    "", ButtonType::TMechanic_Ground_DF,9
+    "", ButtonType::TMechanic_Ground_DF,2
 };
 ButtonInfo g_ButtonInfo_TBionic_AT = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Bionic_AT1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Bionic_AT2.png",
-    "", ButtonType::TBionic_AT,9
+    "", ButtonType::TBionic_AT,1
 };
 ButtonInfo g_ButtonInfo_TBionic_DF = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Bionic_DF1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Bionic_DF2.png",
-    "", ButtonType::TBionic_DF,9
+    "", ButtonType::TBionic_DF,2
 };
 ButtonInfo g_ButtonInfo_TBattle_MP = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Battle_MP1.png",
@@ -345,12 +345,12 @@ ButtonInfo g_ButtonInfo_TDropShip        = {
 ButtonInfo g_ButtonInfo_TFireBat          = {
     "StarResource/Resource/UI/Icon/Terran/Unit/FireBat1.png",
     "StarResource/Resource/UI/Icon/Terran/Unit/FireBat2.png",
-    "", ButtonType::TFireBat,9
+    "", ButtonType::TFireBat,2
 };
 ButtonInfo g_ButtonInfo_TGhost         = {
     "StarResource/Resource/UI/Icon/Terran/Unit/Ghost1.png",
     "StarResource/Resource/UI/Icon/Terran/Unit/Ghost2.png",
-    "", ButtonType::TGhost,9
+    "", ButtonType::TGhost,3
 };
 ButtonInfo g_ButtonInfo_TGoliath          = {
     "StarResource/Resource/UI/Icon/Terran/Unit/Goliath1.png",
@@ -360,12 +360,12 @@ ButtonInfo g_ButtonInfo_TGoliath          = {
 ButtonInfo g_ButtonInfo_TMarine          = {
     "StarResource/Resource/UI/Icon/Terran/Unit/Marine1.png",
     "StarResource/Resource/UI/Icon/Terran/Unit/Marine2.png",
-    "", ButtonType::TMarine,9
+    "", ButtonType::TMarine,1
 };
 ButtonInfo g_ButtonInfo_TMedic          = {
     "StarResource/Resource/UI/Icon/Terran/Unit/Medic1.png",
     "StarResource/Resource/UI/Icon/Terran/Unit/Medic2.png",
-    "", ButtonType::TMedic,9
+    "", ButtonType::TMedic,4
 };
 ButtonInfo g_ButtonInfo_TMine          = {
     "StarResource/Resource/UI/Icon/Terran/Unit/Mine1.png",
@@ -600,8 +600,18 @@ UnitControlButton g_UnitControlButton_TCommandCenter = {
     ButtonType::TLift}
 };
 
-UnitControlButton g_UnitControlButton_OnlyCancel = {
+UnitControlButton g_UnitControlButton_TBarrack = {
+    ActorType::Barrack,
+    {ButtonType::TMarine,ButtonType::TFireBat,ButtonType::TGhost,
+    ButtonType::TMedic,ButtonType::None,ButtonType::TSetRellyPoint,
+    ButtonType::None,ButtonType::None, ButtonType::TLift}
+};
 
+UnitControlButton g_UnitControlButton_TEngineeringBay = {
+    ActorType::EngineeringBay,
+    {ButtonType::TBionic_AT,ButtonType::TBionic_DF,ButtonType::None,
+    ButtonType::None,ButtonType::None,ButtonType::None,
+    ButtonType::None,ButtonType::None,  ButtonType::TLift}
 };
 
 
@@ -627,8 +637,17 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
         case ActionState::Idle:     return &g_UnitControlButton_TCommandCenter;
         case ActionState::Building: return ReturnOnlyCancel(actor);
         }
-    }
         return &g_UnitControlButton_TCommandCenter;
+    }
+    case ActorType::Barrack:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:            return &g_UnitControlButton_TBarrack;
+        case ActionState::Building:        return ReturnOnlyCancel(actor);
+        }
+        return &g_UnitControlButton_TBarrack;
+    }
     default:
         break;
     }

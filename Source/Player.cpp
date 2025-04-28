@@ -93,6 +93,17 @@ void Player::MessageProc(SystemMessage smsg)
                 SendSystemMessage(ui, this, smsg);
                
             }
+        } break;
+        case ButtonType::TMarine:
+        {
+            if (mMainActor && mMainActor->mActorType == ActorType::Barrack)
+            {
+                ActorMessage msg = {MsgType::Create_Marine, nullptr, nullptr};
+                SendActorMessage(mMainActor, msg);
+
+                SystemMessage smsg = {SMsgType::Create_Unit, ActorType::Marine, ButtonType::TMarine, nullptr};
+                SendSystemMessage(ui, this, smsg);
+            }
         }
 
         default:

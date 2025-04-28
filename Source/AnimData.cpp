@@ -272,7 +272,7 @@ AnimInfo g_AnimInfo_Barrack_Building[] ={
      {ECharName::Barrack, ECharAct::Building, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Barrack_Doing[] ={
-    {ECharName::Barrack, ECharAct::Doing, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Doing/%04d.png", 1, 2,   (1.f / 2), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Barrack, ECharAct::Doing, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Doing/%04d.png", 1, 2,   (0.5f / 2), Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Barrack_BP[] = {
     {ECharName::Barrack, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Barrack/0001.png", 1, 1,
@@ -463,6 +463,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         {
         case ECharAct::Idle:  return g_AnimInfo_Academy_Idle[0];
         case ECharAct::BP:    return g_AnimInfo_Academy_BP[0];
+        case ECharAct::Doing: return g_AnimInfo_Academy_Doing[0];
         }
 
     case ECharName::Barrack:
@@ -470,6 +471,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         {
         case ECharAct::Idle:  return g_AnimInfo_Barrack_Idle[0];
         case ECharAct::BP:    return g_AnimInfo_Barrack_BP[0];
+        case ECharAct::Doing: return g_AnimInfo_Barrack_Doing[0];
         }
     case ECharName::Bunker:
         switch (action)

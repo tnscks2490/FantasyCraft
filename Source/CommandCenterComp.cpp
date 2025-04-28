@@ -12,8 +12,6 @@ CommandCenterComp::CommandCenterComp(Actor* actor)
     {
         CreateUnitArray[i] = ActorType::None;
     }
-
-
 }
 
 CommandCenterComp::~CommandCenterComp() {}
@@ -129,13 +127,7 @@ void CommandCenterComp::update(float delta)
                 unitTimer = 0.f;
                 DeleteSCV();
 
-                PK_Data data;
-                data.ClientID = TcpClient::get()->GetID();
-                data.pos      = mActor->GetPosition() + ax::Vec2(0, -100);
-                data.input    = 100;
-                TcpClient::get()->SendMessageToServer(data);
-
-
+                SendPK_Data(GetCreateCommand(CreateUnitArray[0]), mActor->GetPosition() + ax::Vec2(0, -100));
                 if (IsUnitArrayEmpty())
                 {
                     IsCreatingUnit = false;

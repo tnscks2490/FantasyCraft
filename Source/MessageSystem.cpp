@@ -127,6 +127,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
     break;
 
     case MsgType::Create_SCV:
+    case MsgType::Create_Marine:
     {
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
