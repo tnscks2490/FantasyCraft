@@ -285,9 +285,53 @@ void CursorComp::CreateBuildingBP(ActorType type)
         {
             auto BP = BPAcademy(mActor->GetRoot()->getParent());
             mBP     = BP;
+        }  break;
+        case ActorType::Armory:
+        {
+            auto BP = BPArmory(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }break;
+        case ActorType::Bunker:
+        {
+            auto BP = BPBunker(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }break;
+        case ActorType::ScienceFacility:
+        {
+            auto BP = BPScienceFacility(mActor->GetRoot()->getParent());
+            mBP     = BP;
         }
         break;
-
+        case ActorType::SupplyDepot:
+        {
+            auto BP = BPSupplyDepot(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }
+        break;
+        case ActorType::Factory:
+        {
+            auto BP = BPFactory(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }
+        break;
+        case ActorType::Refinery:
+        {
+            auto BP = BPRefinery(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }
+        break;
+        case ActorType::StarPort:
+        {
+            auto BP = BPStarPort(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }
+        break;
+        case ActorType::EngineeringBay:
+        {
+            auto BP = BPEngineeringBay(mActor->GetRoot()->getParent());
+            mBP     = BP;
+        }
+        break;
         default:
             break;
         }

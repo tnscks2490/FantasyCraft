@@ -30,6 +30,9 @@ enum class ActorType
     Bunker,
     EngineeringBay,
     StarPort,
+    Factory,
+    ScienceFacility,
+    Refinery,
 
     BP,
 

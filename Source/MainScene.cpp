@@ -230,7 +230,7 @@ void MainScene::onMouseUp(Event* event)
 
         std::cout << name.data() << "\n" << std::endl;
 
-        if (A->getTag() == 10)
+        if (A->getTag() == 10 || A->getTag() == 20)
         {
             auto aRoot         = A->getParent();
             UserData* userData = (UserData*)aRoot->getUserData();
@@ -703,7 +703,7 @@ void MainScene::Decording()
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
         } break;
-        case 103:
+        case 103: // 서플라이 생성
         {
             Actor* actor = SpawnSupplyDepot(mMapLayer, data);
             actor->SetPosition(data.pos);
@@ -714,9 +714,105 @@ void MainScene::Decording()
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
         } break;
-        case 104:
+        case 104: // 배럭 생성
         {
             Actor* actor = SpawnBarrack(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 105:  // 엔지니어링 베이 생성
+        {
+            Actor* actor = SpawnEngineeringBay(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 106:  // 리파이너리(가스) 생성
+        {
+            Actor* actor = SpawnRefinery(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 107:  // 아카데미 생성
+        {
+            Actor* actor = SpawnAcademy(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 108:  // 아머리 생성
+        {
+            Actor* actor = SpawnArmory(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 109:  // 벙커 생성
+        {
+            Actor* actor = SpawnBunker(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 110:  // 스타포트 생성
+        {
+            Actor* actor = SpawnStarPort(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 111:  // 사이언스퍼실리티 생성
+        {
+            Actor* actor = SpawnScienceFacility(mMapLayer, data);
+            actor->SetPosition(data.pos);
+
+            if (data.ClientID == TcpClient::get()->GetID())
+            {
+                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                SendActorMessage(mPlayer->mMainActor, msg);
+            }
+        }
+        break;
+        case 112:  // 펙토리 생성
+        {
+            Actor* actor = SpawnFactory(mMapLayer, data);
             actor->SetPosition(data.pos);
 
             if (data.ClientID == TcpClient::get()->GetID())

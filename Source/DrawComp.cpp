@@ -50,7 +50,9 @@ void DrawComp::update(float delta)
         ECharAct action       = mCurAnimInfo->act;
         ActionState curAction = mActor->mUnitComp->mCurAction;
 
-        ax::Vec2 dirV = mActor->mMoveComp->GetVelocity();
+        ax::Vec2 dirV;
+        if (mActor->mMoveComp)
+            dirV = mActor->mMoveComp->GetVelocity();
 
        
         if (mActionState == curAction)
@@ -206,18 +208,80 @@ ax::Node* DrawComp::Create_Small_BPPhysicsNode()
     ax::Vec2 bodysize(32, 32);
     if (mRoot.isNotNull())
     {
-        auto body1 = CreatePhysicsNode(bodysize);
-        auto rect  = ax::DrawNode::create();
-        rect->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16,16), ax::Color4B::GREEN);
-        body1->addChild(rect);
-        body1->setPosition(ax::Vec2(-32, 32));
-        return body1;
+        auto mainBody = ax::Node::create();
+        mainBody->setName("BPMainBody");
+        mRoot->addChild(mainBody, 2.f);
+
+        // 탐지 피직스바디
+        ////////////////////////////////////////////
+        auto body1 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body1);
+        body1->setPosition(ax::Vec2(-32, 16));
+
+        auto body2 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body2);
+        body2->setPosition(ax::Vec2(0, 16));
+
+        auto body3 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body3);
+        body3->setPosition(ax::Vec2(32, 16));
+
+        /////////////////////////////////////////
+        auto body4 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body4);
+        body4->setPosition(ax::Vec2(-32, -16));
+
+        auto body5 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body5);
+        body5->setPosition(ax::Vec2(0, -16));
+
+        auto body6 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body6);
+        body6->setPosition(ax::Vec2(32, -16));
+        //////////////////////////////////////////////
+        return mainBody;
     }
     return nullptr;
 }
 
 ax::Node* DrawComp::Create_Middle_BPPhysicsNode()
 {
+    ax::Vec2 bodysize(32, 32);
+    if (mRoot.isNotNull())
+    {
+        auto mainBody = ax::Node::create();
+        mainBody->setName("BPMainBody");
+        mRoot->addChild(mainBody, 2.f);
+
+        // 탐지 피직스바디
+        ////////////////////////////////////////////
+        auto body1 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body1);
+        body1->setPosition(ax::Vec2(-32, 16));
+
+        auto body2 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body2);
+        body2->setPosition(ax::Vec2(0, 16));
+
+        auto body3 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body3);
+        body3->setPosition(ax::Vec2(32, 16));
+
+        /////////////////////////////////////////
+        auto body4 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body4);
+        body4->setPosition(ax::Vec2(-32, -16));
+
+        auto body5 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body5);
+        body5->setPosition(ax::Vec2(0, -16));
+
+        auto body6 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body6);
+        body6->setPosition(ax::Vec2(32, -16));
+        //////////////////////////////////////////////
+        return mainBody;
+    }
     return nullptr;
 }
 
@@ -283,10 +347,6 @@ ax::Node* DrawComp::Create_Big_BPPhysicsNode()
         mainBody->addChild(body12);
         body12->setPosition(ax::Vec2(48, -32));
         //////////////////////////////////////////////
-
-
-        
-
         return mainBody;
     }
     return nullptr;
@@ -540,6 +600,15 @@ void DrawComp::ChangeHpBarByIndex(ECharName Name, int idx)
     action = ax::RepeatForever::create(animate);
     action->setTag(20202);
     animNode->runAction(action);
+}
+
+void DrawComp::ChangePhysicsNodeTag(int tagNum)
+{
+    if (mRoot.isNotNull())
+    {
+        auto pbody = mRoot->getChildByName("Body");
+        pbody->setTag(tagNum);
+    }
 }
 
 

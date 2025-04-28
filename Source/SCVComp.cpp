@@ -144,6 +144,16 @@ void SCVComp::Building(ActorMessage& msg)
     case ActorType::CommandCenter: command = 102; break;
     case ActorType::SupplyDepot:  command = 103;  break;
     case ActorType::Barrack:      command = 104;  break;
+    case ActorType::EngineeringBay: command = 105; break;
+    case ActorType::Refinery:       command = 106; break;
+    case ActorType::Academy:        command = 107; break;
+    case ActorType::Armory:        command = 108;  break;
+    case ActorType::Bunker:       command = 109;   break;
+    case ActorType::StarPort:     command = 110;   break;
+    case ActorType::ScienceFacility: command = 111;break;
+    case ActorType::Factory:      command = 112;   break;
+
+        break;
     default:
         break;
     }

@@ -51,6 +51,9 @@ Actor* SpawnBunker(ax::Node* parent, PK_Data data);
 Actor* SpawnEngineeringBay(ax::Node* parent, PK_Data data);
 Actor* SpawnSupplyDepot(ax::Node* parent, PK_Data data);
 Actor* SpawnStarPort(ax::Node* parent, PK_Data data);
+Actor* SpawnFactory(ax::Node* parent, PK_Data data);
+Actor* SpawnScienceFacility(ax::Node* parent, PK_Data data);
+Actor* SpawnRefinery(ax::Node* parent, PK_Data data);
 
 
 // 건물 설치할때 블루프린트 스폰하기
@@ -62,5 +65,8 @@ Actor* BPBunker(ax::Node* parent);
 Actor* BPCommandCenter(ax::Node* parent);
 Actor* BPEngineeringBay(ax::Node* parent);
 Actor* BPStarPort(ax::Node* parent);
-Actor* BPSupplyDpot(ax::Node* parent);
+Actor* BPSupplyDepot(ax::Node* parent);
+Actor* BPFactory(ax::Node* parent);
+Actor* BPScienceFacility(ax::Node* parent);
+Actor* BPRefinery(ax::Node* parent);
 

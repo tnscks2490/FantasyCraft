@@ -82,6 +82,13 @@ void Player::MessageProc(SystemMessage smsg)
             SendActorMessage(cursor, msg);
         }
         break;
+        case ButtonType::TSupply_Depot:
+        {
+            auto type        = ActorType::SupplyDepot;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
         case ButtonType::TSCV:
         {
             if (mMainActor && mMainActor->mActorType == ActorType::CommandCenter)

@@ -127,11 +127,11 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     actor->charNum = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node,0.1f);
 
     auto body       = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
 
     auto selectanim = ax::DrawNode::create();
@@ -165,11 +165,11 @@ Actor* SpawnAcademy(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -199,11 +199,11 @@ Actor* SpawnArmory(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -232,11 +232,11 @@ Actor* SpawnBarrack(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -267,11 +267,11 @@ Actor* SpawnBunker(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -301,11 +301,11 @@ Actor* SpawnEngineeringBay(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -336,11 +336,12 @@ Actor* SpawnSupplyDepot(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
+
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -369,11 +370,11 @@ Actor* SpawnStarPort(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     auto draw = new DrawComp(actor);
-
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
     selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
@@ -393,6 +394,21 @@ Actor* SpawnStarPort(ax::Node* parent, PK_Data data)
 
     World::get()->Actor_PushBack(actor);
     return actor;
+}
+
+Actor* SpawnFactory(ax::Node* parent, PK_Data data)
+{
+    return nullptr;
+}
+
+Actor* SpawnScienceFacility(ax::Node* parent, PK_Data data)
+{
+    return nullptr;
+}
+
+Actor* SpawnRefinery(ax::Node* parent, PK_Data data)
+{
+    return nullptr;
 }
 
 Actor* SpawnCommandCenter(ax::Node* parent)
@@ -485,7 +501,7 @@ Actor* BPStarPort(ax::Node* parent)
     return actor;
 }
 
-Actor* BPSupplyDpot(ax::Node* parent)
+Actor* BPSupplyDepot(ax::Node* parent)
 {
     Actor* actor      = new Actor;
     actor->mActorType = ActorType::BP;
@@ -503,7 +519,7 @@ Actor* BPSupplyDpot(ax::Node* parent)
     return actor;
 }
 
-Actor* BPAcademy(ax::Node* parent)
+Actor* BPFactory(ax::Node* parent)
 {
     Actor* actor      = new Actor;
     actor->mActorType = ActorType::BP;
@@ -513,6 +529,60 @@ Actor* BPAcademy(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNode(ECharName::Factory, ECharAct::BP, ECharDir::Face, "BPAnim");
+
+    auto bp     = new BPComp(actor);
+    bp->mBPType = ActorType::Factory;
+
+    return actor;
+}
+
+Actor* BPScienceFacility(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Big_BPPhysicsNode();
+    auto anim = draw->CreateAnimNode(ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "BPAnim");
+
+    auto bp     = new BPComp(actor);
+    bp->mBPType = ActorType::ScienceFacility;
+
+    return actor;
+}
+
+Actor* BPRefinery(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Middle_BPPhysicsNode();
+    auto anim = draw->CreateAnimNode(ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "BPAnim");
+
+    auto bp     = new BPComp(actor);
+    bp->mBPType = ActorType::Refinery;
+
+    return actor;
+}
+
+Actor* BPAcademy(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::BP;
+    auto draw         = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 1.f);
+
+    auto body = draw->Create_Middle_BPPhysicsNode();
     auto anim = draw->CreateAnimNode(ECharName::Academy, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
@@ -530,7 +600,7 @@ Actor* BPArmory(ax::Node* parent)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 1.f);
 
-    auto body = draw->Create_Big_BPPhysicsNode();
+    auto body = draw->Create_Middle_BPPhysicsNode();
     auto anim = draw->CreateAnimNode(ECharName::Armory, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
@@ -566,10 +636,10 @@ Actor* BPBunker(ax::Node* parent)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 1.f);
 
-    auto body = draw->Create_Big_BPPhysicsNode();
+    auto body = draw->Create_Middle_BPPhysicsNode();
     auto anim = draw->CreateAnimNode(ECharName::Bunker, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp = new BPComp(actor);
-
+    bp->mBPType = ActorType::Bunker;
     return actor;
 }
