@@ -113,11 +113,7 @@ void CursorComp::LClick(ax::Vec2 pos)
     }
     if (mState == CursorState::Move)
     {
-        PK_Data data;
-        data.ClientID = TcpClient::get()->GetID();
-        data.input    = 114;
-        data.pos      = pos;
-        TcpClient::get()->SendMessageToServer(data);
+        SendPK_Data(114, pos);
     }
     else if (mState == CursorState::Target)
     {
@@ -139,11 +135,7 @@ void CursorComp::RClick(ax::Vec2 pos)
     {
         if (cPlayer->isSelected())
         {
-            PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
-            data.input    = 114;
-            data.pos      = pos - (ax::Vec2(0, 210));
-            TcpClient::get()->SendMessageToServer(data);
+            SendPK_Data(114, pos- ax::Vec2(0,210));
         }
 
     }

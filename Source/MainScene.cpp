@@ -172,7 +172,13 @@ void MainScene::onMouseDown(Event* event)
         }
         else
         {
-            mCursor->mCursorComp->RClick(mousePos);   
+            if (mPlayer->mMainActor&& mCursor->mCursorComp->mBP)
+            {
+                SystemMessage smsg = {SMsgType::Cancel, ActorType::None, ButtonType::None, &mPlayer->mMainActor};
+                SendSystemMessage(mUILayer, mPlayer, smsg);
+            }
+            mCursor->mCursorComp->RClick(mousePos);
+            
         }
     }
     else if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)

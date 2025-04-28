@@ -48,6 +48,9 @@ enum class ECharName
     SupplyDepot,
     StarPort,
     Academy,
+    Factory,
+    ScienceFacility,
+    Refinery,
 
 
 

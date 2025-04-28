@@ -39,6 +39,10 @@ void CommandLayer::MessageProc(SystemMessage smsg)
     {
         SetButton(sActor);
     }
+    else if (msg.smsgType == SMsgType::Cancel)
+    {
+        SetButton(sActor);
+    }
 }
 
 void CommandLayer::ButtonMessage(ax::Object* sender)
@@ -94,7 +98,23 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TLift:
     case ButtonType::TLand:
         break;
+    case ButtonType::TAcademy:
+    case ButtonType::TArmory:
+    case ButtonType::TBarracks:
+    case ButtonType::TBunker:
     case ButtonType::TCommand_Center:
+    case ButtonType::TComsat_Station:
+    case ButtonType::TControl_Tower:
+    case ButtonType::TCovert_Ops:
+    case ButtonType::TEngineering_Bay:
+    case ButtonType::TFactory:
+    case ButtonType::TMachine_Shop:
+    case ButtonType::TMissile_Turret:
+    case ButtonType::TNuclear_Silo:
+    case ButtonType::TRefinery:
+    case ButtonType::TPhysics_Lab:
+    case ButtonType::TSupply_Depot:
+    case ButtonType::TScience_Facility:
     {
         mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);

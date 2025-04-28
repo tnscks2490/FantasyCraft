@@ -360,7 +360,50 @@ AnimInfo g_AnimInfo_SupplyDepot_BP[] = {
      Vec2(0.5, 0.5), nullptr},
 };
 
+AnimInfo g_AnimInfo_Factory_Idle[] = {
+     {ECharName::Factory, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Factory_Building[] = {
+     {ECharName::Factory, ECharAct::Building, ECharDir::Face, "Plist/Factory.plist", "Factory/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::Factory, ECharAct::Building, ECharDir::Face, "Plist/Factory.plist", "Factory/Building/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::Factory, ECharAct::Building, ECharDir::Face, "Plist/Factory.plist", "Factory/Building/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::Factory, ECharAct::Building, ECharDir::Face, "Plist/Factory.plist", "Factory/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Factory_Doing[] = {
+    {ECharName::Factory, ECharAct::Doing, ECharDir::Face, "Plist/Factory.plist", "Factory/Doing/%04d.png", 1, 3, (0.6f / 3), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Factory_BP[] = {
+    {ECharName::Factory, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Factory/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
+AnimInfo g_AnimInfo_ScienceFacility_Idle[] = {
+     {ECharName::ScienceFacility, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_ScienceFacility_Building[] = {
+     {ECharName::ScienceFacility, ECharAct::Building, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::ScienceFacility, ECharAct::Building, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Building/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::ScienceFacility, ECharAct::Building, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Building/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::ScienceFacility, ECharAct::Building, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_ScienceFacility_Doing[] = {
+    {ECharName::ScienceFacility, ECharAct::Doing, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Doing/%04d.png", 1, 2, (0.4f / 2), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_ScienceFacility_BP[] = {
+    {ECharName::ScienceFacility, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/ScienceFacility/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+
+AnimInfo g_AnimInfo_Refinery_Idle[] = {
+     {ECharName::Refinery, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Refinery_Building[] = {
+     {ECharName::Refinery, ECharAct::Building, ECharDir::Face, "Plist/Refinery.plist", "Refinery/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::Refinery, ECharAct::Building, ECharDir::Face, "Plist/Refinery.plist", "Refinery/Building/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::Refinery, ECharAct::Building, ECharDir::Face, "Plist/Refinery.plist", "Refinery/Building/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+     {ECharName::Refinery, ECharAct::Building, ECharDir::Face, "Plist/Refinery.plist", "Refinery/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Refinery_BP[] = {
+    {ECharName::Refinery, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Refinery/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
 
 
@@ -484,18 +527,21 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         {
         case ECharAct::Idle:  return g_AnimInfo_StarPort_Idle[0];
         case ECharAct::BP:    return g_AnimInfo_StarPort_BP[0];
+        case ECharAct::Doing: return g_AnimInfo_StarPort_Doing[0];
         }
     case ECharName::Armory:
         switch (action)
         {
         case ECharAct::Idle:  return g_AnimInfo_Armory_Idle[0];
         case ECharAct::BP:    return g_AnimInfo_Armory_BP[0];
+        case ECharAct::Doing: return g_AnimInfo_Armory_Doing[0];
         }
     case ECharName::EngineeringBay:
         switch (action)
         {
         case ECharAct::Idle:  return g_AnimInfo_EngineeringBay_Idle[0];
         case ECharAct::BP:    return g_AnimInfo_EngineeringBay_BP[0];
+        case ECharAct::Doing: return g_AnimInfo_EngineeringBay_Doing[0];
         }
     case ECharName::SupplyDepot:
         switch (action)
@@ -503,6 +549,27 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         case ECharAct::Idle:  return g_AnimInfo_SupplyDepot_Idle[0];
         case ECharAct::BP:    return g_AnimInfo_SupplyDepot_BP[0];
         }
+    case ECharName::Factory:
+        switch (action)
+        {
+        case ECharAct::Idle:  return g_AnimInfo_Factory_Idle[0];
+        case ECharAct::BP:    return g_AnimInfo_Factory_BP[0];
+        case ECharAct::Doing: return g_AnimInfo_Factory_Doing[0];
+        }
+    case ECharName::ScienceFacility:
+        switch (action)
+        {
+        case ECharAct::Idle:          return g_AnimInfo_ScienceFacility_Idle[0];
+        case ECharAct::Doing:         return g_AnimInfo_ScienceFacility_Doing[0];
+        case ECharAct::BP:            return g_AnimInfo_ScienceFacility_BP[0];
+        }
+    case ECharName::Refinery:
+        switch (action)
+        {
+        case ECharAct::Idle:          return g_AnimInfo_Refinery_Idle[0];
+        case ECharAct::BP:            return g_AnimInfo_Refinery_BP[0];
+        }
+        
 
     case ECharName::Cursor:
         switch (action)
@@ -615,14 +682,32 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
     case ECharName::EngineeringBay:
         switch (act)
         {
-        case ECharAct::Idle:  return g_AnimInfo_EngineeringBay_Idle[0];
+        case ECharAct::Idle:     return g_AnimInfo_EngineeringBay_Idle[0];
         case ECharAct::Building: return g_AnimInfo_EngineeringBay_Building[idx];
         }
     case ECharName::SupplyDepot:
         switch (act)
         {
-        case ECharAct::Idle:  return g_AnimInfo_SupplyDepot_Idle[0];
+        case ECharAct::Idle:     return g_AnimInfo_SupplyDepot_Idle[0];
         case ECharAct::Building: return g_AnimInfo_SupplyDepot_Building[idx];
+        }
+    case ECharName::Factory:
+        switch (act)
+        {
+        case ECharAct::Idle:     return g_AnimInfo_Factory_Idle[0];
+        case ECharAct::Building: return g_AnimInfo_Factory_Building[idx];
+        }
+    case ECharName::ScienceFacility:
+        switch (act)
+        {
+        case ECharAct::Idle:     return g_AnimInfo_ScienceFacility_Idle[0];
+        case ECharAct::Building: return g_AnimInfo_ScienceFacility_Building[idx];
+        }
+    case ECharName::Refinery:
+        switch (act)
+        {
+        case ECharAct::Idle:     return g_AnimInfo_Refinery_Idle[0];
+        case ECharAct::Building: return g_AnimInfo_Refinery_Building[idx];
         }
 
     case ECharName::Effect:

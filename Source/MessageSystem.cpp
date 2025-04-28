@@ -158,6 +158,12 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
         }
     }
     break;
+    case SMsgType::Cancel:
+    {
+        if (ui)
+            ui->MessageProc(smsg);
+    }
+    break;
     case SMsgType::MSUI:
     {
         if (ui) ui->MessageProc(smsg);

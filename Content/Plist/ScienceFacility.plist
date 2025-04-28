@@ -4,127 +4,52 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>BP/Academy/0001.png</key>
+            <key>ScienceFacility/Building/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{96,128}</string>
+                <string>{96,96}</string>
                 <key>spriteSourceSize</key>
-                <string>{96,128}</string>
+                <string>{96,96}</string>
                 <key>textureRect</key>
-                <string>{{0,0},{96,128}}</string>
+                <string>{{0,0},{96,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BP/Armory/0001.png</key>
+            <key>ScienceFacility/Building/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,128}</string>
+                <string>{96,96}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,128}</string>
+                <string>{96,96}</string>
                 <key>textureRect</key>
-                <string>{{0,128},{160,128}}</string>
+                <string>{{96,0},{96,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BP/Barrack/0001.png</key>
+            <key>ScienceFacility/Building/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{192,160}</string>
+                <string>{96,96}</string>
                 <key>spriteSourceSize</key>
-                <string>{192,160}</string>
+                <string>{96,96}</string>
                 <key>textureRect</key>
-                <string>{{128,288},{192,160}}</string>
+                <string>{{192,0},{96,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BP/Bunker/0001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{96,128}</string>
-                <key>spriteSourceSize</key>
-                <string>{96,128}</string>
-                <key>textureRect</key>
-                <string>{{96,0},{96,128}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>BP/CommandCenter/0001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{128,160}</string>
-                <key>spriteSourceSize</key>
-                <string>{128,160}</string>
-                <key>textureRect</key>
-                <string>{{160,128},{128,160}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>BP/EngineeringBay/0001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{192,160}</string>
-                <key>spriteSourceSize</key>
-                <string>{192,160}</string>
-                <key>textureRect</key>
-                <string>{{0,448},{192,160}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>BP/Factory/0001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{128,160}</string>
-                <key>spriteSourceSize</key>
-                <string>{128,160}</string>
-                <key>textureRect</key>
-                <string>{{288,128},{128,160}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>BP/Refinery/0005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{192,192}</string>
-                <key>spriteSourceSize</key>
-                <string>{192,192}</string>
-                <key>textureRect</key>
-                <string>{{192,448},{192,192}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>BP/ScienceFacility/0001.png</key>
+            <key>ScienceFacility/Building/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -135,37 +60,172 @@
                 <key>spriteSourceSize</key>
                 <string>{128,96}</string>
                 <key>textureRect</key>
-                <string>{{192,0},{128,96}}</string>
+                <string>{{288,0},{128,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BP/StarPort/0001.png</key>
+            <key>ScienceFacility/Doing/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{128,160}</string>
+                <string>{128,96}</string>
                 <key>spriteSourceSize</key>
-                <string>{128,160}</string>
+                <string>{128,96}</string>
                 <key>textureRect</key>
-                <string>{{0,288},{128,160}}</string>
+                <string>{{416,0},{128,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BP/SupplyDepot/0001.png</key>
+            <key>ScienceFacility/Doing/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{96,128}</string>
+                <string>{128,96}</string>
                 <key>spriteSourceSize</key>
-                <string>{96,128}</string>
+                <string>{128,96}</string>
                 <key>textureRect</key>
-                <string>{{320,0},{96,128}}</string>
+                <string>{{544,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/Idle/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{672,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/33.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{800,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/33333.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{1312,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/43334.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{1440,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/44.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{928,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/53335.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{1568,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/55.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{1056,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/63336.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{1696,0},{128,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>ScienceFacility/띄우고내리기/66.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,96}</string>
+                <key>textureRect</key>
+                <string>{{1184,0},{128,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -179,13 +239,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>BP.png</string>
+            <string>ScienceFacility.png</string>
             <key>size</key>
-            <string>{416,640}</string>
+            <string>{1824,96}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:50dc176e6485026a1aef71d6f55376fd:a0f79769c73fa50e92cbd6863b7a4b92:1123faa3b436ffec44924e2573b448f0$</string>
+            <string>$TexturePacker:SmartUpdate:49d952a4661bf9bc51c35cb32f07f8de:d8299f73f1162ea7a94f18dc489dfdeb:19cecf50fd8f64d4f15e794b4ae6b841$</string>
             <key>textureFileName</key>
-            <string>BP.png</string>
+            <string>ScienceFacility.png</string>
         </dict>
     </dict>
 </plist>

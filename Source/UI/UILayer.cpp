@@ -68,6 +68,11 @@ void UILayer::MessageProc(SystemMessage smsg)
         /*CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
         command->SetButton(msg.Atype);*/
     } break;
+    case SMsgType::Cancel:
+    {
+        CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+        command->MessageProc(msg);
+    } break;
     case SMsgType::MSUI:
     {
         UnitInfoLayer* UnitInfo = (UnitInfoLayer*)this->getChildByName("UnitInfoLayer");
