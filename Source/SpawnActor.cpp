@@ -433,12 +433,72 @@ Actor* SpawnFactory(ax::Node* parent, PK_Data data)
 
 Actor* SpawnScienceFacility(ax::Node* parent, PK_Data data)
 {
-    return nullptr;
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::ScienceFacility;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::ScienceFacility, ECharAct::Building, 0);
+
+    auto command = new ScienceFacilityComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
 }
 
 Actor* SpawnRefinery(ax::Node* parent, PK_Data data)
 {
-    return nullptr;
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Refinery;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Refinery, ECharAct::Building, 0);
+
+    auto command = new RefineryComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
 }
 
 Actor* SpawnCommandCenter(ax::Node* parent)

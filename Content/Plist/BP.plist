@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BP/Refinery/0005.png</key>
+            <key>BP/Refinery/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -183,7 +183,7 @@
             <key>size</key>
             <string>{416,640}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:50dc176e6485026a1aef71d6f55376fd:a0f79769c73fa50e92cbd6863b7a4b92:1123faa3b436ffec44924e2573b448f0$</string>
+            <string>$TexturePacker:SmartUpdate:3d152238a247c412ccea38cf2c1d156f:a0f79769c73fa50e92cbd6863b7a4b92:1123faa3b436ffec44924e2573b448f0$</string>
             <key>textureFileName</key>
             <string>BP.png</string>
         </dict>

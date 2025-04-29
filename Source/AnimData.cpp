@@ -393,7 +393,7 @@ AnimInfo g_AnimInfo_ScienceFacility_BP[] = {
 };
 
 AnimInfo g_AnimInfo_Refinery_Idle[] = {
-     {ECharName::Refinery, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
+     {ECharName::Refinery, ECharAct::Idle, ECharDir::Face, "Plist/Refinery.plist", "Refinery/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Refinery_Building[] = {
      {ECharName::Refinery, ECharAct::Building, ECharDir::Face, "Plist/Refinery.plist", "Refinery/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
