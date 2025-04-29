@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Building/0001.png</key>
+            <key>Factory/Building/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Building/0002.png</key>
+            <key>Factory/Building/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Building/0003.png</key>
+            <key>Factory/Building/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Building/0004.png</key>
+            <key>Factory/Building/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Doing/0001.png</key>
+            <key>Factory/Doing/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Doing/0002.png</key>
+            <key>Factory/Doing/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Doing/0003.png</key>
+            <key>Factory/Doing/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Idle/0001.png</key>
+            <key>Factory/Idle/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/11.png</key>
+            <key>Factory/LandLift/11.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/13331.png</key>
+            <key>Factory/LandLift/13331.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/33.png</key>
+            <key>Factory/LandLift/33.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/33333.png</key>
+            <key>Factory/LandLift/33333.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/43334.png</key>
+            <key>Factory/LandLift/43334.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/44.png</key>
+            <key>Factory/LandLift/44.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/53335.png</key>
+            <key>Factory/LandLift/53335.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/55.png</key>
+            <key>Factory/LandLift/55.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/63336.png</key>
+            <key>Factory/LandLift/63336.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/66.png</key>
+            <key>Factory/LandLift/66.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/73337.png</key>
+            <key>Factory/LandLift/73337.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/77.png</key>
+            <key>Factory/LandLift/77.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LandLift/88.png</key>
+            <key>Factory/LandLift/88.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -333,7 +333,7 @@
             <key>size</key>
             <string>{256,1696}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6b5c917659ff30f7a818d95e1dfee8fe:8bf447adc1d25631b98c13452afc2799:998aa953f7a11ae19f4849ffb8e55795$</string>
+            <string>$TexturePacker:SmartUpdate:b38678e3bb711d7f0597ed949cbe4f1e:8bf447adc1d25631b98c13452afc2799:998aa953f7a11ae19f4849ffb8e55795$</string>
             <key>textureFileName</key>
             <string>Factory.png</string>
         </dict>

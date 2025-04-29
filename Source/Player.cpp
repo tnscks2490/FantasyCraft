@@ -89,6 +89,27 @@ void Player::MessageProc(SystemMessage smsg)
             SendActorMessage(cursor, msg);
         }
         break;
+        case ButtonType::TFactory:
+        {
+            auto type        = ActorType::Factory;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
+        case ButtonType::TRefinery:
+        {
+            auto type        = ActorType::Refinery;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
+        case ButtonType::TScience_Facility:
+        {
+            auto type        = ActorType::ScienceFacility;
+            ActorMessage msg = {MsgType::CreateBP, nullptr, nullptr, &type};
+            SendActorMessage(cursor, msg);
+        }
+        break;
         case ButtonType::TSCV:
         {
             if (mMainActor && mMainActor->mActorType == ActorType::CommandCenter)

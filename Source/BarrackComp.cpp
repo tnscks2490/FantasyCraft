@@ -7,10 +7,12 @@ BarrackComp::BarrackComp(Actor* actor) :UnitComp(actor)
 {
     actor->mUnitComp = this;
     SetUnitStatus(ActorType::Barrack);
+    mUnitName = "Terran Barrack";
     for (int i = 0; i < 5; i++)
     {
         CreateUnitArray[i] = ActorType::None;
     }
+    BuildAnimChangeTime = MaxBuildTime / 4.f;
 }
 
 BarrackComp::~BarrackComp() {}
@@ -85,29 +87,28 @@ void BarrackComp::update(float delta)
             if (mTimer >= 1.0f)
             {
                 mTimer = 0.f;
-                mStatus.HP += MaxHP / MaxBuildTime;
-                changeImageIdx = BuildingTime / 15.f;
-                if (changeImageIdx != drawidx)
+                mStatus.HP += (int)(mStatus.MaxHP * 0.9f) / MaxBuildTime;
+                if (BuildingTime >= MaxBuildTime)
                 {
-                    drawidx = changeImageIdx;
-                    mActor->mDrawComp->ChangeAnimByIndex(ECharName::Barrack, ECharAct::Building, ECharDir::Face,
-                                                         drawidx);
+                    ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
+                    SendActorMessage(mBuilder, msg);
+
+                    isBuild    = true;
+                    mCurAction = ActionState::Idle;
+                    mBuilder   = nullptr;
+                }
+                else
+                {
+                    changeImageIdx = BuildingTime / BuildAnimChangeTime;
+                    if (changeImageIdx != drawidx)
+                    {
+                        drawidx = changeImageIdx;
+                        mActor->mDrawComp->ChangeAnimByIndex(ECharName::Barrack, ECharAct::Building,
+                                                             ECharDir::Face, drawidx);
+                    }
                 }
 
                 printf("%f초 \n", BuildingTime);
-                if (BuildingTime >= MaxBuildTime)
-                {
-                    changeImageIdx++;
-                    drawidx = changeImageIdx;
-                    mActor->mDrawComp->ChangeAnimByIndex(ECharName::Barrack, ECharAct::Idle, ECharDir::Face,
-                                                         drawidx);
-                    isBuild          = true;
-                    ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
-                    SendActorMessage(mBuilder, msg);
-                    mCurAction = ActionState::Idle;
-                    mBuilder   = nullptr;
-                    mTimer     = 0.f;
-                }
             }
         }
     }

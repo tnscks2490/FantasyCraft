@@ -25,9 +25,9 @@ public:
 
 public:
 
-    int MaxHP = 1500;
     float MaxBuildTime = 75.f;
     float BuildingTime = 0.f;
+    float BuildAnimChangeTime = 0.f;
     bool isBuild    = false;
 
     float mTimer = 0.f;
@@ -39,7 +39,7 @@ public:
 
     Actor* mBuilder = nullptr;
     int drawidx     = 0;
-    int changeImageIdx      = 0;
+    int changeImageIdx   = 0;
 
     ActorType CreateUnitArray[5];
     bool IsCreatingUnit = false;

@@ -398,7 +398,37 @@ Actor* SpawnStarPort(ax::Node* parent, PK_Data data)
 
 Actor* SpawnFactory(ax::Node* parent, PK_Data data)
 {
-    return nullptr;
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Factory;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Factory, ECharAct::Building, 0);
+
+    auto command = new FactoryComp(actor);
+    auto move    = new MoveComp(actor);
+    move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
 }
 
 Actor* SpawnScienceFacility(ax::Node* parent, PK_Data data)
@@ -547,7 +577,7 @@ Actor* BPScienceFacility(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Big_BPPhysicsNode();
-    auto anim = draw->CreateAnimNode(ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "BPAnim");
+    auto anim = draw->CreateAnimNode(ECharName::ScienceFacility, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp     = new BPComp(actor);
     bp->mBPType = ActorType::ScienceFacility;
@@ -565,7 +595,7 @@ Actor* BPRefinery(ax::Node* parent)
     parent->addChild(node, 1.f);
 
     auto body = draw->Create_Middle_BPPhysicsNode();
-    auto anim = draw->CreateAnimNode(ECharName::SupplyDepot, ECharAct::BP, ECharDir::Face, "BPAnim");
+    auto anim = draw->CreateAnimNode(ECharName::Refinery, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp     = new BPComp(actor);
     bp->mBPType = ActorType::Refinery;

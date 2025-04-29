@@ -1,40 +1,37 @@
 #include "pch.h"
+#include "FactoryComp.h"
 #include "Actor.h"
-#include "CommandCenterComp.h"
 #include "DrawComp.h"
 
-CommandCenterComp::CommandCenterComp(Actor* actor)
-    : UnitComp(actor)
+FactoryComp::FactoryComp(Actor* actor) : UnitComp(actor)
 {
     actor->mUnitComp = this;
-    SetUnitStatus(ActorType::CommandCenter);
-    mUnitName = "Terran CommandCenter";
+    SetUnitStatus(ActorType::Factory);
+    mUnitName = "Terran Factory";
     for (int i = 0; i < 5; i++)
     {
         CreateUnitArray[i] = ActorType::None;
     }
-
     BuildAnimChangeTime = MaxBuildTime / 4.f;
 }
 
-CommandCenterComp::~CommandCenterComp() {}
+FactoryComp::~FactoryComp() {}
 
-void CommandCenterComp::MessageProc(ActorMessage& msg)
+void FactoryComp::MessageProc(ActorMessage& msg)
 {
-
     switch (msg.msgType)
     {
     case MsgType::Contacted:
     {
-        
-    } break;
+    }
+    break;
     case MsgType::Build_Start:
     {
         if (mBuilder == nullptr && msg.sender->mActorType == ActorType::SCV)
         {
             if (msg.sender->mUnitComp->mCurAction == ActionState::Building)
             {
-                mBuilder = msg.sender;
+                mBuilder   = msg.sender;
                 mCurAction = ActionState::Building;
             }
         }
@@ -47,10 +44,11 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     {
         if (mBuilder == nullptr)
         {
-            mBuilder = msg.sender;
+            mBuilder   = msg.sender;
             mCurAction = ActionState::Building;
         }
-    } break;
+    }
+    break;
 
     case MsgType::Build_Continue:
     {
@@ -61,26 +59,22 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     }
     break;
 
-
     case MsgType::Build_Cancel:
     {
         if (!isBuild)
             mBuilder = nullptr;
-    }break;
-
-
-    case MsgType::Create_SCV:
-    {
-        AddSCV();
     }
     break;
+
+    case MsgType::Create_Vulture: AddUnit(ActorType::Vulture); break;
+    case MsgType::Create_Tank:   AddUnit(ActorType::Tank);  break;
+    case MsgType::Create_Goliath:  AddUnit(ActorType::Goliath);   break;
     default:
         break;
     }
-
 }
 
-void CommandCenterComp::update(float delta)
+void FactoryComp::update(float delta)
 {
     if (!isBuild && mBuilder)
     {
@@ -97,7 +91,7 @@ void CommandCenterComp::update(float delta)
                     ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
 
-                    isBuild          = true;
+                    isBuild    = true;
                     mCurAction = ActionState::Idle;
                     mBuilder   = nullptr;
                 }
@@ -107,18 +101,14 @@ void CommandCenterComp::update(float delta)
                     if (changeImageIdx != drawidx)
                     {
                         drawidx = changeImageIdx;
-                        mActor->mDrawComp->ChangeAnimByIndex(ECharName::CommandCenter, ECharAct::Building,
+                        mActor->mDrawComp->ChangeAnimByIndex(ECharName::Factory, ECharAct::Building,
                                                              ECharDir::Face, drawidx);
                     }
                 }
-                
-                
 
                 printf("%f초 \n", BuildingTime);
-                
             }
         }
-
     }
 
     if (isBuild)
@@ -126,33 +116,27 @@ void CommandCenterComp::update(float delta)
         if (IsCreatingUnit)
         {
             unitTimer += delta;
-            if (unitTimer >= SCVCreateTime)
+            if (unitTimer >= GetUnitBuildTime())
             {
                 unitTimer = 0.f;
-                DeleteSCV();
-
                 SendPK_Data(GetCreateCommand(CreateUnitArray[0]), mActor->GetPosition() + ax::Vec2(0, -100));
+                DeleteUnit();
+
                 if (IsUnitArrayEmpty())
                 {
                     IsCreatingUnit = false;
                     mCurAction     = ActionState::Idle;
-                    
                 }
                 else
                 {
                     printf("안비었음!");
                 }
-
-                
             }
         }
     }
-
-
 }
 
-
-void CommandCenterComp::AddSCV()
+void FactoryComp::AddUnit(ActorType type)
 {
     if (!IsCreatingUnit)
         IsCreatingUnit = true;
@@ -163,13 +147,13 @@ void CommandCenterComp::AddSCV()
     {
         if (CreateUnitArray[i] == ActorType::None)
         {
-            CreateUnitArray[i] = ActorType::SCV;
+            CreateUnitArray[i] = type;
             return;
         }
     }
 }
 
-void CommandCenterComp::DeleteSCV()
+void FactoryComp::DeleteUnit()
 {
     CreateUnitArray[0] = CreateUnitArray[1];
     CreateUnitArray[1] = CreateUnitArray[2];
@@ -178,12 +162,19 @@ void CommandCenterComp::DeleteSCV()
     CreateUnitArray[4] = ActorType::None;
 }
 
-bool CommandCenterComp::IsUnitArrayEmpty()
+bool FactoryComp::IsUnitArrayEmpty()
 {
     for (int i = 0; i < 5; i++)
     {
-        if (CreateUnitArray[i] == ActorType::SCV)
+        if (CreateUnitArray[i] != ActorType::None)
             return false;
     }
     return true;
+}
+
+float FactoryComp::GetUnitBuildTime()
+{
+    auto bp = FindUnitBP(CreateUnitArray[0]);
+
+    return bp.buildTime;
 }

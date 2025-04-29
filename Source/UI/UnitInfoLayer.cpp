@@ -378,6 +378,9 @@ ax::SpriteFrame* UnitInfoLayer::FindWireFrame(Actor* actor)
     case ActorType::EngineeringBay: str = "UISprite/Wire_EngineeringBay.png"; break;
     case ActorType::SupplyDepot:    str = "UISprite/Wire_SupplyDepot.png";    break;
     case ActorType::StarPort:       str = "UISprite/Wire_StarPort.png";       break;
+    case ActorType::Factory:        str = "UISprite/Wire_Factory.png";         break;
+    case ActorType::Refinery:        str = "UISprite/Wire_Refinery.png";        break;
+    case ActorType::ScienceFacility: str = "UISprite/Wire_ScienceFacility.png"; break;
     default:
         break;
     }

@@ -26,9 +26,9 @@ public:
     float GetUnitBuildTime();
 
 public:
-    int MaxHP          = 1000;
     float MaxBuildTime = 50.f;
     float BuildingTime = 0.f;
+    float BuildAnimChangeTime = 0.f;
     bool isBuild       = false;
 
     float mTimer = 0.f;

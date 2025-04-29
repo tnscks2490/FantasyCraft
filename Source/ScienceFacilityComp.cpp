@@ -1,22 +1,21 @@
 #include "pch.h"
 #include "Actor.h"
-#include "SupplyDepotComp.h"
 #include "DrawComp.h"
+#include "ScienceFacilityComp.h"
 
-SupplyDepotComp::SupplyDepotComp(Actor* actor) : UnitComp(actor)
+ScienceFacilityComp::ScienceFacilityComp(Actor* actor)
+    : UnitComp(actor)
 {
     actor->mUnitComp = this;
-    SetUnitStatus(ActorType::SupplyDepot);
-    mUnitName = "Terran SupplyDepot";
-
+    SetUnitStatus(ActorType::ScienceFacility);
+    mUnitName = "Terran ScienceFacility";
 
     BuildAnimChangeTime = MaxBuildTime / 4.f;
-
 }
 
-SupplyDepotComp::~SupplyDepotComp() {}
+ScienceFacilityComp::~ScienceFacilityComp() {}
 
-void SupplyDepotComp::MessageProc(ActorMessage& msg)
+void ScienceFacilityComp::MessageProc(ActorMessage& msg)
 {
     switch (msg.msgType)
     {
@@ -68,8 +67,7 @@ void SupplyDepotComp::MessageProc(ActorMessage& msg)
         break;
     }
 }
-
-void SupplyDepotComp::update(float delta)
+void ScienceFacilityComp::update(float delta)
 {
     if (!isBuild && mBuilder)
     {
@@ -83,11 +81,10 @@ void SupplyDepotComp::update(float delta)
                 mStatus.HP += (int)(mStatus.MaxHP * 0.9f) / MaxBuildTime;
                 if (BuildingTime >= MaxBuildTime)
                 {
-
                     ActorMessage msg = {MsgType::Build_Complete, mActor, nullptr, nullptr};
                     SendActorMessage(mBuilder, msg);
 
-                    isBuild          = true;
+                    isBuild    = true;
                     mCurAction = ActionState::Idle;
                     mBuilder   = nullptr;
                 }
@@ -97,10 +94,11 @@ void SupplyDepotComp::update(float delta)
                     if (changeImageIdx != drawidx)
                     {
                         drawidx = changeImageIdx;
-                        mActor->mDrawComp->ChangeAnimByIndex(ECharName::SupplyDepot, ECharAct::Building, ECharDir::Face,
-                                                             drawidx);
+                        mActor->mDrawComp->ChangeAnimByIndex(ECharName::ScienceFacility, ECharAct::Building,
+                                                             ECharDir::Face, drawidx);
                     }
-                }  
+                }
+
                 printf("%f초 \n", BuildingTime);
             }
         }

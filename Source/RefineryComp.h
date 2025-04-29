@@ -3,11 +3,11 @@
 
 
 
-class ArmoryComp : public UnitComp
+class RefineryComp : public UnitComp
 {
 public:
-    ArmoryComp(Actor* actor);
-    ~ArmoryComp();
+    RefineryComp(Actor* actor);
+    ~RefineryComp();
     virtual void MessageProc(ActorMessage& msg) override;
     virtual void update(float delta) override;
     virtual bool IsBuild() override { return isBuild; }
@@ -17,7 +17,7 @@ public:
 
 
 public:
-    float MaxBuildTime        = 50.f;
+    float MaxBuildTime        = 25.f;
     float BuildingTime        = 0.f;
     float BuildAnimChangeTime = 0.f;
     bool isBuild              = false;
@@ -29,5 +29,5 @@ public:
     int changeImageIdx = 0;
 
     BuildingSize Bsize = BuildingSize::Middle;
-   
+
 };

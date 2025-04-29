@@ -104,15 +104,13 @@ void DrawComp::update(float delta)
             ChangeAnim(anim, ECharAct::Death, ECharDir::Face, false);
             mActionState = curAction;
             mCurDir      = ECharDir::Face;
-            return;
         } break;
         case ActionState::Create_Unit:
         {
             ChangeAnim(anim, ECharAct::Doing, ECharDir::Face);
             mActionState = curAction;
             mCurDir      = ECharDir::Face;
-            return;
-        }
+        } break;
         default:
             break;
         }

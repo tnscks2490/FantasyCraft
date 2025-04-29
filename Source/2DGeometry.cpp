@@ -79,10 +79,18 @@ ax::Vec2 GetRandomPosToBuild(BuildingSize size, ax::Vec2 pos)
     {
     case BuildingSize::Small:
     {
-    }
-        break;
+
+    } break;
     case BuildingSize::Middle:
-        break;
+    {
+        idx = rand() % 5 - 2;
+        // 0 1 2 3 4
+        // -2 -1 0 1 2 
+        Pos.x = (float)idx * 16;
+        idx   = rand() % 5 - 2;
+        Pos.y = (float)idx * 16;
+        return Pos;
+    }  break;
     case BuildingSize::Big:
     {
         idx = rand() % 7 - 3;

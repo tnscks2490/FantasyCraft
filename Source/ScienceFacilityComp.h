@@ -3,11 +3,11 @@
 
 
 
-class ArmoryComp : public UnitComp
+class ScienceFacilityComp : public UnitComp
 {
 public:
-    ArmoryComp(Actor* actor);
-    ~ArmoryComp();
+    ScienceFacilityComp(Actor* actor);
+    ~ScienceFacilityComp();
     virtual void MessageProc(ActorMessage& msg) override;
     virtual void update(float delta) override;
     virtual bool IsBuild() override { return isBuild; }
@@ -17,7 +17,7 @@ public:
 
 
 public:
-    float MaxBuildTime        = 50.f;
+    float MaxBuildTime        = 38.f;
     float BuildingTime        = 0.f;
     float BuildAnimChangeTime = 0.f;
     bool isBuild              = false;
@@ -28,6 +28,5 @@ public:
     int drawidx        = 0;
     int changeImageIdx = 0;
 
-    BuildingSize Bsize = BuildingSize::Middle;
-   
+    BuildingSize Bsize = BuildingSize::Big;
 };

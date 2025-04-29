@@ -27,4 +27,7 @@
 #include "EngineeringBayComp.h"
 #include "StarPortComp.h"
 #include "SupplyDepotComp.h"
+#include "RefineryComp.h"
+#include "FactoryComp.h"
+#include "ScienceFacilityComp.h"
 

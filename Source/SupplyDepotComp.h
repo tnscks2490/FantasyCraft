@@ -12,11 +12,13 @@ public:
     virtual void update(float delta) override;
     virtual bool IsBuild() override { return isBuild; }
 
+    virtual float GetCurLoadTime() override { return BuildingTime; }
+    virtual float GetMaxLoadTime() override { return MaxBuildTime; }
 public:
 
-    int MaxHP          = 500;
     float MaxBuildTime = 25.f;
     float BuildingTime = 0.f;
+    float BuildAnimChangeTime = 0.f;
     bool isBuild       = false;
 
     float mTimer = 0.f;
@@ -26,5 +28,5 @@ public:
     int changeImageIdx = 0;
 
 
-    BuildingSize Bsize = BuildingSize::Small;
+    BuildingSize Bsize = BuildingSize::Middle;
 };

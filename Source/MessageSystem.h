@@ -32,6 +32,14 @@ enum class MsgType
     Create_Medic,
     Create_FireBat,
     Create_Ghost,
+    Create_Vulture,
+    Create_Tank,
+    Create_Goliath,
+    Create_Wraith,
+    Create_Valkyrie,
+    Create_DropShip,
+    Create_ScienceVessel,
+    Create_BattleCruiser,
 
 
     Cancel,
