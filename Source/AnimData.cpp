@@ -347,7 +347,7 @@ AnimInfo g_AnimInfo_Academy_BP[] = {
 
 
 AnimInfo g_AnimInfo_SupplyDepot_Idle[] = {
-     {ECharName::SupplyDepot, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "SupplyDepot/Idle/%04d.png", 1, 6, (1.f / 6),  Vec2(0.5, 0.5), nullptr},
+     {ECharName::SupplyDepot, ECharAct::Idle, ECharDir::Face, "Plist/SupplyDepot.plist", "SupplyDepot/Idle/%04d.png", 1, 6, (1.f / 6),  Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_SupplyDepot_Building[] = {
      {ECharName::SupplyDepot, ECharAct::Building, ECharDir::Face, "Plist/SupplyDepot.plist", "SupplyDepot/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -361,7 +361,7 @@ AnimInfo g_AnimInfo_SupplyDepot_BP[] = {
 };
 
 AnimInfo g_AnimInfo_Factory_Idle[] = {
-     {ECharName::Factory, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
+     {ECharName::Factory, ECharAct::Idle, ECharDir::Face, "Plist/Factory.plist", "Factory/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Factory_Building[] = {
      {ECharName::Factory, ECharAct::Building, ECharDir::Face, "Plist/Factory.plist", "Factory/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -377,7 +377,7 @@ AnimInfo g_AnimInfo_Factory_BP[] = {
 };
 
 AnimInfo g_AnimInfo_ScienceFacility_Idle[] = {
-     {ECharName::ScienceFacility, ECharAct::Idle, ECharDir::Face, "Plist/Bunker.plist", "Bunker/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
+     {ECharName::ScienceFacility, ECharAct::Idle, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Idle/0001.png", 1, 1, (1.f / 1),  Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_ScienceFacility_Building[] = {
      {ECharName::ScienceFacility, ECharAct::Building, ECharDir::Face, "Plist/ScienceFacility.plist", "ScienceFacility/Building/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},

@@ -96,7 +96,7 @@ ButtonInfo g_ButtonInfo_TLand = {
 ButtonInfo g_ButtonInfo_TEMP = {
     "StarResource/Resource/UI/Icon/Terran/Skill/EMP1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/EMP2.png",
-    "", ButtonType::TEMP,9
+    "", ButtonType::TEMP,1
 };
 ButtonInfo g_ButtonInfo_TGhost_MP = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Ghost_MP1.png",
@@ -111,7 +111,7 @@ ButtonInfo g_ButtonInfo_TGhost_Sight = {
 ButtonInfo g_ButtonInfo_TGoliath_Range = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Goliath_Range1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Goliath_Range2.png",
-    "", ButtonType::TGoliath_Range,9
+    "", ButtonType::TGoliath_Range,4
 };
 ButtonInfo g_ButtonInfo_TDefenciveMatrix = {
     "StarResource/Resource/UI/Icon/Terran/Skill/DefenciveMatrix1.png",
@@ -131,7 +131,7 @@ ButtonInfo g_ButtonInfo_TWraith_MP = {
 ButtonInfo g_ButtonInfo_TRestoration = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Restoration1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Restoration2.png",
-    "", ButtonType::TRestoration,9
+    "", ButtonType::TRestoration,4
 };
 ButtonInfo g_ButtonInfo_TMarine_Range = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Marine_Range1.png",
@@ -141,7 +141,7 @@ ButtonInfo g_ButtonInfo_TMarine_Range = {
 ButtonInfo g_ButtonInfo_TMedic_MP     = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Medic_MP1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Medic_MP2.png",
-    "", ButtonType::TMedic_MP,9
+    "", ButtonType::TMedic_MP,6
 };
 ButtonInfo g_ButtonInfo_TMedic_Heal     = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Medic_Heal1.png",
@@ -186,12 +186,12 @@ ButtonInfo g_ButtonInfo_TBattle_MP = {
 ButtonInfo g_ButtonInfo_TVessel_MP = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Vessel_MP1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Vessel_MP2.png",
-    "", ButtonType::TVessel_MP,9
+    "", ButtonType::TVessel_MP,3
 };
 ButtonInfo g_ButtonInfo_TVulture_Speed = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Vulture_Speed1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Vulture_Speed2.png",
-    "", ButtonType::TVulture_Speed,9
+    "", ButtonType::TVulture_Speed,1
 };
 ButtonInfo g_ButtonInfo_TScan          = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Scan1.png",
@@ -201,7 +201,7 @@ ButtonInfo g_ButtonInfo_TScan          = {
 ButtonInfo g_ButtonInfo_TStimPack      = {
     "StarResource/Resource/UI/Icon/Terran/Skill/StimPack1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/StimPack2.png",
-    "", ButtonType::TStimPack,7
+    "", ButtonType::TStimPack,2
 };
 ButtonInfo g_ButtonInfo_TYamato        = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Yamato1.png",
@@ -211,7 +211,7 @@ ButtonInfo g_ButtonInfo_TYamato        = {
 ButtonInfo g_ButtonInfo_TOptical_Flare = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Optical_Flare1.png",
     "StarResource/Resource/UI/Icon/Terran/Skill/Optical_Flare2.png",
-    "", ButtonType::TOptical_Flare,9
+    "", ButtonType::TOptical_Flare,5
 };
 ButtonInfo g_ButtonInfo_TCloakingON    = {
     "StarResource/Resource/UI/Icon/Terran/Skill/CloakingON1.png",
@@ -224,9 +224,9 @@ ButtonInfo g_ButtonInfo_TCloakingOFF   = {
     "", ButtonType::TCloakingOFF,9
 };
 ButtonInfo g_ButtonInfo_TIrradiate     = {
-    "StarResource/Resource/UI/Icon/Terran/Skill/Irradiate.png",
-    "StarResource/Resource/UI/Icon/Terran/Skill/Irradiate.png",
-    "", ButtonType::TIrradiate,9
+    "StarResource/Resource/UI/Icon/Terran/Skill/Irradiate1.png",
+    "StarResource/Resource/UI/Icon/Terran/Skill/Irradiate2.png",
+    "", ButtonType::TIrradiate,2
 };
 ButtonInfo g_ButtonInfo_TNuclear       = {
     "StarResource/Resource/UI/Icon/Terran/Skill/Nuclear1.png",
@@ -273,12 +273,12 @@ ButtonInfo g_ButtonInfo_TComsat_Station     = {
 ButtonInfo g_ButtonInfo_TControl_Tower      = {
     "StarResource/Resource/UI/Icon/Terran/Build/Control_Tower1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Control_Tower2.png",
-    "", ButtonType::TControl_Tower,9
+    "", ButtonType::TControl_Tower,7
 };
 ButtonInfo g_ButtonInfo_TCovert_Ops         = {
     "StarResource/Resource/UI/Icon/Terran/Build/Covert_Ops1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Covert_Ops2.png",
-    "", ButtonType::TCovert_Ops,9
+    "", ButtonType::TCovert_Ops,7
 };
 ButtonInfo g_ButtonInfo_TEngineering_Bay    = {
     "StarResource/Resource/UI/Icon/Terran/Build/Engineering_Bay1.png",
@@ -303,7 +303,7 @@ ButtonInfo g_ButtonInfo_TMissile_Turret     = {
 ButtonInfo g_ButtonInfo_TPhysics_Lab        = {
     "StarResource/Resource/UI/Icon/Terran/Build/Physics_Lab1.png",
     "StarResource/Resource/UI/Icon/Terran/Build/Physics_Lab2.png",
-    "", ButtonType::TPhysics_Lab,9
+    "", ButtonType::TPhysics_Lab,8
 };
 ButtonInfo g_ButtonInfo_TRefinery           = {
     "StarResource/Resource/UI/Icon/Terran/Build/Refinery1.png",
@@ -614,6 +614,61 @@ UnitControlButton g_UnitControlButton_TEngineeringBay = {
     ButtonType::None,ButtonType::None,  ButtonType::TLift}
 };
 
+UnitControlButton g_UnitControlButton_TAcademy = {
+    ActorType::Academy,
+    {ButtonType::TMarine_Range, ButtonType::TStimPack, ButtonType::None,
+    ButtonType::TRestoration, ButtonType::TOptical_Flare, ButtonType::TMedic_MP,
+    ButtonType::None, ButtonType::None, ButtonType::None}
+};
+
+UnitControlButton g_UnitControlButton_TFactory = {
+    ActorType::Factory,
+    {ButtonType::TVulture, ButtonType::TTank, ButtonType::TGoliath,
+    ButtonType::None, ButtonType::None, ButtonType::TSetRellyPoint,
+    ButtonType::TMachine_Shop, ButtonType::None, ButtonType::TLift}
+};
+
+UnitControlButton g_UnitControlButton_TScienceFacility = {
+    ActorType::ScienceFacility,
+    {ButtonType::TEMP, ButtonType::TIrradiate, ButtonType::TVessel_MP,
+    ButtonType::None, ButtonType::None, ButtonType::None,
+    ButtonType::TCovert_Ops, ButtonType::TPhysics_Lab, ButtonType::TLift}
+};
+
+UnitControlButton g_UnitControlButton_TArmory = {
+    ActorType::Armory,
+    {ButtonType::TBionic_AT, ButtonType::TBionic_DF, ButtonType::None,
+    ButtonType::None, ButtonType::None, ButtonType::None,
+    ButtonType::None, ButtonType::None, ButtonType::TLift}
+};
+
+UnitControlButton g_UnitControlButton_TBunker = {
+    ActorType::Bunker,
+    {ButtonType::TWraith, ButtonType::TDropShip, ButtonType::TVessel,
+    ButtonType::TBattle, ButtonType::TValkyrie, ButtonType::TSetRellyPoint,
+    ButtonType::None, ButtonType::None, ButtonType::TLift}
+};
+
+UnitControlButton g_UnitControlButton_TStarPort = {
+    ActorType::StarPort,
+    {ButtonType::TBionic_AT, ButtonType::TBionic_DF, ButtonType::None,
+    ButtonType::None, ButtonType::None, ButtonType::None,
+    ButtonType::None, ButtonType::None, ButtonType::TLift}
+};
+
+UnitControlButton g_UnitControlButton_TRefinery = {
+    ActorType::Refinery,
+    {ButtonType::None, ButtonType::None, ButtonType::None,
+    ButtonType::None, ButtonType::None, ButtonType::None,
+     ButtonType::None, ButtonType::None, ButtonType::None }};
+
+UnitControlButton g_UnitControlButton_TSupplyDepot = {
+    ActorType::SupplyDepot,
+    {ButtonType::None, ButtonType::TBionic_DF, ButtonType::None,
+    ButtonType::None, ButtonType::None, ButtonType::None,
+     ButtonType::None, ButtonType::None, ButtonType::None}};
+
+
 
 UnitControlButton* FindUnitControlButton(Actor* actor)
 {
@@ -644,9 +699,66 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
         switch (actor->mUnitComp->mCurAction)
         {
         case ActionState::Idle:            return &g_UnitControlButton_TBarrack;
-        case ActionState::Building:        return ReturnOnlyCancel(actor);
+        case ActionState::Building:            return ReturnOnlyCancel(actor);
         }
         return &g_UnitControlButton_TBarrack;
+    }
+    break;
+    case ActorType::Academy:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:       return &g_UnitControlButton_TAcademy;
+        case ActionState::Building:   return ReturnOnlyCancel(actor);
+        }
+    }
+    case ActorType::Bunker:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:            return &g_UnitControlButton_TBunker;
+        case ActionState::Building:        return ReturnOnlyCancel(actor);
+        }
+    }
+    case ActorType::StarPort:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:     return &g_UnitControlButton_TStarPort;
+        case ActionState::Building: return ReturnOnlyCancel(actor);
+        }
+    }
+    case ActorType::Armory:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:            return &g_UnitControlButton_TArmory;
+        case ActionState::Building:        return ReturnOnlyCancel(actor);
+        }
+    }
+    case ActorType::SupplyDepot:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:            return &g_UnitControlButton_TSupplyDepot;
+        case ActionState::Building:        return ReturnOnlyCancel(actor);
+        }
+    }
+    case ActorType::Refinery:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:            return &g_UnitControlButton_TRefinery;
+        case ActionState::Building:            return ReturnOnlyCancel(actor);
+        }
+    }
+    case ActorType::ScienceFacility:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:            return &g_UnitControlButton_TScienceFacility;
+        case ActionState::Building:        return ReturnOnlyCancel(actor);
+        }
     }
     default:
         break;
