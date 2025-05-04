@@ -40,7 +40,6 @@ void CommandLayer::MessageProc(SystemMessage smsg)
     {
     case SMsgType::SSUI:
     case SMsgType::Cancel:
-    case SMsgType::Upgrade:
         SetButton(sActor);
     default:
         break;
@@ -120,7 +119,7 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TScience_Facility:
     {
         UILayer* ui        = (UILayer*)this->getParent();
-        SystemMessage smsg = {SMsgType::None, ActorType::None, type, nullptr};
+        SystemMessage smsg = {SMsgType::None, ReceiverType::Player, ActorType::None, type, nullptr};
         SendSystemMessage(ui, ui->mPlayer, smsg);
         return;
     }
@@ -130,12 +129,20 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     {
         mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
+
         UILayer* ui        = (UILayer*)this->getParent();
-        SystemMessage smsg = {SMsgType::Upgrade, ActorType::None, type, nullptr};
+        SystemMessage smsg = {SMsgType::Upgrade, ReceiverType::Player, ActorType::None, type, nullptr};
         SendSystemMessage(ui, ui->mPlayer, smsg);
         return;
         // 만약 캔슬을 누르면 현재 선택된 액터에게 명령이 가도록 해야함
     } break;
+    case ButtonType::TMarine:
+    case ButtonType::TSCV:
+    {
+        UILayer* ui        = (UILayer*)this->getParent();
+        SystemMessage smsg = {SMsgType::Create_Unit, ReceiverType::Player, ActorType::CommandCenter, type, nullptr};
+        SendSystemMessage(ui, ui->mPlayer, smsg);
+    }
     default:
         break;
     }
@@ -143,7 +150,7 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     // 어떤 버튼을 선택했는지 플레이어에게 보내준다
 
     UILayer* ui        = (UILayer*)this->getParent();
-    SystemMessage smsg = {SMsgType::None,ActorType::None,type,nullptr};
+    SystemMessage smsg = {SMsgType::None, ReceiverType::Player, ActorType::None, type, nullptr};
     SendSystemMessage(ui, ui->mPlayer, smsg);
 }
 

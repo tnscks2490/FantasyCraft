@@ -154,16 +154,17 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     {
     case SMsgType::None:
     {
-        if (smsg.Atype == ActorType::None && smsg.Btype != ButtonType::None)
+        if (smsg.recvType == ReceiverType::Player)
         {
             // UI -> Player
             if (player)
                 player->MessageProc(smsg);
         }
-        else if (smsg.Btype == ButtonType::None && smsg.Atype != ActorType::None)
+        else if (smsg.recvType == ReceiverType::UI)
         {
-            // Player ->UI
-            if (ui) ui->MessageProc(smsg);
+            // Player->UI
+            if (ui)
+                ui->MessageProc(smsg);
         }
     }
     break;
@@ -184,12 +185,24 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     } break;
     case SMsgType::Create_Unit:
     {
+        if (player)
+            player->MessageProc(smsg);
         if (ui)
             ui->MessageProc(smsg);
     } break;
-    case SMsgType::Upgrade:
-        if (ui)
-            ui->MessageProc(smsg);
+    case SMsgType::Upgrade:  
+        if (smsg.recvType == ReceiverType::Player)
+        {
+            // UI -> Player
+            if (player)
+                player->MessageProc(smsg);
+        }
+        else if (smsg.recvType == ReceiverType::UI)
+        {
+            // Player->UI
+            if (ui)
+                ui->MessageProc(smsg);
+        }
     default:
         break;
     }

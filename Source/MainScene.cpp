@@ -174,7 +174,7 @@ void MainScene::onMouseDown(Event* event)
         {
             if (mPlayer->mMainActor&& mCursor->mCursorComp->mBP)
             {
-                SystemMessage smsg = {SMsgType::Cancel, ActorType::None, ButtonType::None, &mPlayer->mMainActor};
+                SystemMessage smsg = {SMsgType::Cancel, ReceiverType::UI, ActorType::None, ButtonType::None,  &mPlayer->mMainActor};
                 SendSystemMessage(mUILayer, mPlayer, smsg);
             }
             mCursor->mCursorComp->RClick(mousePos);

@@ -67,6 +67,13 @@ struct ActorMessage
 void SendActorMessage(Actor* receiver, ActorMessage msg);
 
 
+enum class ReceiverType
+{
+    None,
+    UI,
+    Player,
+};
+
 
 enum class SMsgType
 {
@@ -91,6 +98,7 @@ enum class SMsgType
 struct SystemMessage
 {
     SMsgType smsgType = SMsgType::None;
+    ReceiverType recvType = ReceiverType::None;
 
     ActorType Atype = ActorType::None;
     ButtonType Btype = ButtonType::None;

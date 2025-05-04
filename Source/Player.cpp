@@ -117,7 +117,7 @@ void Player::MessageProc(SystemMessage smsg)
                 ActorMessage msg = {MsgType::Create_SCV, nullptr, nullptr};
                 SendActorMessage(mMainActor, msg);
 
-                SystemMessage smsg = {SMsgType::Create_Unit, ActorType::SCV, ButtonType::TSCV, nullptr};
+                SystemMessage smsg = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::SCV, ButtonType::TSCV, nullptr};
                 SendSystemMessage(ui, this, smsg);
                
             }
@@ -129,10 +129,20 @@ void Player::MessageProc(SystemMessage smsg)
                 ActorMessage msg = {MsgType::Create_Marine, nullptr, nullptr};
                 SendActorMessage(mMainActor, msg);
 
-                SystemMessage smsg = {SMsgType::Create_Unit, ActorType::Marine, ButtonType::TMarine, nullptr};
+                SystemMessage smsg = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::Marine, ButtonType::TMarine, nullptr};
                 SendSystemMessage(ui, this, smsg);
             }
         }
+
+        default:
+            break;
+        }
+    }
+    break;
+    case SMsgType::Upgrade:
+    {
+        switch (smsg.Btype)
+        {
         case ButtonType::TBionic_AT:
         {
             if (mMainActor && mMainActor->mActorType == ActorType::EngineeringBay)
@@ -140,7 +150,18 @@ void Player::MessageProc(SystemMessage smsg)
                 ActorMessage msg = {MsgType::Upgrade_Bionic_AT, nullptr, nullptr};
                 SendActorMessage(mMainActor, msg);
 
-                SystemMessage smsg = {SMsgType::Upgrade, ActorType::Marine, ButtonType::TMarine, nullptr};
+                SystemMessage smsg = {SMsgType::Upgrade, ReceiverType::UI, ActorType::EngineeringBay, ButtonType::TBionic_AT, nullptr};
+                SendSystemMessage(ui, this, smsg);
+            }
+        } break;
+        case ButtonType::TBionic_DF:
+        {
+            if (mMainActor && mMainActor->mActorType == ActorType::EngineeringBay)
+            {
+                ActorMessage msg = {MsgType::Upgrade_Bionic_DF, nullptr, nullptr};
+                SendActorMessage(mMainActor, msg);
+
+                SystemMessage smsg = {SMsgType::Upgrade, ReceiverType::UI, ActorType::EngineeringBay, ButtonType::TBionic_DF, nullptr};
                 SendSystemMessage(ui, this, smsg);
             }
         }
@@ -148,7 +169,6 @@ void Player::MessageProc(SystemMessage smsg)
             break;
         }
     }
-    break;
     case SMsgType::MSUI:
     {
 
@@ -252,12 +272,12 @@ void Player::ReSelected()
         SendSystemMessage(ui, this, smsg);*/
         ///// 단일 선택에 관한 와이어프레임 UI출력하는 함수 추가할것
 
-        SystemMessage ssmsg = {SMsgType::SSUI, ActorType::None, ButtonType::None, mMainActor};
+        SystemMessage ssmsg = {SMsgType::SSUI, ReceiverType::UI,ActorType::None, ButtonType::None, mMainActor};
         SendSystemMessage(ui, this, ssmsg);
     }
     else if (PlayerActorsNum() > 1)
     {
-        SystemMessage smsg = {SMsgType::MSUI, ActorType::None, ButtonType::None, PlayerActors};
+        SystemMessage smsg = {SMsgType::MSUI, ReceiverType::UI,ActorType::None, ButtonType::None, PlayerActors};
 
         SendSystemMessage(ui, this, smsg);
     }

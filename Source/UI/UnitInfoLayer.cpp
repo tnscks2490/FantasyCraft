@@ -39,7 +39,7 @@ bool UnitInfoLayer::init()
 
     mUpgradeSprite = ax::Sprite::create();
     mUpgradeSprite->setScale(2.f);
-    mUpgradeSprite->setPosition(ax::Vec2(-150, 0));
+    mUpgradeSprite->setPosition(ax::Vec2(-64, 0));
     mUpgradeSprite->setVisible(false);
     addChild(mUpgradeSprite, 1);
 
@@ -312,19 +312,9 @@ void UnitInfoLayer::UpgradeUpdate(float delta)
         {
             mLoadIdx = 0;
             ChangeLoadBar(mLoadIdx, false);
-            if (IsEmptyQueue())
-            {
-                ChangeLayerState(LayerState::Idle);
-                ChangeLoadBar(mLoadIdx, false);
-                return;
-            }
-            else
-            {
-                mCurLoadTime = mActor->mUnitComp->GetUnitTimer();
-                mMaxLoadTime = FindUnitBP(mUnitSlot[0].UnitType).buildTime;
-                mFrame       = mMaxLoadTime / 68.f;
-                mLoadIdx     = (int)(mCurLoadTime / mFrame);
-            }
+            ChangeLayerState(LayerState::Idle);
+            mLoadBar->setVisible(false);
+            mUpgradeSprite->setVisible(false);
         }
         ChangeLoadBar(mLoadIdx, false);
     }
@@ -385,9 +375,8 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         mWire->setVisible(true);
         mHP->setVisible(true);
 
-        mUpgradeSprite->setVisible(true);
+        mUpgradeSprite->setVisible(true); 
         mLoadBar->setVisible(true);
-        mLoadBar->setPosition(ax::Vec2(36, 0));
     }
         break;
     case LayerState::MultiSelect:
