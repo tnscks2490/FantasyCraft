@@ -7,11 +7,6 @@ UnitBluePrint g_UnitBP_Marine = {ActorType::Marine, 15, 50, 0, 1.f};
 
 
 
-
-
-
-
-
 UnitBluePrint& FindUnitBP(ActorType type)
 {
     switch (type)

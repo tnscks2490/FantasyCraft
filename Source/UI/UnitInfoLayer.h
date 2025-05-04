@@ -40,6 +40,7 @@ public:
 
     void BuildUpdate(float delta);
     void CreateUnitUpdate(float delta);
+    void UpgradeUpdate(float delta);
 
 
     // 이름은 상시 표기
@@ -49,6 +50,8 @@ public:
     ax::SpriteFrame* FindWireFrame(Actor* actor);
     ax::SpriteFrame* FindATUpgradeSprite(Actor* actor);
     ax::SpriteFrame* FindDFUpgradeSprite(Actor* actor);
+    ax::SpriteFrame* FindUPgradeSprite(ButtonType Btype);
+
     ax::SpriteFrame* FindListUnitSprite(ActorType type);
     ax::SpriteFrame* FindMultiSelectUnitSprite(Actor* actor);
 

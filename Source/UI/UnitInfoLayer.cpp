@@ -37,6 +37,12 @@ bool UnitInfoLayer::init()
     mHP->setPosition(ax::Vec2(-250, -64));
     addChild(mHP);
 
+    mUpgradeSprite = ax::Sprite::create();
+    mUpgradeSprite->setScale(2.f);
+    mUpgradeSprite->setPosition(ax::Vec2(-150, 16));
+    mUpgradeSprite->setVisible(false);
+    addChild(mUpgradeSprite, 1);
+
 
     mATUpgrade = ax::Sprite::create();
     mATUpgrade->setScale(2.f);
@@ -128,14 +134,22 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
             }
             else
                 break;
-            
         }
 
         mCurLoadTime = mActor->mUnitComp->GetUnitTimer();
         mMaxLoadTime = FindUnitBP(mUnitSlot[0].UnitType).buildTime;
         mFrame       = mMaxLoadTime / 68.f;
         mLoadIdx     = (int)(mCurLoadTime / mFrame);
-    }
+    } break;
+    case SMsgType::Upgrade:
+    {
+        ChangeLayerState(LayerState::Upgrade);
+        mCurLoadTime = mActor->mUnitComp->GetCurUpgradeTime();
+        mMaxLoadTime = mActor->mUnitComp->GetMaxUpgradeTime();
+        mFrame       = mMaxLoadTime / 68.f;
+        mLoadIdx     = (int)(mCurLoadTime / mFrame);
+        mUpgradeSprite->setSpriteFrame(FindUPgradeSprite(msg.Btype));
+    }    break;
     default:
         break;
     }
@@ -154,6 +168,10 @@ void UnitInfoLayer::update(float delta)
     else if (mCurState == LayerState::CreateUnit)
     {
         CreateUnitUpdate(delta);
+    }
+    else if (mCurState == LayerState::Upgrade)
+    {
+        UpgradeUpdate(delta);
     }
     // 체력 변동 자동 적용함수 넣을 것
 }
@@ -225,6 +243,15 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
                 mLoadIdx     = (int)(mCurLoadTime / mFrame);
                 ChangeLayerState(LayerState::CreateUnit);
             }
+            else if (mActor->mUnitComp->mCurAction == ActionState::Upgrade)
+            {
+                mCurLoadTime = mActor->mUnitComp->GetCurLoadTime();
+                mMaxLoadTime = mActor->mUnitComp->GetMaxUpgradeTime();
+                mFrame       = mMaxLoadTime / 68.f;
+                mLoadIdx     = (int)(mCurLoadTime / mFrame);
+                mUpgradeSprite->setSpriteFrame(FindUPgradeSprite(smsg.Btype));
+                ChangeLayerState(LayerState::Upgrade);
+            }
         }
     }
     else // 여기로 들어오는 순간 모두 유닛
@@ -266,7 +293,24 @@ void UnitInfoLayer::CreateUnitUpdate(float delta)
         if (mCurLoadTime >= mMaxLoadTime)
         {
             mLoadIdx = 0;
-            pop();
+            ChangeLoadBar(mLoadIdx, false);
+            ChangeLayerState(LayerState::Idle);
+            mLoadBar->setVisible(false);
+            return;
+        }
+        ChangeLoadBar(mLoadIdx, false);
+    }
+}
+
+void UnitInfoLayer::UpgradeUpdate(float delta)
+{
+    mCurLoadTime += delta;
+    if (mLoadIdx != (int)(mCurLoadTime / mFrame))
+    {
+        mLoadIdx = (int)(mCurLoadTime / mFrame);
+        if (mCurLoadTime >= mMaxLoadTime)
+        {
+            mLoadIdx = 0;
             ChangeLoadBar(mLoadIdx, false);
             if (IsEmptyQueue())
             {
@@ -417,6 +461,28 @@ ax::SpriteFrame* UnitInfoLayer::FindDFUpgradeSprite(Actor* actor)
     {
     case ActorType::SCV:
     case ActorType::Marine: str = "UISprite/BionicDF.png"; break;
+
+    default:
+        break;
+    }
+    auto frame = spritecache->getSpriteFrameByName(str);
+    return frame;
+}
+ax::SpriteFrame* UnitInfoLayer::FindUPgradeSprite(ButtonType Btype)
+{
+    auto spritecache = ax::SpriteFrameCache::getInstance();
+    spritecache->addSpriteFramesWithFile("Plist/UISprite.plist");
+
+    std::string str = "";
+
+    switch (Btype)
+    {
+    case ButtonType::TBionic_AT:
+        str = "UISprite/BionicAT.png";
+        break;
+    case ButtonType::TBionic_DF:
+        str = "UISprite/BionicDF.png";
+        break;
 
     default:
         break;

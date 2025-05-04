@@ -704,6 +704,15 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
         return &g_UnitControlButton_TBarrack;
     }
     break;
+    case ActorType::EngineeringBay:
+    {
+        switch (actor->mUnitComp->mCurAction)
+        {
+        case ActionState::Idle:     return &g_UnitControlButton_TEngineeringBay;
+        case ActionState::Building: return ReturnOnlyCancel(actor);
+        }
+        return &g_UnitControlButton_TBarrack;
+    } break;
     case ActorType::Academy:
     {
         switch (actor->mUnitComp->mCurAction)

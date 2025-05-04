@@ -115,4 +115,20 @@ public:
     int mCurPop   = 0;
     int mCurMaxPop = 10;
 
+
+    // upgrade 체크리스트
+    int BionicAT = 0;
+    int BionicDF = 0;
+    int MechanicAT = 0;
+    int MechanicDF = 0;
+    bool MirineRange = false;
+    bool StimPack    = false;
+    bool OpticalFlare = false;
+    bool Restoration  = false;
+    bool VultureSpeed = false;
+    bool SpiderMines  = false;
+    bool SiegeMode    = false;
+    bool GoliathRange = false;
+
+
 };

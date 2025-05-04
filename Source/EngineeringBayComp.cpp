@@ -63,6 +63,51 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
             mBuilder = nullptr;
     }
     break;
+    case MsgType::Upgrade_Bionic_AT:
+    {
+        isUpgrade = true;
+        mCurAction = ActionState::Upgrade;
+
+        if (BionicAT == 0)
+        {
+            mCurUpgrade = UpgradeType::BionicAT1;
+            MaxUT = FindUpgradeBP(UpgradeType::BionicAT1).buildTime;
+        }
+        else if (BionicAT == 1)
+        {
+            mCurUpgrade = UpgradeType::BionicAT1;
+            MaxUT = FindUpgradeBP(UpgradeType::BionicAT2).buildTime;
+
+        }
+        else if (BionicAT == 2)
+        {
+            mCurUpgrade = UpgradeType::BionicAT1;
+            MaxUT       = FindUpgradeBP(UpgradeType::BionicAT3).buildTime;
+        }
+
+    } break;
+    case MsgType::Upgrade_Bionic_DF:
+    {
+        isUpgrade  = true;
+        mCurAction = ActionState::Upgrade;
+
+        if (BionicDF == 0)
+        {
+            mCurUpgrade = UpgradeType::BionicDF1;
+            MaxUT       = FindUpgradeBP(UpgradeType::BionicDF1).buildTime;
+        }
+        else if (BionicDF == 1)
+        {
+            mCurUpgrade = UpgradeType::BionicDF2;
+            MaxUT       = FindUpgradeBP(UpgradeType::BionicDF2).buildTime;
+        }
+        else if (BionicDF == 2)
+        {
+            mCurUpgrade = UpgradeType::BionicDF3;
+            MaxUT       = FindUpgradeBP(UpgradeType::BionicDF3).buildTime;
+        }
+    }
+        break;
     default:
         break;
     }
@@ -104,4 +149,31 @@ void EngineeringBayComp::update(float delta)
             }
         }
     }
+
+    if (isUpgrade)
+    {
+        CurUT += delta;
+        if (CurUT >= MaxUT)
+        {
+            mCurAction = ActionState::Idle;
+            isUpgrade  = false;
+            switch (mCurUpgrade)
+            {
+            case UpgradeType::BionicAT1:
+            case UpgradeType::BionicAT2:
+            case UpgradeType::BionicAT3:
+                BionicAT++; // 이후 서버에 전송하는 내용 넣을것
+                break;
+            case UpgradeType::BionicDF1:
+            case UpgradeType::BionicDF2:
+            case UpgradeType::BionicDF3:
+                BionicDF++; // 이후 서버에 전송하는 내용 넣을것
+                break;
+            }
+            CurUT = 0;
+            MaxUT = 0;
+        }
+
+    }
 }
+

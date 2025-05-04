@@ -133,7 +133,17 @@ void Player::MessageProc(SystemMessage smsg)
                 SendSystemMessage(ui, this, smsg);
             }
         }
+        case ButtonType::TBionic_AT:
+        {
+            if (mMainActor && mMainActor->mActorType == ActorType::EngineeringBay)
+            {
+                ActorMessage msg = {MsgType::Upgrade_Bionic_AT, nullptr, nullptr};
+                SendActorMessage(mMainActor, msg);
 
+                SystemMessage smsg = {SMsgType::Upgrade, ActorType::Marine, ButtonType::TMarine, nullptr};
+                SendSystemMessage(ui, this, smsg);
+            }
+        }
         default:
             break;
         }

@@ -17,7 +17,7 @@ public:
 
 public:
 
-    float MaxBuildTime = 75.f;
+    float MaxBuildTime = 19.f;
     float BuildingTime = 0.f;
     float BuildAnimChangeTime = 0.f;
     bool isBuild       = false;

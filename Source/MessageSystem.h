@@ -40,7 +40,9 @@ enum class MsgType
     Create_DropShip,
     Create_ScienceVessel,
     Create_BattleCruiser,
-
+    // 업그레이드 관련
+    Upgrade_Bionic_AT,
+    Upgrade_Bionic_DF,
 
     Cancel,
     SendInfo,
@@ -80,6 +82,7 @@ enum class SMsgType
     //단일 선택에 대한 정보를 나타냄
     SSUI,
     Create_Unit,
+    Upgrade,
     
 
 };

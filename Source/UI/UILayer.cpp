@@ -94,6 +94,14 @@ void UILayer::MessageProc(SystemMessage smsg)
         UnitInfo->MessageProc(msg);
     }
     break;
+    case SMsgType::Upgrade:
+    {
+        UnitInfoLayer* UnitInfo = (UnitInfoLayer*)this->getChildByName("UnitInfoLayer");
+        UnitInfo->MessageProc(msg);
+
+        CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+        command->MessageProc(msg);
+    }
     default:
         break;
     } 

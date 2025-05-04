@@ -132,7 +132,16 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
     } break;
-
+    case MsgType::Upgrade_Bionic_AT:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    } break;
+    case MsgType::Upgrade_Bionic_DF:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    } break;
     default:
         break;
     }
@@ -177,7 +186,10 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     {
         if (ui)
             ui->MessageProc(smsg);
-    }
+    } break;
+    case SMsgType::Upgrade:
+        if (ui)
+            ui->MessageProc(smsg);
     default:
         break;
     }

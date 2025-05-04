@@ -15,4 +15,5 @@ struct UnitBluePrint
 };
 
 
+
 UnitBluePrint& FindUnitBP(ActorType type);

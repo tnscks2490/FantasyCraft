@@ -10,6 +10,7 @@ enum class ActionState
     Move,
     Death,
     Create_Unit,
+    Upgrade,
 
 };
 
@@ -77,6 +78,9 @@ public:
     virtual float GetCurLoadTime() { return 0; }
     virtual float GetMaxLoadTime() { return 0; }
     virtual float GetUnitTimer() { return 0; }
+    virtual float GetCurUpgradeTime() { return 0; }
+    virtual float GetMaxUpgradeTime() { return 0; }
+
     virtual ActorType* GetCreateUnitList() { return nullptr; }
 
     std::string_view GetUnitName() { return mUnitName; }

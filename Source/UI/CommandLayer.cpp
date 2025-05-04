@@ -35,14 +35,17 @@ void CommandLayer::MessageProc(SystemMessage smsg)
     auto msg = smsg;
     Actor* sActor = (Actor*)msg.data;
 
-    if (msg.smsgType == SMsgType::SSUI)
+
+    switch (msg.smsgType)
     {
+    case SMsgType::SSUI:
+    case SMsgType::Cancel:
+    case SMsgType::Upgrade:
         SetButton(sActor);
+    default:
+        break;
     }
-    else if (msg.smsgType == SMsgType::Cancel)
-    {
-        SetButton(sActor);
-    }
+
 }
 
 void CommandLayer::ButtonMessage(ax::Object* sender)
@@ -116,9 +119,22 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TSupply_Depot:
     case ButtonType::TScience_Facility:
     {
+        UILayer* ui        = (UILayer*)this->getParent();
+        SystemMessage smsg = {SMsgType::None, ActorType::None, type, nullptr};
+        SendSystemMessage(ui, ui->mPlayer, smsg);
+        return;
+    }
+    //여기 부터는 업그레이드를 누르면 커멘드레이어의 반영되는 부분들
+    case ButtonType::TBionic_AT:
+    case ButtonType::TBionic_DF:
+    {
         mMenu->removeAllChildren();
         CreateAddButton(ButtonType::TCancel);
-        // 만약 캔슬을 누르면 SCV에게 명령이 가도록 해야함
+        UILayer* ui        = (UILayer*)this->getParent();
+        SystemMessage smsg = {SMsgType::Upgrade, ActorType::None, type, nullptr};
+        SendSystemMessage(ui, ui->mPlayer, smsg);
+        return;
+        // 만약 캔슬을 누르면 현재 선택된 액터에게 명령이 가도록 해야함
     } break;
     default:
         break;
