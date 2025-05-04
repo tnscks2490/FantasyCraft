@@ -39,7 +39,7 @@ bool UnitInfoLayer::init()
 
     mUpgradeSprite = ax::Sprite::create();
     mUpgradeSprite->setScale(2.f);
-    mUpgradeSprite->setPosition(ax::Vec2(-150, 16));
+    mUpgradeSprite->setPosition(ax::Vec2(-150, 0));
     mUpgradeSprite->setVisible(false);
     addChild(mUpgradeSprite, 1);
 
@@ -381,8 +381,13 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         break;
     case LayerState::Upgrade:
     {
+        mName->setVisible(true);
+        mWire->setVisible(true);
+        mHP->setVisible(true);
+
         mUpgradeSprite->setVisible(true);
         mLoadBar->setVisible(true);
+        mLoadBar->setPosition(ax::Vec2(36, 0));
     }
         break;
     case LayerState::MultiSelect:
@@ -478,10 +483,10 @@ ax::SpriteFrame* UnitInfoLayer::FindUPgradeSprite(ButtonType Btype)
     switch (Btype)
     {
     case ButtonType::TBionic_AT:
-        str = "UISprite/BionicAT.png";
+        str = "UISprite/BionicATUpgrade.png";
         break;
     case ButtonType::TBionic_DF:
-        str = "UISprite/BionicDF.png";
+        str = "UISprite/BionicDFUpgrade.png";
         break;
 
     default:
