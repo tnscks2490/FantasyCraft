@@ -108,6 +108,13 @@ void UILayer::MessageProc(SystemMessage smsg)
         CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
         command->MessageProc(msg);
     }
+    break;
+    case SMsgType::BPCancel:
+    {
+        CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+        command->MessageProc(msg);
+    }
+    break;
     default:
         break;
     } 

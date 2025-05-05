@@ -31,6 +31,7 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
             {
                 mBuilder   = msg.sender;
                 mCurAction = ActionState::Building;
+                cmdLocked  = true;
             }
         }
 
@@ -44,6 +45,7 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
         {
             mBuilder   = msg.sender;
             mCurAction = ActionState::Building;
+            cmdLocked  = true;
         }
     }
     break;
@@ -53,6 +55,7 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
         if (mBuilder == nullptr)
         {
             mBuilder = msg.sender;
+            cmdLocked = true;
         }
     }
     break;
@@ -61,6 +64,8 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
     {
         if (!isBuild)
             mBuilder = nullptr;
+
+        cmdLocked = false;
     }
     break;
     case MsgType::Upgrade_Bionic_AT:
@@ -109,11 +114,15 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
     } break;
     case MsgType::Cancel:
     {
-        isUpgrade = false;
-        MaxUT = 0;
-        CurUT = 0;
-        mCurUpgrade = UpgradeType::None;
-        mCurAction  = ActionState::Idle;
+        if (IsBuild())
+        {
+            isUpgrade   = false;
+            MaxUT       = 0;
+            CurUT       = 0;
+            mCurUpgrade = UpgradeType::None;
+            mCurAction  = ActionState::Idle;
+        }
+        
     }
     break;
     default:
@@ -141,6 +150,7 @@ void EngineeringBayComp::update(float delta)
                     isBuild    = true;
                     mCurAction = ActionState::Idle;
                     mBuilder   = nullptr;
+                    cmdLocked  = false;
                 }
                 else
                 {

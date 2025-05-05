@@ -80,6 +80,8 @@ public:
     virtual float GetUnitTimer() { return 0; }
     virtual float GetCurUpgradeTime() { return 0; }
     virtual float GetMaxUpgradeTime() { return 0; }
+    virtual bool IsCmdLocked() { return cmdLocked; }
+
 
     virtual ActorType* GetCreateUnitList() { return nullptr; }
 
@@ -90,9 +92,9 @@ public:
     UnitArea mUnitArea     = UnitArea::None;
 
 
-    int killCount          = 0;
-    ax::Sprite* mWireFrame = nullptr;
+    bool cmdLocked = false;
 
+    int killCount          = 0;
     std::string_view mUnitName = "";
 
 

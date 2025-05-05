@@ -17,6 +17,7 @@ Goal_DoingBuild::Goal_DoingBuild(Actor* Builder, Actor* structure) : Goal_Compos
     ActorMessage msg = {MsgType::Build_GetBuilder, mActor, nullptr, nullptr};
     SendActorMessage(m_Structure, msg);
 
+    mActor->mUnitComp->cmdLocked  = true;
     mActor->mUnitComp->mCurAction = ActionState::Building;
 
 }

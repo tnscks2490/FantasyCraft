@@ -19,14 +19,14 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mUnitComp)    receiver->mUnitComp->MessageProc(msg);
         if (receiver->mBPComp)      receiver->mBPComp->MessageProc(msg);
         if (receiver->mDrawComp)    receiver->mDrawComp->MessageProc(msg);
-    }
+    } break;
     case MsgType::Separate:
     {
         if (receiver->mCursorComp)  receiver->mCursorComp->MessageProc(msg);
         if (receiver->mUnitComp)    receiver->mUnitComp->MessageProc(msg);
         if (receiver->mBPComp)      receiver->mBPComp->MessageProc(msg);
         if (receiver->mDrawComp)    receiver->mDrawComp->MessageProc(msg);
-    }
+    } break;
     case MsgType::Build:
     {
         if (receiver->mUnitComp)
@@ -184,6 +184,21 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
         }
     }
     break;
+    case SMsgType::BPCancel:
+    {
+        if (smsg.recvType == ReceiverType::Player)
+        {
+            // UI -> Player
+            if (player)
+                player->MessageProc(smsg);
+        }
+        else if (smsg.recvType == ReceiverType::UI)
+        {
+            // Player->UI
+            if (ui)
+                ui->MessageProc(smsg);
+        }
+    }
     case SMsgType::MSUI:
     {
         if (ui) ui->MessageProc(smsg);
@@ -218,6 +233,8 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     }
     
 }
+
+
 
 
 

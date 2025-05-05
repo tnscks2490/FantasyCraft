@@ -2,12 +2,12 @@
 #include "Player.h"
 #include "Actor.h"
 #include "DrawComp.h"
-#include "PlayerController.h"
+#include "SelectManager.h"
 #include "CursorComp.h"
 
 Player::Player()
 {
-    mPC = new PlayerController(this);
+    mSM = new SelectManager(this);
 
     
 }

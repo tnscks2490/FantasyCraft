@@ -3,14 +3,20 @@
 #include "Player.h"
 
 
+enum class CommandState
+{
+    None,
+    Idle,
+    CmdLock,
+};
+
 class CommandLayer : public ax::Layer
 {
 public:
     CREATE_FUNC(CommandLayer);
 
     virtual bool init() override;
-    virtual void update(float delat) override;
-
+    virtual void update(float delta) override;
 
     void MessageProc(SystemMessage smsg);
     void ButtonMessage(ax::Object* sender);
@@ -30,6 +36,7 @@ public:
     void SingleSelected(SystemMessage smsg);
     void MultiSelected(SystemMessage smsg);
 
+    void ChangeCmdState(CommandState state);
 
 public:
     Player* mPlayer = nullptr;
@@ -40,12 +47,11 @@ public:
     ButtonType mCurbuttons[MAX_BUTTON];
     ButtonType mSavebuttons[MAX_BUTTON];
 
+    CommandState mCurState = CommandState::Idle;
+    
     ActorType mCurActorType;
-    ActionState mCurActionState = ActionState::Idle;
-    ActionState mCurActorState = ActionState::Idle;
+
     ax::Menu* mMenu = nullptr;
-
-
 };
 
 

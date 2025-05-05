@@ -90,6 +90,7 @@ enum class SMsgType
     SSUI,
     Create_Unit,
     Upgrade,
+    BPCancel,
     
 
 };

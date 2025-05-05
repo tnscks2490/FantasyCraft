@@ -4,7 +4,7 @@
 #include "MessageSystem.h"
 
 class Actor;
-class PlayerController;
+class SelectManager;
 class UILayer;
 
 enum class PlayerRace
@@ -103,7 +103,7 @@ public:
     Actor* mMainActor = nullptr;
 
 
-    PlayerController* mPC = nullptr;
+    SelectManager* mSM = nullptr;
 
     ActionIcon mCurActionICon    = ActionIcon::None;
 

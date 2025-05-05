@@ -154,7 +154,7 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
     case SMsgType::Cancel:
     {
         ChangeLayerState(LayerState::Idle);
-        resetData();
+        //resetData();
     }
     default:
         break;
@@ -269,12 +269,34 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
 
 void UnitInfoLayer::BuildUpdate(float delta)
 {
+    //if (mActor->mUnitComp->IsCmdLocked())
+    //{
+    //    mCurLoadTime += delta;
+    //    if (mLoadIdx != (int)(mCurLoadTime / mFrame))
+    //    {
+    //        mMaxHP     = mActor->mUnitComp->mStatus.MaxHP;
+    //        mCurHP     = mActor->mUnitComp->mStatus.HP;
+    //        auto hpstr = NumSlashNumToString(mCurHP, mMaxHP);
+    //        mHP->setString(hpstr);
+
+    //        mLoadIdx = (int)(mCurLoadTime / mFrame);
+    //        if (mCurLoadTime >= mMaxLoadTime)
+    //        {
+    //            mLoadIdx = 0;
+    //            ChangeLoadBar(mLoadIdx, false);
+    //            ChangeLayerState(LayerState::Idle);
+    //            mLoadBar->setVisible(false);
+    //            return;
+    //        }
+    //        ChangeLoadBar(mLoadIdx, false);
+    //    }
+    //}
     mCurLoadTime += delta;
     if (mLoadIdx != (int)(mCurLoadTime / mFrame))
     {
-        mMaxHP       = mActor->mUnitComp->mStatus.MaxHP;
-        mCurHP       = mActor->mUnitComp->mStatus.HP;
-        auto hpstr   = NumSlashNumToString(mCurHP, mMaxHP);
+        mMaxHP     = mActor->mUnitComp->mStatus.MaxHP;
+        mCurHP     = mActor->mUnitComp->mStatus.HP;
+        auto hpstr = NumSlashNumToString(mCurHP, mMaxHP);
         mHP->setString(hpstr);
 
         mLoadIdx = (int)(mCurLoadTime / mFrame);
@@ -288,6 +310,7 @@ void UnitInfoLayer::BuildUpdate(float delta)
         }
         ChangeLoadBar(mLoadIdx, false);
     }
+    
 }
 
 void UnitInfoLayer::CreateUnitUpdate(float delta)

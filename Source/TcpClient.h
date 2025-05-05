@@ -35,7 +35,7 @@ public:
     char mRecvBuf[1024] = {0};
     char mSaveBuf[1024] = {0};
 
-     void CleanSaveBuf(int S_idx, int lenth);
+    void CleanSaveBuf(int S_idx, int lenth);
 
 private:
 

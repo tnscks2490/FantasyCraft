@@ -43,6 +43,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
         break;
     case MsgType::Build_Complete:
         mBuilding = nullptr;
+        cmdLocked = false;
         break;
     case MsgType::IsBuild_Complete:
     {
@@ -53,6 +54,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::Build_Continue:
     {
         Build_Continue(msg);
+        cmdLocked = true;
     }break;
 
     case MsgType::Cancel:
@@ -63,6 +65,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
             ActorMessage msg = {MsgType::Build_Cancel, mActor, nullptr, nullptr};
             SendActorMessage(mBuilding, msg);
             mBuilding = nullptr;
+            cmdLocked = false;
         }
     }
     break;
@@ -109,7 +112,14 @@ void SCVComp::update(float delta) {
         mTimer = 0.f;
     }
 
+    if (mTimer > 1.f)
+    {
+        mTimer = 0.f;
+        if (mCurAction == ActionState::Building)
+            printf("건설중입니다~~~~~~~~~~~~~~~~~~~~~~");
+    }
 }
+
 
 void SCVComp::Repair()
 {

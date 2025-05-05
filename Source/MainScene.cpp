@@ -174,8 +174,8 @@ void MainScene::onMouseDown(Event* event)
         {
             if (mPlayer->mMainActor&& mCursor->mCursorComp->mBP)
             {
-                SystemMessage smsg = {SMsgType::Cancel, ReceiverType::UI, ActorType::None, ButtonType::None,  &mPlayer->mMainActor};
-                SendSystemMessage(mUILayer, mPlayer, smsg);
+               SystemMessage smsg = {SMsgType::BPCancel, ReceiverType::UI, ActorType::None, ButtonType::None,  &mPlayer->mMainActor};
+               SendSystemMessage(mUILayer, mPlayer, smsg);
             }
             mCursor->mCursorComp->RClick(mousePos);
             
@@ -828,7 +828,7 @@ void MainScene::Decording()
             for (auto actor : World::get()->w_ActorList)
             {
                 if (actor->mDrawComp->selected
-                    && actor->mUnitComp->mCurAction != ActionState::Building)
+                    && !actor->mUnitComp->IsCmdLocked())
                     AddGoal_MoveToPath(actor, data.pos);
 
             }

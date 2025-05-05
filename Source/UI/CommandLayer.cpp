@@ -25,10 +25,30 @@ bool CommandLayer::init()
     mMenu->setPosition(ax::Vec2::ZERO);
     addChild(mMenu, 1);
 
-
     scheduleUpdate();
 
     return true;
+}
+
+void CommandLayer::update(float delta)
+{
+    if (mActor)
+    {
+        if (mActor->mUnitComp->IsCmdLocked())
+        {
+            if (mCurState == CommandState::Idle)
+            {
+                ChangeCmdState(CommandState::CmdLock);
+            }
+        }
+        else
+        {
+            if (mCurState == CommandState::CmdLock)
+            {
+                ChangeCmdState(CommandState::Idle);
+            }
+        }
+    }
 }
 
 void CommandLayer::MessageProc(SystemMessage smsg)
@@ -52,29 +72,16 @@ void CommandLayer::MessageProc(SystemMessage smsg)
         SetButton(mActor);
     }
     break;
-    
+    case SMsgType::BPCancel:
+    {
+        SetButton(mActor);
+    }
     default:
         break;
     }
 
 }
 
-void CommandLayer::update(float delat)
-{
-    if (mActor)
-    {
-        if (mCurActionState != ActionState::Idle)
-        {
-            if (mActor->mUnitComp->mCurAction == ActionState::Idle)
-            {
-                mCurActionState = mActor->mUnitComp->mCurAction;
-                SetButton(mActor);
-            }
-        }
-
-        
-    }
-}
 
 void CommandLayer::ButtonMessage(ax::Object* sender)
 {
@@ -88,8 +95,6 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
         // 이레귤러
     case ButtonType::TCancel:
     {
-        mMenu->removeAllChildren();
-        //ReturnButton();
 
         UILayer* ui        = (UILayer*)this->getParent();
         SystemMessage smsg = {SMsgType::Cancel, ReceiverType::Player, ActorType::None, type, nullptr};
@@ -111,8 +116,7 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TGather:
     case ButtonType::TRepair:
     {
-        mMenu->removeAllChildren();
-        CreateAddButton(ButtonType::TCancel);
+        ChangeCmdState(CommandState::CmdLock);
     }
     break;
         // 다른 버튼 UI로 변경되는 버튼들
@@ -289,9 +293,40 @@ void CommandLayer::SingleSelected(SystemMessage smsg)
         return;
 
     mActor = (Actor*)smsg.data;
-    SetButton(mActor);
+    
+    if (mActor->mUnitComp->IsCmdLocked())
+    {
+        ChangeCmdState(CommandState::CmdLock);
+    }
+    else
+    {
+        ChangeCmdState(CommandState::Idle);
+    }
+
 }
 
-void CommandLayer::MultiSelected(SystemMessage smsg)
-{}
+void CommandLayer::MultiSelected(SystemMessage smsg) {}
+
+void CommandLayer::ChangeCmdState(CommandState state)
+{
+    mCurState = state;
+    switch (state)
+    {
+    case CommandState::None:
+        break;
+    case CommandState::Idle:
+    {
+        SetButton(mActor);
+    }
+        break;
+    case CommandState::CmdLock:
+    {
+        mMenu->removeAllChildren();
+        CreateAddButton(ButtonType::TCancel);
+    }
+        break;
+    default:
+        break;
+    }
+}
 
