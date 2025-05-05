@@ -70,6 +70,9 @@ void UILayer::MessageProc(SystemMessage smsg)
     } break;
     case SMsgType::Cancel:
     {
+        UnitInfoLayer* UnitInfo = (UnitInfoLayer*)this->getChildByName("UnitInfoLayer");
+        UnitInfo->MessageProc(msg);
+
         CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
         command->MessageProc(msg);
     } break;
@@ -77,6 +80,9 @@ void UILayer::MessageProc(SystemMessage smsg)
     {
         UnitInfoLayer* UnitInfo = (UnitInfoLayer*)this->getChildByName("UnitInfoLayer");
         UnitInfo->MessageProc(msg);
+
+        CommandLayer* command = (CommandLayer*)this->getChildByName("CommandLayer");
+        command->MessageProc(msg);
     }
         break;
     case SMsgType::SSUI:

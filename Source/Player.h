@@ -79,6 +79,7 @@ public:
 
     void Clear();
     void Selected();
+    void ClassifySelected();
     void PreSelected(Actor* actor);
     void PreClear();
     bool isSelected();

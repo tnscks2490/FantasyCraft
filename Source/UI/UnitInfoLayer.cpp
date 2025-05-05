@@ -39,7 +39,7 @@ bool UnitInfoLayer::init()
 
     mUpgradeSprite = ax::Sprite::create();
     mUpgradeSprite->setScale(2.f);
-    mUpgradeSprite->setPosition(ax::Vec2(-64, 0));
+    mUpgradeSprite->setPosition(ax::Vec2(-120, 0));
     mUpgradeSprite->setVisible(false);
     addChild(mUpgradeSprite, 1);
 
@@ -99,8 +99,9 @@ bool UnitInfoLayer::init()
 
     mLoadBar = CreateLoadNode(ECharName::LoadBar, ECharAct::Empty, ECharDir::Face);
     addChild(mLoadBar,1.f);
-    mLoadBar->setVisible(false);
     mLoadBar->setScale(2.f);
+    mLoadBar->setPosition(ax::Vec2(36, 0));
+    mLoadBar->setVisible(false);
 
 
     scheduleUpdate();
@@ -150,6 +151,11 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
         mLoadIdx     = (int)(mCurLoadTime / mFrame);
         mUpgradeSprite->setSpriteFrame(FindUPgradeSprite(msg.Btype));
     }    break;
+    case SMsgType::Cancel:
+    {
+        ChangeLayerState(LayerState::Idle);
+        resetData();
+    }
     default:
         break;
     }
@@ -366,7 +372,7 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
 
         mUnitList->setVisible(true);
         mLoadBar->setVisible(true);
-        mLoadBar->setPosition(ax::Vec2(36, 0));
+        
     }
         break;
     case LayerState::Upgrade:

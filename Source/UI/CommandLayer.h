@@ -9,8 +9,10 @@ public:
     CREATE_FUNC(CommandLayer);
 
     virtual bool init() override;
-    void MessageProc(SystemMessage smsg);
+    virtual void update(float delat) override;
 
+
+    void MessageProc(SystemMessage smsg);
     void ButtonMessage(ax::Object* sender);
 
     void SetButton(Actor* actor);
@@ -25,14 +27,22 @@ public:
     ax::Vec2 SetButtonPosition(int num);
     ax::MenuItemImage* CreateAddButton(ButtonType type);
 
+    void SingleSelected(SystemMessage smsg);
+    void MultiSelected(SystemMessage smsg);
+
+
+public:
     Player* mPlayer = nullptr;
 
-
+    Actor* mActor      = nullptr;
+    Actor* mActors[12] = {nullptr};
 
     ButtonType mCurbuttons[MAX_BUTTON];
     ButtonType mSavebuttons[MAX_BUTTON];
 
     ActorType mCurActorType;
+    ActionState mCurActionState = ActionState::Idle;
+    ActionState mCurActorState = ActionState::Idle;
     ax::Menu* mMenu = nullptr;
 
 

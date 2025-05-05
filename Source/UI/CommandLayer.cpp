@@ -26,6 +26,7 @@ bool CommandLayer::init()
     addChild(mMenu, 1);
 
 
+    scheduleUpdate();
 
     return true;
 }
@@ -33,18 +34,46 @@ bool CommandLayer::init()
 void CommandLayer::MessageProc(SystemMessage smsg)
 {
     auto msg = smsg;
-    Actor* sActor = (Actor*)msg.data;
-
-
     switch (msg.smsgType)
     {
     case SMsgType::SSUI:
+    {
+        SingleSelected(msg);
+    }
+    break;
+    case SMsgType::MSUI:
+    {
+        MultiSelected(msg);
+    }
+    break;
     case SMsgType::Cancel:
-        SetButton(sActor);
+    {
+        mActor = (Actor*)msg.data;
+        SetButton(mActor);
+    }
+    break;
+    
     default:
         break;
     }
 
+}
+
+void CommandLayer::update(float delat)
+{
+    if (mActor)
+    {
+        if (mCurActionState != ActionState::Idle)
+        {
+            if (mActor->mUnitComp->mCurAction == ActionState::Idle)
+            {
+                mCurActionState = mActor->mUnitComp->mCurAction;
+                SetButton(mActor);
+            }
+        }
+
+        
+    }
 }
 
 void CommandLayer::ButtonMessage(ax::Object* sender)
@@ -60,9 +89,13 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TCancel:
     {
         mMenu->removeAllChildren();
-        ReturnButton();
-    }
-    break;
+        //ReturnButton();
+
+        UILayer* ui        = (UILayer*)this->getParent();
+        SystemMessage smsg = {SMsgType::Cancel, ReceiverType::Player, ActorType::None, type, nullptr};
+        SendSystemMessage(ui, ui->mPlayer, smsg);
+        return;
+    } break;
         // 버튼 UI가 변경되지 않는 버튼들
     case ButtonType::THold:
     case ButtonType::TStop:
@@ -118,6 +151,9 @@ void CommandLayer::ButtonMessage(ax::Object* sender)
     case ButtonType::TSupply_Depot:
     case ButtonType::TScience_Facility:
     {
+        mMenu->removeAllChildren();
+        CreateAddButton(ButtonType::TCancel);
+
         UILayer* ui        = (UILayer*)this->getParent();
         SystemMessage smsg = {SMsgType::None, ReceiverType::Player, ActorType::None, type, nullptr};
         SendSystemMessage(ui, ui->mPlayer, smsg);
@@ -246,4 +282,16 @@ ax::MenuItemImage* CommandLayer::CreateAddButton(ButtonType type)
 
     return bt;
 }
+
+void CommandLayer::SingleSelected(SystemMessage smsg)
+{
+    if (mActor == (Actor*)smsg.data)
+        return;
+
+    mActor = (Actor*)smsg.data;
+    SetButton(mActor);
+}
+
+void CommandLayer::MultiSelected(SystemMessage smsg)
+{}
 

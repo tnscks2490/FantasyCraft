@@ -171,7 +171,16 @@ void Player::MessageProc(SystemMessage smsg)
     }
     case SMsgType::MSUI:
     {
+    }
+    break;
+    case SMsgType::Cancel:
+    {
+        ActorMessage msg = {MsgType::Cancel, nullptr, nullptr};
+        SendActorMessage(mMainActor, msg);
 
+        SystemMessage smsg = {SMsgType::Cancel, ReceiverType::UI,
+                              ActorType::None, ButtonType::None, mMainActor};
+        SendSystemMessage(ui, this, smsg);
     }
     default:
         break;
@@ -203,7 +212,7 @@ void Player::Selected()
     for (int i = 0; i < 12; i++)
     {
         if (PrePlayerActors[i] == nullptr)
-            break;
+            continue;
         else
         {
             PlayerActors[i] = PrePlayerActors[i];
@@ -212,6 +221,80 @@ void Player::Selected()
         }
     }
 
+}
+
+void Player::ClassifySelected()
+{
+    // 조건 1 모두 확인후 건물이 있는지 없는지 판별한다.
+    // 조건 2 건물이 있는경우 제외하고 유닛만 선별한다.
+    // 조건 3 건물만 있는 경우 무조건 싱글 선택이다.
+    // 
+    // 조건 4 상대 유닛과 내 유닛이 같이 선택된 경우 상대 유닛은 무시한다(나중에 구현하기)
+
+    bool isFriendUnit = false;
+    bool isBuilding = false;
+    bool isEnemyUnit  = false;
+
+
+    for (auto ac : PrePlayerActors)
+    {
+        if (ac)
+        {
+            if (ac->mCategory == UnitCategory::Unit)
+            {
+                isFriendUnit = true;
+            }
+            else if (ac->mCategory == UnitCategory::Building)
+            {
+                isBuilding = true;
+            }
+        }
+    }
+
+
+
+    // 아군 유닛만 선택한 경우
+    if (isFriendUnit == true && isBuilding == false)
+    {
+        // 건드릴게 없지만 확인용
+    }
+    // 아군 건물만 선택한 경우
+    else if (isFriendUnit == false && isBuilding == true)
+    {
+        auto ac = PrePlayerActors[0];
+        PrePlayerActorsClear();
+        PrePlayerActors[0] = ac;
+    }
+    // 아군 유닛과 건물을 모두 선택한 경우
+    else if (isFriendUnit == true && isBuilding == true)
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            if (PrePlayerActors[i] == nullptr)
+                break;
+            if (PrePlayerActors[i]->mCategory == UnitCategory::Building)
+            {
+                PrePlayerActors[i] = nullptr;
+            }
+        }
+        int idx = -1;
+
+        for (int i = 0; i < 12; i++)
+        {
+            if (PrePlayerActors[i] == nullptr)
+                idx = i;
+
+            if (idx != -1)
+            {
+                PrePlayerActors[idx] = PrePlayerActors[i];
+                PrePlayerActors[i]   = nullptr;
+                idx                   = -1;
+            }
+        }
+
+    }
+
+    
 }
 
 void Player::PreSelected(Actor* actor)
@@ -260,6 +343,7 @@ void Player::PrintSelectActors()
 void Player::ReSelected()
 {
     Clear();
+    ClassifySelected();
     Selected();
     PrePlayerActorsClear();
 
@@ -267,10 +351,6 @@ void Player::ReSelected()
     {
         // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
         mMainActor = PlayerActors[0];
-        /*SystemMessage smsg;
-        smsg.Atype = mMainActor->mActorType;
-        SendSystemMessage(ui, this, smsg);*/
-        ///// 단일 선택에 관한 와이어프레임 UI출력하는 함수 추가할것
 
         SystemMessage ssmsg = {SMsgType::SSUI, ReceiverType::UI,ActorType::None, ButtonType::None, mMainActor};
         SendSystemMessage(ui, this, ssmsg);

@@ -170,8 +170,18 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     break;
     case SMsgType::Cancel:
     {
-        if (ui)
-            ui->MessageProc(smsg);
+        if (smsg.recvType == ReceiverType::Player)
+        {
+            // UI -> Player
+            if (player)
+                player->MessageProc(smsg);
+        }
+        else if (smsg.recvType == ReceiverType::UI)
+        {
+            // Player->UI
+            if (ui)
+                ui->MessageProc(smsg);
+        }
     }
     break;
     case SMsgType::MSUI:

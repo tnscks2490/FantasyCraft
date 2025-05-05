@@ -106,8 +106,16 @@ void EngineeringBayComp::MessageProc(ActorMessage& msg)
             mCurUpgrade = UpgradeType::BionicDF3;
             MaxUT       = FindUpgradeBP(UpgradeType::BionicDF3).buildTime;
         }
+    } break;
+    case MsgType::Cancel:
+    {
+        isUpgrade = false;
+        MaxUT = 0;
+        CurUT = 0;
+        mCurUpgrade = UpgradeType::None;
+        mCurAction  = ActionState::Idle;
     }
-        break;
+    break;
     default:
         break;
     }
