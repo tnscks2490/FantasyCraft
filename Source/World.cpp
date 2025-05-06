@@ -32,13 +32,23 @@ void World::update(float delta)
         //인덱스로 추정해서 찾아서 삭제하기
         if (IsDeleteActors)
         {
-            for (auto ac : w_Wait_DeleteActors)
+            for (auto& ac : w_Wait_DeleteActors)
             {
-                if (ac != nullptr)
+                for (auto& AliveActor : w_ActorList)
+                {
+                    if (ac == AliveActor)
+                    {
+                        delete ac;
+                        ac = nullptr;
+                        AliveActor = nullptr;
+                    }
+                }
+
+                /*if (ac != nullptr)
                 {
                     ac->~Actor();
                     ac = nullptr;
-                }
+                }*/
             }
             //IsAddActors = false;
             //w_Wait_AddActors.clear();
@@ -46,7 +56,8 @@ void World::update(float delta)
 
         for (auto actor : w_ActorList)
         {
-            actor->update(delta);
+            if (actor)
+                actor->update(delta);
         }
 
         if (IsAddActors)
@@ -103,12 +114,12 @@ void World::Actor_PushBackDelete(Actor* actor)
         if (ac == nullptr)
         {
             ac          = actor;
-            IsDeleteActors = true;
             return;
         }
     }
     w_Wait_DeleteActors.push_back(actor);
     IsDeleteActors = true;
+    actor->isDead     = true;
     //actor->idx = w_ActorList.size();
     // IsAddActors = true;
 }
@@ -120,6 +131,11 @@ void World::PrintActorList()
         if (actor)
             printf("액터 있음 : %d\n", actor->charNum);
     }
+}
+
+void World::test(ax::Node* node)
+{
+    printf("안녕");
 }
 
 World::World()

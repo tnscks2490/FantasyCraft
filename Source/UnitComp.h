@@ -1,6 +1,6 @@
 #pragma once
 #include "IActorComp.h"
-
+#include "Weapon/WeaponComp.h"
 
 enum class ActionState
 {
@@ -80,6 +80,7 @@ public:
     virtual float GetUnitTimer() { return 0; }
     virtual float GetCurUpgradeTime() { return 0; }
     virtual float GetMaxUpgradeTime() { return 0; }
+    virtual Actor* GetTarget() { return mTarget; }
     virtual bool IsCmdLocked() { return cmdLocked; }
 
 
@@ -98,5 +99,9 @@ public:
     std::string_view mUnitName = "";
 
 
+    /// <summary>
+    /// 나중에 센서로 옮길것
+    /// </summary>
+    Actor* mTarget = nullptr;
 };
 

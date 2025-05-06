@@ -18,6 +18,8 @@ GoalComp::GoalComp(Actor* actor)
 GoalComp::~GoalComp()
 {
     AX_SAFE_DELETE(mThink);
+    if (mActor)
+        mActor->mGoalComp = nullptr;
 }
 
 

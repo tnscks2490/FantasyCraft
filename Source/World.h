@@ -23,6 +23,7 @@ public:
     void Actor_PushBackDelete(Actor* actor);
     void PrintActorList();
 
+    void test(ax::Node* node);
 
 public:
     std::vector<Actor*> w_Wait_AddActors;

@@ -444,7 +444,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
             {
                 if (g_AnimInfo_Marin_Idle[i].dir == dir)
                     return g_AnimInfo_Marin_Idle[i];
-            }
+            } break;
 
         case ECharAct::Move:
             for (int i = 0; i < 16; i++)
@@ -459,7 +459,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
                 if (g_AnimInfo_Marine_Attack[i].dir == dir)
                     return g_AnimInfo_Marine_Attack[i];
             } break;
-        case ECharAct::Death:return g_AnimInfo_Marine_Death[0];
+        case ECharAct::Death: return g_AnimInfo_Marine_Death[0];
 
         }
         break;

@@ -5,7 +5,6 @@
 class WeaponComp : public IActorComp
 {
 public:
-    const static std::string COMPONENT_NAME;
 
 	WeaponComp(Actor* actor);
     ~WeaponComp();
@@ -17,9 +16,11 @@ public:
     void SelectWeapon();
     void TakeAimAndShoot() const;
 
+
     void AddWeapon(WeaponType type);
     void DoAction();
 
+    WeaponType ClassifyWeapon(ActorType type);
 
 
 public:

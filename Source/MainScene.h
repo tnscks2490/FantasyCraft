@@ -73,6 +73,18 @@ public:
 
     void ScreenMove(float delta);
 
+
+
+    //여기는 테스트용
+
+    void TestFunc(ax::Node* node);
+
+
+
+
+
+
+
     float mTimer = 0.f;
     float ScreenMoveTimer = 0.f;
 

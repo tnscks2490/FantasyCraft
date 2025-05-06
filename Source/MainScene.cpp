@@ -193,7 +193,7 @@ void MainScene::onMouseDown(Event* event)
         else if (mCursor->mCursorComp->mState == CursorState::Target)
         {
             //AddGoal_MoveToPath(mPlayer->mMainActor, realpos);
-            mCursor->mCursorComp->mState = CursorState::Idle;
+            //mCursor->mCursorComp->mState = CursorState::Idle;
             
             printf("이게 문제야 문제");
         }
@@ -237,7 +237,6 @@ void MainScene::onMouseUp(Event* event)
 
             if (mCursor->mCursorComp->mState == CursorState::Target)
             {
-
                 ActorMessage msg = {MsgType::SetTarget, userData->mActor, nullptr, nullptr};
                 for (auto ac : mPlayer->PlayerActors)
                 {
@@ -827,9 +826,12 @@ void MainScene::Decording()
         {
             for (auto actor : World::get()->w_ActorList)
             {
-                if (actor->mDrawComp->selected
-                    && !actor->mUnitComp->IsCmdLocked())
-                    AddGoal_MoveToPath(actor, data.pos);
+                if (actor)
+                {
+                    if (actor->mDrawComp->selected && !actor->mUnitComp->IsCmdLocked())
+                        AddGoal_MoveToPath(actor, data.pos);
+                }
+                
 
             }
         } break;
@@ -845,6 +847,15 @@ void MainScene::Decording()
                 }
             }
         }
+        break;
+        case 117: // 사망 이펙트띄우기
+        {
+            auto node = ax::Node::create();
+            this->addChild(node,1);
+            node->setPosition(data.pos);
+            TestFunc(node);
+        }
+        break;
         ///////////////////////
         default:
             break;
@@ -887,4 +898,16 @@ void MainScene::ScreenMove(float delta)
             mMapLayer->GetMap()->setPosition(mapPos);
         }
     }
+}
+
+void MainScene::TestFunc(ax::Node* node)
+{
+    AnimInfo& animInfo = FindAnimInfo(ECharName::SCV, ECharAct::Death, ECharDir::Face);
+    animInfo.CreateAnimation();
+
+    auto sprite            = ax::Sprite::createWithSpriteFrame(animInfo.animation->getFrames().front()->getSpriteFrame());
+    node->addChild(sprite);
+    ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
+    ax::Action* action = ax::RepeatForever::create(animate);    
+    node->runAction(action);
 }

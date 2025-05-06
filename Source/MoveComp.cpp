@@ -16,29 +16,33 @@ MoveComp::MoveComp(Actor* actor)
 
 MoveComp::~MoveComp()
 {
-
+    if (mActor)
+        mActor->mMoveComp = nullptr;
 }
 
 void MoveComp::update(float delta)
 {
 
-    mVelocity = ax::Vec2(0, 0);
-    if (mTimer != -1.0)
-        mTimer += delta;
-    CheckTargetList();
-    if (IsMoving)
+    if (mActor->mUnitComp->mCurAction == ActionState::Move)
     {
-        Do_Moving();
-        mVelocity.normalize();
-        ax::Vec2 pos = mActor->GetRoot()->getPosition();
-        mCurFrameMovement = mVelocity * delta * mSpeed;
-        pos += mCurFrameMovement;
-        mActor->GetRoot()->setPosition(pos);
+        mVelocity = ax::Vec2(0, 0);
+        if (mTimer != -1.0)
+            mTimer += delta;
+        CheckTargetList();
+        if (IsMoving)
+        {
+            Do_Moving();
+            mVelocity.normalize();
+            ax::Vec2 pos      = mActor->GetRoot()->getPosition();
+            mCurFrameMovement = mVelocity * delta * mSpeed;
+            pos += mCurFrameMovement;
+            mActor->GetRoot()->setPosition(pos);
 
-
-        // 충돌했을때 겹치지 않게 하는 코드 
-        UpdateBodyRect();
+            // 충돌했을때 겹치지 않게 하는 코드
+            UpdateBodyRect();
+        }
     }
+
 }
 
 

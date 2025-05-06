@@ -5,6 +5,7 @@
 #include "MessageSystem.h"
 #include "TcpClient.h"
 #include "BPComp.h"
+#include "MoveComp.h"
 #include "Goal/Base/GoalComp.h"
 #include "DrawComp.h"
 
@@ -19,7 +20,12 @@ SCVComp::SCVComp(Actor* actor)
 
 }
 
-SCVComp::~SCVComp() {}
+SCVComp::~SCVComp()
+{
+    mBuilding = nullptr;
+    if (mActor)
+        mActor->mUnitComp = nullptr;
+}
 
 void SCVComp::MessageProc(ActorMessage& msg)
 {
@@ -72,6 +78,11 @@ void SCVComp::MessageProc(ActorMessage& msg)
 
     case MsgType::Attack:
     {
+        if (msg.sender == nullptr || msg.sender->mUnitComp == nullptr)
+        {
+            printf("⚠️ 메시지 발신자(sender)가 유효하지 않음. 공격 무시\n");
+            break;
+        }
         int damage = msg.sender->mUnitComp->mStatus.AT - mStatus.DF;
         if (damage  <= 0 ) damage = 1;
 
@@ -88,7 +99,10 @@ void SCVComp::MessageProc(ActorMessage& msg)
         if (mActor->mUnitComp->mStatus.HP <= 0)
         {
             mCurAction = ActionState::Death;
+            // 소멸자에 대한 정보를 넣는다.
 
+            //SendPK_Data(117, mActor->GetPosition());
+            //World::get()->Actor_PushBackDelete(mActor);
         }
     }
     break;

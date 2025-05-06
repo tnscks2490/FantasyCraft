@@ -5,7 +5,7 @@
 #include "DrawComp.h"
 #include "UnitComp.h"
 #include "GoalComp.h"
-#include "WeaponComp.h"
+#include "Weapon/WeaponComp.h"
 #include "CursorComp.h"
 #include "BPComp.h"
 

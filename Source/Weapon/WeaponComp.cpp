@@ -8,15 +8,19 @@
 #include "Weapon/Weapon_Spell.h"
 
 
-const std::string WeaponComp::COMPONENT_NAME = "WeaponComp";
-
 WeaponComp::WeaponComp(Actor* actor)
     : IActorComp(actor)
 {
     actor->mWeaponComp = this;
+
+    auto type = ClassifyWeapon(actor->mActorType);
+    AddWeapon(type);
 }
 
-WeaponComp::~WeaponComp() {
+WeaponComp::~WeaponComp()
+{
+    if (mActor)
+        mActor->mWeaponComp = nullptr;
 
 }
 
@@ -70,6 +74,25 @@ void WeaponComp::DoAction()
 {
     if (mCurWeapon)
         mCurWeapon->Use();
+}
+
+WeaponType WeaponComp::ClassifyWeapon(ActorType type)
+{
+    switch (type)
+    {
+    //case ActorType::Medic:       break;
+    //case ActorType::Bunker:        break;
+    case ActorType::SCV:       return WeaponType::Normal;
+    case ActorType::Marine:    return WeaponType::Normal;
+    case ActorType::FireBat:   return WeaponType ::Concussive;
+    case ActorType::Ghost:     return WeaponType ::Concussive;
+    case ActorType::Vulture:   return WeaponType ::Concussive;
+    case ActorType::Tank:      return WeaponType ::Explosive;
+    case ActorType::Goliath:   return WeaponType ::Normal;
+    case ActorType::Wraith:    return WeaponType ::Normal;
+    case ActorType::Valkyrie:  return WeaponType ::Explosive;
+    }
+    return WeaponType::Normal;
 }
 
 

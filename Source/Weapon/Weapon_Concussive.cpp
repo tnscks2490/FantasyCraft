@@ -20,5 +20,6 @@ void Weapon_Concussive::Use()
     if (!IsUsing)
     {
         IsUsing  = true;
+       
     }
 }

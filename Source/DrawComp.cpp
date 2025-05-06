@@ -16,7 +16,8 @@ DrawComp::~DrawComp()
     if (mRoot.isNotNull())
         mRoot->removeFromParent();
 
-    mActor->mDrawComp = nullptr;
+    if (mActor)
+        mActor->mDrawComp = nullptr;
 }
 
 void DrawComp::update(float delta)
@@ -72,7 +73,7 @@ void DrawComp::update(float delta)
 
 
 
-        if (dirV == ax::Vec2::ZERO)
+        if (dirV == ax::Vec2::ZERO && curAction != ActionState::Death)
             mCurAnimInfo->dir = mCurDir;
          
 
@@ -101,7 +102,8 @@ void DrawComp::update(float delta)
 
         case ActionState::Death:
         {
-            ChangeAnim(anim, ECharAct::Death, ECharDir::Face, false);
+            ChangeAnimDeath(anim);
+            //ChangeAnim(anim, ECharAct::Death, ECharDir::Face, false);
             mActionState = curAction;
             mCurDir      = ECharDir::Face;
         } break;
@@ -529,7 +531,14 @@ ax::Node* DrawComp::CreateDemageNode(ActorType type)
         ax::Animate* animate = ax::Animate::create(info.animation.get());
         ax::Action* action = ax::Repeat::create(animate,1);
         action->setTag(20202);
-        node->runAction(action);
+
+
+        auto removeNode = ax::CallFunc::create([node]() { node->removeFromParentAndCleanup(true); });
+
+        // 4. 시퀀스로 실행
+        auto sequence = ax::Sequence::create(animate, removeNode, nullptr);
+        node->runAction(sequence);
+
 
         return node;
     }
@@ -565,6 +574,30 @@ void DrawComp::ChangeAnim(ECharName Name, ECharAct act, ECharDir dir, bool repea
 
     action->setTag(20202);
     animNode->runAction(action);
+    mCurAnimInfo = &animInfo;
+}
+
+void DrawComp::ChangeAnimDeath(ECharName Name)
+{
+    auto animNode = mRoot->getChildByName("Anim");
+    animNode->stopActionByTag(20202);
+
+    AnimInfo& animInfo = FindAnimInfo(Name, ECharAct::Death, ECharDir::Face);
+    animInfo.CreateAnimation();
+
+    ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
+
+   auto removeNode = ax::CallFuncN::create([mActor = this->mActor](ax::Node* sender) {
+        //sender->removeFromParentAndCleanup(true);
+        World::get()->Actor_PushBackDelete(mActor);
+    });
+
+    // 4. 시퀀스로 실행
+    auto sequence = ax::Sequence::create(animate, removeNode, nullptr);
+    sequence->setTag(20202);
+    animNode->runAction(sequence);
+
+    /////
     mCurAnimInfo = &animInfo;
 }
 

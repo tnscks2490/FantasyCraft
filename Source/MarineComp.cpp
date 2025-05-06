@@ -11,9 +11,13 @@ MarineComp::MarineComp(Actor* actor)
     mUnitName = "Terran Marine";
 }
 
-MarineComp::~MarineComp() {}
+MarineComp::~MarineComp()
+{
+}
 
-void MarineComp::update(float delta) {}
+void MarineComp::update(float delta)
+{
+}
 
 void MarineComp::MessageProc(ActorMessage& msg)
 {
@@ -24,11 +28,18 @@ void MarineComp::MessageProc(ActorMessage& msg)
     {
         mTarget = msg.sender;
 
-        ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
-        SendActorMessage(mTarget, msg);
-        auto pos   = mTarget->GetPosition() - mActor->GetPosition();
-        mActor->mDrawComp->mCurAnimInfo->dir = mActor->mDrawComp->CalcAniDir(pos/pos.length());
-        mCurAction = ActionState::Attack;
+        if (!IsCmdLocked())
+        {
+            ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
+            SendActorMessage(mTarget, msg);
+            auto pos                             = mTarget->GetPosition() - mActor->GetPosition();
+            mActor->mDrawComp->mCurAnimInfo->dir = mActor->mDrawComp->CalcAniDir(pos / pos.length());
+        }
+        else
+        {
+            printf("재장전중");
+        }
+        mActor->mWeaponComp->DoAction();
     }
     break;
     default:

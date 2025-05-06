@@ -13,6 +13,5 @@ public:
 
 public:
 
-    Actor* mTarget = nullptr;
     short mPop      = 1;
 };

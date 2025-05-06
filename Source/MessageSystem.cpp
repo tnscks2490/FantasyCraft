@@ -11,6 +11,8 @@
 
 void SendActorMessage(Actor* receiver, ActorMessage msg)
 {
+    if (receiver->isDead)
+        return;
     switch (msg.msgType)
     {
     case MsgType::Contacted:

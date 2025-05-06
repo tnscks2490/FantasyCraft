@@ -38,6 +38,7 @@ public:
 
 
     void ChangeAnim(ECharName Name, ECharAct action, ECharDir dir, bool repeat = true);
+    void ChangeAnimDeath(ECharName Name);
     void ChangeAnimByIndex(ECharName Name, ECharAct action, ECharDir dir,int idx);
     void ChangeHpBarByIndex(ECharName Name, int idx);
     void ChangePhysicsNodeTag(int tagNum);
