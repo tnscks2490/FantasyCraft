@@ -4,6 +4,7 @@
 #include "DrawComp.h"
 #include "MoveComp.h"
 #include "GoalComp.h"
+#include "SensorComp.h"
 #include "Weapon/WeaponComp.h"
 #include "BPComp.h"
 #include "CursorComp.h"
@@ -106,8 +107,8 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     auto move           = new MoveComp(actor);
     auto unit           = new MarineComp(actor);
     auto weapon        = new WeaponComp(actor);
-
-
+    auto sensor         = new SensorComp(actor);
+ 
 
     UserData* mUserData = new UserData;
     mUserData->mActor = actor;

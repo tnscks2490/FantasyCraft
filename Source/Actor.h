@@ -1,12 +1,13 @@
 #pragma once
 #include "AnimInfo.h"
-#include "SensorMemory.h"
+
 
 class MoveComp;
 class DrawComp;
 class UnitComp;
 class GoalComp;
 class WeaponComp;
+class SensorComp;
 class ProjectileComp;
 class CursorComp;
 class PK_Data;
@@ -86,12 +87,13 @@ public:
     UnitComp* mUnitComp = nullptr;
     GoalComp* mGoalComp = nullptr;
     WeaponComp* mWeaponComp = nullptr;
+    SensorComp* mSensorComp = nullptr;
 
     ////////////// 예외적인 상황
     CursorComp* mCursorComp = nullptr;
     BPComp* mBPComp     = nullptr;
 
-    SensorMemory* mSM = nullptr;
+  
 
 public:
     ActorType mActorType = ActorType::None;

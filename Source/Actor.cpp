@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Actor.h"
 #include "TcpClient.h"
+#include "SensorComp.h"
 #include "MoveComp.h"
 #include "DrawComp.h"
 #include "UnitComp.h"
@@ -21,6 +22,7 @@ Actor::Actor(PK_Data data)
 
 Actor::~Actor()
 {
+    if (mSensorComp) delete mSensorComp;
     if (mGoalComp) delete mGoalComp;
     if (mUnitComp) delete mUnitComp;
     if (mWeaponComp)  delete mWeaponComp;
@@ -32,6 +34,7 @@ Actor::~Actor()
 
 void Actor::update(float delta)
 {
+    if (mSensorComp) mSensorComp->update(delta);
     if (mGoalComp) mGoalComp->update(delta);
     if (mUnitComp) mUnitComp->update(delta);
     if (mWeaponComp) mWeaponComp->update(delta);

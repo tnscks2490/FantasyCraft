@@ -12,9 +12,10 @@ WeaponComp::WeaponComp(Actor* actor)
     : IActorComp(actor)
 {
     actor->mWeaponComp = this;
+    SetRangeByType(actor->mActorType);
 
-    auto type = ClassifyWeapon(actor->mActorType);
-    AddWeapon(type);
+    auto weapontype = ClassifyWeapon(actor->mActorType);
+    AddWeapon(weapontype);
 }
 
 WeaponComp::~WeaponComp()
@@ -95,6 +96,28 @@ WeaponType WeaponComp::ClassifyWeapon(ActorType type)
     return WeaponType::Normal;
 }
 
+void WeaponComp::SetRangeByType(ActorType type)
+{
+    switch (type)
+    {
+    case ActorType::SCV:            SetRange(1);  break;
+    case ActorType::Marine:         SetRange(4);  break;
+    case ActorType::Medic:          SetRange(0);  break;
+    case ActorType::FireBat:        SetRange(1);  break;
+    case ActorType::Ghost:          SetRange(7);  break;
+    case ActorType::Vulture:        SetRange(5);  break;
+    case ActorType::Tank:           SetRange(7);  break;
+    case ActorType::Goliath:        SetRange(4);  break;
+    case ActorType::Wraith:         SetRange(5);  break;
+    case ActorType::Valkyrie:       SetRange(6);  break;
+    case ActorType::DropShip:       SetRange(0);  break;
+    case ActorType::ScienceVessel:  SetRange(0);  break;
+    case ActorType::BattleCruiser:  SetRange(6);  break;
+    default:
+        break;
+    }
+}
 
 
+//터렛은 7임
 

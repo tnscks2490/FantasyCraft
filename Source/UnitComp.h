@@ -80,7 +80,6 @@ public:
     virtual float GetUnitTimer() { return 0; }
     virtual float GetCurUpgradeTime() { return 0; }
     virtual float GetMaxUpgradeTime() { return 0; }
-    virtual Actor* GetTarget() { return mTarget; }
     virtual bool IsCmdLocked() { return cmdLocked; }
 
 
@@ -98,10 +97,5 @@ public:
     int killCount          = 0;
     std::string_view mUnitName = "";
 
-
-    /// <summary>
-    /// 나중에 센서로 옮길것
-    /// </summary>
-    Actor* mTarget = nullptr;
 };
 

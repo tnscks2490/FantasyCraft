@@ -13,7 +13,6 @@ UnitComp::~UnitComp() {}
 
 void UnitComp::update(float delta)
 {
-    mTarget = nullptr;
 
     if (mActor)
         mActor->mUnitComp = nullptr;

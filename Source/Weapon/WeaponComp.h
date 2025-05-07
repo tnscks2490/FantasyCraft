@@ -22,10 +22,15 @@ public:
 
     WeaponType ClassifyWeapon(ActorType type);
 
+    void SetRange(float range) { mRange = range * 32; }
+
+    void SetRangeByType(ActorType type);
 
 public:
     std::vector<Weapon*> mWeaponList;
     Weapon* mCurWeapon = nullptr;
+
+    float mRange = 0;
 
 };
 

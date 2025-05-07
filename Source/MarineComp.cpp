@@ -26,7 +26,8 @@ void MarineComp::MessageProc(ActorMessage& msg)
     {
     case MsgType::SetTarget:
     {
-        mTarget = msg.sender;
+        //TODO: 여기 해결할것
+        auto mTarget = msg.sender;
 
         if (!IsCmdLocked())
         {
