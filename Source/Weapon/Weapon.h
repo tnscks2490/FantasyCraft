@@ -28,6 +28,7 @@ public:
     void SetCoolTime(float coolTime) { mCoolTime = coolTime; }
 
 
+
     void CoolTime(float delta);
     void SetAttackDelay(ActorType type);
 

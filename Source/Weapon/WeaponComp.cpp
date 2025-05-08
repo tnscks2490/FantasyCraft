@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Actor.h"
 #include "WeaponComp.h"
+#include "DrawComp.h"
 #include "Weapon/Weapon.h"
 #include "Weapon/Weapon_Normal.h"
 #include "Weapon/Weapon_Explosive.h"
@@ -69,6 +70,18 @@ void WeaponComp::AddWeapon(WeaponType type)
 
     mWeaponList.push_back(weapon);
     mCurWeapon = weapon;
+}
+
+bool WeaponComp::DoAttack(Actor* mTarget)
+{
+    if (!mActor->mUnitComp->IsCmdLocked())
+    {
+        DoAction();
+        ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
+        SendActorMessage(mTarget, msg);
+        return true;
+    }
+    return false;
 }
 
 void WeaponComp::DoAction()

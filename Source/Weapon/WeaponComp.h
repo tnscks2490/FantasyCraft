@@ -18,6 +18,7 @@ public:
 
 
     void AddWeapon(WeaponType type);
+    bool DoAttack(Actor* mTarget);
     void DoAction();
 
     WeaponType ClassifyWeapon(ActorType type);

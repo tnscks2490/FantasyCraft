@@ -2,6 +2,7 @@
 #include "Weapon/Weapon.h"
 #include "Actor.h"
 
+
 void Weapon::CoolTime(float delta)
 {
     if (IsUsing)

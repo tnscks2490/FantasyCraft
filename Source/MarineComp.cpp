@@ -27,20 +27,17 @@ void MarineComp::MessageProc(ActorMessage& msg)
     case MsgType::SetTarget:
     {
         //TODO: 여기 해결할것
+        
         auto mTarget = msg.sender;
 
-        if (!IsCmdLocked())
+        if (mTarget == mActor)
+            return;
+
+        if (mActor->mWeaponComp->DoAttack(mTarget))
         {
-            ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
-            SendActorMessage(mTarget, msg);
-            auto pos                             = mTarget->GetPosition() - mActor->GetPosition();
-            mActor->mDrawComp->mCurAnimInfo->dir = mActor->mDrawComp->CalcAniDir(pos / pos.length());
-        }
-        else
-        {
-            printf("재장전중");
-        }
-        mActor->mWeaponComp->DoAction();
+            auto pos = mTarget->GetPosition() - mActor->GetPosition();
+            mActor->mDrawComp->ChangeCurDir(pos);
+        } 
     }
     break;
     default:

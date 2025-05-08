@@ -46,7 +46,7 @@ public:
 
     ECharDir CalcAniDir(ax::Vec2 mVelocity);
 
-
+    void ChangeCurDir(ax::Vec2 mTargetDir);
 
 
 

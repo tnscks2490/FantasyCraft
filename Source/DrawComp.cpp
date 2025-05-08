@@ -695,6 +695,11 @@ ECharDir DrawComp::CalcAniDir(ax::Vec2 mVelocity)
     return ECharDir::S;
 }
 
+void DrawComp::ChangeCurDir(ax::Vec2 mTargetDir)
+{
+    mCurAnimInfo->dir = mActor->mDrawComp->CalcAniDir(mTargetDir / mTargetDir.length());
+}
+
 void DrawComp::isSelected()
 {
     if (selected)
