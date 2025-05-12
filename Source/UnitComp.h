@@ -11,6 +11,7 @@ enum class ActionState
     Death,
     Create_Unit,
     Upgrade,
+    Gathering,
 
 };
 

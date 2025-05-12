@@ -415,6 +415,16 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     }
     break;
 
+    case ax::EventKeyboard::KeyCode::KEY_M:
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.pos      = ax::Vec2(300, 500);
+        data.input    = 50;
+        TcpClient::get()->SendMessageToServer(data);
+    }
+    break;
+
     case ax::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
     {
         PK_Data data;
@@ -659,7 +669,12 @@ void MainScene::Decording()
                 printf("설치중");
             }
         }  break;
-
+        case 50:
+        {
+            Actor* actor = SpawnMineral(mMapLayer, data);
+            actor->SetPosition(data.pos);
+        }
+        break;
         case 77:
         case 78:
         case 79:

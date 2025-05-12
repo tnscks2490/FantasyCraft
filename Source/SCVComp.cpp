@@ -104,8 +104,25 @@ void SCVComp::MessageProc(ActorMessage& msg)
             //SendPK_Data(117, mActor->GetPosition());
             //World::get()->Actor_PushBackDelete(mActor);
         }
+    } 
+    break;
+    case MsgType::SetTarget:
+    {
+        if (msg.sender->mActorType == ActorType::Mineral)
+        {
+            auto mMineral = msg.sender;
+            AddGoal_MoveAndGathering(mMineral);
+        }
     }
     break;
+    case MsgType::Gathering:
+    {
+        if (msg.sender->mActorType == ActorType::Mineral)
+        {
+            auto mineral = msg.sender;
+            Gathering(mineral);
+        }
+    } break;
     default:
         break;
     }
@@ -138,6 +155,17 @@ void SCVComp::update(float delta) {
 void SCVComp::Repair()
 {
 
+}
+
+void SCVComp::Gathering(Actor* mineral)
+{
+    mMineral = mineral;
+    //mCurAction = ActionState::Gathering;
+    //cmdLocked        = true;
+    ActorMessage msg = {MsgType::Gathering,mActor,nullptr,nullptr};
+    SendActorMessage(mMineral, msg);
+
+    //이미지 바뀌는거까지 넣어야지
 }
 
 void SCVComp::SCVHpChange()

@@ -702,8 +702,7 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
         case ActionState::Building:            return ReturnOnlyCancel(actor);
         }
         return &g_UnitControlButton_TBarrack;
-    }
-    break;
+    }    break;
     case ActorType::EngineeringBay:
     {
         switch (actor->mUnitComp->mCurAction)
@@ -768,6 +767,10 @@ UnitControlButton* FindUnitControlButton(Actor* actor)
         case ActionState::Idle:            return &g_UnitControlButton_TScienceFacility;
         case ActionState::Building:        return ReturnOnlyCancel(actor);
         }
+    } break;
+    case ActorType::Mineral:
+    {
+        return ReturnNoButton(actor);
     }
     default:
         break;
@@ -782,6 +785,17 @@ UnitControlButton* ReturnOnlyCancel(Actor* actor)
         {ButtonType::None, ButtonType::None, ButtonType::None,
         ButtonType::None, ButtonType::None, ButtonType::None,
          ButtonType::None, ButtonType::None, ButtonType::TCancel}
+    };
+    return &cancelButton;
+}
+
+UnitControlButton* ReturnNoButton(Actor* actor)
+{
+    UnitControlButton cancelButton = {
+        actor->mActorType,
+        {ButtonType::None, ButtonType::None, ButtonType::None,
+        ButtonType::None, ButtonType::None, ButtonType::None,
+         ButtonType::None, ButtonType::None, ButtonType::None}
     };
     return &cancelButton;
 }

@@ -23,6 +23,8 @@ DrawComp::~DrawComp()
 void DrawComp::update(float delta)
 {
 
+    if (mActor->mActorType == ActorType::Mineral)
+        return;
 
     // 커서에 한해서 변경하는 것
     if (mActor->mActorType == ActorType::Cursor)
@@ -44,7 +46,7 @@ void DrawComp::update(float delta)
             ChangeAnim(ECharName::Cursor, ECharAct::Drag, ECharDir::Face);
         }
     }
-    else
+    else 
     {
         ECharDir dir  = mCurAnimInfo->dir;
         ECharName anim        = mCurAnimInfo->name;

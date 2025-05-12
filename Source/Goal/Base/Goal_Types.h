@@ -16,6 +16,7 @@ enum class GoalType
     AddWorkforce,
     Attack,
     Build,
+    Gather,
     AllComplete,
     Cancel,
 };

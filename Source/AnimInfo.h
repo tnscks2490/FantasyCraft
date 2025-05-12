@@ -53,7 +53,8 @@ enum class ECharName
     Refinery,
 
 
-
+    // 리소스
+    Mineral,
 
 
 
@@ -92,8 +93,10 @@ enum class ECharAct
     // 행동들 추가하기
 
 
-
-
+    //미네랄 전용
+    M01,
+    M02,
+    M03,
 
 
 
@@ -115,6 +118,7 @@ enum class ECharAct
     OnCursorEnemy,
     Drag,
     Target,
+
     //////////
     Act_Count,
 };

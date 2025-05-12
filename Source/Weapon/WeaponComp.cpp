@@ -74,13 +74,17 @@ void WeaponComp::AddWeapon(WeaponType type)
 
 bool WeaponComp::DoAttack(Actor* mTarget)
 {
-    if (!mActor->mUnitComp->IsCmdLocked())
+    if (length(mTarget->GetPosition(), mActor->GetPosition()) < mRange)
     {
-        DoAction();
-        ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
-        SendActorMessage(mTarget, msg);
-        return true;
+        if (!mActor->mUnitComp->IsCmdLocked())
+        {
+            DoAction();
+            ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
+            SendActorMessage(mTarget, msg);
+            return true;
+        }
     }
+
     return false;
 }
 

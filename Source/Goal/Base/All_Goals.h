@@ -9,3 +9,5 @@
 #include "Goal/Action/Goal_ChangeDir.h"
 #include "Goal/Action/Goal_AllCancel.h"
 #include "Goal/Action/Goal_MoveAndContinueBuild.h"
+#include "Goal/Action/Goal_MoveAndGathering.h"
+#include "Goal/Action/Goal_Gathering.h"

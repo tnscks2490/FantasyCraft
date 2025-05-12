@@ -24,6 +24,11 @@ void Player::MessageProc(SystemMessage smsg)
     {
         switch (smsg.Btype)
         {
+        case ButtonType::TGather:
+        {
+            cursor->mCursorComp->mState = CursorState::Target;
+        }
+        break;
         case ButtonType::TAttack:
             cursor->mCursorComp->mState = CursorState::Target;
             break;

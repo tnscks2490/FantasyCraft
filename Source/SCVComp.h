@@ -13,6 +13,8 @@ public:
     void Building(ActorMessage& msg);
     void Repair();
 
+
+    void Gathering(Actor* mineral);
     void SCVHpChange();
     void Build_Continue(ActorMessage& msg);
 
@@ -25,5 +27,6 @@ public:
     short mPop      = 1;
 
     Actor* mBuilding = nullptr;
+    Actor* mMineral  = nullptr;
     
 };

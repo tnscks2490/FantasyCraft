@@ -8,6 +8,7 @@
 #include "Weapon/WeaponComp.h"
 #include "BPComp.h"
 #include "CursorComp.h"
+#include "MineralComp.h"
 #include "UnitCompList.h"
 
 Actor* SpawnCursor(ax::Node* parent)
@@ -143,7 +144,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
 
     auto anim       =  draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Building, 0);
 
-    auto command = new CommandCenterComp(actor);
+    auto unit = new CommandCenterComp(actor);
     auto move = new MoveComp(actor);
     move->IsOn   = false;
 
@@ -179,7 +180,7 @@ Actor* SpawnAcademy(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Academy, ECharAct::Building, 0);
 
-    auto command = new AcademyComp(actor);
+    auto unit = new AcademyComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -213,7 +214,7 @@ Actor* SpawnArmory(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Armory, ECharAct::Building, 0);
 
-    auto command = new ArmoryComp(actor);
+    auto unit = new ArmoryComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -246,7 +247,7 @@ Actor* SpawnBarrack(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Barrack, ECharAct::Building, 0);
 
-    auto command = new BarrackComp(actor);
+    auto unit = new BarrackComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
 
@@ -281,7 +282,7 @@ Actor* SpawnBunker(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Bunker, ECharAct::Building, 0);
 
-    auto command = new BunkerComp(actor);
+    auto unit = new BunkerComp(actor);
 
 
     UserData* mUserData = new UserData;
@@ -315,7 +316,7 @@ Actor* SpawnEngineeringBay(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::EngineeringBay, ECharAct::Building, 0);
 
-    auto command = new EngineeringBayComp(actor);
+    auto unit = new EngineeringBayComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
 
@@ -351,7 +352,7 @@ Actor* SpawnSupplyDepot(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::SupplyDepot, ECharAct::Building, 0);
 
-    auto command = new SupplyDepotComp(actor);
+    auto unit = new SupplyDepotComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -384,7 +385,7 @@ Actor* SpawnStarPort(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::StarPort, ECharAct::Building, 0);
 
-    auto command = new StarPortComp(actor);
+    auto unit = new StarPortComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
 
@@ -419,7 +420,7 @@ Actor* SpawnFactory(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Factory, ECharAct::Building, 0);
 
-    auto command = new FactoryComp(actor);
+    auto unit = new FactoryComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
 
@@ -454,7 +455,7 @@ Actor* SpawnScienceFacility(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::ScienceFacility, ECharAct::Building, 0);
 
-    auto command = new ScienceFacilityComp(actor);
+    auto unit = new ScienceFacilityComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
 
@@ -489,9 +490,41 @@ Actor* SpawnRefinery(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Refinery, ECharAct::Building, 0);
 
-    auto command = new RefineryComp(actor);
+    auto unit = new RefineryComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+    return actor;
+}
+
+Actor* SpawnMineral(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Mineral;
+    actor->mCategory  = UnitCategory::Resource;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::YELLOW);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Mineral, ECharAct::M01, 0);
+    auto unit = new MineralComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -523,7 +556,7 @@ Actor* SpawnCommandCenter(ax::Node* parent)
     auto anim = draw->CreateAnimNode(ECharName::CommandCenter, ECharAct::BP, ECharDir::Face, "BPAnim");
     
 
-    auto command = new CommandCenterComp(actor);
+    auto unit = new CommandCenterComp(actor);
     auto move    = new MoveComp(actor);
     move->IsOn   = false;
 

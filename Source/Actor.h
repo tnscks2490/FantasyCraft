@@ -45,6 +45,7 @@ enum class ActorType
     Refinery,
 
     BP,
+    Mineral,
 
 };
 
@@ -54,6 +55,7 @@ enum class UnitCategory
     None,
     Building,
     Unit,
+    Resource,
 };
 
 

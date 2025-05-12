@@ -14,7 +14,7 @@ enum class MsgType
     GameClick,
     Attack,
     Demaged,
-
+    Gathering,
     SetTarget,
 
     // 건설물 생성하기

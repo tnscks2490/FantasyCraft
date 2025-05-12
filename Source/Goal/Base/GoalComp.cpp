@@ -103,6 +103,21 @@ void PushGoal_MoveAndContinueBuild(Actor* Builder, Actor* structure)
         Builder->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndContinueBuild(Builder, structure));
 }
 
+void AddGoal_MoveAndGathering(Actor* Gather,Actor* mMineral)
+{
+    if (mMineral->mGoalComp)
+    {
+        mMineral->mGoalComp->mThink->RemoveAllSubgoals();
+        mMineral->mGoalComp->mThink->AddSubGoal(new Goal_MoveAndGathering(mMineral));
+    }
+}
+
+void PushGoal_MoveAndGathering(Actor* mMineral)
+{
+    if (mMineral->mGoalComp)
+        mMineral->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndGathering(mMineral));
+}
+
 void AddGoal_AllCancel(Actor* actor)
 {
     if (actor->mGoalComp)
