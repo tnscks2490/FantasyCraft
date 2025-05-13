@@ -523,6 +523,7 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
     selectanim->setVisible(false);
     node->addChild(selectanim);
 
+
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Mineral, ECharAct::M01, 0);
     auto unit = new MineralComp(actor);
 

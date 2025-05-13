@@ -16,7 +16,7 @@ public:
 
 
 public:
-    Actor* mMineral = nullptr;
+    Actor* mGatherResource = nullptr;
     ax::Vec2 m_Dest;
 };
 

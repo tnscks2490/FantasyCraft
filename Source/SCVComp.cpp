@@ -32,6 +32,13 @@ void SCVComp::MessageProc(ActorMessage& msg)
    
     switch (msg.msgType)
     {
+    case MsgType::Contacted:
+    {
+        if (msg.sender->mActorType == ActorType::CommandCenter)
+        {
+            GiveMineral();
+        }
+    }break;
     case MsgType::Build:
     {
         ax::Vec2* pos = (ax::Vec2*)msg.data;
@@ -111,7 +118,12 @@ void SCVComp::MessageProc(ActorMessage& msg)
         if (msg.sender->mActorType == ActorType::Mineral)
         {
             auto mMineral = msg.sender;
-            AddGoal_MoveAndGathering(mMineral);
+            AddGoal_MoveAndGathering(mActor,mMineral);
+        }
+        else if (msg.sender->mActorType == ActorType::Refinery)
+        {
+            auto refinery = msg.sender;
+            AddGoal_MoveAndGathering(mActor, refinery);
         }
     }
     break;
@@ -122,6 +134,26 @@ void SCVComp::MessageProc(ActorMessage& msg)
             auto mineral = msg.sender;
             Gathering(mineral);
         }
+        else if (msg.sender->mActorType == ActorType::Refinery)
+        {
+            auto refinery = msg.sender;
+            Gathering(refinery);
+        }
+    } break;
+    case MsgType::GatherMineral:
+    {
+        mCurAction = ActionState::Idle;
+        mActor->mDrawComp->CreateCarryMineral();
+        mItem = GetItem::Mineral;
+        //미네랄 아이콘 생성하기
+
+    }break;
+    case MsgType::GatherGas:
+    {
+        mCurAction = ActionState::Idle;
+        mActor->mDrawComp->CreateCarryGas();
+        mItem = GetItem::Gas;
+        mActor->GetRoot()->setVisible(true);
     } break;
     default:
         break;
@@ -157,15 +189,28 @@ void SCVComp::Repair()
 
 }
 
-void SCVComp::Gathering(Actor* mineral)
+void SCVComp::Gathering(Actor* resource)
 {
-    mMineral = mineral;
-    //mCurAction = ActionState::Gathering;
+    mGatherResource = resource;
+    if (mGatherResource->mActorType == ActorType::Mineral)
+        mCurAction = ActionState::Gathering;
+    else if (mGatherResource->mActorType == ActorType::Refinery)
+        mCurAction = ActionState::Idle;
     //cmdLocked        = true;
     ActorMessage msg = {MsgType::Gathering,mActor,nullptr,nullptr};
-    SendActorMessage(mMineral, msg);
+    SendActorMessage(mGatherResource, msg);
 
     //이미지 바뀌는거까지 넣어야지
+}
+
+void SCVComp::GiveMineral()
+{
+    mGatherResource = nullptr;
+    mCurAction = ActionState::Idle;
+
+    mActor->mDrawComp->RemoveCarryItem();
+    ActorMessage msg = {MsgType::GiveMineral, mActor, nullptr, nullptr};
+    SendActorMessage(mHomeCenter, msg);
 }
 
 void SCVComp::SCVHpChange()

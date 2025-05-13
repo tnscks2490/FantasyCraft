@@ -4,6 +4,966 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>SCV/Attack/1/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/1/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/1/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/1/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/10/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/10/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/10/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/10/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/11/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/11/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/11/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/11/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/12/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/12/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/12/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/12/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/13/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,432},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/13/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/13/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/13/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/14/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/14/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/14/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/14/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,504},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/15/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/15/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/15/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/15/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/16/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/16/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/16/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,576},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/16/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,648},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/2/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/2/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/2/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,0},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/2/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/3/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/3/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/3/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/3/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/4/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/4/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,72},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/4/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/4/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/5/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/5/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/5/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/5/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/6/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,144},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/6/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/6/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/6/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/7/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/7/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/7/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/7/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,216},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/8/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/8/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/8/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/8/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/9/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/9/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/9/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,288},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Attack/9/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,360},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>SCV/Death/0001.png</key>
             <dict>
                 <key>aliases</key>
@@ -15,7 +975,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{0,0},{128,128}}</string>
+                <string>{{72,648},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +990,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{128,0},{128,128}}</string>
+                <string>{{200,648},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +1005,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{256,0},{128,128}}</string>
+                <string>{{328,648},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +1020,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{0,128},{128,128}}</string>
+                <string>{{0,776},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +1035,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{128,128},{128,128}}</string>
+                <string>{{128,776},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +1050,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{256,128},{128,128}}</string>
+                <string>{{256,776},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +1065,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{0,256},{128,128}}</string>
+                <string>{{0,904},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +1080,7 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{128,256},{128,128}}</string>
+                <string>{{128,904},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,11 +1095,11 @@
                 <key>spriteSourceSize</key>
                 <string>{128,128}</string>
                 <key>textureRect</key>
-                <string>{{256,256},{128,128}}</string>
+                <string>{{256,904},{128,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/1/1.png</key>
+            <key>SCV/Gathering/1/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -150,11 +1110,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{384,256},{72,72}}</string>
+                <string>{{384,904},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/10/10.png</key>
+            <key>SCV/Gathering/1/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -165,11 +1125,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,456},{72,72}}</string>
+                <string>{{0,1032},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/11/11.png</key>
+            <key>SCV/Gathering/1/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -180,11 +1140,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,456},{72,72}}</string>
+                <string>{{72,1032},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/12/12.png</key>
+            <key>SCV/Gathering/1/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -195,11 +1155,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,456},{72,72}}</string>
+                <string>{{144,1032},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/13/13.png</key>
+            <key>SCV/Gathering/10/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -210,11 +1170,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,456},{72,72}}</string>
+                <string>{{0,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/14/14.png</key>
+            <key>SCV/Gathering/10/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -225,11 +1185,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{360,456},{72,72}}</string>
+                <string>{{72,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/15/15.png</key>
+            <key>SCV/Gathering/10/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -240,11 +1200,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{432,456},{72,72}}</string>
+                <string>{{144,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/16/16.png</key>
+            <key>SCV/Gathering/10/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -255,11 +1215,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,528},{72,72}}</string>
+                <string>{{216,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/2/2.png</key>
+            <key>SCV/Gathering/11/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -270,11 +1230,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,384},{72,72}}</string>
+                <string>{{288,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/3/3.png</key>
+            <key>SCV/Gathering/11/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -285,11 +1245,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,384},{72,72}}</string>
+                <string>{{360,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/4/4.png</key>
+            <key>SCV/Gathering/11/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -300,11 +1260,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,384},{72,72}}</string>
+                <string>{{432,1392},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/5/5.png</key>
+            <key>SCV/Gathering/11/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -315,11 +1275,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,384},{72,72}}</string>
+                <string>{{0,1464},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/6/6.png</key>
+            <key>SCV/Gathering/12/0001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -330,11 +1290,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,384},{72,72}}</string>
+                <string>{{72,1464},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/7/7.png</key>
+            <key>SCV/Gathering/12/0002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -345,11 +1305,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{360,384},{72,72}}</string>
+                <string>{{144,1464},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/8/8.png</key>
+            <key>SCV/Gathering/12/0003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -360,11 +1320,11 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{432,384},{72,72}}</string>
+                <string>{{216,1464},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SCV/Gathering/9/9.png</key>
+            <key>SCV/Gathering/12/0004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -375,7 +1335,727 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,456},{72,72}}</string>
+                <string>{{288,1464},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/13/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1464},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/13/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1464},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/13/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/13/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/14/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/14/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/14/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/14/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/15/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1536},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/15/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/15/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/15/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/16/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/16/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/16/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/16/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1608},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/2/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1032},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/2/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1032},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/2/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1032},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/2/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1032},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/3/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/3/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/3/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/3/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/4/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/4/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/4/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1104},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/4/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/5/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/5/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/5/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/5/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/6/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/6/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1176},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/6/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/6/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/7/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/7/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/7/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/7/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/8/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1248},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/8/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{0,1320},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/8/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{72,1320},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/8/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{144,1320},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/9/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{216,1320},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/9/0002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{288,1320},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/9/0003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{360,1320},{72,72}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SCV/Gathering/9/0004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{432,1320},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -390,7 +2070,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,528},{72,72}}</string>
+                <string>{{0,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -405,7 +2085,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,600},{72,72}}</string>
+                <string>{{144,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -420,7 +2100,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,600},{72,72}}</string>
+                <string>{{216,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -435,7 +2115,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{360,600},{72,72}}</string>
+                <string>{{288,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -450,7 +2130,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{432,600},{72,72}}</string>
+                <string>{{360,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -465,7 +2145,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,672},{72,72}}</string>
+                <string>{{432,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -480,7 +2160,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,672},{72,72}}</string>
+                <string>{{0,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -495,7 +2175,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,672},{72,72}}</string>
+                <string>{{72,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -510,7 +2190,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,528},{72,72}}</string>
+                <string>{{72,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -525,7 +2205,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,528},{72,72}}</string>
+                <string>{{144,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -540,7 +2220,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,528},{72,72}}</string>
+                <string>{{216,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -555,7 +2235,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{360,528},{72,72}}</string>
+                <string>{{288,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -570,7 +2250,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{432,528},{72,72}}</string>
+                <string>{{360,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -585,7 +2265,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,600},{72,72}}</string>
+                <string>{{432,1680},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -600,7 +2280,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,600},{72,72}}</string>
+                <string>{{0,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -615,7 +2295,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,600},{72,72}}</string>
+                <string>{{72,1752},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -630,7 +2310,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,672},{72,72}}</string>
+                <string>{{144,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -645,7 +2325,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{360,744},{72,72}}</string>
+                <string>{{288,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -660,7 +2340,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{432,744},{72,72}}</string>
+                <string>{{360,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -675,7 +2355,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,816},{72,72}}</string>
+                <string>{{432,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -690,7 +2370,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,816},{72,72}}</string>
+                <string>{{0,1968},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -705,7 +2385,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,816},{72,72}}</string>
+                <string>{{72,1968},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -720,7 +2400,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,816},{72,72}}</string>
+                <string>{{144,1968},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -735,7 +2415,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,816},{72,72}}</string>
+                <string>{{216,1968},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -750,7 +2430,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,672},{72,72}}</string>
+                <string>{{216,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -765,7 +2445,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{360,672},{72,72}}</string>
+                <string>{{288,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -780,7 +2460,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{432,672},{72,72}}</string>
+                <string>{{360,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -795,7 +2475,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{0,744},{72,72}}</string>
+                <string>{{432,1824},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -810,7 +2490,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{72,744},{72,72}}</string>
+                <string>{{0,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -825,7 +2505,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{144,744},{72,72}}</string>
+                <string>{{72,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -840,7 +2520,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{216,744},{72,72}}</string>
+                <string>{{144,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -855,7 +2535,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,72}</string>
                 <key>textureRect</key>
-                <string>{{288,744},{72,72}}</string>
+                <string>{{216,1896},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -871,9 +2551,9 @@
             <key>realTextureFileName</key>
             <string>SCV.png</string>
             <key>size</key>
-            <string>{504,888}</string>
+            <string>{504,2040}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:cc836fc416d707d275e62bfea6627122:213d27bce5526df19b4d5ce9b3e1a04e:9ea6526dbb882b1241176dfdf094c456$</string>
+            <string>$TexturePacker:SmartUpdate:89a4d8c69eeb5f0112f8c0190321f64d:939fb7505b1f608255f6ac5383a447a3:9ea6526dbb882b1241176dfdf094c456$</string>
             <key>textureFileName</key>
             <string>SCV.png</string>
         </dict>

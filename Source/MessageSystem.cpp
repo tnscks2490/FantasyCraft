@@ -11,6 +11,8 @@
 
 void SendActorMessage(Actor* receiver, ActorMessage msg)
 {
+    if (receiver == nullptr)
+        return;
     if (receiver->isDead)
         return;
     switch (msg.msgType)
@@ -140,6 +142,31 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
             receiver->mUnitComp->MessageProc(msg);
     } break;
     case MsgType::Upgrade_Bionic_DF:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    } break;
+    case MsgType::Gathering:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }
+    break;
+
+    case MsgType::GatherMineral:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }
+    break;
+
+    case MsgType::GatherGas:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }break;
+
+    case MsgType::GiveMineral:
     {
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);

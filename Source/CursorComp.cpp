@@ -259,7 +259,7 @@ void CursorComp::GreenRectClear()
 
 void CursorComp::ReleaseBP()
 {
-    World::get()->Actor_PushBackDelete(mBP);
+    delete mBP;
     mBP = nullptr;
 }
 

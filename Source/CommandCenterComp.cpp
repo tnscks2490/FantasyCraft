@@ -74,6 +74,10 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         AddSCV();
     }
     break;
+    case MsgType::GiveMineral:
+    {
+
+    }
     default:
         break;
     }

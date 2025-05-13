@@ -11,10 +11,10 @@
 
 const char* Goal_MoveAndGathering::GOAL_NAME = "Goal_MoveAndGathering";
 Goal_MoveAndGathering::Goal_MoveAndGathering(Actor* mActor, Actor* mineral)
-    : Goal_Composite(mActor, GoalType::WaitTime)
+    : Goal_Composite(mActor, GoalType::Gather)
 {
-    m_Dest = mActor->GetPosition();
-    mMineral = mineral;
+    m_Dest   = mineral->GetPosition();
+    mGatherResource = mineral;
     
 }
 
@@ -25,7 +25,7 @@ void Goal_MoveAndGathering::Start()
 
 
     PushSubGoal(new Goal_MoveToPath(mActor, m_Dest));
-    PushSubGoal(new Goal_Gathering(mActor));
+    PushSubGoal(new Goal_Gathering(mActor, mGatherResource));
 
 
 }

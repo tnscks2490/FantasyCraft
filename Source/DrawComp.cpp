@@ -94,6 +94,12 @@ void DrawComp::update(float delta)
             dir        = CalcAniDir(dirV);
             ChangeAnim(anim, ECharAct::Move, dir);
             mActionState = curAction;
+            if (isCarryItme)
+            {
+                auto node = mRoot->getChildByName("CarryMineral");
+                node->setPosition(GetCarryItemPos(dir));
+            }
+            
         } break;
 
         case ActionState::Attack:
@@ -115,6 +121,11 @@ void DrawComp::update(float delta)
             mActionState = curAction;
             mCurDir      = ECharDir::Face;
         } break;
+        case ActionState::Gathering:
+        {
+            ChangeAnim(anim, ECharAct::Gathering, dir, true);
+            mActionState = curAction;
+        }break;
         default:
             break;
         }
@@ -545,6 +556,137 @@ ax::Node* DrawComp::CreateDemageNode(ActorType type)
         return node;
     }
     return nullptr;
+}
+
+ax::Node* DrawComp::CreateGatheringNode(ActorType type)
+{
+    if (mRoot.isNotNull())
+    {
+        ECharAct animType = ECharAct::Idle;
+        switch (type)
+        {
+        case ActorType::Marine:
+            animType = ECharAct::MarineSpark;
+            break;
+        case ActorType::SCV:
+            animType = ECharAct::SCVSpark;
+            break;
+        default:
+            break;
+        }
+
+        AnimInfo& info = FindAnimInfo(ECharName::Effect, animType, ECharDir::Face);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName("GatherAnim");
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+        ax::Action* action   = ax::RepeatForever::create(animate);
+
+        action->setTag(20202);
+        node->runAction(action);
+
+        return node;
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateCarryMineral()
+{
+
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& info = FindAnimInfo(ECharName::CarryMineral, ECharAct::Idle, mCurDir);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName("CarryMineral");
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+        ax::Action* action = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        node->setPosition(GetCarryItemPos(mCurDir));
+        isCarryItme = true;
+        return node;
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateCarryGas()
+{
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& info = FindAnimInfo(ECharName::TCarryGas, ECharAct::Idle, ECharDir::Face);
+        info.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
+        node->setName("CarryMineral");
+        mRoot->addChild(node);
+
+        ax::Animate* animate = ax::Animate::create(info.animation.get());
+        ax::Action* action   = ax::RepeatForever::create(animate);
+        action->setTag(20202);
+        node->runAction(action);
+
+        node->setPosition(GetCarryItemPos(mCurDir));
+        isCarryItme = true;
+        return node;
+    }
+    return nullptr;
+}
+
+ax::Vec2 DrawComp::GetCarryItemPos(ECharDir dir)
+{
+    switch (dir)
+    {
+    case ECharDir::N:    return ax::Vec2(0, 20);
+    case ECharDir::NNE:  return ax::Vec2(17, 10);
+    case ECharDir::NE:   return ax::Vec2(14, 14);
+    case ECharDir::ENE:  return ax::Vec2(10, 17);
+    case ECharDir::E:    return ax::Vec2(20, 0);
+    case ECharDir::ESE:  return ax::Vec2(17, -10);
+    case ECharDir::SE:   return ax::Vec2(14, -14);
+    case ECharDir::SSE:  return ax::Vec2(10, -17);
+    case ECharDir::S:    return ax::Vec2(0, -20);   
+    case ECharDir::SSW:  return ax::Vec2(-17, -10);
+    case ECharDir::SW:   return ax::Vec2(-14, -14);
+    case ECharDir::WSW:  return ax::Vec2(-10, -17);
+    case ECharDir::W:    return ax::Vec2(-20, 0);
+    case ECharDir::WNW:  return ax::Vec2(-17, 10);
+    case ECharDir::NW:   return ax::Vec2(-14, 14);
+    case ECharDir::NNW:  return ax::Vec2(-10, 17);
+    default:
+        break;
+    }
+    return ax::Vec2();
+}
+
+void DrawComp::RemoveCarryItem()
+{
+    if (mRoot.isNotNull())
+    {
+
+        auto node = mRoot->getChildByName("CarryMineral");
+        if (node != nullptr)
+        {
+            node->removeFromParentAndCleanup(true);
+            isCarryItme = false;
+        }
+    }
+}
+
+void DrawComp::RemoveGatherAnim()
+{
+    if (mRoot.isNotNull())
+    {
+        auto node = mRoot->getChildByName("GatherAnim");
+        node->removeFromParentAndCleanup(true);
+    }
 }
 
 

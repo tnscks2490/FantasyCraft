@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>TCarryGas/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{28,28}</string>
+                <key>spriteSourceSize</key>
+                <string>{28,28}</string>
+                <key>textureRect</key>
+                <string>{{0,0},{28,28}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>TCarryGas.png</string>
+            <key>size</key>
+            <string>{28,28}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:9b2d5490da7d26665a3a20106acd4dd6:ea7f274c9557d50f3efd0d25cb053c66:ed4bcb9358f6e6545334ceb1ae94476e$</string>
+            <key>textureFileName</key>
+            <string>TCarryGas.png</string>
+        </dict>
+    </dict>
+</plist>

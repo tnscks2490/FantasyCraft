@@ -30,4 +30,10 @@ public:
 
     BuildingSize Bsize = BuildingSize::Middle;
 
+    float GatherTime = 1.55f;
+
+    int mResource = 5000;
+    bool isGathering = false;
+
+    Actor* mGather   = nullptr;
 };

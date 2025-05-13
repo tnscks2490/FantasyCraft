@@ -16,6 +16,9 @@ enum class MsgType
     Demaged,
     Gathering,
     SetTarget,
+    GatherMineral,
+    GatherGas,
+    GiveMineral,
 
     // 건설물 생성하기
     Build,

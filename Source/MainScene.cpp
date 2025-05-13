@@ -270,8 +270,10 @@ void MainScene::onMouseUp(Event* event)
             auto ac = userData->mActor;
             if (ac->mUnitComp)
             {
+                // 건물인지 아닌지 판별하기
+
                 auto builder = mPlayer->mMainActor;
-                if (builder->mActorType == ActorType::SCV)
+                if (builder->mActorType == ActorType::SCV )
                 {
                     ActorMessage msg = {MsgType::Build_Continue, ac, nullptr, nullptr};
                     SendActorMessage(builder, msg);
@@ -675,6 +677,7 @@ void MainScene::Decording()
             actor->SetPosition(data.pos);
         }
         break;
+
         case 77:
         case 78:
         case 79:

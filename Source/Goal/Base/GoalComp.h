@@ -38,8 +38,8 @@ void PushGoal_DoingBuild(Actor* Builder, Actor* structure);
 void AddGoal_MoveAndContinueBuild(Actor* Builder, Actor* structure);
 void PushGoal_MoveAndContinueBuild(Actor* Builder, Actor* structure);
 
-void AddGoal_MoveAndGathering(Actor* mMineral);
-void PushGoal_MoveAndGathering(Actor* mMineral);
+void AddGoal_MoveAndGathering(Actor* Gather, Actor* mMineral);
+void PushGoal_MoveAndGathering(Actor* Gather, Actor* mMineral);
 
 void AddGoal_AllCancel(Actor* actor);
 void PushGoal_AllCancel(Actor* actor);

@@ -31,6 +31,17 @@ public:
     ax::Node* CreateHPBarByIndex(ECharName name, int idx, std::string_view nodeName = "HpBar");
     
     ax::Node* CreateDemageNode(ActorType type);
+    ax::Node* CreateGatheringNode(ActorType type);
+
+    ax::Node* CreateCarryMineral();
+    ax::Node* CreateCarryGas();
+
+
+    ax::Vec2 GetCarryItemPos(ECharDir dir);
+
+    void RemoveCarryItem();
+    void RemoveGatherAnim();
+
 
     ax::Node* CreateCursorRect(ax::Vec2 sPos, ax::Vec2 ePos);
     void ChangeRectSize(ax::Vec2 ePos);
@@ -60,6 +71,8 @@ public:
 
     bool selected = false;
     float Timer = 0.f;
+
+    bool isCarryItme = false;
 
 public:
     Ptr<ax::Node> mRoot = nullptr;

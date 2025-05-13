@@ -62,7 +62,12 @@ struct UnitQueueSlott
 };
 
 
-
+enum class GetItem
+{
+    None,
+    Mineral,
+    Gas,
+};
 
 
 

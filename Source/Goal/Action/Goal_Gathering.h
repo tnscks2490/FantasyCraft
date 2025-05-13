@@ -6,7 +6,7 @@ class Goal_Gathering : public Goal
 {
 public:
     static const char* GOAL_NAME;
-    Goal_Gathering(Actor* actor);
+    Goal_Gathering(Actor* gather,Actor* mineral);
 
     virtual void Start() override;
     virtual int Do() override;
@@ -17,7 +17,7 @@ public:
 
 public:
 
-    Actor* mTargetMineral = nullptr;
+    Actor* mTargetResource = nullptr;
 };
 
 

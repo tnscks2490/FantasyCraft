@@ -2,6 +2,9 @@
 #include "UnitComp.h"
 
 
+
+
+
 class SCVComp : public UnitComp
 {
 public:
@@ -14,7 +17,8 @@ public:
     void Repair();
 
 
-    void Gathering(Actor* mineral);
+    void Gathering(Actor* resource);
+    void GiveMineral();
     void SCVHpChange();
     void Build_Continue(ActorMessage& msg);
 
@@ -26,7 +30,11 @@ public:
     bool IsWorking = false;
     short mPop      = 1;
 
-    Actor* mBuilding = nullptr;
-    Actor* mMineral  = nullptr;
+    
+    GetItem mItem = GetItem::None;
+
+    Actor* mBuilding   = nullptr;
+    Actor* mGatherResource    = nullptr;
+    Actor* mHomeCenter = nullptr;
     
 };

@@ -12,7 +12,7 @@ public:
     virtual void update(float delta) override;
 
     
-    float GatherTime = 1.99f;
+    float GatherTime = 3.36f;
     float mTimer  = 0.f;
 
 
@@ -20,5 +20,5 @@ public:
 
 
     bool isGathering = false;
-    int mResource = 12000;
+    int mResource = 1500;
 };

@@ -61,6 +61,13 @@ void RefineryComp::MessageProc(ActorMessage& msg)
             mBuilder = nullptr;
     }
     break;
+    case MsgType::Gathering:
+    {
+        isGathering = true;
+        mGather     = msg.sender;
+        mGather->GetRoot()->setVisible(false);
+    }
+    break;
     default:
         break;
     }
@@ -102,4 +109,19 @@ void RefineryComp::update(float delta)
             }
         }
     }
+
+    if (isGathering)
+    {
+        mTimer += delta;
+        if (mTimer >= GatherTime)
+        {
+            mTimer      = 0.f;
+            isGathering = false;
+            // 메세지 보내기 넣으면될듯?
+            mResource -= 8;
+            ActorMessage msg = {MsgType::GatherGas, mActor, nullptr, nullptr};
+            SendActorMessage(mGather, msg);
+        }
+    }
+
 }
