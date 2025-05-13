@@ -280,6 +280,73 @@ AnimInfo g_AnimInfo_SCV_Attack[] = {
     {ECharName::SCV, ECharAct::Gathering, ECharDir::NNW, "Plist/SCV.plist", "SCV/Gathering/16/%04d.png", 1, 4, (0.5f / 4),     Vec2(0.5, 0.5), nullptr},
 };
 
+AnimInfo g_AnimInfo_Ghost_Move[] = {
+    {ECharName::Ghost, ECharAct::Move, ECharDir::N, "Plist/Ghost.plist", "Ghost/Move/1/%04d.png", 1, 9, (0.9f / 9), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::NNE, "Plist/Ghost.plist", "Ghost/Move/2/%04d.png", 1, 9, (0.9f / 9),    Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::NE, "Plist/Ghost.plist", "Ghost/Move/3/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::ENE, "Plist/Ghost.plist", "Ghost/Move/4/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::E, "Plist/Ghost.plist", "Ghost/Move/5/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::ESE, "Plist/Ghost.plist", "Ghost/Move/6/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::SE, "Plist/Ghost.plist", "Ghost/Move/7/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::SSE, "Plist/Ghost.plist", "Ghost/Move/8/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::S, "Plist/Ghost.plist", "Ghost/Move/9/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::SSW, "Plist/Ghost.plist", "Ghost/Move/10/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::SW, "Plist/Ghost.plist", "Ghost/Move/11/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::WSW, "Plist/Ghost.plist", "Ghost/Move/12/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::W, "Plist/Ghost.plist", "Ghost/Move/13/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::WNW, "Plist/Ghost.plist", "Ghost/Move/14/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::NW, "Plist/Ghost.plist", "Ghost/Move/15/%04d.png", 1, 9, (0.9f / 9),    Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::Move, ECharDir::NNW, "Plist/Ghost.plist", "Ghost/Move/16/%04d.png", 1, 9, (0.9f / 9),     Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Ghost_Idle[] = {
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::N, "Plist/Ghost.plist", "Ghost/Idle/1/%04d.png", 1, 5,(1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::NNE, "Plist/Ghost.plist", "Ghost/Idle/2/%04d.png", 1, 5,(1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::NE, "Plist/Ghost.plist", "Ghost/Idle/3/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::ENE, "Plist/Ghost.plist", "Ghost/Idle/4/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::E, "Plist/Ghost.plist", "Ghost/Idle/5/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::ESE, "Plist/Ghost.plist", "Ghost/Idle/6/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::SE, "Plist/Ghost.plist", "Ghost/Idle/7/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::SSE, "Plist/Ghost.plist", "Ghost/Idle/8/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::S, "Plist/Ghost.plist", "Ghost/Idle/9/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::SSW, "Plist/Ghost.plist", "Ghost/Idle/10/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::SW, "Plist/Ghost.plist", "Ghost/Idle/11/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::WSW, "Plist/Ghost.plist", "Ghost/Idle/12/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::W, "Plist/Ghost.plist", "Ghost/Idle/13/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::WNW, "Plist/Ghost.plist", "Ghost/Idle/14/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::NW, "Plist/Ghost.plist", "Ghost/Idle/15/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Idle, ECharDir::NNW, "Plist/Ghost.plist", "Ghost/Idle/16/%04d.png", 1, 5, (1.f / 5), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Ghost_Attack[] = {
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::N, "Plist/Ghost.plist", "Ghost/Attack/1/%04d.png", 1, 6,(0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::NNE, "Plist/Ghost.plist", "Ghost/Attack/2/%04d.png", 1, 6,(0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::NE, "Plist/Ghost.plist", "Ghost/Attack/3/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::ENE, "Plist/Ghost.plist", "Ghost/Attack/4/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::E, "Plist/Ghost.plist", "Ghost/Attack/5/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::ESE, "Plist/Ghost.plist", "Ghost/Attack/6/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::SE, "Plist/Ghost.plist", "Ghost/Attack/7/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::SSE, "Plist/Ghost.plist", "Ghost/Attack/8/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::S, "Plist/Ghost.plist", "Ghost/Attack/9/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::SSW, "Plist/Ghost.plist", "Ghost/Attack/10/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::SW, "Plist/Ghost.plist", "Ghost/Attack/11/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::WSW, "Plist/Ghost.plist", "Ghost/Attack/12/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::W, "Plist/Ghost.plist", "Ghost/Attack/13/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::WNW, "Plist/Ghost.plist", "Ghost/Attack/14/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::NW, "Plist/Ghost.plist", "Ghost/Attack/15/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+        {ECharName::Ghost, ECharAct::Attack, ECharDir::NNW, "Plist/Ghost.plist", "Ghost/Attack/16/%04d.png", 1, 6, (0.3f / 6), Vec2(0.5, 0.5), nullptr},
+};
+AnimInfo g_AnimInfo_Ghost_Death[] = {
+        {ECharName::Ghost, ECharAct::Death, ECharDir::Face, "Plist/Ghost.plist", "Ghost/Death/%04d.png", 1, 8, (1.f / 8), Vec2(0.5, 0.5), nullptr},
+
+};
+AnimInfo g_AnimInfo_Ghost_HP_Bar[] = {
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0005.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0006.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Ghost, ECharAct::HPBar, ECharDir::Face, "Plist/HP_Bar.plist", "HP_Bar/Ghost/0007.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
 
 AnimInfo g_AnimInfo_Effect_SCVSpark[] = {
     {ECharName::Effect, ECharAct::SCVSpark, ECharDir::Face, "Plist/SCVSpark.plist", "SCVSpark/%04d.png", 1, 10, (0.5f / 10), Vec2(0.5, 0.5), nullptr},

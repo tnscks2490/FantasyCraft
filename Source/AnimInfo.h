@@ -40,6 +40,7 @@ enum class ECharName
     Select,
     Marine,
     SCV,
+    Ghost,
     CommandCenter,
     Armory,
     Bunker,
