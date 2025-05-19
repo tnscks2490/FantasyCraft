@@ -539,7 +539,7 @@ ax::Node* DrawComp::CreateDemageNode(ActorType type)
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName("EffectNode");
-        mRoot->addChild(node);
+        mRoot->addChild(node,2);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
         ax::Action* action = ax::Repeat::create(animate,1);

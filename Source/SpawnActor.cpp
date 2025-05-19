@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "World.h"
+#include "PathFind.h"
 #include "Actor.h"
 #include "DrawComp.h"
 #include "MoveComp.h"
@@ -531,7 +532,10 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
     mUserData->mActor   = actor;
     node->setUserData(mUserData);
 
+
     World::get()->Actor_PushBack(actor);
+    
+
     return actor;
 }
 

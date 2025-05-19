@@ -11,3 +11,4 @@
 #include "Goal/Action/Goal_MoveAndContinueBuild.h"
 #include "Goal/Action/Goal_MoveAndGathering.h"
 #include "Goal/Action/Goal_Gathering.h"
+#include "Goal/Action/Goal_ReturnCargo.h"

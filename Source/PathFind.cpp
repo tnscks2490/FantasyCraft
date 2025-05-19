@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "PathFind.h"
 #include <iostream>
+#include "ComFunction.h"
 #include <chrono>
 #include <time.h>
+#include <cmath>
 #include <stdarg.h>
 
 
@@ -47,7 +49,7 @@ void PathFind::DebugMap()
         {
             if (mColMap->IsCollision(j, i))
             {
-                printf("1");
+                printf("*");
             }
             else
             {
@@ -73,6 +75,96 @@ bool PathFind::Enter()
     }
     else
         return false;
+}
+
+void PathFind::SetTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
+{
+    auto ap = actorPos;
+    auto as = actorSize;
+
+
+    int spX, spY;
+    spX = ap.x - (as.x / 2);
+    spY = ap.y + (as.y / 2);
+
+    spX = spX / 16;
+    spY = spY / 16;
+
+    int epX, epY;
+    epX = ap.x + (as.x / 2);
+    epY = ap.y - (as.y / 2);
+
+    epX = epX / 16;
+    epY = epY / 16;
+
+
+
+
+    for (int i = spX; i <= epX; i++)
+    {
+        for (int j = epY; j <= spY; j++)
+        {
+            mColMap->SetAt(i, j);
+        }
+    }
+
+
+    printf("설치끝~");
+
+
+
+}
+
+ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
+{
+    auto sp = sPos;
+    auto ep = ePos;
+
+
+    auto findPos = sp - ep;
+
+    float fx = std::abs(findPos.x);
+    float fy = std::abs(findPos.y);
+
+    if (fx >= fy)
+    {
+        if (findPos.x > 0)
+        {
+            for (int i = (int)(ep.x / 16); i < mWidth; i++)
+            {
+                if (!mColMap->IsCollision(i, ep.y / 16))
+                    return ax::Vec2(i * 16, ep.y);
+            }
+        }
+        else
+        {
+            for (int i = (int)(ep.x / 16); i >= 0; i--)
+            {
+                if (!mColMap->IsCollision(i, ep.y / 16))
+                    return ax::Vec2(i * 16, ep.y);
+            }
+        }
+    }
+    else
+    {
+        if (findPos.y > 0)
+        {
+            for (int j = (int)(ep.y / 16); j < mHeight; j++)
+            {
+                if (!mColMap->IsCollision((ep.x / 16),j))
+                    return ax::Vec2(ep.x,j*16);
+            }
+        }
+        else
+        {
+            for (int j = (int)(ep.y / 16); j >= 0; j--)
+            {
+                if (!mColMap->IsCollision((ep.x / 16), j))
+                    return ax::Vec2(ep.x, j * 16);
+            }
+        }
+    }
+    return ax::Vec2::ZERO;
 }
 
 std::list<ax::Vec2> PathFind::GetTargetList(ax::Vec2 start, ax::Vec2 dest)

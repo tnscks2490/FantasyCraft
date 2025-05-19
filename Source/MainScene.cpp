@@ -421,7 +421,7 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     {
         PK_Data data;
         data.ClientID = TcpClient::get()->GetID();
-        data.pos      = ax::Vec2(300, 500);
+        data.pos      = ax::Vec2(320, 512);
         data.input    = 50;
         TcpClient::get()->SendMessageToServer(data);
     }
@@ -444,8 +444,11 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         data.input    = 4;
         TcpClient::get()->SendMessageToServer(data);
     } break;
-
-
+    case ax::EventKeyboard::KeyCode::KEY_9:
+    {
+        World::get()->mPath->DebugMap();
+    }
+    break;
     default:
         break;
     }
@@ -675,6 +678,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnMineral(mMapLayer, data);
             actor->SetPosition(data.pos);
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 64));
         }
         break;
 
@@ -701,6 +705,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(data.pos);
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(16, 16));
         } break;
 
         case 101:  // 마린 생성
@@ -713,7 +718,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnCommandCenter(mMapLayer, data);
             actor->SetPosition(data.pos);
-
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 64));
             if (data.ClientID == TcpClient::get()->GetID())
             {
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};

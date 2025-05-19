@@ -36,6 +36,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
             {
                 mBuilder = msg.sender;
                 mCurAction = ActionState::Building;
+                mActor->mDrawComp->CreateDemageNode(ActorType::SCV);
             }
         }
 

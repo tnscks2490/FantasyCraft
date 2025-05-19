@@ -171,6 +171,11 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
     } break;
+    case MsgType::ReturnCargo:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }
     default:
         break;
     }

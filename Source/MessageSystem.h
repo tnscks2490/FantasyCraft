@@ -19,7 +19,7 @@ enum class MsgType
     GatherMineral,
     GatherGas,
     GiveMineral,
-
+    ReturnCargo,
     // 건설물 생성하기
     Build,
     Do_Build,

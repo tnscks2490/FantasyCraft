@@ -5,6 +5,7 @@
 #include "MessageSystem.h"
 #include "TcpClient.h"
 #include "BPComp.h"
+#include "PathFind.h"
 #include "MoveComp.h"
 #include "Goal/Base/GoalComp.h"
 #include "DrawComp.h"
@@ -36,7 +37,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
     {
         if (msg.sender->mActorType == ActorType::CommandCenter)
         {
-            GiveMineral();
+            if (mGatherResource)
+                GiveMineral();
         }
     }break;
     case MsgType::Build:
@@ -142,6 +144,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
     } break;
     case MsgType::GatherMineral:
     {
+        cmdLocked  = false;
         mCurAction = ActionState::Idle;
         mActor->mDrawComp->CreateCarryMineral();
         mItem = GetItem::Mineral;
@@ -155,6 +158,27 @@ void SCVComp::MessageProc(ActorMessage& msg)
         mItem = GetItem::Gas;
         mActor->GetRoot()->setVisible(true);
     } break;
+
+    case MsgType::ReturnCargo:
+    {
+        mCurAction = ActionState::Idle;
+        if (mCargo)
+        {
+            auto pos = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mCargo->GetPosition());
+            AddGoal_MoveToPath(mActor, pos);
+        }
+        else
+        {
+            if (SearchNearCargo())
+            {
+                auto pos = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mCargo->GetPosition());
+                AddGoal_MoveToPath(mActor, pos);
+            }
+            
+        }
+
+    }
+    break;
     default:
         break;
     }
@@ -196,7 +220,7 @@ void SCVComp::Gathering(Actor* resource)
         mCurAction = ActionState::Gathering;
     else if (mGatherResource->mActorType == ActorType::Refinery)
         mCurAction = ActionState::Idle;
-    //cmdLocked        = true;
+    cmdLocked        = true;
     ActorMessage msg = {MsgType::Gathering,mActor,nullptr,nullptr};
     SendActorMessage(mGatherResource, msg);
 
@@ -210,7 +234,7 @@ void SCVComp::GiveMineral()
 
     mActor->mDrawComp->RemoveCarryItem();
     ActorMessage msg = {MsgType::GiveMineral, mActor, nullptr, nullptr};
-    SendActorMessage(mHomeCenter, msg);
+    SendActorMessage(mCargo, msg);
 }
 
 void SCVComp::SCVHpChange()
@@ -229,6 +253,30 @@ void SCVComp::Build_Continue(ActorMessage& msg)
         mBuilding = msg.sender;
         AddGoal_MoveAndContinueBuild(mActor, msg.sender);
     }
+}
+
+bool SCVComp::SearchNearCargo()
+{
+    Actor* nearCargo = nullptr;
+    float len     = 10000000;
+    for (auto ac : World::get()->w_ActorList)
+    {
+        if (ac->mID == mActor->mID && ac->mActorType == ActorType::CommandCenter)
+        {
+            if (length(mActor->GetPosition(), ac->GetPosition()) < len)
+            {
+                len = length(mActor->GetPosition(), ac->GetPosition());
+                nearCargo = ac;
+            }
+        }
+    }
+    if (nearCargo)
+    {
+        mCargo = nearCargo;
+        return true;
+    }
+
+    return false;
 }
 
 void SCVComp::Building(ActorMessage& msg)

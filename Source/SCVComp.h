@@ -22,6 +22,8 @@ public:
     void SCVHpChange();
     void Build_Continue(ActorMessage& msg);
 
+    void SearchCloseMineral();
+    bool SearchNearCargo();
     
 
 
@@ -35,6 +37,6 @@ public:
 
     Actor* mBuilding   = nullptr;
     Actor* mGatherResource    = nullptr;
-    Actor* mHomeCenter = nullptr;
+    Actor* mCargo = nullptr;
     
 };
