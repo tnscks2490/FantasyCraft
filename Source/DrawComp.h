@@ -11,6 +11,8 @@ public:
 
     virtual void update(float delta) override;
 
+    ax::Vec2 GetBodySize() { return mBodySize; }
+
 
     ax::Node* CreateRootNode();
     ax::Node* CreatePhysicsNode(ax::Vec2 bodysize);
@@ -61,6 +63,7 @@ public:
     void ChangeCurDir(ax::Vec2 mTargetDir);
 
 
+public:
 
     //TODO:추후에 수정할것 생성하는 액터에 따라서
     AnimInfo* mCurAnimInfo   = nullptr;
@@ -73,6 +76,8 @@ public:
     float Timer = 0.f;
 
     bool isCarryItme = false;
+
+    ax::Vec2 mBodySize;
 
 public:
     Ptr<ax::Node> mRoot = nullptr;

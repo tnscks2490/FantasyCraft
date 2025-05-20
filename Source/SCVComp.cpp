@@ -72,6 +72,14 @@ void SCVComp::MessageProc(ActorMessage& msg)
         cmdLocked = true;
     }break;
 
+    case MsgType::Build_Cancel:
+    {
+        AddGoal_AllCancel(mActor);
+        mBuilding = nullptr;
+        cmdLocked = false;
+    }
+    break;
+
     case MsgType::Cancel:
     {
         if (mBuilding)

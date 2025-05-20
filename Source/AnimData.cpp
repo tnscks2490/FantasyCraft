@@ -372,6 +372,11 @@ AnimInfo g_AnimInfo_CommandCenter_Doing[] = {
 AnimInfo g_AnimInfo_CommandCenter_BP[] = {
     {ECharName::CommandCenter, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/CommandCenter/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
+AnimInfo g_AnimInfo_CommandCenter_Death[] = {
+    {ECharName::CommandCenter, ECharAct::Death, ECharDir::Face, "Plist/CommandCenter.plist",
+     "CommandCenter/Death/%04d.png", 1, 14, (2.f / 14), Vec2(0.5, 0.5), nullptr},
+};
+
 
 AnimInfo g_AnimInfo_Armory_Idle[] ={
     {ECharName::Armory, ECharAct::Idle, ECharDir::Face, "Plist/Armory.plist", "Armory/Idle/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -634,6 +639,7 @@ AnimInfo& FindAnimInfo(ECharName Name, ECharAct action, ECharDir dir)
         case ECharAct::Idle:  return g_AnimInfo_CommandCenter_Idle[0];
         case ECharAct::Doing: return g_AnimInfo_CommandCenter_Doing[0];
         case ECharAct::BP:    return g_AnimInfo_CommandCenter_BP[0];
+        case ECharAct::Death: return g_AnimInfo_CommandCenter_Death[0];
         }
 
     case ECharName::Academy:

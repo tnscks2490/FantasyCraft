@@ -163,9 +163,18 @@ void UnitInfoLayer::MessageProc(SystemMessage smsg)
 
 void UnitInfoLayer::update(float delta)
 {
+    if (mActor && mActor->isDead)
+    {
+        ChangeLayerState(LayerState::None);
+        mActor = nullptr;
+    }
+
 
     if (mCurState == LayerState::None)
         return;
+
+
+
 
     if (mCurState == LayerState::Build)
     {
@@ -180,6 +189,8 @@ void UnitInfoLayer::update(float delta)
         UpgradeUpdate(delta);
     }
     // 체력 변동 자동 적용함수 넣을 것
+
+    
 }
 
 

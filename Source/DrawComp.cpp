@@ -3,6 +3,7 @@
 #include "World.h"
 #include "MoveComp.h"
 #include "CursorComp.h"
+#include "PathFind.h"
 
 
 DrawComp::DrawComp(Actor* actor)
@@ -165,7 +166,7 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         auto bodyNode = ax::Node::create();
         bodyNode->setName("Body");
         
-        
+        mBodySize = bodysize;
         //피직스바디생성 및 노드에 붙여주기
 
         auto body = ax::PhysicsBody::createBox(bodysize);
@@ -733,6 +734,7 @@ void DrawComp::ChangeAnimDeath(ECharName Name)
 
    auto removeNode = ax::CallFuncN::create([mActor = this->mActor](ax::Node* sender) {
         //sender->removeFromParentAndCleanup(true);
+        World::get()->mPath->ClrTileActorPhysics(mActor->GetPosition(), ax::Vec2(64, 64));
         World::get()->Actor_PushBackDelete(mActor);
     });
 

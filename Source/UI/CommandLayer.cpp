@@ -32,10 +32,16 @@ bool CommandLayer::init()
 
 void CommandLayer::update(float delta)
 {
+    if (mActor && mActor->isDead)
+    {
+        ChangeCmdState(CommandState::None);
+        mActor = nullptr;
+    }
+
     if (mActor)
     {
         if (mActor->mUnitComp->IsCmdLocked())
-        {
+        { 
             if (mCurState == CommandState::Idle)
             {
                 ChangeCmdState(CommandState::CmdLock);
@@ -49,6 +55,7 @@ void CommandLayer::update(float delta)
             }
         }
     }
+    
 }
 
 void CommandLayer::MessageProc(SystemMessage smsg)
@@ -313,6 +320,7 @@ void CommandLayer::ChangeCmdState(CommandState state)
     switch (state)
     {
     case CommandState::None:
+        mMenu->removeAllChildren();
         break;
     case CommandState::Idle:
     {

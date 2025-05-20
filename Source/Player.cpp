@@ -200,7 +200,7 @@ void Player::Clear()
 {
     for (auto ac : PlayerActors)
     {
-        if (ac)
+        if (ac && !ac->isDead )
         {
             ac->mDrawComp->selected = false;         
             ac->mDrawComp->isSelected();
@@ -355,8 +355,15 @@ void Player::ReSelected()
     if (PlayerActorsNum() == 1)
     {
         // 여기서 UI로 어떤 캐릭터가 선택됐는지 보내서 UI버튼 바꿔야함
-        mMainActor = PlayerActors[0];
 
+        for (auto ac : PlayerActors)
+        {
+            if (ac)
+            {
+                mMainActor = ac;
+                break;
+            }
+        }
         SystemMessage ssmsg = {SMsgType::SSUI, ReceiverType::UI,ActorType::None, ButtonType::None, mMainActor};
         SendSystemMessage(ui, this, ssmsg);
     }

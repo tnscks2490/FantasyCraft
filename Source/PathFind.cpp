@@ -115,6 +115,34 @@ void PathFind::SetTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
 
 }
 
+void PathFind::ClrTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
+{
+    auto ap = actorPos;
+    auto as = actorSize;
+
+    int spX, spY;
+    spX = ap.x - (as.x / 2);
+    spY = ap.y + (as.y / 2);
+
+    spX = spX / 16;
+    spY = spY / 16;
+
+    int epX, epY;
+    epX = ap.x + (as.x / 2);
+    epY = ap.y - (as.y / 2);
+
+    epX = epX / 16;
+    epY = epY / 16;
+
+    for (int i = spX; i <= epX; i++)
+    {
+        for (int j = epY; j <= spY; j++)
+        {
+            mColMap->ClrAt(i, j);
+        }
+    }
+}
+
 ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
 {
     auto sp = sPos;
@@ -130,38 +158,26 @@ ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
     {
         if (findPos.x > 0)
         {
-            for (int i = (int)(ep.x / 16); i < mWidth; i++)
-            {
-                if (!mColMap->IsCollision(i, ep.y / 16))
-                    return ax::Vec2(i * 16, ep.y);
-            }
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, true, true);
+            return ax::Vec2(pos*16,ePos.y);
         }
         else
         {
-            for (int i = (int)(ep.x / 16); i >= 0; i--)
-            {
-                if (!mColMap->IsCollision(i, ep.y / 16))
-                    return ax::Vec2(i * 16, ep.y);
-            }
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, true, false);
+            return ax::Vec2(pos * 16, ePos.y);
         }
     }
     else
     {
         if (findPos.y > 0)
         {
-            for (int j = (int)(ep.y / 16); j < mHeight; j++)
-            {
-                if (!mColMap->IsCollision((ep.x / 16),j))
-                    return ax::Vec2(ep.x,j*16);
-            }
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, false, true);
+            return ax::Vec2(ePos.x, pos * 16);
         }
         else
         {
-            for (int j = (int)(ep.y / 16); j >= 0; j--)
-            {
-                if (!mColMap->IsCollision((ep.x / 16), j))
-                    return ax::Vec2(ep.x, j * 16);
-            }
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, false, false);
+            return ax::Vec2(ePos.x, pos * 16);
         }
     }
     return ax::Vec2::ZERO;

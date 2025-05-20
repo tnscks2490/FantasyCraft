@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "CommandCenterComp.h"
 #include "DrawComp.h"
+#include "PathFind.h"
 
 CommandCenterComp::CommandCenterComp(Actor* actor)
     : UnitComp(actor)
@@ -68,8 +69,17 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         if (!isBuild)
             mBuilder = nullptr;
     }break;
-
-
+    case MsgType::Cancel:
+    {
+        if (!IsBuild())
+        {
+            mCurAction = ActionState::Death;
+            ActorMessage msg = {MsgType::Build_Cancel, mActor, nullptr, nullptr};
+            SendActorMessage(mBuilder, msg);
+            mBuilder = nullptr;
+        }
+    }
+    break;
     case MsgType::Create_SCV:
     {
         AddSCV();
@@ -78,7 +88,9 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     case MsgType::GiveMineral:
     {
 
-    }
+    } break;
+
+
     default:
         break;
     }
@@ -105,6 +117,7 @@ void CommandCenterComp::update(float delta)
                     isBuild          = true;
                     mCurAction = ActionState::Idle;
                     mBuilder   = nullptr;
+
                 }
                 else
                 {

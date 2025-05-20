@@ -17,6 +17,7 @@ public:
     bool Enter();
 
     void SetTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize);
+    void ClrTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize);
     ax::Vec2 FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos);
 
 public:
