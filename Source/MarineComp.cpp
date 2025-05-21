@@ -41,9 +41,12 @@ void MarineComp::MessageProc(ActorMessage& msg)
         AddGoal_MoveAndAttack(mActor, mAttackTarget);
 
     }break;
+
     case MsgType::AttackTarget:
     {
         AttackTarget(msg.sender);
+
+        
     }break;
     default:
         break;
@@ -57,4 +60,5 @@ void MarineComp::AttackTarget(Actor* Target)
         auto pos = Target->GetPosition() - mActor->GetPosition();
         mActor->mDrawComp->ChangeCurDir(pos);
     }
+
 }

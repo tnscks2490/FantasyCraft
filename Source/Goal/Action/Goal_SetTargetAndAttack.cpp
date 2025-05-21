@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Actor.h"
 #include "MoveComp.h"
-#include "GoalComp.h"
 #include "UnitComp.h"
+#include "Goal/Base/GoalComp.h"
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
 #include "Goal_SetTargetAndAttack.h"
@@ -30,7 +30,12 @@ int Goal_SetTargetAndAttack::Do()
 
     if (!mActor->mUnitComp->IsCmdLocked())
     {
-        m_Status = Goal::completed_t;
+        if (mTarget->isDead)
+            m_Status = Goal::completed_t;
+        else
+        {
+            AddGoal_MoveAndAttack(mActor, mTarget);
+        }
         return m_Status;
     }
 
