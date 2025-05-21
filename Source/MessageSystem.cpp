@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "UI/UILayer.h"
 #include "UnitComp.h"
+#include "SensorComp.h"
 #include "CursorComp.h"
 #include "BPComp.h"
 #include "DrawComp.h"
@@ -20,6 +21,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
     case MsgType::Contacted:
     {
         if (receiver->mCursorComp)  receiver->mCursorComp->MessageProc(msg);
+        if (receiver->mSensorComp)  receiver->mSensorComp->MessageProc(msg);
         if (receiver->mUnitComp)    receiver->mUnitComp->MessageProc(msg);
         if (receiver->mBPComp)      receiver->mBPComp->MessageProc(msg);
         if (receiver->mDrawComp)    receiver->mDrawComp->MessageProc(msg);
@@ -27,6 +29,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
     case MsgType::Separate:
     {
         if (receiver->mCursorComp)  receiver->mCursorComp->MessageProc(msg);
+        if (receiver->mSensorComp)  receiver->mSensorComp->MessageProc(msg);
         if (receiver->mUnitComp)    receiver->mUnitComp->MessageProc(msg);
         if (receiver->mBPComp)      receiver->mBPComp->MessageProc(msg);
         if (receiver->mDrawComp)    receiver->mDrawComp->MessageProc(msg);

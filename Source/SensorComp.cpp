@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "SensorComp.h"
 #include "SensorMemory.h"
+#include "Goal/Base/GoalComp.h"
 #include "Actor.h"
 
 SensorComp::SensorComp(Actor* actor)
@@ -8,6 +9,7 @@ SensorComp::SensorComp(Actor* actor)
 {
     actor->mSensorComp = this;
     SetSightByType(actor->mActorType);
+    CreateSightNode();
 }
 
 SensorComp::~SensorComp()
@@ -24,7 +26,25 @@ void SensorComp::update(float delta)
 
 }
 
-void SensorComp::MessageProc(ActorMessage& msg) {}
+void SensorComp::MessageProc(ActorMessage& msg)
+{
+    switch (msg.msgType)
+    {
+    case MsgType::Separate:
+    case MsgType::Contacted:
+    {
+        if (msg.sender->mActorType == ActorType::Cursor)
+            return;
+        if (msg.sender->mID == mActor->mID)
+        {
+            AddGoal_MoveAndAttack(mActor, msg.sender);
+        }
+    }
+    break;
+    default:
+        break;
+    }
+}
 
 void SensorComp::SetSightByType(ActorType type)
 {
@@ -56,5 +76,29 @@ void SensorComp::SetSightByType(ActorType type)
     case ActorType::Refinery:        SetSight(8);   break;
     default:  break;
     }
+}
+ax::Node* SensorComp::CreateSightNode()
+{
+    auto root = mActor->GetRoot();
+
+    if (root != nullptr)
+    {
+        auto sNode = ax::Node::create();
+        sNode->setName("SensorNode");
+        root->addChild(sNode, 1);
+
+        auto sBody = ax::PhysicsBody::createCircle(mSight);
+        sBody->setContactTestBitmask(0xFFFFFFFF);
+        sBody->setDynamic(false);
+        sNode->setPhysicsBody(sBody);
+        sNode->setTag(100);
+
+        ax::DrawNode* circle = ax::DrawNode::create();
+        circle->drawCircle(ax::Vec2::ZERO, mSight,360, 100,true,ax::Color4B::RED);
+        sNode->addChild(circle,1);
+
+        return sNode;
+    }
+    return nullptr;
 }
 //TODO:터렛은 11임 공격사거리 7

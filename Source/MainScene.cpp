@@ -512,6 +512,8 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, dataA};
     SendActorMessage(dataB->mActor, amsgB);
 
+      
+    
     return true;
 }
 
@@ -520,6 +522,8 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
+    
+
     if (A->getTag() == 10 &&  B->getTag() == 10)
     {
         UserData* userDataA = (UserData*)A->getParent()->getUserData();
@@ -527,8 +531,17 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
 
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
- 
-        if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) <
+
+        if (actorA->mMoveComp->IsContacted(actorB->mMoveComp->mBodyBorder))
+        {         
+            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
+        }
+        else if (actorB->mMoveComp->IsContacted(actorA->mMoveComp->mBodyBorder))
+        {
+            actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
+        }
+
+        /*if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) <
             actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
             actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
@@ -537,7 +550,7 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
                  actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
         {
             actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
-        }
+        }*/
 
         return true;
     }

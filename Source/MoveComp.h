@@ -11,6 +11,7 @@ struct Border
     float right;
     float top;
     float bottom;
+    ax::Vec2 pos;
 };
 
 

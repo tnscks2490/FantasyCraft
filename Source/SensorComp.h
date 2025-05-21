@@ -17,6 +17,8 @@ public:
 
     void SetSightByType(ActorType type);
 
+    ax::Node* CreateSightNode();
+
 public:
 
 

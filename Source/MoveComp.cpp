@@ -37,27 +37,8 @@ void MoveComp::update(float delta)
         mActor->GetRoot()->setPosition(pos);
 
         // 충돌했을때 겹치지 않게 하는 코드
-        UpdateBodyRect();
+         UpdateBodyRect();
     }
-    //if (mActor->mUnitComp->mCurAction == ActionState::Move)
-    //{
-    //    mVelocity = ax::Vec2(0, 0);
-    //    if (mTimer != -1.0)
-    //        mTimer += delta;
-    //    CheckTargetList();
-    //    if (IsMoving)
-    //    {
-    //        Do_Moving();
-    //        mVelocity.normalize();
-    //        ax::Vec2 pos      = mActor->GetRoot()->getPosition();
-    //        mCurFrameMovement = mVelocity * delta * mSpeed;
-    //        pos += mCurFrameMovement;
-    //        mActor->GetRoot()->setPosition(pos);
-
-    //        // 충돌했을때 겹치지 않게 하는 코드
-    //        UpdateBodyRect();
-    //    }
-    //}
 
 }
 
@@ -99,7 +80,7 @@ void MoveComp::Do_Moving()
 
 void MoveComp::CheckTargetList()
 {
-    if (mTargetList.size() < 1)
+    if (mTargetList.size() < 1 && !IsMoving)
     {
         return;
     }
@@ -118,6 +99,7 @@ void MoveComp::UpdateBodyRect()
     mBodyBorder.right = mActor->GetPosition().x + 8.f;
     mBodyBorder.bottom = mActor->GetPosition().y - 8.f;
     mBodyBorder.top    = mActor->GetPosition().y + 8.f;
+    mBodyBorder.pos    = mActor->GetPosition();
 }
 
 bool MoveComp::IsArriveComplete()
@@ -130,7 +112,6 @@ bool MoveComp::IsArriveComplete()
 void MoveComp::StopMove()
 {
     IsMoving = false;
-
     mTarget = mActor->GetPosition();
     mTargetList.clear();
 
@@ -337,13 +318,23 @@ void MoveComp::CollisionMove(Border other)
 
 bool MoveComp::IsContacted(Border other)
 {
-    if ((mBodyBorder.right > other.left)
-        && (other.right > mBodyBorder.left)
-        && (mBodyBorder.top > other.bottom)
-        && (other.top > mBodyBorder.bottom))
-        return true;
-    else
+
+
+    float xdis = std::max(mBodyBorder.pos.x, other.pos.x) - std::min(mBodyBorder.pos.x, other.pos.x);
+    float xRectdis = ((mBodyBorder.right - mBodyBorder.left) / 2) + ((other.right - other.left) / 2);
+
+    if (xdis >= xRectdis)
         return false;
+
+    float ydis     = std::max(mBodyBorder.pos.y, other.pos.y) - std::min(mBodyBorder.pos.y, other.pos.y);
+    float yRectdis = ((mBodyBorder.top - mBodyBorder.bottom) / 2) + ((other.top - other.bottom) / 2);
+    if (ydis >= yRectdis)
+        return false;
+
+    if (xdis < xRectdis && ydis < yRectdis)
+        return true;
+
+    return false;
 }
 
 void MoveComp::Avoid()

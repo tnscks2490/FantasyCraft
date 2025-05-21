@@ -67,7 +67,7 @@ void Actor::SetPosition(ax::Vec2 pos)
 
 ax::Vec2 Actor::GetPosition()
 {
-    if (mDrawComp->mRoot.isNotNull())
+    if (mDrawComp->mRoot.isNotNull()&& !isDead)
     {
         return mDrawComp->mRoot->getPosition();
     }
