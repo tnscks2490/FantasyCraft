@@ -12,3 +12,7 @@
 #include "Goal/Action/Goal_MoveAndGathering.h"
 #include "Goal/Action/Goal_Gathering.h"
 #include "Goal/Action/Goal_ReturnCargo.h"
+#include "Goal/Action/Goal_SetTargetAndAttack.h"
+#include "Goal/Action/Goal_MoveAndAttack.h"
+#include "Goal/Action/Goal_ApproachToTarget.h"
+#include "Goal/Action/Goal_MoveAndAttack.h"

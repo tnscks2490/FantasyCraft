@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Actor.h"
 #include "MarineComp.h"
+#include "Goal/Base/GoalComp.h"
 #include "DrawComp.h"
 
 MarineComp::MarineComp(Actor* actor)
@@ -32,15 +33,28 @@ void MarineComp::MessageProc(ActorMessage& msg)
 
         if (mTarget == mActor)
             return;
+        
+    } break;
+    case MsgType::SetAttackTarget:
+    {
+        mAttackTarget = msg.sender;
+        AddGoal_MoveAndAttack(mActor, mAttackTarget);
 
-        if (mActor->mWeaponComp->DoAttack(mTarget))
-        {
-            auto pos = mTarget->GetPosition() - mActor->GetPosition();
-            mActor->mDrawComp->ChangeCurDir(pos);
-        } 
-    }
-    break;
+    }break;
+    case MsgType::AttackTarget:
+    {
+        AttackTarget(msg.sender);
+    }break;
     default:
         break;
+    }
+}
+
+void MarineComp::AttackTarget(Actor* Target)
+{
+    if (mActor->mWeaponComp->DoAttack(Target))
+    {
+        auto pos = Target->GetPosition() - mActor->GetPosition();
+        mActor->mDrawComp->ChangeCurDir(pos);
     }
 }

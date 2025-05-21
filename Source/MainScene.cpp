@@ -157,6 +157,39 @@ void MainScene::onMouseDown(Event* event)
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
     ax::Vec2 realpos  = mousePos - mMapLayer->getPosition();
 
+    auto Lfunc = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
+        auto A                = shape.getBody()->getNode();
+        std::string_view name = A->getName();
+
+        std::cout << name.data() << "\n" << std::endl;
+
+        if (A->getTag() == 10 || A->getTag() == 20)
+        {
+            auto aRoot         = A->getParent();
+            UserData* userData = (UserData*)aRoot->getUserData();
+
+            if (mCursor->mCursorComp->mState == CursorState::SetAttackTarget)
+            {
+                ActorMessage msg = {MsgType::SetAttackTarget, userData->mActor, nullptr, nullptr};
+                for (auto ac : mPlayer->PlayerActors)
+                {
+                    if (ac != nullptr)
+                        SendActorMessage(ac, msg);
+                }
+            }
+            else
+            {
+                if (userData->mActor->mID == TcpClient::get()->GetID())
+                {
+                    mPlayer->PreSelected(userData->mActor);
+                }
+            }
+        }
+        return true;
+    };
+
+
+
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
         if (mCursor->mCursorComp->mState != CursorState::Idle)
@@ -190,12 +223,9 @@ void MainScene::onMouseDown(Event* event)
             mCursor->mCursorComp->sPos   = mousePos;
             mCursor->mCursorComp->ePos   = mousePos + ax::Vec2(1,1);
         }
-        else if (mCursor->mCursorComp->mState == CursorState::Target)
+        else if (mCursor->mCursorComp->mState == CursorState::SetAttackTarget)
         {
-            //AddGoal_MoveToPath(mPlayer->mMainActor, realpos);
-            //mCursor->mCursorComp->mState = CursorState::Idle;
-            
-            printf("이게 문제야 문제");
+            getPhysicsWorld()->queryRect(Lfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
         }
         else
         {
@@ -235,9 +265,9 @@ void MainScene::onMouseUp(Event* event)
             auto aRoot         = A->getParent();
             UserData* userData = (UserData*)aRoot->getUserData();
 
-            if (mCursor->mCursorComp->mState == CursorState::Target)
+            if (mCursor->mCursorComp->mState == CursorState::SetAttackTarget)
             {
-                ActorMessage msg = {MsgType::SetTarget, userData->mActor, nullptr, nullptr};
+                ActorMessage msg = {MsgType::SetAttackTarget, userData->mActor, nullptr, nullptr};
                 for (auto ac : mPlayer->PlayerActors)
                 {
                     if (ac != nullptr)
@@ -286,11 +316,8 @@ void MainScene::onMouseUp(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
     {
-        if (mCursor->mCursorComp->mState == CursorState::Target)
-        {
-            getPhysicsWorld()->queryRect(Lfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
-        }
-        else if (mCursor->mCursorComp->mState == CursorState::Drag)
+
+        if (mCursor->mCursorComp->mState == CursorState::Drag)
         {
             float width = GetRectWidth(sPos, ePos);
             float height = GetRectHeight(sPos, ePos);

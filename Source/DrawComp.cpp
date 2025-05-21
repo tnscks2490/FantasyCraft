@@ -46,6 +46,10 @@ void DrawComp::update(float delta)
         {
             ChangeAnim(ECharName::Cursor, ECharAct::Drag, ECharDir::Face);
         }
+        if (mActor->mCursorComp->mState == CursorState::SetAttackTarget)
+        {
+            ChangeAnim(ECharName::Cursor, ECharAct::Target, ECharDir::Face);
+        }
     }
     else 
     {

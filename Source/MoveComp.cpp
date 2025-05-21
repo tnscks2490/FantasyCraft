@@ -127,6 +127,15 @@ bool MoveComp::IsArriveComplete()
     return false;
 }
 
+void MoveComp::StopMove()
+{
+    IsMoving = false;
+
+    mTarget = mActor->GetPosition();
+    mTargetList.clear();
+
+}
+
 ax::Vec2 MoveComp::CalcVelocity(ax::Vec2 force)
 {
     force = Separation(World::get()->w_ActorList) * mWeightSeparation;

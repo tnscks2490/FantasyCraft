@@ -154,9 +154,9 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
                 auto otherRoot = other->mActor->GetRoot();
 
 
-                if (mState == CursorState::Target)
+                if (mState == CursorState::SetAttackTarget)
                 {
-                    
+                    printf("출력"); 
                 }
                 else if (mState != CursorState::Drag)
                 {

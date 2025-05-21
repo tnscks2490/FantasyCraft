@@ -18,5 +18,7 @@ enum class GoalType
     Build,
     Gather,
     AllComplete,
+    Approach,
+
     Cancel,
 };

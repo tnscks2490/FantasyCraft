@@ -43,3 +43,12 @@ void PushGoal_MoveAndGathering(Actor* Gather, Actor* mMineral);
 
 void AddGoal_AllCancel(Actor* actor);
 void PushGoal_AllCancel(Actor* actor);
+
+void AddGoal_SetTargetAndAttack(Actor* Attacker, Actor* Target);
+void PushGoal_SetTargetAndAttack(Actor* Attacker, Actor* Target);
+
+void AddGoal_ApproachToTarget(Actor* Attacker, ax::Vec2 dest);
+void PushGoal_ApproachToTarget(Actor* Attacker, ax::Vec2 dest);
+
+void AddGoal_MoveAndAttack(Actor* Attacker, Actor* Target);
+void PushGoal_MoveAndAttack(Actor* Attacker, Actor* Target);

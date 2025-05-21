@@ -11,7 +11,12 @@ public:
     virtual void update(float delta) override;
     virtual void MessageProc(ActorMessage& msg) override;
 
-public:
 
+    void AttackTarget(Actor* Target);
+
+public:
     short mPop      = 1;
+
+    // 공격대상
+    Actor* mAttackTarget = nullptr;
 };

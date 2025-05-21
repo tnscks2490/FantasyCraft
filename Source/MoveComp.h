@@ -32,6 +32,9 @@ public:
     void UpdateBodyRect();
     bool IsArriveComplete();
 
+    void StopMove();
+
+
     ax::Vec2 CalcVelocity(ax::Vec2 force);
 
     ax::Vec2 Separation(std::vector<Actor*>& actor);

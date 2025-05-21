@@ -24,7 +24,7 @@ public:
     WeaponType ClassifyWeapon(ActorType type);
 
     void SetRange(float range) { mRange = range * 32; }
-
+    float GetRange() { return mRange; }
     void SetRangeByType(ActorType type);
 
 public:

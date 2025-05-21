@@ -30,7 +30,7 @@ void Player::MessageProc(SystemMessage smsg)
         }
         break;
         case ButtonType::TAttack:
-            cursor->mCursorComp->mState = CursorState::Target;
+            cursor->mCursorComp->mState = CursorState::SetAttackTarget;
             break;
 
         case ButtonType::TMove:

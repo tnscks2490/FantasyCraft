@@ -132,3 +132,54 @@ void PushGoal_AllCancel(Actor* actor)
     if (actor->mGoalComp)
         actor->mGoalComp->mThink->PushSubGoal(new Goal_AllCancel(actor));
 }
+
+void AddGoal_SetTargetAndAttack(Actor* Attacker, Actor* Target)
+{
+    if (Attacker->mGoalComp)
+    {
+        Attacker->mGoalComp->mThink->RemoveAllSubgoals();
+        Attacker->mGoalComp->mThink->AddSubGoal(new Goal_SetTargetAndAttack(Attacker,Target));
+    }
+}
+
+void PushGoal_SetTargetAndAttack(Actor* Attacker, Actor* Target)
+{
+    if (Attacker->mGoalComp)
+    {
+        Attacker->mGoalComp->mThink->PushSubGoal(new Goal_SetTargetAndAttack(Attacker, Target));
+    }
+}
+
+void AddGoal_ApproachToTarget(Actor* Attacker, ax::Vec2 dest)
+{
+    if (Attacker->mGoalComp)
+    {
+        Attacker->mGoalComp->mThink->RemoveAllSubgoals();
+        Attacker->mGoalComp->mThink->AddSubGoal(new Goal_ApproachToTarget(Attacker, dest));
+    }
+}
+
+void PushGoal_ApproachToTarget(Actor* Attacker, ax::Vec2 dest)
+{
+    if (Attacker->mGoalComp)
+    {
+        Attacker->mGoalComp->mThink->PushSubGoal(new Goal_ApproachToTarget(Attacker, dest));
+    }
+}
+
+void AddGoal_MoveAndAttack(Actor* Attacker, Actor* Target)
+{
+    if (Attacker->mGoalComp)
+    {
+        Attacker->mGoalComp->mThink->RemoveAllSubgoals();
+        Attacker->mGoalComp->mThink->AddSubGoal(new Goal_MoveAndAttack(Attacker, Target));
+    }
+}
+
+void PushGoal_MoveAndAttack(Actor* Attacker, Actor* Target)
+{
+    if (Attacker->mGoalComp)
+    {
+        Attacker->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndAttack(Attacker, Target));
+    }
+}

@@ -14,6 +14,7 @@ enum class CursorState
     ContactTeam,
     ContactEnemy,
     Target,
+    SetAttackTarget,
 
 
 };
