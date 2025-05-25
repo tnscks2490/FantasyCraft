@@ -28,12 +28,12 @@ bool MapLayer::init()
     }
     printf("44\n");
 
-    mMap = ax::TMXTiledMap::create("Map/Python/Map.tmx");
+    mMap = ax::TMXTiledMap::create("Map/StarMap/StarMap.tmx");
     printf("55\n");
     this->addChild(mMap);
 
     //CreateWalls();
-
+    SettingResource();
 
     return true;
 }
@@ -74,4 +74,24 @@ void MapLayer::CreateWalls()
 
 
     printf("워 레이어 생성");
+}
+
+void MapLayer::SettingResource()
+{
+    auto rscLayer = mMap->getObjectGroup("ResourcePoint");
+
+    auto minerals = rscLayer->getObjects();
+    for (auto p : minerals)
+    {
+        ax::ValueMap obj = p.asValueMap();
+
+        ax::Vec2 pos;
+        pos.x = obj["x"].asFloat();
+        pos.y = obj["y"].asFloat();
+
+        SendPK_Data(50, pos);
+        
+        printf("123");
+    }
+
 }

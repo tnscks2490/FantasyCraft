@@ -132,7 +132,7 @@ bool MainScene::init()
 
     // 이동불가능한 지형을 데이터로 넣기 TMX에다가쓰는방식(맵을 바꾸면서 수정해야함)
     auto wall = mMapLayer->GetMap()->getLayer("Wall");
-    World::get()->mPath->DefaultSetting(wall);
+    //World::get()->mPath->DefaultSetting(wall);
     World::get()->mPath->DebugMap();
     
    
@@ -171,6 +171,15 @@ void MainScene::onMouseDown(Event* event)
             if (mCursor->mCursorComp->mState == CursorState::SetAttackTarget)
             {
                 ActorMessage msg = {MsgType::SetAttackTarget, userData->mActor, nullptr, nullptr};
+                for (auto ac : mPlayer->PlayerActors)
+                {
+                    if (ac != nullptr)
+                        SendActorMessage(ac, msg);
+                }
+            }
+            else if (mCursor->mCursorComp->mState == CursorState::Target)
+            {
+                ActorMessage msg = {MsgType::SetTarget, userData->mActor, nullptr, nullptr};
                 for (auto ac : mPlayer->PlayerActors)
                 {
                     if (ac != nullptr)
@@ -224,6 +233,10 @@ void MainScene::onMouseDown(Event* event)
             mCursor->mCursorComp->ePos   = mousePos + ax::Vec2(1,1);
         }
         else if (mCursor->mCursorComp->mState == CursorState::SetAttackTarget)
+        {
+            getPhysicsWorld()->queryRect(Lfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
+        }
+        else if (mCursor->mCursorComp->mState == CursorState::Target)
         {
             getPhysicsWorld()->queryRect(Lfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
         }
@@ -592,7 +605,7 @@ void MainScene::update(float delta)
     
     // 마우스가 화면 끝으로 갔을 때 화면 전체를 옮긴다.
     // 해당기능은 마우스의 위치백터만큼 화면에 더해야한다.
-    //ScreenMove(delta);
+    ScreenMove(delta);
 
     mCursor->update(delta);
 

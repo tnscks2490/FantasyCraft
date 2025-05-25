@@ -16,9 +16,12 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 1091.5,
-                "y": 1028
+                "x": 1092,
+                "y": 1028.5
             }
+        },
+        "python.tmx#TMXTileSet_Animations": {
+            "scaleInDock": 1
         }
     },
     "frame.defaultDuration": 200,

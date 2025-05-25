@@ -1,0 +1,30 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/CC/TestClient/Content/TMXMap/Python/TMXTileSet_Animations.tsx": {
+            "scaleInDock": 1
+        },
+        "Map.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3892,
+                "y": 2512
+            }
+        },
+        "Map.tmx#t": {
+            "scaleInDock": 1
+        },
+        "TMXTileSet_Animations.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+    ],
+    "project": "StarMap.tiled-project",
+    "recentFiles": [
+        "Map.tmx"
+    ]
+}

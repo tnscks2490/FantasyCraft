@@ -19,6 +19,7 @@ public:
     int GetWidth() { return mWidth; }
     int GetHeight() { return mHeight; }
     void CreateWalls();
+    void SettingResource();
 
 
 public:

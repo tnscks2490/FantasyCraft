@@ -127,8 +127,11 @@ void SCVComp::MessageProc(ActorMessage& msg)
     {
         if (msg.sender->mActorType == ActorType::Mineral)
         {
-            auto mMineral = msg.sender;
-            AddGoal_MoveAndGathering(mActor,mMineral);
+            if (mGatherResource == nullptr)
+            {
+                auto mMineral = msg.sender;
+                AddGoal_MoveAndGathering(mActor, mMineral);
+            }
         }
         else if (msg.sender->mActorType == ActorType::Refinery)
         {
