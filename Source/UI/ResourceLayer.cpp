@@ -45,11 +45,37 @@ bool ResourceLayer::init()
     return true;
 }
 
-void ResourceLayer::MessageProc(SystemMessage smsg) {}
+void ResourceLayer::MessageProc(SystemMessage smsg)
+{
+    switch (smsg.smsgType)
+    {
+    case SMsgType::ChangeResource:
+    {
+        updateResource();
+    }
+    default:
+        break;
+    }
+}
 
 void ResourceLayer::update(float delta)
 {
      
+}
+
+void ResourceLayer::updateResource()
+{
+    if (mPlayer)
+    {
+        auto str    = std::to_string(mPlayer->mMineral);
+        mMineralNum->setString(str);
+
+        auto str2 = std::to_string(mPlayer->mGas);
+        mGasNum->setString(str2);
+
+        std::string str3 = std::to_string(mPlayer->mCurPop) + "/" + std::to_string(mPlayer->mCurMaxPop);
+        mPopNum->setString(str3);          
+    }
 }
 
 void ResourceLayer::SetNumText()

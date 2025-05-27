@@ -115,6 +115,11 @@ void UILayer::MessageProc(SystemMessage smsg)
         command->MessageProc(msg);
     }
     break;
+    case SMsgType::ChangeResource:
+    {
+        ResourceLayer* resource = (ResourceLayer*)this->getChildByName("ResourceLayer");
+        resource->MessageProc(msg);
+    }
     default:
         break;
     } 

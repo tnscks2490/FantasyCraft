@@ -3,12 +3,23 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "StarMap.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
         "#SourcePython": {
             "scaleInDock": 1.5
+        },
+        "StarMap.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1444,
+                "y": 2780
+            }
+        },
+        "StarMap.tmx#ResourcePython": {
+            "scaleInDock": 1
         }
     },
     "last.imagePath": "C:/CC/FantasyCraft/Content/Map/StarMap",
@@ -19,10 +30,12 @@
     "map.tileWidth": 32,
     "map.width": 128,
     "openFiles": [
+        "StarMap.tmx"
     ],
     "project": "StarMap.tiled-project",
     "property.type": "float",
     "recentFiles": [
+        "StarMap.tmx"
     ],
     "tileset.embedInMap": true
 }

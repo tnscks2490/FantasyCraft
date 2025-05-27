@@ -96,6 +96,7 @@ enum class SMsgType
     Create_Unit,
     Upgrade,
     BPCancel,
+    ChangeResource,
     
 
 };
@@ -113,3 +114,4 @@ struct SystemMessage
 };
 
 void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg);
+

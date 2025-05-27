@@ -129,7 +129,7 @@ bool MainScene::init()
 
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
-
+    mMapLayer->CreateWalls();
     // 이동불가능한 지형을 데이터로 넣기 TMX에다가쓰는방식(맵을 바꾸면서 수정해야함)
     auto wall = mMapLayer->GetMap()->getLayer("Wall");
     //World::get()->mPath->DefaultSetting(wall);
@@ -219,7 +219,7 @@ void MainScene::onMouseDown(Event* event)
                SystemMessage smsg = {SMsgType::BPCancel, ReceiverType::UI, ActorType::None, ButtonType::None,  &mPlayer->mMainActor};
                SendSystemMessage(mUILayer, mPlayer, smsg);
             }
-            mCursor->mCursorComp->RClick(mousePos);
+            mCursor->mCursorComp->RClick(realpos);
             
         }
     }
@@ -731,7 +731,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnMineral(mMapLayer, data);
             actor->SetPosition(data.pos);
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 64));
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 32));
         }
         break;
 
@@ -758,7 +758,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(data.pos);
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(16, 16));
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(32, 32));
         } break;
 
         case 101:  // 마린 생성
@@ -788,6 +788,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
         } break;
         case 104: // 배럭 생성
         {
@@ -946,34 +947,34 @@ void MainScene::ScreenMove(float delta)
 {
     auto mCursorPos = mCursor->GetPosition();
 
-
     ScreenMoveTimer += delta;
 
-    if (ScreenMoveTimer > 0.02f)
+    if (ScreenMoveTimer > 0.01f)
     {
         ScreenMoveTimer = 0;
-        ax::Vec2 mapPos = mMapLayer->GetMap()->getPosition();
-        if (mCursorPos.x > visibleSize.x - 32 && mapPos.x > -768)
+        ax::Vec2 mapPos = mMapLayer->getPosition();
+        if (mCursorPos.x > visibleSize.x - 32 && mapPos.x > -2816)
         {
             mapPos.x -= 8;
-            mMapLayer->GetMap()->setPosition(mapPos);
+            mMapLayer->setPosition(mapPos);
         }
         else if (mCursorPos.x < 32 && mapPos.x < 0)
         {
             mapPos.x += 8;
-            mMapLayer->GetMap()->setPosition(mapPos);
+            mMapLayer->setPosition(mapPos);
         }
-        else if (mCursorPos.y > visibleSize.y - 32  && mapPos.y > -1296)
+        else if (mCursorPos.y > visibleSize.y - 32 && mapPos.y > -3128)
         {
             mapPos.y -= 8;
-            mMapLayer->GetMap()->setPosition(mapPos);
+            mMapLayer->setPosition(mapPos);
         }
-        else if (mCursorPos.y < 32 && mapPos.y < 0)
+        else if (mCursorPos.y < 32 && mapPos.y < 210)
         {
             mapPos.y += 8;
-            mMapLayer->GetMap()->setPosition(mapPos);
+            mMapLayer->setPosition(mapPos);
         }
     }
+    
 }
 
 void MainScene::TestFunc(ax::Node* node)

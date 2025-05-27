@@ -35,7 +35,7 @@ void SensorComp::MessageProc(ActorMessage& msg)
     {
         if (msg.sender->mActorType == ActorType::Cursor)
             return;
-        if (msg.sender->mID == mActor->mID)
+        if (msg.sender->mID != mActor->mID)
         {
             AddGoal_MoveAndAttack(mActor, msg.sender);
         }

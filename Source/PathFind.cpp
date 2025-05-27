@@ -47,7 +47,7 @@ void PathFind::DebugMap()
     {
         for (int j = 0; j < mWidth; j++)
         {
-            if (mColMap->IsCollision(j, i))
+            if (mColMap->IsCollision(j, mHeight-1- i))
             {
                 printf("*");
             }
@@ -82,38 +82,21 @@ void PathFind::SetTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
     auto ap = actorPos;
     auto as = actorSize;
 
+    int X = ap.x / 32;
+    int Y = ap.y / 32;
 
-    int spX, spY;
-    spX = ap.x - (as.x / 2);
-    spY = ap.y + (as.y / 2);
+    int CountX = as.x / 32;
+    int CountY = as.y / 32;
 
-    spX = spX / 16;
-    spY = spY / 16;
-
-    int epX, epY;
-    epX = ap.x + (as.x / 2);
-    epY = ap.y - (as.y / 2);
-
-    epX = epX / 16;
-    epY = epY / 16;
-
-
-
-
-    for (int i = spX; i <= epX; i++)
+    for (int i = 0; i < CountX; i++)
     {
-        for (int j = epY; j <= spY; j++)
+        for (int j = 0; j < CountY; j++)
         {
-            mColMap->SetAt(i, j);
+            mColMap->SetAt(X+i, Y+j);
+
         }
-    }
-
-
-    printf("설치끝~");
-
-
-
-}
+    } 
+} 
 
 void PathFind::ClrTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
 {
@@ -183,6 +166,18 @@ ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
     return ax::Vec2::ZERO;
 }
 
+void PathFind::SetTile(int x, int y)
+{
+    if (mColMap.get())
+        mColMap->SetAt(x,y);
+}
+
+void PathFind::ClrTile(int x, int y)
+{
+    if (mColMap.get())
+        mColMap->ClrAt(x, y);
+}
+
 std::list<ax::Vec2> PathFind::GetTargetList(ax::Vec2 start, ax::Vec2 dest)
 {
     auto resultNode = PathSearch(start, dest);
@@ -192,8 +187,8 @@ std::list<ax::Vec2> PathFind::GetTargetList(ax::Vec2 start, ax::Vec2 dest)
     for (auto t : resultNode)
     {
         ax::Vec2 pos;
-        pos.x = (float)t.m_x * 16;
-        pos.y = (float)t.m_y * 16;
+        pos.x = (float)t.m_x * 32;
+        pos.y = (float)t.m_y * 32;
         targetList.push_back(pos);
     }
     return targetList;
@@ -210,10 +205,10 @@ std::list<jpspath::Coord> PathFind::PathSearch(ax::Vec2 start, ax::Vec2 dest)
     
     jps.Init(mColMap);
 
-    int32_t sx = start.x / 16;
-    int32_t sy = start.y / 16;
-    int32_t ex = dest.x / 16;
-    int32_t ey = dest.y / 16;
+    int32_t sx = start.x / 32;
+    int32_t sy = start.y / 32;
+    int32_t ex = dest.x / 32;
+    int32_t ey = dest.y / 32;
 
     jps.Search(sx, sy, ex, ey, ResultNodes);
     return ResultNodes;

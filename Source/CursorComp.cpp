@@ -135,7 +135,7 @@ void CursorComp::RClick(ax::Vec2 pos)
     {
         if (cPlayer->isSelected())
         {
-            SendPK_Data(114, pos- ax::Vec2(0,210));
+            SendPK_Data(114, pos);
         }
 
     }

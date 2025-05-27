@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "Actor.h"
 #include "CommandCenterComp.h"
+#include "PlayerEventSystem.h"
 #include "DrawComp.h"
 #include "PathFind.h"
+#include "Player.h"
 
 CommandCenterComp::CommandCenterComp(Actor* actor)
     : UnitComp(actor)
@@ -87,7 +89,8 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     break;
     case MsgType::GiveMineral:
     {
-
+        PEvent event = {EventType::GetResource,8,0};
+        SendEvent(event);
     } break;
 
 

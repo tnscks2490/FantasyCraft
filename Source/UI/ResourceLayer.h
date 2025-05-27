@@ -13,7 +13,7 @@ public:
     void MessageProc(SystemMessage smsg);
     virtual void update(float delta) override;
 
-
+    void updateResource();
     void SetNumText();
 
 public:

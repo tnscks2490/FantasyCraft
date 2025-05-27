@@ -56,7 +56,7 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 1.0f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(16, 16));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(32, 32));
 
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
     // 선택 표기 타원의 위치는 바디사이즈의 1/2, 반지름의 크기도 바디사이즈의 1/2로 설정할것

@@ -3,13 +3,14 @@
 #include "Actor.h"
 #include "DrawComp.h"
 #include "SelectManager.h"
+#include "PlayerEventSystem.h"
 #include "CursorComp.h"
 
 Player::Player()
 {
     mSM = new SelectManager(this);
 
-    
+    RegistePlayer(this);
 }
 
 Player::~Player() {}
@@ -194,6 +195,23 @@ void Player::MessageProc(SystemMessage smsg)
     
 
     printf("Player가 UI로부터 메세지를 수신받았습니다");
+}
+
+void Player::EvnetProc(PEvent evnet)
+{
+    auto e = evnet;
+    switch (e.EType)
+    {
+    case EventType::GetResource:
+    {
+        GetResource(e.Mineral, e.Gas);
+        SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None, nullptr};
+        SendSystemMessage(ui, this, smsg);
+    }
+    break;
+    default:
+        break;
+    }
 }
 
 void Player::Clear()
@@ -419,3 +437,12 @@ void Player::ButtonAction(ax::Object* sender)
     ButtonInfo* info = (ButtonInfo*)node->getUserData();
     printf("실행");
 }
+
+bool Player::UseResource(int m, int g)
+{
+    if ((mMineral - m) < 0 || mGas - g < 0)
+        return false;
+
+    return true;
+}
+

@@ -2,6 +2,7 @@
 #include "MessageSystem.h"
 #include "Actor.h"
 #include "UI/UILayer.h"
+#include "PlayerEventSystem.h"
 #include "UnitComp.h"
 #include "SensorComp.h"
 #include "CursorComp.h"
@@ -277,13 +278,27 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
             if (ui)
                 ui->MessageProc(smsg);
         }
+        break;
+    case SMsgType::ChangeResource:
+    {
+        if (smsg.recvType == ReceiverType::Player)
+        {
+            // UI -> Player
+            if (player)
+                player->MessageProc(smsg);
+        }
+        else if (smsg.recvType == ReceiverType::UI)
+        {
+            // Player->UI
+            if (ui)
+                ui->MessageProc(smsg);
+        }
+    }break;
     default:
         break;
     }
     
 }
-
-
 
 
 

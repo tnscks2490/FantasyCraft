@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "ButtonInfo.h"
 #include "MessageSystem.h"
+#include "PlayerEventSystem.h"
 
 class Actor;
 class SelectManager;
@@ -67,6 +68,7 @@ enum class ActionIcon
 };
 
 
+
 class Player
 {
 public:
@@ -75,7 +77,7 @@ public:
     ~Player();
 
     void MessageProc(SystemMessage smsg);
-
+    void EvnetProc(PEvent evnet);
 
     void Clear();
     void Selected();
@@ -95,6 +97,9 @@ public:
     PlayerCommand mCommand[9];
     PlayerRace mRace       = PlayerRace::None;
 
+    void GetResource(int m, int g) { mMineral += m; mGas +=g;}
+    bool UseResource(int m, int g);
+
 public:
 
 
@@ -105,12 +110,14 @@ public:
 
     SelectManager* mSM = nullptr;
 
+
+
     ActionIcon mCurActionICon    = ActionIcon::None;
 
     UILayer* ui = nullptr;
     Actor* cursor = nullptr;
 
-    int mMineral = 0;
+    int mMineral = 50;
     int mGas      = 0;
     int MaxPop   = 200;
     int mCurPop   = 0;
@@ -133,3 +140,6 @@ public:
 
 
 };
+
+
+
