@@ -5,6 +5,7 @@
 #include "SelectManager.h"
 #include "PlayerEventSystem.h"
 #include "CursorComp.h"
+#include "MoveComp.h"
 
 Player::Player()
 {
@@ -257,7 +258,7 @@ void Player::ClassifySelected()
     bool isFriendUnit = false;
     bool isBuilding = false;
     bool isEnemyUnit  = false;
-
+    bool isResource   = false; 
 
     for (auto ac : PrePlayerActors)
     {
@@ -271,22 +272,70 @@ void Player::ClassifySelected()
             {
                 isBuilding = true;
             }
+            else if (ac->mCategory == UnitCategory::Resource)
+            {
+                isResource = true;
+            }
         }
     }
 
+    if (!isFriendUnit && !isBuilding && !isEnemyUnit && isResource)
+    {
+        for (auto ac : PrePlayerActors)
+        {
+            if (ac)
+            {
+                auto actor = ac;
+                PrePlayerActorsClear();
+                PrePlayerActors[0] = actor;
+                return;
+            }
+        }
+    }
 
 
     // 아군 유닛만 선택한 경우
     if (isFriendUnit == true && isBuilding == false)
     {
+        Actor* tmp[12] = {nullptr};
+        int idx = 0;
+
+        for (auto ac : PrePlayerActors)
+        {
+            if (ac == nullptr)
+                break;
+            if (ac->mCategory == UnitCategory::Unit)
+            {
+                tmp[idx] = ac;
+                idx++;
+            }
+        }
+        PrePlayerActorsClear();
+        for (int i = 0; i < idx; i++)
+        {
+            PrePlayerActors[i] = tmp[i];
+        }
         // 건드릴게 없지만 확인용
     }
     // 아군 건물만 선택한 경우
     else if (isFriendUnit == false && isBuilding == true)
     {
-        auto ac = PrePlayerActors[0];
-        PrePlayerActorsClear();
-        PrePlayerActors[0] = ac;
+
+        for (auto ac : PrePlayerActors)
+        {
+            if (ac->mCategory == UnitCategory::Resource)
+            {
+                ac = nullptr;
+            }
+            else if (ac->mCategory == UnitCategory::Building)
+            {
+                auto actor = ac;
+                PrePlayerActorsClear();
+                PrePlayerActors[0] = actor;
+                return;
+            }
+        }
+
     }
     // 아군 유닛과 건물을 모두 선택한 경우
     else if (isFriendUnit == true && isBuilding == true)
@@ -295,7 +344,8 @@ void Player::ClassifySelected()
         {
             if (PrePlayerActors[i] == nullptr)
                 break;
-            if (PrePlayerActors[i]->mCategory == UnitCategory::Building)
+            if (PrePlayerActors[i]->mCategory == UnitCategory::Building
+                || PrePlayerActors[i]->mCategory == UnitCategory::Resource)
             {
                 PrePlayerActors[i] = nullptr;
             }
@@ -388,10 +438,43 @@ void Player::ReSelected()
     else if (PlayerActorsNum() > 1)
     {
         SystemMessage smsg = {SMsgType::MSUI, ReceiverType::UI,ActorType::None, ButtonType::None, PlayerActors};
-
         SendSystemMessage(ui, this, smsg);
     }
 }
+
+void Player::MoveUnit(ax::Vec2 pos)
+{
+    for (auto& ac : PlayerActors)
+    {
+        if (ac && !ac->isDead && ac->mMoveComp)
+        {
+            SendPK_Data(113, ax::Vec2(ac->idx,0));
+        }
+    }
+
+
+    SendPK_Data(114, pos);
+}
+
+void Player::ImConnect()
+{
+    PK_Data data;
+    data.ClientID = TcpClient::get()->GetID();
+    data.pos      = ax::Vec2::ZERO;
+    data.input    = 1;
+    TcpClient::get()->SendMessageToServer(data);
+}
+
+void Player::AlertMyConnect()
+{
+    PK_Data data;
+    data.ClientID = TcpClient::get()->GetID();
+    data.pos      = ax::Vec2::ZERO;
+    data.input    = 2;
+    TcpClient::get()->SendMessageToServer(data);
+}
+
+
 
 int Player::PlayerActorsNum()
 {

@@ -100,6 +100,11 @@ AnimInfo g_AnimInfo_Mineral_03[] = {
     {ECharName::Mineral, ECharAct::M03, ECharDir::Face, "Plist/Mineral.plist", "Mineral/03/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 
+AnimInfo g_AnimInfo_Gas[] = {
+    {ECharName::Gas, ECharAct::Gas, ECharDir::Face, "Plist/Gas.plist", "Gas/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
+};
+
+
 AnimInfo g_AnimInfo_CarryMineral[] =
 {
         {ECharName::CarryMineral, ECharAct::Idle, ECharDir::N,   "Plist/CarryMineral.plist", "CarryMineral/1/0001.png", 1, 1,(1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -785,6 +790,11 @@ AnimInfo& FindAnimInfoByIndex(ECharName name, ECharAct act, ECharDir dir, int id
             break;
         }
         break;
+    case ECharName::Gas:
+    {
+        return g_AnimInfo_Gas[0];
+    }
+    break;
     case ECharName::SCV:
         switch (act)
         {

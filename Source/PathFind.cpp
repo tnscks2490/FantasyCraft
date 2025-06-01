@@ -93,7 +93,6 @@ void PathFind::SetTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
         for (int j = 0; j < CountY; j++)
         {
             mColMap->SetAt(X+i, Y+j);
-
         }
     } 
 } 
@@ -141,26 +140,26 @@ ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
     {
         if (findPos.x > 0)
         {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, true, true);
-            return ax::Vec2(pos*16,ePos.y);
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, true, true);
+            return ax::Vec2(pos*32,ePos.y);
         }
         else
         {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, true, false);
-            return ax::Vec2(pos * 16, ePos.y);
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, true, false);
+            return ax::Vec2(pos * 32, ePos.y);
         }
     }
     else
     {
         if (findPos.y > 0)
         {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, false, true);
-            return ax::Vec2(ePos.x, pos * 16);
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, false, true);
+            return ax::Vec2(ePos.x, pos * 32);
         }
         else
         {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 16, ePos.y / 16, false, false);
-            return ax::Vec2(ePos.x, pos * 16);
+            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, false, false);
+            return ax::Vec2(ePos.x, pos * 32);
         }
     }
     return ax::Vec2::ZERO;

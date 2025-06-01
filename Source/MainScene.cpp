@@ -108,6 +108,7 @@ bool MainScene::init()
     mMapLayer->setPosition(ax::Vec2(0, 210));
     addChild(mMapLayer);
 
+    
 
 
 
@@ -130,12 +131,14 @@ bool MainScene::init()
 
     World::get()->mPath = new PathFind(mMapLayer->GetWidth(), mMapLayer->GetHeight());
     mMapLayer->CreateWalls();
-    // 이동불가능한 지형을 데이터로 넣기 TMX에다가쓰는방식(맵을 바꾸면서 수정해야함)
-    auto wall = mMapLayer->GetMap()->getLayer("Wall");
-    //World::get()->mPath->DefaultSetting(wall);
-    World::get()->mPath->DebugMap();
-    
-   
+
+    //기본값 세팅
+
+    mPlayer->ImConnect();
+
+
+
+
 
     // window화면 테두리 표기
     auto drawNode = DrawNode::create();
@@ -156,6 +159,8 @@ void MainScene::onMouseDown(Event* event)
 
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
     ax::Vec2 realpos  = mousePos - mMapLayer->getPosition();
+
+    printf("마우스 위치 : x = %f || y = %f",realpos.x,realpos.y);
 
     auto Lfunc = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
         auto A                = shape.getBody()->getNode();
@@ -684,6 +689,18 @@ void MainScene::DebugPath()
     }
 }
 
+void MainScene::FirstObjectSetting()
+{
+    if (mMapLayer && !mMapLayer->isFirstSetting)
+    {
+        auto sp = mMapLayer->SetStartPoint();
+        SetScreenPos(sp);
+        mMapLayer->SettingResource();
+        mMapLayer->isFirstSetting = true;
+    }
+
+}
+
 void MainScene::Decording()
 {
     char buf[1024] = {0};
@@ -715,6 +732,16 @@ void MainScene::Decording()
 
         switch (data.input)
         {
+        case 1:
+        {
+            World::get()->ConnectPlayer(mPlayer, data.ClientID);      
+        }
+        break;
+        case 2:
+        {
+            FirstObjectSetting();
+        } break;
+
         case 10:
         {
             if (data.ClientID == TcpClient::get()->GetID())
@@ -727,6 +754,34 @@ void MainScene::Decording()
                 printf("설치중");
             }
         }  break;
+
+        // 유닛 상태변경 커맨드 
+        case 11:  //Create_Unit
+        {
+            auto actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == (int)data.pos.x)
+                {
+                    ac->mUnitComp->mCurAction = ActionState::Create_Unit;
+                }
+            }
+        }
+        break;
+        case 12:  // Idle
+        {
+            auto actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == (int)data.pos.x)
+                {
+                    ac->mUnitComp->mCurAction = ActionState::Idle;
+                }
+            }
+        }
+        break;
+        
+
         case 50:
         {
             Actor* actor = SpawnMineral(mMapLayer, data);
@@ -734,6 +789,14 @@ void MainScene::Decording()
             World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 32));
         }
         break;
+        case 51:
+        {
+            Actor* actor = SpawnGas(mMapLayer, data);
+            actor->SetPosition(data.pos);
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 32));
+        }
+        break;
+
 
         case 77:
         case 78:
@@ -752,7 +815,13 @@ void MainScene::Decording()
                 }
             }
         } break;
-
+        case 80:  // 커맨드센터 완제품생성
+        {
+            Actor* actor = SpawnCommandCenterComplete(mMapLayer, data);
+            actor->SetPosition(data.pos);
+            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(128, 96));
+        }
+        break;
         // Actor 생성 라인
         case 100: //SCV 생성
         {
@@ -898,18 +967,36 @@ void MainScene::Decording()
             }
         }
         break;
+        case 113:
+        {
+            auto actors = World::get()->w_ActorList;
+            for (auto actor : actors)
+            {
+                if (actor && !actor->isDead && actor->mMoveComp)
+                {
+                    if (actor->idx == (int)data.pos.x)
+                    {
+                        actor->mMoveComp->ServerMoveOrderOn();
+                    }
+                }
+            }
 
+        }
+        break;
         case 114: // MoveToPath
         {
-            for (auto actor : World::get()->w_ActorList)
+            auto actors = World::get()->w_ActorList;
+            for (auto actor : actors)
             {
-                if (actor)
+                if (actor && !actor->isDead && actor->mMoveComp)
                 {
-                    if (actor->mDrawComp->selected && !actor->mUnitComp->IsCmdLocked())
+                    if (actor->mMoveComp->ServerMoveOrder)
+                    {
+                        actor->mMoveComp->ServerMoveOrderOff();
                         AddGoal_MoveToPath(actor, data.pos);
+                    }
                 }
-                
-
+           
             }
         } break;
 
@@ -975,6 +1062,36 @@ void MainScene::ScreenMove(float delta)
         }
     }
     
+}
+
+void MainScene::SetScreenPos(ax::Vec2 layerPos)
+{
+    auto pos = visibleSize/2 - layerPos;
+
+    if (pos.x < visibleSize.x - 4096)
+    {
+        pos.x = visibleSize.x - 4096;
+    }
+
+    if (pos.x > 0)
+    {
+        pos.x = 0;
+    }
+
+    if (pos.y < visibleSize.y - 4096)
+    {
+        pos.y = visibleSize.y - 4096;
+    }
+
+    if (pos.y > 210)
+    {
+        pos.y = 210;
+    }
+
+
+
+
+    mMapLayer->setPosition(pos);
 }
 
 void MainScene::TestFunc(ax::Node* node)

@@ -20,6 +20,7 @@ void Goal_AllCancel::Start()
 {
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::Cancel;
+    mActor->mUnitComp->mCurAction   = ActionState::Idle;
 }
 
 int Goal_AllCancel::Do()

@@ -1,17 +1,17 @@
 #include "pch.h"
-#include "MineralComp.h"
+#include "GasComp.h"
 #include "DrawComp.h"
 
-MineralComp::MineralComp(Actor* actor): UnitComp(actor)
+GasComp::GasComp(Actor* actor) : UnitComp(actor)
 {
     actor->mUnitComp = this;
-    mUnitName        = "Mineral";
+    mUnitName        = "Gas";
    
 }
 
-MineralComp::~MineralComp() {}
+GasComp::~GasComp() {}
 
-void MineralComp::MessageProc(ActorMessage& msg)
+void GasComp::MessageProc(ActorMessage& msg)
 {
     switch (msg.msgType)
     {
@@ -29,7 +29,7 @@ void MineralComp::MessageProc(ActorMessage& msg)
     }
 }
 
-void MineralComp::update(float delta)
+void GasComp::update(float delta)
 {
     if (isGathering)
     {

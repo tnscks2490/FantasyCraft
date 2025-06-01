@@ -6,6 +6,7 @@
 #include "UnitComp.h"
 #include "SCVComp.h"
 #include "PathFind.h"
+#include "Player.h"
 #include "CommandCenterComp.h"
 
 
@@ -83,13 +84,12 @@ void World::Actor_PushBack(Actor* actor)
         if (ac == nullptr)
         {
             ac = actor;
-            actor->idx = w_ActorList.size();
             IsAddActors = true;
             return;
         }
     }
     w_Wait_AddActors.push_back(actor);
-    actor->idx = w_ActorList.size();
+    actor->idx  = UnitIdx++;
     IsAddActors = true;
 
     //for (auto ac : w_ActorList)
@@ -135,10 +135,15 @@ void World::PrintActorList()
     }
 }
 
-void World::test(ax::Node* node)
+void World::ConnectPlayer(Player* player,int idx)
 {
-    printf("안녕");
+    if (idx != TcpClient::get()->GetID())
+    {
+        player->AlertMyConnect();
+    }
 }
+
+
 
 World::World()
 {

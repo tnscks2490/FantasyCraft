@@ -35,11 +35,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
     {
     case MsgType::Contacted:
     {
-        if (msg.sender->mActorType == ActorType::CommandCenter)
-        {
-            if (mGatherResource)
-                GiveMineral();
-        }
+        
     }break;
     case MsgType::Build:
     {
@@ -90,6 +86,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
             mBuilding = nullptr;
             cmdLocked = false;
         }
+        AddGoal_AllCancel(mActor);
     }
     break;
 
@@ -149,8 +146,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
         }
         else if (msg.sender->mActorType == ActorType::Refinery)
         {
-            auto refinery = msg.sender;
-            Gathering(refinery);
+            auto gas = msg.sender;
+            Gathering(gas);
         }
     } break;
     case MsgType::GatherMineral:
@@ -176,20 +173,36 @@ void SCVComp::MessageProc(ActorMessage& msg)
         if (mCargo)
         {
             auto pos = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mCargo->GetPosition());
-            AddGoal_MoveToPath(mActor, pos);
+            AddGoal_ReturnCargo(mActor, mCargo);
         }
         else
         {
             if (SearchNearCargo())
             {
                 auto pos = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mCargo->GetPosition());
-                AddGoal_MoveToPath(mActor, pos);
+                AddGoal_ReturnCargo(mActor, mCargo);
             }
             
         }
 
     }
     break;
+    case MsgType::SearchCargo:
+    {
+        SearchNearCargo();
+    }
+    break;
+    case MsgType::GiveResource:
+    {
+        if (msg.sender->mActorType == ActorType::CommandCenter)
+        {
+            if (mGatherResource)
+            {
+                GiveMineral();
+                PushGoal_MoveAndGathering(mActor, mGatherResource);
+            }
+        }
+    }
     default:
         break;
     }
@@ -240,12 +253,14 @@ void SCVComp::Gathering(Actor* resource)
 
 void SCVComp::GiveMineral()
 {
-    mGatherResource = nullptr;
+    //mGatherResource = nullptr;
     mCurAction = ActionState::Idle;
 
     mActor->mDrawComp->RemoveCarryItem();
-    ActorMessage msg = {MsgType::GiveMineral, mActor, nullptr, nullptr};
+    ActorMessage msg = {MsgType::GiveResource, mActor, nullptr, nullptr};
     SendActorMessage(mCargo, msg);
+
+    
 }
 
 void SCVComp::SCVHpChange()

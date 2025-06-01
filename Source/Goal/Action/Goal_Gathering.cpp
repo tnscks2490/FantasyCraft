@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Actor.h"
 #include "MoveComp.h"
-#include "GoalComp.h"
 #include "UnitComp.h"
+#include "Goal/Base/GoalComp.h"
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
 #include "Goal_Gathering.h"
@@ -30,7 +30,10 @@ int Goal_Gathering::Do()
     if (!mActor->mUnitComp->IsCmdLocked())
     {
         m_Status = Goal::completed_t;
-        //mActor->mUnitComp->mCurAction = ActionState::Idle;
+
+        ActorMessage msg = {MsgType::ReturnCargo, mActor, nullptr, nullptr};
+        SendActorMessage(mActor, msg);
+
         return m_Status;
     }
 

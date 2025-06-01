@@ -23,9 +23,11 @@ DrawComp::~DrawComp()
 
 void DrawComp::update(float delta)
 {
-
     if (mActor->mActorType == ActorType::Mineral)
         return;
+    if (mActor->mActorType == ActorType::Gas)
+        return;
+
 
     // 커서에 한해서 변경하는 것
     if (mActor->mActorType == ActorType::Cursor)
@@ -53,6 +55,7 @@ void DrawComp::update(float delta)
     }
     else 
     {
+
         ECharDir dir  = mCurAnimInfo->dir;
         ECharName anim        = mCurAnimInfo->name;
         ECharAct action       = mCurAnimInfo->act;
@@ -184,11 +187,6 @@ ax::Node* DrawComp::CreatePhysicsNode(ax::Vec2 bodysize)
         ax::DrawNode* dNode = ax::DrawNode::create();
         dNode->drawRect((bodysize / 2) * (-1), bodysize / 2, ax::Color4B::RED);
         bodyNode->addChild(dNode);
-
-
-
-
-
 
         //루트노드에 피직스노드붙여주기
         mRoot->addChild(bodyNode);

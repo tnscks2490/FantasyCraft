@@ -183,3 +183,20 @@ void PushGoal_MoveAndAttack(Actor* Attacker, Actor* Target)
         Attacker->mGoalComp->mThink->PushSubGoal(new Goal_MoveAndAttack(Attacker, Target));
     }
 }
+
+void AddGoal_ReturnCargo(Actor* Gather, Actor* Cargo)
+{
+    if (Gather->mGoalComp)
+    {
+        Gather->mGoalComp->mThink->RemoveAllSubgoals();
+        Gather->mGoalComp->mThink->AddSubGoal(new Goal_ReturnCargo(Gather, Cargo));
+    }
+}
+
+void PushGoal_ReturnCargo(Actor* Gather, Actor* Cargo)
+{
+    if (Gather->mGoalComp)
+    {
+        Gather->mGoalComp->mThink->PushSubGoal(new Goal_ReturnCargo(Gather, Cargo));
+    }
+}

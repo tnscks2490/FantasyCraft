@@ -46,6 +46,7 @@ enum class ActorType
 
     BP,
     Mineral,
+    Gas
 
 };
 

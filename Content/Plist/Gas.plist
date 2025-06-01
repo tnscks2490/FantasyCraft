@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>Gas/0001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{128,64}</string>
+                <key>spriteSourceSize</key>
+                <string>{128,64}</string>
+                <key>textureRect</key>
+                <string>{{0,0},{128,64}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>Gas.png</string>
+            <key>size</key>
+            <string>{128,64}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:dc1ac002d3df59b781e891bec3be2d90:cf8d69349fed65d26591f4d92a6f4aa7:c1481b6a09b2529262ee43530f938ba7$</string>
+            <key>textureFileName</key>
+            <string>Gas.png</string>
+        </dict>
+    </dict>
+</plist>

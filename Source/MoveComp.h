@@ -53,6 +53,8 @@ public:
     void Start_ElapsedTime() { mTimer = 0.0; }
     void Stop_ElapsedTime() { mTimer = -1.0; }
 
+    void ServerMoveOrderOn() { ServerMoveOrder = true; }
+    void ServerMoveOrderOff() { ServerMoveOrder = false; }
 
 public:
     //멤버 변수
@@ -63,7 +65,7 @@ public:
     bool mTag       = false;
     bool testing      = false;
 
-
+    bool ServerMoveOrder = false;
     std::list<ax::Vec2> mTargetList;
 
     ax::Vec2 mTarget;

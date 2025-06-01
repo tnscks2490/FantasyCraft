@@ -20,7 +20,9 @@ public:
     int GetHeight() { return mHeight; }
     void CreateWalls();
     void SettingResource();
+    ax::Vec2 SetStartPoint();
 
+   
 
 public:
     std::vector<ax::Vec2> walls;
@@ -29,4 +31,6 @@ public:
 
     int mWidth  = 128;
     int mHeight = 128;
+
+    bool isFirstSetting = false;
 };

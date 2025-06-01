@@ -88,6 +88,15 @@ public:
     void PrintSelectActors();
     void ReSelected();
 
+
+    void MoveUnit(ax::Vec2 pos);
+
+
+    void ImConnect();
+    void AlertMyConnect();
+
+
+
     int PlayerActorsNum();
     int PrePlayerActorsNum();
     void PlayerActorsClear();

@@ -69,11 +69,12 @@ public:
 
     void DebugPath();
 
+    void FirstObjectSetting();
+    
     void Decording();
 
     void ScreenMove(float delta);
-
-
+    void SetScreenPos(ax::Vec2 layerPos);
 
     //여기는 테스트용
 
@@ -108,8 +109,9 @@ public:
     // init() 때 값을 넣어줌
     ax::Vec2 visibleSize;
 
-    // 총 타일의 갯수 각 타일별 16 x 16 픽셀이다
-    
+
+
+    // 총 타일의 갯수 각 타일별 32 x 32 픽셀이다
 
     int selectidx = -1;
 

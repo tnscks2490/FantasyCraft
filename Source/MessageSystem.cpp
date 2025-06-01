@@ -170,7 +170,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
             receiver->mUnitComp->MessageProc(msg);
     }break;
 
-    case MsgType::GiveMineral:
+    case MsgType::GiveResource:
     {
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
@@ -192,6 +192,12 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
     }
+    break;
+    case MsgType::SearchCargo:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    } break;
     default:
         break;
     }

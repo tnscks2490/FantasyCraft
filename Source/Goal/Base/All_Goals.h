@@ -16,3 +16,6 @@
 #include "Goal/Action/Goal_MoveAndAttack.h"
 #include "Goal/Action/Goal_ApproachToTarget.h"
 #include "Goal/Action/Goal_MoveAndAttack.h"
+#include "Goal/Action/Goal_SearchCargo.h"
+#include "Goal/Action/Goal_GiveResource.h"
+#include "Goal/Action/Goal_ApproachToLocation.h"

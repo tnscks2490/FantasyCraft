@@ -1,12 +1,12 @@
 #pragma once
-#include "Goal/Base/Goal_Composite.h"
+#include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
 
-class Goal_ReturnCargo : public Goal_Composite
+class Goal_SearchCargo : public Goal
 {
 public:
     static const char* GOAL_NAME;
-    Goal_ReturnCargo(Actor* mActor,Actor* cargo);
+    Goal_SearchCargo(Actor* actor);
 
     virtual void Start() override;
     virtual int Do() override;
@@ -15,8 +15,9 @@ public:
     const char* getName() override { return GOAL_NAME; }
 
 
+
 public:
-    Actor* mCargo  = nullptr;
+
 };
 
 

@@ -11,11 +11,11 @@
             "scaleInDock": 1.5
         },
         "StarMap.tmx": {
-            "scale": 0.25,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1444,
-                "y": 2780
+                "x": 3969.6666666666665,
+                "y": 1193.3333333333333
             }
         },
         "StarMap.tmx#ResourcePython": {
@@ -33,7 +33,7 @@
         "StarMap.tmx"
     ],
     "project": "StarMap.tiled-project",
-    "property.type": "float",
+    "property.type": "string",
     "recentFiles": [
         "StarMap.tmx"
     ],

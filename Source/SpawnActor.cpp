@@ -10,6 +10,7 @@
 #include "BPComp.h"
 #include "CursorComp.h"
 #include "MineralComp.h"
+#include "GasComp.h"
 #include "UnitCompList.h"
 
 Actor* SpawnCursor(ax::Node* parent)
@@ -143,11 +144,50 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     node->addChild(selectanim);
 
 
-    auto anim       =  draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Building, 0);
+    auto anim =  draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Building, 0);
 
     auto unit = new CommandCenterComp(actor);
     auto move = new MoveComp(actor);
     move->IsOn   = false;
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+
+    return actor;
+}
+
+Actor* SpawnCommandCenterComplete(ax::Node* parent, PK_Data data)
+{
+
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::CommandCenter;
+    actor->mCategory  = UnitCategory::Building;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 48.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Idle, 0);
+
+
+    auto unit  = new CommandCenterComp(actor);
+    unit->MakeComplete();
+    auto move  = new MoveComp(actor);
+    move->IsOn = false;
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -538,6 +578,106 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
 
     return actor;
 }
+
+Actor* SpawnMineral(ax::Node* Parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Mineral;
+    actor->mCategory  = UnitCategory::Resource;
+    actor->mID        = TcpClient::get()->GetID();
+    actor->charNum    = 50;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    Parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 32));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::YELLOW);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Mineral, ECharAct::M01, 0);
+    auto unit = new MineralComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+
+    return actor;
+}
+
+Actor* SpawnGas(ax::Node* parent, PK_Data data)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Gas;
+    actor->mCategory  = UnitCategory::Resource;
+    actor->mID        = data.ClientID;
+    actor->charNum    = data.input;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 32));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::YELLOW);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Gas, ECharAct::Gas, 0);
+    auto unit = new GasComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+
+    return actor;
+}
+
+Actor* SpawnGas(ax::Node* parent)
+{
+    Actor* actor      = new Actor;
+    actor->mActorType = ActorType::Mineral;
+    actor->mCategory  = UnitCategory::Resource;
+    actor->mID        = TcpClient::get()->GetID();
+    actor->charNum    = 50;
+
+    auto draw = new DrawComp(actor);
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 0.1f);
+
+    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 32));
+    draw->ChangePhysicsNodeTag(20);
+
+    auto selectanim = ax::DrawNode::create();
+    selectanim->drawCircle(ax::Vec2(0, -8), 32.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::YELLOW);
+    selectanim->setName("Select");
+    selectanim->setVisible(false);
+    node->addChild(selectanim);
+
+    auto anim = draw->CreateAnimNodeByIndex(ECharName::Mineral, ECharAct::M01, 0);
+    auto unit = new MineralComp(actor);
+
+    UserData* mUserData = new UserData;
+    mUserData->mActor   = actor;
+    node->setUserData(mUserData);
+
+    World::get()->Actor_PushBack(actor);
+
+    return actor;
+}
+
 
 Actor* SpawnCommandCenter(ax::Node* parent)
 {

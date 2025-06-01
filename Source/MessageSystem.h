@@ -18,10 +18,11 @@ enum class MsgType
     SetTarget,
     GatherMineral,
     GatherGas,
-    GiveMineral,
+    GiveResource,
     AttackTarget,
     SetAttackTarget,
     ReturnCargo,
+    SearchCargo,
     // 건설물 생성하기
     Build,
     Do_Build,
@@ -48,6 +49,9 @@ enum class MsgType
     // 업그레이드 관련
     Upgrade_Bionic_AT,
     Upgrade_Bionic_DF,
+
+
+
 
     Cancel,
     SendInfo,

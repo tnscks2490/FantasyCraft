@@ -3,6 +3,7 @@
 
 class Actor;
 class PathFind;
+class Player;
 
 struct UserData
 {
@@ -23,7 +24,9 @@ public:
     void Actor_PushBackDelete(Actor* actor);
     void PrintActorList();
 
-    void test(ax::Node* node);
+    void ConnectPlayer(Player* player,int idx);
+
+    int NumOfConnectPlayer() { return NumOfPlayer; }
 
 public:
     std::vector<Actor*> w_Wait_AddActors;
@@ -33,8 +36,13 @@ public:
 
 
 public:
+    int NumOfPlayer = 0;
+
+
     bool IsAddActors = false;
     bool IsDeleteActors = false;
+
+    int UnitIdx = 0;
 };
 
 // 시스템 엑터
@@ -45,6 +53,9 @@ Actor* SpawnCursor(ax::Node* parent);
 Actor* SpawnSCV(ax::Node* parent, PK_Data data);
 Actor* SpawnMarine(ax::Node* parent, PK_Data data);
 Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data);
+
+Actor* SpawnCommandCenterComplete(ax::Node* parent, PK_Data data);
+
 Actor* SpawnAcademy(ax::Node* parent, PK_Data data);
 Actor* SpawnArmory(ax::Node* parent, PK_Data data);
 Actor* SpawnBarrack(ax::Node* parent, PK_Data data);
@@ -60,7 +71,10 @@ Actor* SpawnRefinery(ax::Node* parent, PK_Data data);
 
 // 리소스 액터 생성
 Actor* SpawnMineral(ax::Node* parent, PK_Data data);
+Actor* SpawnMineral(ax::Node* Parent);
 
+Actor* SpawnGas(ax::Node* parent, PK_Data data);
+Actor* SpawnGas(ax::Node* parent);
 
 // 건물 설치할때 블루프린트 스폰하기
 

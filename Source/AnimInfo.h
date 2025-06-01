@@ -56,6 +56,7 @@ enum class ECharName
 
     // 리소스
     Mineral,
+    Gas,
     CarryMineral,
     TCarryGas,
 
@@ -100,6 +101,7 @@ enum class ECharAct
     M01,
     M02,
     M03,
+    Gas,
 
 
 

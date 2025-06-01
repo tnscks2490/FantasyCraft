@@ -5,13 +5,13 @@
 #include "UnitComp.h"
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
+#include "Goal/Base/All_Goals.h"
 #include "Goal_ReturnCargo.h"
 
 const char* Goal_ReturnCargo::GOAL_NAME = "Goal_ReturnCargo";
-Goal_ReturnCargo::Goal_ReturnCargo(Actor* gather)
-    : Goal(gather,GoalType::Gather) {
-
-    mGather = gather;
+Goal_ReturnCargo::Goal_ReturnCargo(Actor* mActor,Actor* cargo)
+    : Goal_Composite(mActor,GoalType::Gather) {
+    mCargo = cargo;
 }
 
 void Goal_ReturnCargo::Start()
@@ -19,16 +19,17 @@ void Goal_ReturnCargo::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::Gather;
 
-    ActorMessage msg = {MsgType::ReturnCargo, mGather, nullptr, nullptr};
-    SendActorMessage(mActor, msg);
+    PushSubGoal(new Goal_ApproachToLocation(mActor, mCargo->GetPosition()));
+    PushSubGoal(new Goal_GiveResource(mActor,mCargo));
+
 }
 
 int Goal_ReturnCargo::Do()
 {
     If_Inactive_Start();
 
+    m_Status = ProcessSubgoals();
 
-    m_Status = Goal::completed_t;
     return m_Status;
 }
 

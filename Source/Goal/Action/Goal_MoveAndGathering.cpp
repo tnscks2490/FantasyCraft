@@ -26,9 +26,6 @@ void Goal_MoveAndGathering::Start()
 
     PushSubGoal(new Goal_MoveToPath(mActor, m_Dest));
     PushSubGoal(new Goal_Gathering(mActor, mGatherResource));
-    PushSubGoal(new Goal_ReturnCargo(mActor));
-
-
 }
 
 int Goal_MoveAndGathering::Do()

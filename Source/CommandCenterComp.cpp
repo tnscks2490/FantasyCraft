@@ -87,7 +87,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         AddSCV();
     }
     break;
-    case MsgType::GiveMineral:
+    case MsgType::GiveResource:
     {
         PEvent event = {EventType::GetResource,8,0};
         SendEvent(event);
@@ -150,13 +150,18 @@ void CommandCenterComp::update(float delta)
             if (unitTimer >= SCVCreateTime)
             {
                 unitTimer = 0.f;
+                SendPK_Data(GetCreateCommand(CreateUnitArray[0]), mActor->GetPosition() + ax::Vec2(0, -100));
                 DeleteSCV();
 
-                SendPK_Data(GetCreateCommand(CreateUnitArray[0]), mActor->GetPosition() + ax::Vec2(0, -100));
                 if (IsUnitArrayEmpty())
                 {
                     IsCreatingUnit = false;
-                    mCurAction     = ActionState::Idle;
+
+                    PK_Data data;
+                    data.ClientID = TcpClient::get()->GetID();
+                    data.input    = 12;
+                    data.pos      = ax::Vec2(mActor->idx, 0);
+                    TcpClient::get()->SendMessageToServer(data);
                     
                 }
                 else
@@ -178,7 +183,11 @@ void CommandCenterComp::AddSCV()
     if (!IsCreatingUnit)
         IsCreatingUnit = true;
 
-    mCurAction = ActionState::Create_Unit;
+    PK_Data data;
+    data.ClientID = TcpClient::get()->GetID();
+    data.input    = 11;
+    data.pos      = ax::Vec2(mActor->idx, 0);
+    TcpClient::get()->SendMessageToServer(data);
 
     for (int i = 0; i < 5; i++)
     {
@@ -207,4 +216,11 @@ bool CommandCenterComp::IsUnitArrayEmpty()
             return false;
     }
     return true;
+}
+
+void CommandCenterComp::MakeComplete()
+{
+    isBuild = true;
+    mStatus.HP = mStatus.MaxHP;
+
 }

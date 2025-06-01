@@ -21,7 +21,7 @@ public:
     void AddSCV();
     void DeleteSCV();
     bool IsUnitArrayEmpty();
-
+    void MakeComplete();
 
 public:
 

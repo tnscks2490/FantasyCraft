@@ -23,7 +23,6 @@ bool MapLayer::init()
     mMap = ax::TMXTiledMap::create("Map/StarMap/StarMap.tmx");
     this->addChild(mMap);
 
-    SettingResource();
 
     return true;
 }
@@ -63,13 +62,59 @@ void MapLayer::SettingResource()
         pos.x = obj["x"].asFloat();
         pos.y = obj["y"].asFloat();
 
-        PK_Data data;
-        data.ClientID = TcpClient::get()->GetID();
-        data.input    = 50;
-        data.pos      = pos;
-        TcpClient::get()->SendMessageToServer(data);
-        
-        printf("123");
+        auto t = obj["type"].asString();
+
+        if (t == "Mineral")
+        {
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 50;
+            data.pos      = pos;
+            TcpClient::get()->SendMessageToServer(data);
+        }
+        else if (t == "Gas")
+        {
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 51;
+            data.pos      = pos;
+            TcpClient::get()->SendMessageToServer(data);
+        }       
     }
 
+}
+
+ax::Vec2 MapLayer::SetStartPoint()
+{
+    auto spawnPoints = mMap->getObjectGroup("SpawnPoint");
+    auto SP = spawnPoints->getObjects();
+    std::vector<ax::Vec2> startPoints;
+
+    for (auto sp : SP)
+    {
+        ax::ValueMap obj = sp.asValueMap();
+
+        ax::Vec2 pos;
+        pos.x = obj["x"].asFloat()/32;
+        pos.y = obj["y"].asFloat()/32;
+
+        pos.x = pos.x * 32;
+        pos.y = pos.y * 32;
+
+        startPoints.push_back(pos);
+    }
+
+    int idx = TcpClient::get()->GetID();
+    idx     = idx % 4;
+
+    auto spos = startPoints[idx];
+
+    PK_Data data;
+    data.pos      = spos;
+    data.ClientID = TcpClient::get()->GetID();
+    data.input    = 80;
+
+    TcpClient::get()->SendMessageToServer(data);
+
+    return spos;
 }
