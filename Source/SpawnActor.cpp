@@ -183,7 +183,6 @@ Actor* SpawnCommandCenterComplete(ax::Node* parent, PK_Data data)
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Idle, 0);
 
-
     auto unit  = new CommandCenterComp(actor);
     unit->MakeComplete();
     auto move  = new MoveComp(actor);
@@ -550,6 +549,8 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
     actor->mCategory  = UnitCategory::Resource;
     actor->mID        = data.ClientID;
     actor->charNum    = data.input;
+
+    
 
     auto draw = new DrawComp(actor);
     auto node = draw->CreateRootNode();

@@ -360,10 +360,11 @@ void SCVComp::Building(ActorMessage& msg)
     default:
         break;
     }
+
     PK_Data data;
     data.ClientID = mActor->mID;
     data.input    = command;
-    data.pos      = mActor->GetPosition();
+    data.pos      = ax::Vec2(mActor->idx,0);
     TcpClient::get()->SendMessageToServer(data);
     mCurAction = ActionState::Building;
 }

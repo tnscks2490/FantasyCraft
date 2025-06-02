@@ -274,10 +274,10 @@
    <property name="P3Spawn" type="object" value="5"/>
    <property name="P4Spawn" type="object" value="3"/>
   </properties>
-  <object id="3" name="SpawnP4" type="StartPoint" x="3712" y="1280" width="128" height="96"/>
-  <object id="5" name="SpawnP3" type="StartPoint" x="2656" y="192" width="128" height="96"/>
-  <object id="8" name="SpawnP2" type="StartPoint" x="256" y="2720" width="128" height="96"/>
-  <object id="10" name="SpawnP1" type="StartPoint" x="1344" y="3808" width="128" height="96"/>
+  <object id="3" name="SpawnP4" type="StartPoint" x="3727.27" y="1355.64" width="4.18182" height="3.81818"/>
+  <object id="5" name="SpawnP3" type="StartPoint" x="2674.61" y="268.97" width="3.27273" height="2.54545"/>
+  <object id="8" name="SpawnP2" type="StartPoint" x="277.333" y="2790.67" width="3.27273" height="2.72727"/>
+  <object id="10" name="SpawnP1" type="StartPoint" x="1370.48" y="3879.55" width="3.09091" height="4"/>
  </objectgroup>
  <objectgroup id="6" name="ResourcePoint">
   <object id="19" name="Point2M1" type="Mineral" x="96.33" y="2851.22" width="64" height="32"/>

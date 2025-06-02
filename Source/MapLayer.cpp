@@ -95,13 +95,18 @@ ax::Vec2 MapLayer::SetStartPoint()
         ax::ValueMap obj = sp.asValueMap();
 
         ax::Vec2 pos;
-        pos.x = obj["x"].asFloat()/32;
-        pos.y = obj["y"].asFloat()/32;
+        pos.x = obj["x"].asInt()/32;
+        pos.y = obj["y"].asInt()/32;
 
         pos.x = pos.x * 32;
         pos.y = pos.y * 32;
 
         startPoints.push_back(pos);
+
+        auto draw = ax::DrawNode::create();
+        draw->drawDot(pos, 16, ax::Color4B::MAGENTA);
+        addChild(draw, 4);
+
     }
 
     int idx = TcpClient::get()->GetID();

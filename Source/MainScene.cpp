@@ -783,15 +783,15 @@ void MainScene::Decording()
         case 50:
         {
             Actor* actor = SpawnMineral(mMapLayer, data);
-            actor->SetPosition(data.pos);
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 32));
+            World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(64, 32));
+            actor->SetPosition(data.pos + ax::Vec2(32,16));
         }
         break;
         case 51:
         {
             Actor* actor = SpawnGas(mMapLayer, data);
-            actor->SetPosition(data.pos);
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 32));
+            World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(64, 32));
+            actor->SetPosition(data.pos + ax::Vec2(32,16));
         }
         break;
 
@@ -803,6 +803,15 @@ void MainScene::Decording()
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(data.pos);
         } break;
+        
+        case 80:  // 커맨드센터 완제품생성
+        {
+            Actor* actor = SpawnCommandCenterComplete(mMapLayer, data);
+            World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(128, 96));
+            actor->SetPosition(data.pos + ax::Vec2(48, 32));
+        }
+        break;
+
         case 90:
         {
             for (auto actor : mPlayer->PlayerActors)
@@ -813,13 +822,6 @@ void MainScene::Decording()
                 }
             }
         } break;
-        case 80:  // 커맨드센터 완제품생성
-        {
-            Actor* actor = SpawnCommandCenterComplete(mMapLayer, data);
-            actor->SetPosition(data.pos);
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(128, 96));
-        }
-        break;
         // Actor 생성 라인
         case 100: //SCV 생성
         {
@@ -834,124 +836,205 @@ void MainScene::Decording()
         } break;
         case 102:  // 커맨드센터 생성
         {
-            Actor* actor = SpawnCommandCenter(mMapLayer, data);
-            actor->SetPosition(data.pos);
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(64, 64));
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnCommandCenter(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 103: // 서플라이 생성
         {
-            Actor* actor = SpawnSupplyDepot(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos         = ac->GetPosition();
+                    Actor* actor = SpawnSupplyDepot(mMapLayer, data);
+                    actor->SetPosition(ac->GetPosition());
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+
+
+            
+
         } break;
         case 104: // 배럭 생성
         {
-            Actor* actor = SpawnBarrack(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnBarrack(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 105:  // 엔지니어링 베이 생성
         {
-            Actor* actor = SpawnEngineeringBay(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnEngineeringBay(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 106:  // 리파이너리(가스) 생성
         {
-            Actor* actor = SpawnRefinery(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnRefinery(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 107:  // 아카데미 생성
         {
-            Actor* actor = SpawnAcademy(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnAcademy(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 108:  // 아머리 생성
         {
-            Actor* actor = SpawnArmory(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnArmory(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 109:  // 벙커 생성
         {
-            Actor* actor = SpawnBunker(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnBunker(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 110:  // 스타포트 생성
         {
-            Actor* actor = SpawnStarPort(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnStarPort(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 111:  // 사이언스퍼실리티 생성
         {
-            Actor* actor = SpawnScienceFacility(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnScienceFacility(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         case 112:  // 펙토리 생성
         {
-            Actor* actor = SpawnFactory(mMapLayer, data);
-            actor->SetPosition(data.pos);
-
-            if (data.ClientID == TcpClient::get()->GetID())
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
             {
-                ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
-                SendActorMessage(mPlayer->mMainActor, msg);
+                if (ac->idx == (int)data.pos.x)
+                {
+                    data.pos     = ac->GetPosition();
+                    Actor* actor = SpawnFactory(mMapLayer, data);
+
+                    ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
+                    SendActorMessage(ac, msg);
+
+                    actor->SetPosition(ac->GetPosition());
+                    World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+                }
             }
         } break;
         // 여기까지 유닛, 건물 생성

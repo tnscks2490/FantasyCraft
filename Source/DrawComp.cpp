@@ -471,6 +471,7 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, ECharAct action, int i
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName(nodeName);
+
         mRoot->addChild(node);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
@@ -583,7 +584,7 @@ ax::Node* DrawComp::CreateGatheringNode(ActorType type)
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName("GatherAnim");
-        mRoot->addChild(node);
+        mRoot->addChild(node,3);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
         ax::Action* action   = ax::RepeatForever::create(animate);
