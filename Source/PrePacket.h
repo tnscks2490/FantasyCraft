@@ -12,8 +12,8 @@ struct PK_Head
 
 struct PK_Data
 {
-    short ClientID = -1;
-    char input  = 0;
+    unsigned short ClientID = -1;
+    unsigned char input      = 0;
     ax::Vec2 pos;
 };
 

@@ -40,7 +40,30 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::Build:
     {
         ax::Vec2* pos = (ax::Vec2*)msg.data;
-        AddGoal_MoveAndBuild(mActor, *pos, msg.sender->mBPComp->mBPType);
+
+        int command = 0;
+        switch (msg.sender->mBPComp->mBPType)
+        {
+        case ActorType::CommandCenter: command = 120;break;
+        case ActorType::SupplyDepot: command = 121;break;
+        case ActorType::Barrack: command = 122; break;
+        case ActorType::EngineeringBay: command = 123; break;
+        case ActorType::Academy: command = 124; break;
+        case ActorType::Refinery: command = 125; break;
+        case ActorType::Factory: command = 126; break;
+        case ActorType::StarPort: command = 127; break;
+        case ActorType::Armory: command = 128; break;
+        case ActorType::ScienceFacility: command = 129; break;
+        default:
+            break;
+        }
+
+
+        PK_Data data;
+        data.ClientID = mActor->idx;
+        data.input    = command;
+        data.pos      = *pos;
+        TcpClient::get()->SendMessageToServer(data);
     }
         break;
     case MsgType::Do_Build:
@@ -127,7 +150,14 @@ void SCVComp::MessageProc(ActorMessage& msg)
             if (mGatherResource == nullptr)
             {
                 auto mMineral = msg.sender;
-                AddGoal_MoveAndGathering(mActor, mMineral);
+                //AddGoal_MoveAndGathering(mActor, mMineral);
+
+                PK_Data data;
+                data.ClientID = mActor->idx;
+                data.input    = 130;
+                data.pos      = ax::Vec2(mMineral->idx, 0);
+                TcpClient::get()->SendMessageToServer(data);
+
             }
         }
         else if (msg.sender->mActorType == ActorType::Refinery)
@@ -257,9 +287,13 @@ void SCVComp::GiveMineral()
     mCurAction = ActionState::Idle;
 
     mActor->mDrawComp->RemoveCarryItem();
-    ActorMessage msg = {MsgType::GiveResource, mActor, nullptr, nullptr};
-    SendActorMessage(mCargo, msg);
+    if (mActor->mID == TcpClient::get()->GetID())
+    {
+        ActorMessage msg = {MsgType::GiveResource, mActor, nullptr, nullptr};
+        SendActorMessage(mCargo, msg);
 
+    }
+    
     
 }
 
@@ -323,11 +357,13 @@ void SCVComp::Building(ActorMessage& msg)
     case ActorType::StarPort:     command = 110;   break;
     case ActorType::ScienceFacility: command = 111;break;
     case ActorType::Factory:      command = 112;   break;
-
-        break;
     default:
         break;
     }
-    SendPK_Data(command, mActor->GetPosition());
+    PK_Data data;
+    data.ClientID = mActor->mID;
+    data.input    = command;
+    data.pos      = mActor->GetPosition();
+    TcpClient::get()->SendMessageToServer(data);
     mCurAction = ActionState::Building;
 }

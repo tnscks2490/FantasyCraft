@@ -758,7 +758,7 @@ void MainScene::Decording()
         // 유닛 상태변경 커맨드 
         case 11:  //Create_Unit
         {
-            auto actors = World::get()->w_ActorList;
+            auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
                 if (ac->idx == (int)data.pos.x)
@@ -766,11 +766,10 @@ void MainScene::Decording()
                     ac->mUnitComp->mCurAction = ActionState::Create_Unit;
                 }
             }
-        }
-        break;
+        }   break;
         case 12:  // Idle
         {
-            auto actors = World::get()->w_ActorList;
+            auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
                 if (ac->idx == (int)data.pos.x)
@@ -778,8 +777,7 @@ void MainScene::Decording()
                     ac->mUnitComp->mCurAction = ActionState::Idle;
                 }
             }
-        }
-        break;
+        }   break;
         
 
         case 50:
@@ -829,13 +827,11 @@ void MainScene::Decording()
             actor->SetPosition(data.pos);
             World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(32, 32));
         } break;
-
         case 101:  // 마린 생성
         {
             Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(data.pos);
         } break;
-
         case 102:  // 커맨드센터 생성
         {
             Actor* actor = SpawnCommandCenter(mMapLayer, data);
@@ -869,8 +865,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 105:  // 엔지니어링 베이 생성
         {
             Actor* actor = SpawnEngineeringBay(mMapLayer, data);
@@ -881,8 +876,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 106:  // 리파이너리(가스) 생성
         {
             Actor* actor = SpawnRefinery(mMapLayer, data);
@@ -893,8 +887,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 107:  // 아카데미 생성
         {
             Actor* actor = SpawnAcademy(mMapLayer, data);
@@ -905,8 +898,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 108:  // 아머리 생성
         {
             Actor* actor = SpawnArmory(mMapLayer, data);
@@ -917,8 +909,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 109:  // 벙커 생성
         {
             Actor* actor = SpawnBunker(mMapLayer, data);
@@ -929,8 +920,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 110:  // 스타포트 생성
         {
             Actor* actor = SpawnStarPort(mMapLayer, data);
@@ -941,8 +931,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 111:  // 사이언스퍼실리티 생성
         {
             Actor* actor = SpawnScienceFacility(mMapLayer, data);
@@ -953,8 +942,7 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
+        } break;
         case 112:  // 펙토리 생성
         {
             Actor* actor = SpawnFactory(mMapLayer, data);
@@ -965,61 +953,215 @@ void MainScene::Decording()
                 ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                 SendActorMessage(mPlayer->mMainActor, msg);
             }
-        }
-        break;
-        case 113:
-        {
-            auto actors = World::get()->w_ActorList;
-            for (auto actor : actors)
-            {
-                if (actor && !actor->isDead && actor->mMoveComp)
-                {
-                    if (actor->idx == (int)data.pos.x)
-                    {
-                        actor->mMoveComp->ServerMoveOrderOn();
-                    }
-                }
-            }
-
-        }
-        break;
+        } break;
+        // 여기까지 유닛, 건물 생성
         case 114: // MoveToPath
         {
             auto actors = World::get()->w_ActorList;
-            for (auto actor : actors)
+            auto ac     = actors[data.ClientID];
+            
+            if (ac && !ac->isDead && ac->mMoveComp)
             {
-                if (actor && !actor->isDead && actor->mMoveComp)
-                {
-                    if (actor->mMoveComp->ServerMoveOrder)
-                    {
-                        actor->mMoveComp->ServerMoveOrderOff();
-                        AddGoal_MoveToPath(actor, data.pos);
-                    }
-                }
-           
+                AddGoal_MoveToPath(ac, data.pos);
             }
-        } break;
 
-        case 115: // 건물 건설
+        } break;
+        case 115:  // 건물 건설
         {
             for (auto actor : World::get()->w_ActorList)
             {
                 if (actor && actor->mID == data.ClientID)
                 {
                     if (actor->mDrawComp->selected)
-                        AddGoal_BuildStructure(actor,ActorType::Cursor);
+                        AddGoal_BuildStructure(actor, ActorType::Cursor);
                 }
             }
         }
         break;
-        case 117: // 사망 이펙트띄우기
+        case 117:  // 사망 이펙트띄우기
         {
             auto node = ax::Node::create();
-            this->addChild(node,1);
+            this->addChild(node, 1);
             node->setPosition(data.pos);
             TestFunc(node);
         }
         break;
+
+
+
+
+
+        // 여기서부터는 골추가
+        case 120: // MoveAndBuild
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::CommandCenter);
+                    }
+                }
+            }       
+        } break;
+        case 121:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::SupplyDepot);
+                    }
+                }
+            }   
+        } break;
+        case 122:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::Barrack);
+                    }
+                }
+            }   
+        } break;
+        case 123:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::EngineeringBay);
+                    }
+                }
+            }   
+        } break;
+        case 124:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::Academy);
+                    }
+                }
+            }   
+        } break;
+        case 125:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::Refinery);
+                    }
+                }
+            }   
+        } break;
+        case 126:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::Factory);
+                    }
+                }
+            }   
+        } break;
+        case 127:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::StarPort);
+                    }
+                }
+            }   
+        } break;
+        case 128:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::Armory);
+                    }
+                }
+            }   
+        } break;
+        case 129:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == data.ClientID)
+                {
+                    if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
+                    {
+                        AddGoal_MoveAndBuild(ac, data.pos, ActorType::ScienceFacility);
+                    }
+                }
+            }   
+        } break;
+        // 여기까지 건물짓는 골
+        case 130: //MoveAndGather 미네랄캐기,
+        {
+            auto& actors = World::get()->w_ActorList;
+            Actor* gather = nullptr;
+            Actor* mineral = nullptr;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == (int)data.ClientID)
+                {
+                    gather = ac;
+                }
+                if (ac->idx == (int)data.pos.x)
+                {
+                    mineral = ac;
+                }
+
+                if (gather && mineral) break;
+            }
+
+            if (gather && !gather->isDead && gather->mUnitComp && gather->mMoveComp)
+            {
+                AddGoal_MoveAndGathering(gather,mineral);
+            }
+        }break;
+        case 131: //MoveAndGather 가스캐기,
+        {
+
+        }
+
         ///////////////////////
         default:
             break;

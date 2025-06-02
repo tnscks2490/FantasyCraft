@@ -448,12 +448,23 @@ void Player::MoveUnit(ax::Vec2 pos)
     {
         if (ac && !ac->isDead && ac->mMoveComp)
         {
+            PK_Data data;
+            data.ClientID = ac->idx;
+            data.input    = 114;
+            data.pos      = pos;
+            TcpClient::get()->SendMessageToServer(data);
+        }
+    }
+    /*for (auto& ac : PlayerActors)
+    {
+        if (ac && !ac->isDead && ac->mMoveComp)
+        {
             SendPK_Data(113, ax::Vec2(ac->idx,0));
         }
     }
 
 
-    SendPK_Data(114, pos);
+    SendPK_Data(114, pos);*/
 }
 
 void Player::ImConnect()

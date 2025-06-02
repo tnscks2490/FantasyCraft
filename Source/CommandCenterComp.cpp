@@ -84,11 +84,18 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     break;
     case MsgType::Create_SCV:
     {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.input    = 11;
+        data.pos      = ax::Vec2(mActor->idx, 0);
+        TcpClient::get()->SendMessageToServer(data);
+
         AddSCV();
     }
     break;
     case MsgType::GiveResource:
     {
+        
         PEvent event = {EventType::GetResource,8,0};
         SendEvent(event);
     } break;
@@ -182,12 +189,6 @@ void CommandCenterComp::AddSCV()
 {
     if (!IsCreatingUnit)
         IsCreatingUnit = true;
-
-    PK_Data data;
-    data.ClientID = TcpClient::get()->GetID();
-    data.input    = 11;
-    data.pos      = ax::Vec2(mActor->idx, 0);
-    TcpClient::get()->SendMessageToServer(data);
 
     for (int i = 0; i < 5; i++)
     {
