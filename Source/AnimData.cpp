@@ -105,8 +105,7 @@ AnimInfo g_AnimInfo_Gas[] = {
 };
 
 
-AnimInfo g_AnimInfo_CarryMineral[] =
-{
+AnimInfo g_AnimInfo_CarryMineral[] ={
         {ECharName::CarryMineral, ECharAct::Idle, ECharDir::N,   "Plist/CarryMineral.plist", "CarryMineral/1/0001.png", 1, 1,(1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CarryMineral, ECharAct::Idle, ECharDir::NNE, "Plist/CarryMineral.plist", "CarryMineral/2/0001.png", 1, 1,(1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CarryMineral, ECharAct::Idle, ECharDir::NE,  "Plist/CarryMineral.plist", "CarryMineral/3/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
@@ -124,8 +123,7 @@ AnimInfo g_AnimInfo_CarryMineral[] =
         {ECharName::CarryMineral, ECharAct::Idle, ECharDir::NW,  "Plist/CarryMineral.plist", "CarryMineral/15/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
         {ECharName::CarryMineral, ECharAct::Idle, ECharDir::NNW, "Plist/CarryMineral.plist", "CarryMineral/16/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
-AnimInfo g_AnimInfo_TCarryGas[] =
-{
+AnimInfo g_AnimInfo_TCarryGas[] ={
         {ECharName::TCarryGas, ECharAct::Idle, ECharDir::Face,   "Plist/TCarryGas.plist", "TCarryGas/0001.png", 1, 1,(1.f / 1), Vec2(0.5, 0.5), nullptr},
 
 };

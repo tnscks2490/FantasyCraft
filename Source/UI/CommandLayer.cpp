@@ -300,15 +300,24 @@ void CommandLayer::SingleSelected(SystemMessage smsg)
         return;
 
     mActor = (Actor*)smsg.data;
-    
-    if (mActor->mUnitComp->IsCmdLocked())
+
+    if (mActor->mID == TcpClient::get()->GetID())
     {
-        ChangeCmdState(CommandState::CmdLock);
+        if (mActor->mUnitComp->IsCmdLocked())
+        {
+            ChangeCmdState(CommandState::CmdLock);
+        }
+        else
+        {
+            ChangeCmdState(CommandState::Idle);
+        }
     }
     else
     {
-        ChangeCmdState(CommandState::Idle);
+        ChangeCmdState(CommandState::None);
     }
+
+   
 
 }
 

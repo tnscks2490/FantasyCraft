@@ -74,6 +74,7 @@ public:
     void SetPosition(ax::Vec2 pos);
     ax::Vec2 GetPosition();
     ax::Vec2 GetVelocity();
+    int GetIDX() { return mID; }
 
 public:
 

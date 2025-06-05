@@ -87,6 +87,7 @@ public:
     virtual float GetCurUpgradeTime() { return 0; }
     virtual float GetMaxUpgradeTime() { return 0; }
     virtual bool IsCmdLocked() { return cmdLocked; }
+    virtual void ChangeAction(ActionState action) { mCurAction = action; }
 
 
     virtual ActorType* GetCreateUnitList() { return nullptr; }

@@ -366,5 +366,7 @@ void SCVComp::Building(ActorMessage& msg)
     data.input    = command;
     data.pos      = ax::Vec2(mActor->idx,0);
     TcpClient::get()->SendMessageToServer(data);
+
+
     mCurAction = ActionState::Building;
 }

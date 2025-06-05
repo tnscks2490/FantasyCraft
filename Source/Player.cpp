@@ -258,6 +258,7 @@ void Player::ClassifySelected()
     bool isFriendUnit = false;
     bool isBuilding = false;
     bool isEnemyUnit  = false;
+    bool isEnemyBuilding = false;
     bool isResource   = false; 
 
     for (auto ac : PrePlayerActors)
@@ -266,11 +267,17 @@ void Player::ClassifySelected()
         {
             if (ac->mCategory == UnitCategory::Unit)
             {
-                isFriendUnit = true;
+                if (ac->mID == TcpClient::get()->GetID())
+                    isFriendUnit = true;
+                else
+                    isEnemyUnit = true;
             }
             else if (ac->mCategory == UnitCategory::Building)
             {
-                isBuilding = true;
+                if (ac->mID == TcpClient::get()->GetID())
+                    isBuilding = true;
+                else
+                    isEnemyBuilding = true;
             }
             else if (ac->mCategory == UnitCategory::Resource)
             {
@@ -295,7 +302,8 @@ void Player::ClassifySelected()
 
 
     // 아군 유닛만 선택한 경우
-    if (isFriendUnit == true && isBuilding == false)
+    if (isFriendUnit == true && isBuilding == false
+        && !isEnemyUnit && !isEnemyBuilding)
     {
         Actor* tmp[12] = {nullptr};
         int idx = 0;
@@ -318,7 +326,8 @@ void Player::ClassifySelected()
         // 건드릴게 없지만 확인용
     }
     // 아군 건물만 선택한 경우
-    else if (isFriendUnit == false && isBuilding == true)
+    else if (isFriendUnit == false && isBuilding == true
+         && !isEnemyUnit && !isEnemyBuilding)
     {
 
         for (auto ac : PrePlayerActors)
@@ -338,7 +347,8 @@ void Player::ClassifySelected()
 
     }
     // 아군 유닛과 건물을 모두 선택한 경우
-    else if (isFriendUnit == true && isBuilding == true)
+    else if (isFriendUnit == true && isBuilding == true
+         && !isEnemyUnit && !isEnemyBuilding)
     {
         for (int i = 0; i < 12; i++)
         {
@@ -365,6 +375,21 @@ void Player::ClassifySelected()
             }
         }
 
+    }
+    //적군만 선택한 경우
+    else if (isEnemyUnit && isEnemyBuilding &&
+        !isFriendUnit && !isBuilding)
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            if (PrePlayerActors[i])
+            {
+                auto ac = PrePlayerActors[i];
+                PrePlayerActorsClear();
+                PrePlayerActors[0] = ac;
+                break;
+            }
+        }
     }
 
     
@@ -448,11 +473,14 @@ void Player::MoveUnit(ax::Vec2 pos)
     {
         if (ac && !ac->isDead && ac->mMoveComp)
         {
-            PK_Data data;
-            data.ClientID = ac->idx;
-            data.input    = 114;
-            data.pos      = pos;
-            TcpClient::get()->SendMessageToServer(data);
+            if (ac->mID == TcpClient::get()->GetID())
+            {
+                PK_Data data;
+                data.ClientID = ac->idx;
+                data.input    = 114;
+                data.pos      = pos;
+                TcpClient::get()->SendMessageToServer(data);
+            }  
         }
     }
     /*for (auto& ac : PlayerActors)

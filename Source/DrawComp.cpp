@@ -71,7 +71,7 @@ void DrawComp::update(float delta)
             if (dirV == ax::Vec2::ZERO)
             {
                 if (mCurAnimInfo->dir == mCurDir)
-                    return;
+                    return;                
             }
             else
             {
@@ -418,7 +418,7 @@ ax::Node* DrawComp::CreateAnimNode(ECharName name, std::string_view nodeName)
 
 ax::Node* DrawComp::CreateAnimNode(ECharName name, ECharAct action, ECharDir dir, std::string_view nodeName)
 {
-     if (mRoot.isNotNull())
+    if (mRoot.isNotNull())
     {
         AnimInfo& info = FindAnimInfo(name, action, dir);  
         info.CreateAnimation();
@@ -487,12 +487,21 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, ECharAct action, int i
     return nullptr;
 }
 
-ax::Node* DrawComp::CreateSelectedNode()
+ax::Node* DrawComp::CreateSelectedNode(ax::Vec2 bodySize)
 {
     if (mRoot.isNotNull())
     {
+        auto bs = bodySize;
+
         auto selectanim = ax::DrawNode::create();
-        selectanim->drawCircle(ax::Vec2(0, -8), 8.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
+
+        if (mActor->mID == TcpClient::get()->GetID())
+            selectanim->drawCircle(ax::Vec2(0, -bodySize.y / 8), bodySize.y/2, 360.f, 20, false, 1.5f, 1.0f,
+                                   ax::Color4B::GREEN);
+        else
+            selectanim->drawCircle(ax::Vec2(0, -bodySize.y / 8), bodySize.y/2, 360.f, 20, false, 1.5f, 1.0f,
+                                   ax::Color4B::RED);
+
         selectanim->setName("Select");
         selectanim->setVisible(false);
         mRoot->addChild(selectanim, 0.9f);
@@ -854,7 +863,7 @@ void DrawComp::isSelected()
     if (selected)
     {
         auto selectNode = (ax::DrawNode*)mRoot->getChildByName("Select");
-        selectNode->setVisible(true);
+        selectNode->setVisible(true);  
     }
     else
     {

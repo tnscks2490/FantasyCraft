@@ -85,7 +85,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     case MsgType::Create_SCV:
     {
         PK_Data data;
-        data.ClientID = TcpClient::get()->GetID();
+        data.ClientID = mActor->GetIDX();
         data.input    = 11;
         data.pos      = ax::Vec2(mActor->idx, 0);
         TcpClient::get()->SendMessageToServer(data);
@@ -148,34 +148,35 @@ void CommandCenterComp::update(float delta)
 
     }
 
-    if (isBuild)
+    if (isBuild && IsCreatingUnit)
     {
-        if (IsCreatingUnit)
+
+        unitTimer += delta;
+        if (unitTimer >= SCVCreateTime)
         {
-            unitTimer += delta;
-            if (unitTimer >= SCVCreateTime)
+            unitTimer = 0.f;
+
+            PK_Data data;
+            data.ClientID = mActor->GetIDX();
+            data.input = GetCreateCommand(CreateUnitArray[0]);
+            data.pos      = mActor->GetPosition() + ax::Vec2(0, -100);
+            TcpClient::get()->SendMessageToServer(data);
+
+            DeleteSCV();
+
+            if (IsUnitArrayEmpty())
             {
-                unitTimer = 0.f;
-                SendPK_Data(GetCreateCommand(CreateUnitArray[0]), mActor->GetPosition() + ax::Vec2(0, -100));
-                DeleteSCV();
+                IsCreatingUnit = false;
 
-                if (IsUnitArrayEmpty())
-                {
-                    IsCreatingUnit = false;
-
-                    PK_Data data;
-                    data.ClientID = TcpClient::get()->GetID();
-                    data.input    = 12;
-                    data.pos      = ax::Vec2(mActor->idx, 0);
-                    TcpClient::get()->SendMessageToServer(data);
-                    
-                }
-                else
-                {
-                    printf("안비었음!");
-                }
-
-                
+                PK_Data data;
+                data.ClientID = mActor->GetIDX();
+                data.input    = 12;
+                data.pos      = ax::Vec2(mActor->idx, 0);
+                TcpClient::get()->SendMessageToServer(data);
+            }
+            else
+            {
+                printf("안비었음!");
             }
         }
     }

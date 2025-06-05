@@ -28,13 +28,12 @@ Actor* SpawnCursor(ax::Node* parent)
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     body->setTag(-1);
     body->setName("Cursor");
+
     auto anim       = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Idle, ECharDir::Face, "Anim");
+
+
     auto cursor = new CursorComp(actor);
     draw->CreateCursorRect(ax::Vec2(0, 0), ax::Vec2(0, 0));
-
-    //auto Tanim = draw->CreateAnimNode(ECharName::Cursor, ECharAct::Target, ECharDir::Face, "TargetAnim");
-    //Tanim->setVisible(false);
-
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -61,7 +60,9 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
     // 선택 표기 타원의 위치는 바디사이즈의 1/2, 반지름의 크기도 바디사이즈의 1/2로 설정할것
-    auto selectanim = draw->CreateSelectedNode();
+
+ 
+    auto selectanim = draw->CreateSelectedNode(draw->mBodySize);
 
     auto hpbar = draw->CreateHPBarByIndex(ECharName::Marine, 0);
     hpbar->setPosition(ax::Vec2(0, -20));
@@ -99,7 +100,8 @@ Actor* SpawnMarine(ax::Node* parent, PK_Data data)
     
     auto body       = draw->CreatePhysicsNode(ax::Vec2(16, 16));
     auto anim = draw->CreateAnimNode(ECharName::Marine, ECharAct::Idle, ECharDir::S, "Anim");
-    auto selectanim = draw->CreateSelectedNode();
+
+    auto selectanim = draw->CreateSelectedNode(draw->mBodySize);
 
     auto hpbar      = draw->CreateHPBarByIndex(ECharName::Marine, 0);
     hpbar->setPosition(ax::Vec2(0, -20));
@@ -137,11 +139,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     draw->ChangePhysicsNodeTag(20);
 
 
-    auto selectanim = ax::DrawNode::create();
-    selectanim->drawCircle(ax::Vec2(0, -8), 48.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
-    selectanim->setName("Select");
-    selectanim->setVisible(false);
-    node->addChild(selectanim);
+    auto selectanim = draw->CreateSelectedNode(draw->mBodySize);
 
 
     auto anim =  draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Building, 0);
@@ -175,11 +173,8 @@ Actor* SpawnCommandCenterComplete(ax::Node* parent, PK_Data data)
     auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
-    auto selectanim = ax::DrawNode::create();
-    selectanim->drawCircle(ax::Vec2(0, -8), 48.f, 360.f, 20, false, 1.5f, 1.0f, ax::Color4B::GREEN);
-    selectanim->setName("Select");
-    selectanim->setVisible(false);
-    node->addChild(selectanim);
+    auto selectanim = draw->CreateSelectedNode(draw->mBodySize);
+
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::CommandCenter, ECharAct::Idle, 0);
 

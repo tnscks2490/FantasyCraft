@@ -135,6 +135,7 @@ void CursorComp::RClick(ax::Vec2 pos)
     {
         if (cPlayer->isSelected())
         {
+            
             cPlayer->MoveUnit(pos); 
         }
 
@@ -149,7 +150,8 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
     {
         if (other->mActor->GetRoot()->getChildByName("Body"))
         {
-            if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
+            auto tag = other->mActor->GetRoot()->getChildByName("Body")->getTag();
+            if (tag == 10 || tag == 20)
             {
                 auto otherRoot = other->mActor->GetRoot();
 
@@ -160,6 +162,14 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
                 }
                 else if (mState != CursorState::Drag)
                 {
+                    if (other->mActor->mActorType == ActorType::Mineral ||
+                        other->mActor->mActorType == ActorType::Gas)
+                    {
+                        mState = CursorState::ContactTeam;
+                        return;
+                    }
+
+
                     if (other->mActor->mID == mActor->mID)
                         mState = CursorState::ContactTeam;
                     else
@@ -181,7 +191,8 @@ void CursorComp::SeparateUnit(ActorMessage& msg)
     {
         if (other->mActor->GetRoot()->getChildByName("Body"))
         {
-            if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
+            auto tag = other->mActor->GetRoot()->getChildByName("Body")->getTag();
+            if (tag == 10 || tag == 20)
             {
                 auto otherRoot = other->mActor->GetRoot();
 
@@ -340,10 +351,32 @@ void CursorComp::CreateBuildingBP(ActorType type)
 
 void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos)
 {
-    auto pos = createPos - mActor->GetRoot()->getParent()->getPosition();
+    auto pos = createPos;
 
-    ActorMessage msg = {MsgType::Build, BP, nullptr, &pos};
-    SendActorMessage(cPlayer->mMainActor, msg);
+
+    int command = 0;
+    switch (BP->mBPComp->mBPType)
+        {
+        case ActorType::CommandCenter: command = 120;break;
+        case ActorType::SupplyDepot: command = 121;break;
+        case ActorType::Barrack: command = 122; break;
+        case ActorType::EngineeringBay: command = 123; break;
+        case ActorType::Academy: command = 124; break;
+        case ActorType::Refinery: command = 125; break;
+        case ActorType::Factory: command = 126; break;
+        case ActorType::StarPort: command = 127; break;
+        case ActorType::Armory: command = 128; break;
+        case ActorType::ScienceFacility: command = 129; break;
+        default:
+            break;
+        }
+
+    PK_Data data;
+    data.ClientID = cPlayer->mMainActor->idx;
+    data.input    = command;
+    data.pos      = pos;
+    TcpClient::get()->SendMessageToServer(data);
+
 
     ReleaseBP();
 }

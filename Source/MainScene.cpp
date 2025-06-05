@@ -294,10 +294,7 @@ void MainScene::onMouseUp(Event* event)
             }
             else
             {
-                if (userData->mActor->mID == TcpClient::get()->GetID())
-                {
-                    mPlayer->PreSelected(userData->mActor);
-                }
+               mPlayer->PreSelected(userData->mActor);
             }
             
         }
@@ -761,10 +758,14 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+                if (ac->idx == data.ClientID)
                 {
-                    ac->mUnitComp->mCurAction = ActionState::Create_Unit;
+                    ac->mUnitComp->ChangeAction(ActionState::Create_Unit);
                 }
+                /*if (ac->idx == (int)data.pos.x)
+                {
+                    ac->mUnitComp->ChangeAction(ActionState::Create_Unit);
+                }*/
             }
         }   break;
         case 12:  // Idle
@@ -854,7 +855,6 @@ void MainScene::Decording()
         } break;
         case 103: // 서플라이 생성
         {
-            
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
@@ -870,10 +870,7 @@ void MainScene::Decording()
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
                 }
             }
-
-
-            
-
+ 
         } break;
         case 104: // 배럭 생성
         {

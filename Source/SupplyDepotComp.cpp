@@ -18,6 +18,7 @@ SupplyDepotComp::~SupplyDepotComp() {}
 
 void SupplyDepotComp::MessageProc(ActorMessage& msg)
 {
+
     switch (msg.msgType)
     {
     case MsgType::Contacted:
@@ -32,6 +33,7 @@ void SupplyDepotComp::MessageProc(ActorMessage& msg)
             {
                 mBuilder   = msg.sender;
                 mCurAction = ActionState::Building;
+                mActor->mDrawComp->CreateDemageNode(ActorType::SCV);
             }
         }
 
@@ -62,6 +64,17 @@ void SupplyDepotComp::MessageProc(ActorMessage& msg)
     {
         if (!isBuild)
             mBuilder = nullptr;
+    }
+    break;
+    case MsgType::Cancel:
+    {
+        if (!IsBuild())
+        {
+            mCurAction       = ActionState::Death;
+            ActorMessage msg = {MsgType::Build_Cancel, mActor, nullptr, nullptr};
+            SendActorMessage(mBuilder, msg);
+            mBuilder = nullptr;
+        }
     }
     break;
     default:
