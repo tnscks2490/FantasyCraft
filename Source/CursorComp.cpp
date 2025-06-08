@@ -158,7 +158,11 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
 
                 if (mState == CursorState::SetAttackTarget)
                 {
-                    printf("출력"); 
+                    return;
+                }
+                else if (mState == CursorState::Target)
+                {
+                    return;
                 }
                 else if (mState != CursorState::Drag)
                 {

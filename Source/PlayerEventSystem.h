@@ -16,6 +16,8 @@ struct PEvent
     EventType EType;
     int Mineral;
     int Gas;
+    bool isEnough;
+    Actor* sender;
 };
 
 class PlayerEventSystem

@@ -66,10 +66,10 @@ void BarrackComp::MessageProc(ActorMessage& msg)
     }
     break;
 
-    case MsgType::Create_Marine:  AddUnit(ActorType::Marine);  break;
+    /*case MsgType::Create_Marine:  AddUnit(ActorType::Marine);  break;
     case MsgType::Create_Medic:   AddUnit(ActorType::Medic);   break;
     case MsgType::Create_FireBat: AddUnit(ActorType::FireBat); break;
-    case MsgType::Create_Ghost:   AddUnit(ActorType::Ghost);   break;
+    case MsgType::Create_Ghost:   AddUnit(ActorType::Ghost);   break;*/
     default:
         break;
     }

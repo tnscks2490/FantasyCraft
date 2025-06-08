@@ -11,11 +11,11 @@
             "scaleInDock": 1.5
         },
         "StarMap.tmx": {
-            "scale": 3,
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1534.8333333333333,
-                "y": 3901
+                "x": 2774.25,
+                "y": 167.5
             }
         },
         "StarMap.tmx#ResourcePython": {

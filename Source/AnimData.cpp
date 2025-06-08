@@ -86,14 +86,14 @@ AnimInfo g_AnimInfo_Mineral_01[] = {
     {ECharName::Mineral, ECharAct::M01, ECharDir::Face, "Plist/Mineral.plist", "Mineral/01/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M01, ECharDir::Face, "Plist/Mineral.plist", "Mineral/01/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M01, ECharDir::Face, "Plist/Mineral.plist", "Mineral/01/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-};
-AnimInfo g_AnimInfo_Mineral_02[] = {
+};                                                                                                                          
+AnimInfo g_AnimInfo_Mineral_02[] = {                                                                                        
     {ECharName::Mineral, ECharAct::M02, ECharDir::Face, "Plist/Mineral.plist", "Mineral/02/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M02, ECharDir::Face, "Plist/Mineral.plist", "Mineral/02/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M02, ECharDir::Face, "Plist/Mineral.plist", "Mineral/02/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M02, ECharDir::Face, "Plist/Mineral.plist", "Mineral/02/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
-};
-AnimInfo g_AnimInfo_Mineral_03[] = {
+};                                                                                                                          
+AnimInfo g_AnimInfo_Mineral_03[] = {                                                                                        
     {ECharName::Mineral, ECharAct::M03, ECharDir::Face, "Plist/Mineral.plist", "Mineral/03/0001.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M03, ECharDir::Face, "Plist/Mineral.plist", "Mineral/03/0002.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
     {ECharName::Mineral, ECharAct::M03, ECharDir::Face, "Plist/Mineral.plist", "Mineral/03/0003.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},

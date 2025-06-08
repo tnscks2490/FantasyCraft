@@ -89,6 +89,11 @@ public:
     void ReSelected();
 
 
+    void PushBackActor(Actor* actor);
+    void DeleteActor(Actor* actor);
+
+    Actor* FindActor(Actor* actor);
+
     void MoveUnit(ax::Vec2 pos);
 
 
@@ -107,7 +112,7 @@ public:
     PlayerRace mRace       = PlayerRace::None;
 
     void GetResource(int m, int g) { mMineral += m; mGas +=g;}
-    bool UseResource(int m, int g);
+    void UseResource(int m, int g) { mMineral -= m; mGas -=g;}
 
 public:
 
@@ -115,6 +120,8 @@ public:
     Actor* PrePlayerActors[12] = {nullptr};
     Actor* PlayerActors[12] = {nullptr};
     Actor* mMainActor = nullptr;
+
+    std::vector<Actor*> mActors;
 
 
     SelectManager* mSM = nullptr;

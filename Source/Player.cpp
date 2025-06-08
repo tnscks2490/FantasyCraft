@@ -121,19 +121,15 @@ void Player::MessageProc(SystemMessage smsg)
         {
             if (mMainActor && mMainActor->mActorType == ActorType::CommandCenter)
             {
-                ActorMessage msg = {MsgType::Create_SCV, nullptr, nullptr};
-                SendActorMessage(mMainActor, msg);
-
-                SystemMessage smsg = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::SCV, ButtonType::TSCV, nullptr};
-                SendSystemMessage(ui, this, smsg);
-               
+                ActorMessage msg = {MsgType::CheckAdd_SCV, nullptr, nullptr};
+                SendActorMessage(mMainActor, msg);             
             }
         } break;
         case ButtonType::TMarine:
         {
             if (mMainActor && mMainActor->mActorType == ActorType::Barrack)
             {
-                ActorMessage msg = {MsgType::Create_Marine, nullptr, nullptr};
+                ActorMessage msg = {MsgType::CheckAdd_Marine, nullptr, nullptr};
                 SendActorMessage(mMainActor, msg);
 
                 SystemMessage smsg = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::Marine, ButtonType::TMarine, nullptr};
@@ -208,8 +204,25 @@ void Player::EvnetProc(PEvent evnet)
         GetResource(e.Mineral, e.Gas);
         SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None, nullptr};
         SendSystemMessage(ui, this, smsg);
-    }
-    break;
+    } break;
+    case EventType::UseResource:
+    {
+        if (mMineral >= e.Mineral && mGas >= e.Gas)
+        {
+            auto actor = FindActor(e.sender);
+            ActorMessage msg = {MsgType::DoOrder,nullptr,nullptr,nullptr};
+            SendActorMessage(actor, msg);
+            UseResource(e.Mineral, e.Gas);
+            SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None,
+                                  nullptr};
+            SendSystemMessage(ui, this, smsg);
+
+            SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::SCV, ButtonType::TSCV, nullptr};
+            SendSystemMessage(ui, this, smsg2);
+        }
+
+    }break;
+
     default:
         break;
     }
@@ -467,6 +480,34 @@ void Player::ReSelected()
     }
 }
 
+void Player::PushBackActor(Actor* actor)
+{
+    mActors.push_back(actor);
+}
+
+void Player::DeleteActor(Actor* actor)
+{
+    for (auto& ac : mActors)
+    {
+        if (ac->GetIDX() == actor->GetIDX())
+        {
+            delete ac;
+            ac = nullptr;
+        }
+    }
+}
+
+Actor* Player::FindActor(Actor* actor)
+{
+    for (auto ac : mActors)
+    {
+        if (ac->GetIDX() == actor->GetIDX())
+            return ac;
+
+    }
+    return nullptr;
+}
+
 void Player::MoveUnit(ax::Vec2 pos)
 {
     for (auto& ac : PlayerActors)
@@ -483,16 +524,6 @@ void Player::MoveUnit(ax::Vec2 pos)
             }  
         }
     }
-    /*for (auto& ac : PlayerActors)
-    {
-        if (ac && !ac->isDead && ac->mMoveComp)
-        {
-            SendPK_Data(113, ax::Vec2(ac->idx,0));
-        }
-    }
-
-
-    SendPK_Data(114, pos);*/
 }
 
 void Player::ImConnect()
@@ -560,11 +591,4 @@ void Player::ButtonAction(ax::Object* sender)
     printf("실행");
 }
 
-bool Player::UseResource(int m, int g)
-{
-    if ((mMineral - m) < 0 || mGas - g < 0)
-        return false;
-
-    return true;
-}
 

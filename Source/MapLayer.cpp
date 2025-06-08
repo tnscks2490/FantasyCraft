@@ -79,7 +79,13 @@ void MapLayer::SettingResource()
             data.input    = 51;
             data.pos      = pos;
             TcpClient::get()->SendMessageToServer(data);
-        }       
+        }
+
+        auto draw = ax::DrawNode::create();
+        draw->drawDot(pos, 4, ax::Color4B::ORANGE);
+        draw->setPosition(ax::Vec2::ZERO);
+        addChild(draw, 4);
+
     }
 
 }
@@ -104,7 +110,8 @@ ax::Vec2 MapLayer::SetStartPoint()
         startPoints.push_back(pos);
 
         auto draw = ax::DrawNode::create();
-        draw->drawDot(pos, 16, ax::Color4B::MAGENTA);
+        draw->drawDot(pos, 4, ax::Color4B::MAGENTA);
+        draw->setPosition(ax::Vec2::ZERO);
         addChild(draw, 4);
 
     }
@@ -115,10 +122,9 @@ ax::Vec2 MapLayer::SetStartPoint()
     auto spos = startPoints[idx];
 
     PK_Data data;
-    data.pos      = spos;
     data.ClientID = TcpClient::get()->GetID();
     data.input    = 80;
-
+    data.pos      = spos;
     TcpClient::get()->SendMessageToServer(data);
 
     return spos;

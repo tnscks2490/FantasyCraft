@@ -134,12 +134,29 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
     }
     break;
 
-    case MsgType::Create_SCV:
-    case MsgType::Create_Marine:
+    //
+    case MsgType::DoOrder:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);      
+    } break;
+        
+    case MsgType::CheckAdd_SCV:
+    case MsgType::CheckAdd_Marine:
     {
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
     } break;
+
+    case MsgType::Add_SCV:
+    case MsgType::Add_Marine:
+    case MsgType::Cancel_SCV:
+    case MsgType::Cancel_Marine:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    } break;
+
     case MsgType::Upgrade_Bionic_AT:
     {
         if (receiver->mUnitComp)
@@ -266,10 +283,18 @@ void SendSystemMessage(UILayer* ui, Player* player, SystemMessage smsg)
     } break;
     case SMsgType::Create_Unit:
     {
-        if (player)
-            player->MessageProc(smsg);
-        if (ui)
-            ui->MessageProc(smsg);
+        if (smsg.recvType == ReceiverType::Player)
+        {
+            // UI -> Player
+            if (player)
+                player->MessageProc(smsg);
+        }
+        else if (smsg.recvType == ReceiverType::UI)
+        {
+            // Player->UI
+            if (ui)
+                ui->MessageProc(smsg);
+        }
     } break;
     case SMsgType::Upgrade:  
         if (smsg.recvType == ReceiverType::Player)

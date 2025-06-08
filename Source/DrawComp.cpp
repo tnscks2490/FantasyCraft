@@ -125,12 +125,16 @@ void DrawComp::update(float delta)
         } break;
         case ActionState::Create_Unit:
         {
+            if (mCurAnimInfo->act == ECharAct::Doing)
+                return;
             ChangeAnim(anim, ECharAct::Doing, ECharDir::Face);
             mActionState = curAction;
             mCurDir      = ECharDir::Face;
         } break;
         case ActionState::Gathering:
         {
+            if (mCurAnimInfo->act == ECharAct::Gathering)
+                return;
             ChangeAnim(anim, ECharAct::Gathering, dir, true);
             mActionState = curAction;
         }break;
@@ -472,10 +476,10 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, ECharAct action, int i
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName(nodeName);
 
-        mRoot->addChild(node);
+        mRoot->addChild(node,1);
+        node->setPosition(ax::Vec2::ZERO);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
-
         ax::Action* action = ax::RepeatForever::create(animate);
         action->setTag(20202);
         node->runAction(action);
@@ -593,11 +597,11 @@ ax::Node* DrawComp::CreateGatheringNode(ActorType type)
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName("GatherAnim");
-        mRoot->addChild(node,3);
+
+        mRoot->addChild(node,2);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
         ax::Action* action   = ax::RepeatForever::create(animate);
-
         action->setTag(20202);
         node->runAction(action);
 

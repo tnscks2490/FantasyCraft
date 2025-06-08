@@ -33,8 +33,20 @@ enum class MsgType
     Build_Start,
     Build_GetBuilder,
     // 유닛생산하기
-    Create_SCV,
-    Create_Marine,
+
+    DoOrder,
+
+
+
+    CheckAdd_SCV,
+    Add_SCV,
+    Cancel_SCV,
+
+    CheckAdd_Marine,
+    Add_Marine,
+    Cancel_Marine,
+
+
     Create_Medic,
     Create_FireBat,
     Create_Ghost,

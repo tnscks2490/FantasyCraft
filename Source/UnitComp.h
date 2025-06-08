@@ -13,6 +13,9 @@ enum class ActionState
     Upgrade,
     Gathering,
 
+
+    AddSCV,
+
 };
 
 enum class BuildingSize
@@ -97,6 +100,8 @@ public:
     Status mStatus;
     ActionState mCurAction = ActionState::Idle;
     UnitArea mUnitArea     = UnitArea::None;
+
+    ActionState mOrderAction = ActionState::Idle;
 
 
     bool cmdLocked = false;

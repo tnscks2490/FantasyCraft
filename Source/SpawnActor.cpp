@@ -549,7 +549,7 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
 
     auto draw = new DrawComp(actor);
     auto node = draw->CreateRootNode();
-    parent->addChild(node, 0.1f);
+    parent->addChild(node, 1);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 32));
     draw->ChangePhysicsNodeTag(20);
@@ -618,9 +618,9 @@ Actor* SpawnGas(ax::Node* parent, PK_Data data)
 
     auto draw = new DrawComp(actor);
     auto node = draw->CreateRootNode();
-    parent->addChild(node, 0.1f);
+    parent->addChild(node, 1);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 32));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(96, 64));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();

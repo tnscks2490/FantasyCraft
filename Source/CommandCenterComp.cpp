@@ -62,15 +62,14 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         {
             mBuilder = msg.sender;
         }
-    }
-    break;
-
+    }break;
 
     case MsgType::Build_Cancel:
     {
         if (!isBuild)
             mBuilder = nullptr;
     }break;
+
     case MsgType::Cancel:
     {
         if (!IsBuild())
@@ -80,25 +79,34 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
             SendActorMessage(mBuilder, msg);
             mBuilder = nullptr;
         }
-    }
-    break;
-    case MsgType::Create_SCV:
-    {
-        PK_Data data;
-        data.ClientID = mActor->GetIDX();
-        data.input    = 11;
-        data.pos      = ax::Vec2(mActor->idx, 0);
-        TcpClient::get()->SendMessageToServer(data);
-        AddSCV();
-    }
-    break;
-    case MsgType::GiveResource:
-    {
-        
-        PEvent event = {EventType::GetResource,8,0};
-        SendEvent(event);
     } break;
 
+    case MsgType::CheckAdd_SCV:
+    {
+        mOrderAction = ActionState::AddSCV;
+        PEvent event = {EventType::UseResource, 50, 0, true, mActor};
+        SendEvent(event);
+        
+    } break;
+
+    case MsgType::DoOrder:
+    {
+        if (mOrderAction == ActionState::AddSCV)
+        {
+            PK_Data data;
+            data.ClientID = TcpClient::get()->GetID();
+            data.input    = 11;
+            data.pos      = ax::Vec2(mActor->idx, 0);
+            TcpClient::get()->SendMessageToServer(data);
+            AddSCV();
+        }
+    } break;
+
+    case MsgType::GiveResource:
+    {
+        PEvent event = {EventType::GetResource,8,0,true,mActor};
+        SendEvent(event);
+    } break;
 
     default:
         break;
@@ -157,7 +165,7 @@ void CommandCenterComp::update(float delta)
             unitTimer = 0.f;
 
             PK_Data data;
-            data.ClientID = mActor->GetIDX();
+            data.ClientID = mActor->GetID();
             data.input = GetCreateCommand(CreateUnitArray[0]);
             data.pos      = mActor->GetPosition() + ax::Vec2(0, -100);
             TcpClient::get()->SendMessageToServer(data);
@@ -169,7 +177,7 @@ void CommandCenterComp::update(float delta)
                 IsCreatingUnit = false;
 
                 PK_Data data;
-                data.ClientID = mActor->GetIDX();
+                data.ClientID = mActor->GetID();
                 data.input    = 12;
                 data.pos      = ax::Vec2(mActor->idx, 0);
                 TcpClient::get()->SendMessageToServer(data);
