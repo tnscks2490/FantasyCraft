@@ -66,10 +66,61 @@ void BarrackComp::MessageProc(ActorMessage& msg)
     }
     break;
 
-    /*case MsgType::Create_Marine:  AddUnit(ActorType::Marine);  break;
-    case MsgType::Create_Medic:   AddUnit(ActorType::Medic);   break;
-    case MsgType::Create_FireBat: AddUnit(ActorType::FireBat); break;
-    case MsgType::Create_Ghost:   AddUnit(ActorType::Ghost);   break;*/
+    case MsgType::CheckAdd_Marine:
+    {
+        mOrderAction = ActionState::AddMarine;
+        PEvent event = {EventType::UseResource, 50, 0, true, mActor};
+        SendEvent(event);
+    } break;
+    case MsgType::CheckAdd_FireBat:
+    {
+        mOrderAction = ActionState::AddFireBat;
+        auto bp      = FindUnitBP(ActorType::FireBat);
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor};
+        SendEvent(event);
+    }
+    break;
+    case MsgType::CheckAdd_Medic:
+    {
+        mOrderAction = ActionState::AddMedic;
+        auto bp      = FindUnitBP(ActorType::Medic);
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor};
+        SendEvent(event);
+    }
+    break;
+    case MsgType::Cancel_Ghost:
+    {
+        mOrderAction = ActionState::AddGhost;
+        auto bp      = FindUnitBP(ActorType::Ghost);
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor};
+        SendEvent(event);
+    } break;
+
+
+    case MsgType::DoOrder:
+    {
+        switch (mOrderAction)
+        {
+        case ActionState::AddMarine:
+        {
+
+        }break;
+        case ActionState::AddFireBat:
+        {
+        }
+        break;
+        case ActionState::AddMedic:
+        {
+        }
+        break;
+        case ActionState::AddGhost:
+        {
+
+        } break;
+        default:
+            break;
+        }
+    }
     default:
         break;
     }

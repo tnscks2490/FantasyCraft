@@ -15,6 +15,10 @@ enum class ActionState
 
 
     AddSCV,
+    AddMarine,
+    AddFireBat,
+    AddMedic,
+    AddGhost,
 
 };
 
@@ -84,6 +88,8 @@ public:
     virtual void update(float delta) override;
     virtual void SetUnitStatus(ActorType Atype);
     virtual bool IsBuild() { return false; }
+    virtual bool isGathered() { return false; }
+
     virtual float GetCurLoadTime() { return 0; }
     virtual float GetMaxLoadTime() { return 0; }
     virtual float GetUnitTimer() { return 0; }

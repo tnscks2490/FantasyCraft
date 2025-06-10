@@ -10,7 +10,7 @@ public:
 
     virtual void MessageProc(ActorMessage& msg) override;
     virtual void update(float delta) override;
-
+    virtual bool isGathered() override { return isGathering; }
     
     float GatherTime = 3.36f;
     float mTimer  = 0.f;

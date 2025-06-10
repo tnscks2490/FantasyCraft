@@ -13,7 +13,8 @@ Goal_MoveAndBuild::Goal_MoveAndBuild(Actor* actor, ax::Vec2 dest, ActorType type
     : Goal_Composite(actor, GoalType::Build)
 {
     mStructure = type;
-    m_Dest     = dest;
+
+    m_Dest = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), dest);
 
 }
 

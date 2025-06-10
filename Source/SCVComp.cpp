@@ -39,7 +39,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
     }break;
     case MsgType::Build:
     {
-        ax::Vec2* pos = (ax::Vec2*)msg.data;
+        printf("문제발견!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        /*ax::Vec2* pos = (ax::Vec2*)msg.data;
 
         int command = 0;
         switch (msg.sender->mBPComp->mBPType)
@@ -63,7 +64,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
         data.ClientID = mActor->idx;
         data.input    = command;
         data.pos      = *pos;
-        TcpClient::get()->SendMessageToServer(data);
+        TcpClient::get()->SendMessageToServer(data);*/
     }
         break;
     case MsgType::Do_Build:
@@ -172,7 +173,17 @@ void SCVComp::MessageProc(ActorMessage& msg)
         if (msg.sender->mActorType == ActorType::Mineral)
         {
             auto mineral = msg.sender;
-            Gathering(mineral);
+            if (!mineral->mUnitComp->isGathered())
+                Gathering(mineral);
+            else
+            {
+                mineral = SearchCloseMineral(mineral->GetIDX());
+                PK_Data data;
+                data.ClientID = mActor->GetID();
+                data.input    = 130;
+                data.pos      = ax::Vec2(mActor->GetIDX(), mineral->GetIDX());
+                TcpClient::get()->SendMessageToServer(data);
+            }
         }
         else if (msg.sender->mActorType == ActorType::Refinery)
         {
@@ -313,6 +324,30 @@ void SCVComp::Build_Continue(ActorMessage& msg)
         mBuilding = msg.sender;
         AddGoal_MoveAndContinueBuild(mActor, msg.sender);
     }
+}
+
+Actor* SCVComp::SearchCloseMineral(int failMineralIdx )
+{
+    float min = 1000000000;
+    Actor* mineral = nullptr;
+    auto actors = World::get()->w_ActorList;
+    for (auto ac : actors)
+    {
+        if (ac->mActorType == ActorType::Mineral
+            && ac->GetID() == -1)
+        {
+            if (ac->GetIDX() == failMineralIdx)
+                continue;
+
+            if (min > length(mActor->GetPosition(), ac->GetPosition()))
+            {
+                min = length(mActor->GetPosition(), ac->GetPosition());
+                mineral = ac;
+            }
+        }
+    }
+
+    return mineral;
 }
 
 bool SCVComp::SearchNearCargo()

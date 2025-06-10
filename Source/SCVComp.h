@@ -22,7 +22,7 @@ public:
     void SCVHpChange();
     void Build_Continue(ActorMessage& msg);
 
-    void SearchCloseMineral();
+    Actor* SearchCloseMineral(int failMineralIdx);
     bool SearchNearCargo();
     
 

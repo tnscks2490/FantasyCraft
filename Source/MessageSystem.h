@@ -46,6 +46,18 @@ enum class MsgType
     Add_Marine,
     Cancel_Marine,
 
+    CheckAdd_FireBat,
+    Add_FireBat,
+    Cancel_FireBat,
+
+    CheckAdd_Medic,
+    Add_Medic,
+    Cancel_Medic,
+
+    CheckAdd_Ghost,
+    Add_Ghost,
+    Cancel_Ghost,
+
 
     Create_Medic,
     Create_FireBat,

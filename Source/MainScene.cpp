@@ -359,7 +359,7 @@ void MainScene::onMouseUp(Event* event)
             UserData* userData = (UserData*)aRoot->getUserData();
 
             auto ac = userData->mActor;
-            if (ac->mUnitComp)
+            if (ac->mCategory == UnitCategory::Building && ac->GetID() == TcpClient::get()->GetID())
             {
                 // 건물인지 아닌지 판별하기
 
@@ -734,12 +734,13 @@ void MainScene::DebugPath()
 
 void MainScene::FirstObjectSetting()
 {
-    if (mMapLayer && !mMapLayer->isFirstSetting)
+    if (mMapLayer && mMapLayer->isFirstSetting)
     {
         auto sp = mMapLayer->SetStartPoint();
         SetScreenPos(sp);
-        mMapLayer->SettingResource();
-        mMapLayer->isFirstSetting = true;
+        if (TcpClient::get()->GetID() == 0)
+            mMapLayer->SettingResource();
+        mMapLayer->isFirstSetting = false;
     }
 
 }

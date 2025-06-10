@@ -51,17 +51,51 @@ void BPComp::ContactedUnit(ActorMessage& msg)
 
     if (other->mActor->GetRoot()->getChildByName("Body"))
     {
-        if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
+        int tag = other->mActor->GetRoot()->getChildByName("Body")->getTag();
+
+        if (mBPType == ActorType::Refinery)
         {
-            if (bodyNode->getChildByName("BPBodyRect"))
+            int OtherX = other->mActor->GetPosition().x;
+            int OtherY = other->mActor->GetPosition().y;
+
+            OtherX /= 32;
+            OtherY /= 32;
+
+            auto actors = World::get()->w_ActorList;
+            for (auto actor : actors)
             {
-                ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
-                dNode->clear();
-                auto color = ax::Color4B(255, 0, 0, 100);
-                dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
-                BuildPossible = false;
+                if (actor->mActorType == ActorType::Gas)
+                {
+                    int Gx = actor->GetPosition().x/32;
+                    int Gy = actor->GetPosition().y/32;
+
+                    if (OtherX == Gx && OtherY == Gy)
+                    {
+                        ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
+                        dNode->clear();
+                        auto color = ax::Color4B(0, 255, 0, 100);
+                        dNode->drawSolidRect(ax::Vec2(-48, -32), ax::Vec2(48, 32), color);
+                        BuildPossible = true;
+                    }
+                }
             }
         }
+        else
+        {
+            if (tag == 10 || tag == 20)
+            {
+                if (bodyNode->getChildByName("BPBodyRect"))
+                {
+                    ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
+                    dNode->clear();
+                    auto color = ax::Color4B(255, 0, 0, 100);
+                    dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+                    BuildPossible = false;
+                }
+            }
+        }
+
+
     }
 }
 
@@ -70,19 +104,38 @@ void BPComp::SeparatedUnit(ActorMessage& msg)
     auto bodyNode   = msg.bodyNode;
     UserData* other = (UserData*)msg.data;
 
+
     if (other->mActor->GetRoot()->getChildByName("Body"))
     {
-        if (other->mActor->GetRoot()->getChildByName("Body")->getTag() == 10)
+        int tag = other->mActor->GetRoot()->getChildByName("Body")->getTag();
+
+        if (mBPType == ActorType::Refinery)
         {
             if (bodyNode->getChildByName("BPBodyRect"))
             {
                 ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
                 dNode->clear();
-                auto color = ax::Color4B(0, 255, 0, 100);
-                dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+                auto color = ax::Color4B(255, 0, 0, 100);
+                dNode->drawSolidRect(ax::Vec2(-48, -32), ax::Vec2(48, 32), color);
                 BuildPossible = true;
             }
         }
+        else
+        {
+            if (tag == 10 || tag == 20)
+            {
+                if (bodyNode->getChildByName("BPBodyRect"))
+                {
+                    ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
+                    dNode->clear();
+                    auto color = ax::Color4B(0, 255, 0, 100);
+                    dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+                    BuildPossible = true;
+                }
+            }
+        }
+
+        
     }
 }
 

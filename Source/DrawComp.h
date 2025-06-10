@@ -21,6 +21,7 @@ public:
     ax::Node* Create_Small_BPPhysicsNode();
     ax::Node* Create_Middle_BPPhysicsNode();
     ax::Node* Create_Big_BPPhysicsNode();
+    ax::Node* Create_Refinery_BPPhysicsNode();
 
     ax::Node* CreateAnimNode(ECharName name, std::string_view nodeName = "Anim");
     ax::Node* CreateAnimNode(ECharName name, ECharAct action, ECharDir dir,

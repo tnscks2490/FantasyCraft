@@ -214,7 +214,7 @@ ax::Node* DrawComp::CreateBPPhysicsNode(ax::Vec2 bodysize)
 
         ax::DrawNode* rect = ax::DrawNode::create();
         auto color         = ax::Color4B(0, 255, 0, 100);
-        rect->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+        rect->drawSolidRect(ax::Vec2(-bodysize.x / 2, -bodysize.y / 2), ax::Vec2(bodysize.x / 2, bodysize.y/2), color);
         rect->setName("BPBodyRect");
         bodyNode->addChild(rect);
 
@@ -366,6 +366,26 @@ ax::Node* DrawComp::Create_Big_BPPhysicsNode()
         auto body12 = CreateBPPhysicsNode(bodysize);
         mainBody->addChild(body12);
         body12->setPosition(ax::Vec2(48, -32));
+        //////////////////////////////////////////////
+        return mainBody;
+    }
+    return nullptr;
+}
+
+ax::Node* DrawComp::Create_Refinery_BPPhysicsNode()
+{
+    ax::Vec2 bodysize(96, 64);
+    if (mRoot.isNotNull())
+    {
+        auto mainBody = ax::Node::create();
+        mainBody->setName("BPMainBody");
+        mRoot->addChild(mainBody, 2);
+
+        // 탐지 피직스바디
+        ////////////////////////////////////////////
+        auto body1 = CreateBPPhysicsNode(bodysize);
+        mainBody->addChild(body1);
+        body1->setPosition(ax::Vec2(0,0));
         //////////////////////////////////////////////
         return mainBody;
     }

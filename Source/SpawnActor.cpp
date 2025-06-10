@@ -828,11 +828,12 @@ Actor* BPRefinery(ax::Node* parent)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 1.f);
 
-    auto body = draw->Create_Middle_BPPhysicsNode();
+    auto body = draw->Create_Refinery_BPPhysicsNode();
     auto anim = draw->CreateAnimNode(ECharName::Refinery, ECharAct::BP, ECharDir::Face, "BPAnim");
 
     auto bp     = new BPComp(actor);
     bp->mBPType = ActorType::Refinery;
+    bp->BuildPossible = false;
 
     return actor;
 }

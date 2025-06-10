@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "PrePacket.h"
 #include "BPComp.h"
+#include "BuildingBluePrint.h"
 #include "DrawComp.h"
 
 
@@ -108,7 +109,14 @@ void CursorComp::LClick(ax::Vec2 pos)
 
         if (mBP->mBPComp->CheckBuildPossible())
         {
-            CreateBuildingByBP(mBP,pos);
+            auto bp = FindBuildingBP(mBP->mBPComp->mBPType);
+
+            if (cPlayer->mMineral >= bp.mineralCost
+                && cPlayer->mGas >= bp.gasCost)
+            {
+                cPlayer->UseResource(bp.mineralCost, bp.gasCost);
+                CreateBuildingByBP(mBP, pos);
+            }
         }           
     }
     if (mState == CursorState::Move)

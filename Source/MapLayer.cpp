@@ -67,7 +67,7 @@ void MapLayer::SettingResource()
         if (t == "Mineral")
         {
             PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
+            data.ClientID = -1;
             data.input    = 50;
             data.pos      = pos;
             TcpClient::get()->SendMessageToServer(data);
@@ -75,7 +75,7 @@ void MapLayer::SettingResource()
         else if (t == "Gas")
         {
             PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
+            data.ClientID = -1;
             data.input    = 51;
             data.pos      = pos;
             TcpClient::get()->SendMessageToServer(data);
@@ -126,6 +126,15 @@ ax::Vec2 MapLayer::SetStartPoint()
     data.input    = 80;
     data.pos      = spos;
     TcpClient::get()->SendMessageToServer(data);
+
+    for (int i = 0; i < 4; i++)
+    {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.input    = 100;
+        data.pos      = spos +ax::Vec2(i*36,-64);
+        TcpClient::get()->SendMessageToServer(data);
+    }
 
     return spos;
 }

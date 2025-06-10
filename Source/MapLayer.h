@@ -32,5 +32,5 @@ public:
     int mWidth  = 128;
     int mHeight = 128;
 
-    bool isFirstSetting = false;
+    bool isFirstSetting = true;
 };
