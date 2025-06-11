@@ -103,6 +103,9 @@ void SupplyDepotComp::update(float delta)
                     isBuild          = true;
                     mCurAction = ActionState::Idle;
                     mBuilder   = nullptr;
+
+                    PEvent event = {EventType::AddPop, 0, 0, true, mActor, mActor->mActorType};
+                    SendEvent(event);
                 }
                 else
                 {

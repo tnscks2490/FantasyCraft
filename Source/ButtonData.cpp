@@ -664,7 +664,7 @@ UnitControlButton g_UnitControlButton_TRefinery = {
 
 UnitControlButton g_UnitControlButton_TSupplyDepot = {
     ActorType::SupplyDepot,
-    {ButtonType::None, ButtonType::TBionic_DF, ButtonType::None,
+    {ButtonType::None, ButtonType::None, ButtonType::None,
     ButtonType::None, ButtonType::None, ButtonType::None,
      ButtonType::None, ButtonType::None, ButtonType::None}};
 

@@ -115,13 +115,15 @@ void CursorComp::LClick(ax::Vec2 pos)
                 && cPlayer->mGas >= bp.gasCost)
             {
                 cPlayer->UseResource(bp.mineralCost, bp.gasCost);
-                CreateBuildingByBP(mBP, pos);
+                CreateBuildingByBP(mBP, pos, cPlayer->mMainActor->GetIDX());
             }
         }           
     }
+
+
     if (mState == CursorState::Move)
     {
-        SendPK_Data(114, pos);
+        //SendPK_Data(114, pos);
     }
     else if (mState == CursorState::Target)
     {
@@ -361,7 +363,7 @@ void CursorComp::CreateBuildingBP(ActorType type)
     }
 }
 
-void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos)
+void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos, int BuildIdx)
 {
     auto pos = createPos;
 
@@ -384,7 +386,7 @@ void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos)
         }
 
     PK_Data data;
-    data.ClientID = cPlayer->mMainActor->idx;
+    data.ClientID = BuildIdx;
     data.input    = command;
     data.pos      = pos;
     TcpClient::get()->SendMessageToServer(data);

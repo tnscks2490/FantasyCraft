@@ -37,7 +37,7 @@ void MoveComp::update(float delta)
         mActor->GetRoot()->setPosition(pos);
 
         // 충돌했을때 겹치지 않게 하는 코드
-         UpdateBodyRect();
+        UpdateBodyRect();
     }
 
 }
@@ -313,7 +313,10 @@ void MoveComp::CollisionMove(Border other)
         }
     }
 
+    if (mTarget != ax::Vec2::ZERO)
+        mTargetList.insert(mTargetList.begin(), mTarget);
     SetTarget(movePos);
+   
 }
 
 bool MoveComp::IsContacted(Border other)

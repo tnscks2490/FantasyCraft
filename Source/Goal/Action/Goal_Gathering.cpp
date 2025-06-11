@@ -26,16 +26,7 @@ void Goal_Gathering::Start()
 int Goal_Gathering::Do()
 {
     If_Inactive_Start();
-
-    if (!mActor->mUnitComp->IsCmdLocked())
-    {
-        m_Status = Goal::completed_t;
-
-        ActorMessage msg = {MsgType::ReturnCargo, mActor, nullptr, nullptr};
-        SendActorMessage(mActor, msg);
-
-        return m_Status;
-    }
+    m_Status = Goal::completed_t;
 
     return m_Status;
 }

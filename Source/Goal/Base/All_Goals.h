@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Goal/Action/Goal_MoveToPath.h"
-#include "Goal/Action/Goal_BuildStructure.h"
 #include "Goal/Action/Goal_MoveToTarget.h"
+#include "Goal/Action/Goal_BuildStructure.h"
 #include "Goal/Action/Goal_MoveAndBuild.h"
 #include "Goal/Action/Goal_DoingBuild.h"
 #include "Goal/Action/Goal_WaitTime.h"
@@ -15,7 +15,6 @@
 #include "Goal/Action/Goal_SetTargetAndAttack.h"
 #include "Goal/Action/Goal_MoveAndAttack.h"
 #include "Goal/Action/Goal_ApproachToTarget.h"
-#include "Goal/Action/Goal_MoveAndAttack.h"
 #include "Goal/Action/Goal_SearchCargo.h"
 #include "Goal/Action/Goal_GiveResource.h"
 #include "Goal/Action/Goal_ApproachToLocation.h"

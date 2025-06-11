@@ -13,9 +13,9 @@ public:
 
     virtual void MessageProc(ActorMessage& msg) override;
     virtual void update(float delta) override;
+    virtual bool IsGetItem() override;
     void Building(ActorMessage& msg);
     void Repair();
-
 
     void Gathering(Actor* resource);
     void GiveMineral();

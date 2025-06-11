@@ -112,6 +112,8 @@ void DrawComp::update(float delta)
 
         case ActionState::Attack:
         {
+            if (mCurAnimInfo->act == ECharAct::Attack)
+                return;
             ChangeAnim(anim, ECharAct::Attack, dir,false);
             mActionState = curAction;
         } break;

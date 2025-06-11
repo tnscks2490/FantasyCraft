@@ -84,7 +84,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     case MsgType::CheckAdd_SCV:
     {
         mOrderAction = ActionState::AddSCV;
-        PEvent event = {EventType::UseResource, 50, 0, true, mActor};
+        PEvent event = {EventType::UseResource, 50, 0, true, mActor,ActorType::SCV};
         SendEvent(event);
         
     } break;
@@ -104,7 +104,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
 
     case MsgType::GiveResource:
     {
-        PEvent event = {EventType::GetResource,8,0,true,mActor};
+        PEvent event = {EventType::GetResource,8,0,true,mActor,ActorType::Mineral};
         SendEvent(event);
     } break;
 

@@ -73,6 +73,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::SendInfo:
     {
         mBuilding = msg.sender;
+        ActorMessage msg = {MsgType::Build_GetBuilder, mActor, nullptr, nullptr};
+        SendActorMessage(mBuilding, msg);
         AddGoal_DoingBuild(mActor, mBuilding);
     }
         break;
@@ -82,7 +84,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
         break;
     case MsgType::IsBuild_Complete:
     {
-        if (mBuilding)
+
+        if (mBuilding && !mBuilding->mUnitComp->IsBuild())
             AddGoal_DoingBuild(mActor, mBuilding);
     }break;
 
@@ -170,7 +173,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
     break;
     case MsgType::Gathering:
     {
-        if (msg.sender->mActorType == ActorType::Mineral)
+
+        if (msg.sender->mActorType == ActorType::Mineral && mItem == GetItem::None)
         {
             auto mineral = msg.sender;
             if (!mineral->mUnitComp->isGathered())
@@ -197,7 +201,19 @@ void SCVComp::MessageProc(ActorMessage& msg)
         mCurAction = ActionState::Idle;
         mActor->mDrawComp->CreateCarryMineral();
         mItem = GetItem::Mineral;
-        //미네랄 아이콘 생성하기
+
+
+        if (mCargo)
+        {
+            AddGoal_ReturnCargo(mActor, mCargo);
+        }
+        else
+        {
+            if (SearchNearCargo())
+            {
+                AddGoal_ReturnCargo(mActor, mCargo);
+            }
+        }
 
     }break;
     case MsgType::GatherGas:
@@ -210,17 +226,18 @@ void SCVComp::MessageProc(ActorMessage& msg)
 
     case MsgType::ReturnCargo:
     {
+        if (msg.sender)
+            mCargo = msg.sender;
+
         mCurAction = ActionState::Idle;
         if (mCargo)
         {
-            auto pos = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mCargo->GetPosition());
             AddGoal_ReturnCargo(mActor, mCargo);
         }
         else
         {
             if (SearchNearCargo())
             {
-                auto pos = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mCargo->GetPosition());
                 AddGoal_ReturnCargo(mActor, mCargo);
             }
             
@@ -272,6 +289,14 @@ void SCVComp::update(float delta) {
     }
 }
 
+bool SCVComp::IsGetItem()
+{
+    if (mItem == GetItem::None)
+        return false;
+
+    return true;
+}
+
 
 void SCVComp::Repair()
 {
@@ -298,11 +323,11 @@ void SCVComp::GiveMineral()
     mCurAction = ActionState::Idle;
 
     mActor->mDrawComp->RemoveCarryItem();
+    mItem = GetItem::None;
     if (mActor->mID == TcpClient::get()->GetID())
     {
         ActorMessage msg = {MsgType::GiveResource, mActor, nullptr, nullptr};
         SendActorMessage(mCargo, msg);
-
     }
     
     
@@ -356,7 +381,7 @@ bool SCVComp::SearchNearCargo()
     float len     = 10000000;
     for (auto ac : World::get()->w_ActorList)
     {
-        if (ac->mID == mActor->mID && ac->mActorType == ActorType::CommandCenter)
+        if (ac->GetID() == mActor->GetID() && ac->mActorType == ActorType::CommandCenter)
         {
             if (length(mActor->GetPosition(), ac->GetPosition()) < len)
             {
@@ -365,6 +390,7 @@ bool SCVComp::SearchNearCargo()
             }
         }
     }
+
     if (nearCargo)
     {
         mCargo = nearCargo;
@@ -397,7 +423,7 @@ void SCVComp::Building(ActorMessage& msg)
     }
 
     PK_Data data;
-    data.ClientID = mActor->mID;
+    data.ClientID = mActor->GetID();
     data.input    = command;
     data.pos      = ax::Vec2(mActor->idx,0);
     TcpClient::get()->SendMessageToServer(data);

@@ -21,7 +21,8 @@ public:
 };
 
 
-
+void AddGoal_MoveToTarget(Actor* actor, ax::Vec2 dest);
+void PushGoal_MoveToTarget(Actor* actor, ax::Vec2 dest);
 
 void AddGoal_MoveToPath(Actor* actor, ax::Vec2 dest);
 void PushGoal_MoveToPath(Actor* actor, ax::Vec2 dest);

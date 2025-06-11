@@ -43,6 +43,7 @@ void MineralComp::update(float delta)
             ActorMessage msg = {MsgType::GatherMineral, mActor, nullptr, nullptr};
             SendActorMessage(mGather, msg);
             mActor->mDrawComp->RemoveGatherAnim();
+            mGather = nullptr;
         }
     }
 }

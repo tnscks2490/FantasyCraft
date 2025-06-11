@@ -28,7 +28,22 @@ void GoalComp::update(float delta)
     mThink->Do();
 }
 
-void AddGoal_MoveToPath(Actor* actor,ax::Vec2 dest)
+void AddGoal_MoveToTarget(Actor* actor, ax::Vec2 dest)
+{
+    if (actor->mGoalComp)
+    {
+        actor->mGoalComp->mThink->RemoveAllSubgoals();
+        actor->mGoalComp->mThink->AddSubGoal(new Goal_MoveToTarget(actor, dest));
+    }
+}
+
+void PushGoal_MoveToTarget(Actor* actor, ax::Vec2 dest)
+{
+    if (actor->mGoalComp)
+        actor->mGoalComp->mThink->PushSubGoal(new Goal_MoveToTarget(actor, dest));
+}
+
+void AddGoal_MoveToPath(Actor* actor, ax::Vec2 dest)
 {
     if (actor->mGoalComp)
     {

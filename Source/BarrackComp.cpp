@@ -69,14 +69,15 @@ void BarrackComp::MessageProc(ActorMessage& msg)
     case MsgType::CheckAdd_Marine:
     {
         mOrderAction = ActionState::AddMarine;
-        PEvent event = {EventType::UseResource, 50, 0, true, mActor};
+        auto bp      = FindUnitBP(ActorType::Marine);
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor,ActorType::Marine};
         SendEvent(event);
     } break;
     case MsgType::CheckAdd_FireBat:
     {
         mOrderAction = ActionState::AddFireBat;
         auto bp      = FindUnitBP(ActorType::FireBat);
-        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor};
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor,ActorType::FireBat};
         SendEvent(event);
     }
     break;
@@ -84,7 +85,7 @@ void BarrackComp::MessageProc(ActorMessage& msg)
     {
         mOrderAction = ActionState::AddMedic;
         auto bp      = FindUnitBP(ActorType::Medic);
-        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor};
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor,ActorType::Medic};
         SendEvent(event);
     }
     break;
@@ -92,30 +93,38 @@ void BarrackComp::MessageProc(ActorMessage& msg)
     {
         mOrderAction = ActionState::AddGhost;
         auto bp      = FindUnitBP(ActorType::Ghost);
-        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor};
+        PEvent event = {EventType::UseResource, bp.mineralCost, bp.gasCost, true, mActor,ActorType::Ghost};
         SendEvent(event);
     } break;
 
 
     case MsgType::DoOrder:
     {
+        PK_Data data;
+        data.ClientID = TcpClient::get()->GetID();
+        data.input    = 11;
+        data.pos      = ax::Vec2(mActor->idx, 0);
+        TcpClient::get()->SendMessageToServer(data);
+
         switch (mOrderAction)
         {
         case ActionState::AddMarine:
         {
-
+            AddUnit(ActorType::Marine);
         }break;
         case ActionState::AddFireBat:
         {
+            AddUnit(ActorType::FireBat);
         }
         break;
         case ActionState::AddMedic:
         {
+            AddUnit(ActorType::Medic);
         }
         break;
         case ActionState::AddGhost:
         {
-
+            AddUnit(ActorType::Ghost);
         } break;
         default:
             break;

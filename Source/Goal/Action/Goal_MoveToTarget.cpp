@@ -4,13 +4,14 @@
 #include "GoalComp.h"
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
-#include "Goal_MoveToTarget.h"
+#include "Goal/Action/Goal_MoveToTarget.h"
 
+const char* Goal_MoveToTarget::GOAL_NAME = "Goal_MoveToTarget";
 
 Goal_MoveToTarget::Goal_MoveToTarget(Actor* actor, ax::Vec2 dest)
     : Goal(actor,GoalType::MoveToTarget) {
 
-
+    m_Dest = dest;
 }
 
 void Goal_MoveToTarget::Start()
@@ -19,6 +20,9 @@ void Goal_MoveToTarget::Start()
     mActor->mGoalComp->mCurGoal   = GoalType::MoveToTarget;
 
     mActor->mMoveComp->SetTarget(m_Dest);
+
+
+    mActor->mUnitComp->mCurAction = ActionState::Move;
 
     //stuck() 관련함 함수이므로 나중에 찾아볼것
     /*mExpectedTime = mActor->mMoveComp->getTimeToReachTarget();

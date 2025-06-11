@@ -28,19 +28,21 @@ int Goal_SetTargetAndAttack::Do()
 {
     If_Inactive_Start();
 
-    if (!mActor->mUnitComp->IsCmdLocked())
+
+    if (mTarget->isDead)
+        m_Status = Goal::completed_t;
+    else
     {
-        if (mTarget->isDead)
-            m_Status = Goal::completed_t;
-        else
-        {
-            AddGoal_MoveAndAttack(mActor, mTarget);
-        }
-        return m_Status;
+        AddGoal_MoveAndAttack(mActor, mTarget);
     }
-
-
     return m_Status;
+    //if (!mActor->mUnitComp->IsCmdLocked())
+    //{
+    //    
+    //}
+
+
+    //return m_Status;
 }
 
 void Goal_SetTargetAndAttack::End()

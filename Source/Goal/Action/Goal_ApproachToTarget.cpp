@@ -32,7 +32,10 @@ int Goal_ApproachToTarget::Do()
 {
     If_Inactive_Start();
 
-    if (length(mActor->GetPosition(), mTargetDest) < mActor->mWeaponComp->GetRange())
+    auto len = length(mActor->GetPosition(), mTargetDest);
+    auto range = mActor->mWeaponComp->GetRange();
+
+    if ( len < range)
     {
         m_Status = Goal::completed_t;
         mActor->mMoveComp->StopMove();

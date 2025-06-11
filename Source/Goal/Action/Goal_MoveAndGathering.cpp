@@ -8,14 +8,14 @@
 #include "Goal/Base/Goal.h"
 #include "Goal/Base/Goal_Think.h"
 #include "Goal_MoveAndGathering.h"
+#include "DrawComp.h"
 
 const char* Goal_MoveAndGathering::GOAL_NAME = "Goal_MoveAndGathering";
 Goal_MoveAndGathering::Goal_MoveAndGathering(Actor* mActor, Actor* mineral)
     : Goal_Composite(mActor, GoalType::Gather)
 {
     m_Dest          = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mineral->GetPosition());
-    mGatherResource = mineral;
-    
+    mGatherResource = mineral;  
 }
 
 void Goal_MoveAndGathering::Start()

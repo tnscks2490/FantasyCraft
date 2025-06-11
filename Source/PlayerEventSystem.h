@@ -7,6 +7,8 @@ enum class EventType
     None,
     GetResource,
     UseResource,
+    AddPop,
+    MinusPop,
 };
 
 
@@ -18,6 +20,7 @@ struct PEvent
     int Gas;
     bool isEnough;
     Actor* sender;
+    ActorType AddActorType;
 };
 
 class PlayerEventSystem

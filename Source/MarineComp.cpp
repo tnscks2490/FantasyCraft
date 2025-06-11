@@ -37,16 +37,17 @@ void MarineComp::MessageProc(ActorMessage& msg)
     } break;
     case MsgType::SetAttackTarget:
     {
+
         mAttackTarget = msg.sender;
-        AddGoal_MoveAndAttack(mActor, mAttackTarget);
+
+        if (mAttackTarget && !mAttackTarget->isDead)
+            AddGoal_MoveAndAttack(mActor, mAttackTarget);
 
     }break;
 
     case MsgType::AttackTarget:
     {
-        AttackTarget(msg.sender);
-
-        
+        AttackTarget(msg.sender);  
     }break;
     default:
         break;

@@ -30,14 +30,18 @@ void SensorComp::MessageProc(ActorMessage& msg)
 {
     switch (msg.msgType)
     {
-    case MsgType::Separate:
+    //case MsgType::Separate:
     case MsgType::Contacted:
     {
         if (msg.sender->mActorType == ActorType::Cursor)
             return;
-        if (msg.sender->mID != mActor->mID)
+        if (msg.sender->GetID() != mActor->GetID() && msg.sender->mCategory != UnitCategory::Resource)
         {
-            AddGoal_MoveAndAttack(mActor, msg.sender);
+            if (!mTarget || mTarget == msg.sender)
+            {
+                mTarget = msg.sender;
+                AddGoal_MoveAndAttack(mActor, mTarget);
+            }
         }
     }
     break;
@@ -77,6 +81,8 @@ void SensorComp::SetSightByType(ActorType type)
     default:  break;
     }
 }
+
+
 ax::Node* SensorComp::CreateSightNode()
 {
     auto root = mActor->GetRoot();

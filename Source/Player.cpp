@@ -209,19 +209,66 @@ void Player::EvnetProc(PEvent evnet)
     {
         if (mMineral >= e.Mineral && mGas >= e.Gas)
         {
+            UseResource(e.Mineral, e.Gas);
+
             auto actor = FindActor(e.sender);
             ActorMessage msg = {MsgType::DoOrder,nullptr,nullptr,nullptr};
             SendActorMessage(actor, msg);
-            UseResource(e.Mineral, e.Gas);
-            SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None,
-                                  nullptr};
+
+            SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None, nullptr};
             SendSystemMessage(ui, this, smsg);
 
-            SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::SCV, ButtonType::TSCV, nullptr};
-            SendSystemMessage(ui, this, smsg2);
+            switch (e.AddActorType)
+            {
+            case ActorType::SCV:
+            {
+                SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::SCV, ButtonType::TSCV,
+                                       nullptr};
+                SendSystemMessage(ui, this, smsg2);
+            }
+            break;
+            case ActorType::Marine:
+            {
+                SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::Marine, ButtonType::TMarine,
+                                       nullptr};
+                SendSystemMessage(ui, this, smsg2);
+            }
+            break;
+            case ActorType::FireBat:
+            {
+                SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::FireBat, ButtonType::TFireBat,
+                                       nullptr};
+                SendSystemMessage(ui, this, smsg2);
+            }
+            break;
+            case ActorType::Medic:
+            {
+                SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::Medic, ButtonType::TMedic,
+                                       nullptr};
+                SendSystemMessage(ui, this, smsg2);
+            }
+            break;
+            case ActorType::Ghost:
+            {
+                SystemMessage smsg2 = {SMsgType::Create_Unit, ReceiverType::UI, ActorType::Ghost, ButtonType::TGhost,
+                                       nullptr};
+                SendSystemMessage(ui, this, smsg2);
+            }
+            break;
+            default:
+                break;
+            }
         }
 
     }break;
+    case EventType::AddPop:
+    {
+        if (e.sender && e.sender->mActorType == ActorType::SupplyDepot)
+        {
+            mCurMaxPop += 8;
+        }
+    }
+    break;
 
     default:
         break;

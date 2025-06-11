@@ -220,16 +220,16 @@ void MainScene::onMouseDown(Event* event)
             auto other = userData->mActor;
 
             if (other->mActorType == ActorType::CommandCenter
-                && other->GetIDX() == TcpClient::get()->GetID())
+                && other->GetID() == TcpClient::get()->GetID())
             {
                 for (auto ac : mPlayer->PlayerActors)
                 {
-                    if (ac != nullptr && ac->mActorType == ActorType::SCV)
+                    if (ac && ac->mActorType == ActorType::SCV)
                     {
                         PK_Data data;
                         data.ClientID = TcpClient::get()->GetID();
                         data.input    = 118;
-                        data.pos      = ax::Vec2(ac->GetIDX(), 0);
+                        data.pos      = ax::Vec2(ac->GetIDX(), other->GetIDX());
                         TcpClient::get()->SendMessageToServer(data);
                     }
                 }
@@ -238,8 +238,7 @@ void MainScene::onMouseDown(Event* event)
             {
                 for (auto ac : mPlayer->PlayerActors)
                 {
-                    if (ac != nullptr && ac->mActorType == ActorType::SCV
-                        && ac->mID == TcpClient::get()->GetID())
+                    if (ac && ac->mActorType == ActorType::SCV)
                     {
                         PK_Data data;
                         data.ClientID = TcpClient::get()->GetID();
@@ -958,11 +957,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnBarrack(mMapLayer, data);
+                    actor->SetPosition(ac->GetPosition());
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1201,16 +1200,18 @@ void MainScene::Decording()
         {
             for (auto actor : World::get()->w_ActorList)
             {
+                Actor* cargo = nullptr;
+                if (actor && actor->GetIDX() == (int)data.pos.y)
+                    cargo = actor;
+
                 if (actor && actor->GetIDX() == (int)data.pos.x)
                 {
-                    ActorMessage msg = {MsgType::ReturnCargo, nullptr, nullptr, nullptr};
+                    ActorMessage msg = {MsgType::ReturnCargo, cargo, nullptr, nullptr};
                     SendActorMessage(actor, msg);
                 }
             }
         }
-
-
-
+        break;
 
         // 여기서부터는 골추가
         case 120: // MoveAndBuild
@@ -1232,7 +1233,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == data.ClientID)
+                if (ac->GetIDX() == data.ClientID)
                 {
                     if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
                     {
@@ -1365,18 +1366,21 @@ void MainScene::Decording()
                 {
                     gather = ac;
                 }
+
                 if (ac->idx == (int)data.pos.y)
                 {
                     mineral = ac;
                 }
 
-                if (gather && mineral) break;
+                if (gather && mineral)
+                    break;
             }
 
             if (gather && !gather->isDead && gather->mUnitComp && gather->mMoveComp)
             {
                 AddGoal_MoveAndGathering(gather,mineral);
             }
+
         }break;
         case 131: //MoveAndGather 가스캐기,
         {
