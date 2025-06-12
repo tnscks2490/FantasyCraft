@@ -127,23 +127,25 @@ void SCVComp::MessageProc(ActorMessage& msg)
         int damage = msg.sender->mUnitComp->mStatus.AT - mStatus.DF;
         if (damage  <= 0 ) damage = 1;
 
-        mStatus.HP -= damage;
-        printf("남은 체력 : %d\n" ,mStatus.HP);
+        PK_Data data;
+        data.ClientID = mActor->GetID();
+        data.input    = 5;
+        data.pos      = ax::Vec2(mActor->GetIDX(), damage);
+        TcpClient::get()->SendMessageToServer(data);
+  
 
         SCVHpChange();
         mActor->mDrawComp->CreateDemageNode(msg.sender->mActorType);
 
 
-
-
-
         if (mActor->mUnitComp->mStatus.HP <= 0)
         {
-            mCurAction = ActionState::Death;
-            // 소멸자에 대한 정보를 넣는다.
+            PK_Data data;
+            data.ClientID = mActor->GetID();
+            data.input    = 13;
+            data.pos      = ax::Vec2(mActor->GetIDX(), 0);
+            TcpClient::get()->SendMessageToServer(data);
 
-            //SendPK_Data(117, mActor->GetPosition());
-            //World::get()->Actor_PushBackDelete(mActor);
         }
     } 
     break;

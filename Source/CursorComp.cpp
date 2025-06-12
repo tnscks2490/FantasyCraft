@@ -24,7 +24,7 @@ void CursorComp::update(float delta)
     switch (mState)
     {
     case CursorState::Idle:
-        mActor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
+        //mActor->mDrawComp->ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
         break;
     case CursorState::Drag:
     {

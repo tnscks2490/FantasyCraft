@@ -13,6 +13,28 @@
 #include "GasComp.h"
 #include "UnitCompList.h"
 
+Actor* DeathActor(ax::Node* parent, Actor* dActor)
+{
+    Actor* actor = new Actor;
+    actor->mActorType = ActorType::Death;
+    actor->mID        = -100;
+    actor->charNum    = -100;
+
+    auto draw = new DrawComp(actor);
+
+    auto node = draw->CreateRootNode();
+    parent->addChild(node, 128);
+
+
+    auto animinfo = dActor->mDrawComp->mCurAnimInfo;
+
+    auto anim = draw->CreateAnimNode(animinfo->name, animinfo->act, animinfo->dir, "Anim");
+
+    draw->ChangeAnimDeath(animinfo->name);
+        
+    return actor;
+}
+
 Actor* SpawnCursor(ax::Node* parent)
 {
     Actor* actor      = new Actor;
@@ -135,7 +157,7 @@ Actor* SpawnCommandCenter(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node,0.1f);
 
-    auto body       = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body       = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
 
@@ -238,7 +260,7 @@ Actor* SpawnArmory(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(96, 64));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -271,7 +293,7 @@ Actor* SpawnBarrack(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -306,7 +328,7 @@ Actor* SpawnBunker(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(96, 64));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -340,7 +362,7 @@ Actor* SpawnEngineeringBay(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -376,7 +398,7 @@ Actor* SpawnSupplyDepot(ax::Node* parent, PK_Data data)
     parent->addChild(node, 0.1f);
 
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(96, 64));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -409,7 +431,7 @@ Actor* SpawnStarPort(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -444,7 +466,7 @@ Actor* SpawnFactory(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -479,7 +501,7 @@ Actor* SpawnScienceFacility(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(128, 96));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -514,7 +536,7 @@ Actor* SpawnRefinery(ax::Node* parent, PK_Data data)
     auto node = draw->CreateRootNode();
     parent->addChild(node, 0.1f);
 
-    auto body = draw->CreatePhysicsNode(ax::Vec2(64, 64));
+    auto body = draw->CreatePhysicsNode(ax::Vec2(96, 64));
     draw->ChangePhysicsNodeTag(20);
 
     auto selectanim = ax::DrawNode::create();
@@ -549,7 +571,9 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
 
     auto draw = new DrawComp(actor);
     auto node = draw->CreateRootNode();
-    parent->addChild(node, 1);
+
+    int idx = data.pos.y / 32;
+    parent->addChild(node, idx);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(64, 32));
     draw->ChangePhysicsNodeTag(20);
@@ -618,7 +642,8 @@ Actor* SpawnGas(ax::Node* parent, PK_Data data)
 
     auto draw = new DrawComp(actor);
     auto node = draw->CreateRootNode();
-    parent->addChild(node, 1);
+    int idx   = data.pos.y / 32;
+    parent->addChild(node, idx);
 
     auto body = draw->CreatePhysicsNode(ax::Vec2(96, 64));
     draw->ChangePhysicsNodeTag(20);

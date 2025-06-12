@@ -275,7 +275,7 @@
    <property name="P4Spawn" type="object" value="3"/>
   </properties>
   <object id="3" name="SpawnP4" type="StartPoint" x="3727.27" y="1355.64" width="4.18182" height="3.81818"/>
-  <object id="5" name="SpawnP3" type="StartPoint" x="2674.61" y="268.97" width="3.27273" height="2.54545"/>
+  <object id="5" name="SpawnP3" type="StartPoint" x="2674.61" y="208.303" width="84.6061" height="63.2121"/>
   <object id="8" name="SpawnP2" type="StartPoint" x="277.333" y="2790.67" width="3.27273" height="2.72727"/>
   <object id="10" name="SpawnP1" type="StartPoint" x="1370.48" y="3879.55" width="3.09091" height="4"/>
  </objectgroup>
@@ -308,7 +308,7 @@
   <object id="54" name="Point3M8" type="Mineral" x="2863.88" y="103.125" width="46.75" height="16.5"/>
   <object id="55" name="Point3M9" type="Mineral" x="2832.05" y="72.5415" width="36.5833" height="14"/>
   <object id="56" name="Point4G1" type="Gas" x="3716.87" y="1119.42" width="96" height="64"/>
-  <object id="57" name="Point3G1" type="Gas" x="2663.73" y="31.9697" width="96" height="64"/>
+  <object id="57" name="Point3G1" type="Gas" x="2669.23" y="46.9697" width="70.5" height="37.5"/>
   <object id="58" name="Point2G1" type="Gas" x="267.03" y="2559.38" width="96" height="64"/>
   <object id="59" name="Point1G1" type="Gas" x="1354.39" y="3647.33" width="96" height="64"/>
   <object id="60" name="Point4M1" type="Mineral" x="3918.52" y="1413.23" width="37.5" height="21"/>

@@ -407,7 +407,7 @@ AnimInfo g_AnimInfo_Barrack_Building[] ={
      {ECharName::Barrack, ECharAct::Building, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Building/0004.png", 1, 1, (1.f / 1), Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Barrack_Doing[] ={
-    {ECharName::Barrack, ECharAct::Doing, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Doing/%04d.png", 1, 2,   (0.5f / 2), Vec2(0.5, 0.5), nullptr},
+    {ECharName::Barrack, ECharAct::Doing, ECharDir::Face, "Plist/Barrack.plist", "Barrack/Doing/%04d.png", 1, 2,   (0.2f / 2), Vec2(0.5, 0.5), nullptr},
 };
 AnimInfo g_AnimInfo_Barrack_BP[] = {
     {ECharName::Barrack, ECharAct::BP, ECharDir::Face, "Plist/BP.plist", "BP/Barrack/0001.png", 1, 1,

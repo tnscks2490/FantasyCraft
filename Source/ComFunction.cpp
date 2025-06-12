@@ -37,3 +37,15 @@ int GetCreateCommand(ActorType type)
     }
     return 0;
 }
+
+ax::Vec2 ChangeTiledPos(ax::Vec2 pos)
+{
+    ax::Vec2 Pos;
+    Pos.x = (int)pos.x / 32;
+    Pos.y = (int)pos.y / 32;
+
+    Pos.x = Pos.x * 32;
+    Pos.y = Pos.y * 32;
+
+    return Pos;
+}

@@ -80,6 +80,8 @@ public:
 
     ax::Vec2 mBodySize;
 
+    int idx = 0;
+
 public:
     Ptr<ax::Node> mRoot = nullptr;
 };

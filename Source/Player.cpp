@@ -451,7 +451,33 @@ void Player::ClassifySelected()
             }
         }
     }
+    if (isFriendUnit == true && isBuilding == false)
+    {
+        if (isEnemyUnit || isEnemyBuilding)
+        {
+            Actor* tmp[12] = {nullptr};
+            int idx        = 0;
 
+            for (auto ac : PrePlayerActors)
+            {
+                if (ac == nullptr)
+                    break;
+                if (ac->mCategory == UnitCategory::Unit
+                    && ac->GetID() == TcpClient::get()->GetID())
+                {
+                    tmp[idx] = ac;
+                    idx++;
+                }
+            }
+            PrePlayerActorsClear();
+            for (int i = 0; i < idx; i++)
+            {
+                PrePlayerActors[i] = tmp[i];
+            }
+        }
+       
+        // 건드릴게 없지만 확인용
+    }
     
 }
 

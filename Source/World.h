@@ -45,6 +45,9 @@ public:
     int UnitIdx = 0;
 };
 
+
+Actor* DeathActor(ax::Node* parent, Actor* dActor);
+
 // 시스템 엑터
 Actor* SpawnCursor(ax::Node* parent);
 

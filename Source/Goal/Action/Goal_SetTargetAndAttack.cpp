@@ -18,9 +18,12 @@ void Goal_SetTargetAndAttack::Start()
 {
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::Attack;
-
-    ActorMessage msg = {MsgType::AttackTarget, mTarget, nullptr, nullptr};
-    SendActorMessage(mActor, msg);
+    if (!mTarget->isDead)
+    {
+        ActorMessage msg = {MsgType::AttackTarget, mTarget, nullptr, nullptr};
+        SendActorMessage(mActor, msg);
+    }
+    
 
 }
 
@@ -29,20 +32,8 @@ int Goal_SetTargetAndAttack::Do()
     If_Inactive_Start();
 
 
-    if (mTarget->isDead)
-        m_Status = Goal::completed_t;
-    else
-    {
-        AddGoal_MoveAndAttack(mActor, mTarget);
-    }
+    m_Status = Goal::completed_t;
     return m_Status;
-    //if (!mActor->mUnitComp->IsCmdLocked())
-    //{
-    //    
-    //}
-
-
-    //return m_Status;
 }
 
 void Goal_SetTargetAndAttack::End()

@@ -23,6 +23,13 @@ DrawComp::~DrawComp()
 
 void DrawComp::update(float delta)
 {
+    if (mActor->mCategory == UnitCategory::Resource)
+        mRoot->setLocalZOrder(129 - mActor->GetPosition().y / 32);
+    else
+    {
+        mRoot->setLocalZOrder(128 - mActor->GetPosition().y / 32);
+    }
+
     if (mActor->mActorType == ActorType::Mineral)
         return;
     if (mActor->mActorType == ActorType::Gas)
@@ -34,6 +41,8 @@ void DrawComp::update(float delta)
     {
         if (mActor->mCursorComp->mState == CursorState::Idle && mCurAnimInfo->act != ECharAct::Idle)
         {
+            if (mCurAnimInfo->act == ECharAct::Idle)
+                return;
             ChangeAnim(ECharName::Cursor, ECharAct::Idle, ECharDir::Face);
         }
         if (mActor->mCursorComp->mState == CursorState::ContactTeam && mCurAnimInfo->act != ECharAct::OnCursorTeam)
@@ -771,9 +780,9 @@ void DrawComp::ChangeAnimDeath(ECharName Name)
     ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
 
    auto removeNode = ax::CallFuncN::create([mActor = this->mActor](ax::Node* sender) {
-        //sender->removeFromParentAndCleanup(true);
-        World::get()->mPath->ClrTileActorPhysics(mActor->GetPosition(), ax::Vec2(64, 64));
-        World::get()->Actor_PushBackDelete(mActor);
+        sender->removeFromParentAndCleanup(true);
+        //World::get()->mPath->ClrTileActorPhysics(mActor->GetPosition(), ax::Vec2(32, 32));
+        //World::get()->Actor_PushBackDelete(mActor);
     });
 
     // 4. 시퀀스로 실행

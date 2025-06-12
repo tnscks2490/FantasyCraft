@@ -46,7 +46,10 @@ enum class ActorType
 
     BP,
     Mineral,
-    Gas
+    Gas,
+
+
+    Death,
 
 };
 

@@ -600,18 +600,6 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
         {
             actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
         }
-
-        /*if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) <
-            actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
-        {
-            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
-        }
-        else if (actorA->GetPosition().distance(actorA->mMoveComp->mLastTarget) >
-                 actorB->GetPosition().distance(actorB->mMoveComp->mLastTarget))
-        {
-            actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
-        }*/
-
         return true;
     }
     return true;
@@ -785,6 +773,21 @@ void MainScene::Decording()
             FirstObjectSetting();
         } break;
 
+        case 5:
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == (int)data.pos.x)
+                {
+                    ac->mUnitComp->mStatus.HP -= (int)data.pos.y;
+                    break;
+                }
+            }
+        }
+        break;
+
+
         case 10:
         {
             if (data.ClientID == TcpClient::get()->GetID())
@@ -797,7 +800,7 @@ void MainScene::Decording()
                 printf("설치중");
             }
         }  break;
-
+        
         // 유닛 상태변경 커맨드 
         case 11:  //Create_Unit
         {
@@ -819,23 +822,41 @@ void MainScene::Decording()
                 if (ac->idx == (int)data.pos.x)
                 {
                     ac->mUnitComp->mCurAction = ActionState::Idle;
+                    break;
                 }
             }
-        }   break;
-        
+        } break;
+        case 13: //death
+        {
+            auto& actors = World::get()->w_ActorList;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == (int)data.pos.x)
+                {
+                    auto pos                  = ac->GetPosition();
+                    ac->mUnitComp->mCurAction = ActionState::Death;
+                    ac->isDead                = true;
+                    ac->GetRoot()->setVisible(false);
+                    Actor* actor = DeathActor(mMapLayer, ac);
+                    actor->SetPosition(pos);
+                    break;
+                }
+            }
+        } break;
 
         case 50:
         {
             Actor* actor = SpawnMineral(mMapLayer, data);
             World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(64, 32));
-            actor->SetPosition(data.pos +ax::Vec2(32,16));
+            
+            actor->SetPosition(ChangeTiledPos(data.pos) + ax::Vec2(32,16));
         }
         break;
         case 51:
         {
             Actor* actor = SpawnGas(mMapLayer, data);
             World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(96, 64));
-            actor->SetPosition(data.pos + ax::Vec2(48,32));
+            actor->SetPosition(ChangeTiledPos(data.pos) + ax::Vec2(48, 32));
         }
         break;
 
@@ -852,7 +873,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnCommandCenterComplete(mMapLayer, data);
             World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(128, 96));
-            actor->SetPosition(data.pos + ax::Vec2(64,48));
+            actor->SetPosition(ChangeTiledPos(data.pos) + ax::Vec2(64,48));
 
             if (data.ClientID == TcpClient::get()->GetID())
             {
@@ -876,7 +897,7 @@ void MainScene::Decording()
         case 100: //SCV 생성
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
-            actor->SetPosition(data.pos);
+            actor->SetPosition(ChangeTiledPos(data.pos));
             World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(32, 32));
 
             if (data.ClientID == TcpClient::get()->GetID())
@@ -889,7 +910,7 @@ void MainScene::Decording()
         case 101:  // 마린 생성
         {
             Actor* actor = SpawnMarine(mMapLayer, data);
-            actor->SetPosition(data.pos);
+            actor->SetPosition(ChangeTiledPos(data.pos));
             World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(32, 32));
             if (data.ClientID == TcpClient::get()->GetID())
             {
@@ -907,12 +928,12 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnCommandCenter(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -932,7 +953,7 @@ void MainScene::Decording()
                 {
                     data.pos         = ac->GetPosition();
                     Actor* actor = SpawnSupplyDepot(mMapLayer, data);
-                    actor->SetPosition(ac->GetPosition());
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
@@ -957,7 +978,7 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnBarrack(mMapLayer, data);
-                    actor->SetPosition(ac->GetPosition());
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
@@ -981,11 +1002,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnEngineeringBay(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1005,11 +1026,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnRefinery(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1029,11 +1050,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnAcademy(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1053,11 +1074,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnArmory(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1077,11 +1098,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnBunker(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1101,11 +1122,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnStarPort(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1125,11 +1146,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnScienceFacility(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1149,11 +1170,11 @@ void MainScene::Decording()
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnFactory(mMapLayer, data);
+                    actor->SetPosition(ChangeTiledPos(data.pos));
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
 
-                    actor->SetPosition(ac->GetPosition());
                     World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
 
                     if (data.ClientID == TcpClient::get()->GetID())
@@ -1384,8 +1405,8 @@ void MainScene::Decording()
         }break;
         case 131: //MoveAndGather 가스캐기,
         {
-
         }
+        break;
 
         ///////////////////////
         default:

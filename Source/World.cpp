@@ -57,7 +57,7 @@ void World::update(float delta)
 
         for (auto actor : w_ActorList)
         {
-            if (actor)
+            if (actor && !actor->isDead)
                 actor->update(delta);
         }
 

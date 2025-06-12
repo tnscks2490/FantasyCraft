@@ -36,6 +36,12 @@ int Goal_MoveAndAttack::Do()
 
     m_Status = ProcessSubgoals();
 
+    if (m_Status == Goal::completed_t && !mTargetActor->isDead)
+    {
+        ActorMessage msg = {MsgType::SetAttackTarget, mTargetActor, nullptr, nullptr};
+        SendActorMessage(mActor, msg);
+    }
+
     return m_Status;
 }
 

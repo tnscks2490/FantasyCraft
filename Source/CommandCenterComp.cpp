@@ -107,7 +107,31 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         PEvent event = {EventType::GetResource,8,0,true,mActor,ActorType::Mineral};
         SendEvent(event);
     } break;
+    case MsgType::Attack:
+    {
+        int damage = msg.sender->mUnitComp->mStatus.AT - mStatus.DF;
+        if (damage <= 0)
+            damage = 1;
 
+        PK_Data data;
+        data.ClientID = mActor->GetID();
+        data.input    = 5;
+        data.pos      = ax::Vec2(mActor->GetIDX(), damage);
+        TcpClient::get()->SendMessageToServer(data);
+
+        // SCVHpChange();
+        mActor->mDrawComp->CreateDemageNode(msg.sender->mActorType);
+
+        if (mActor->mUnitComp->mStatus.HP <= 0)
+        {
+            PK_Data data;
+            data.ClientID = mActor->GetID();
+            data.input    = 13;
+            data.pos      = ax::Vec2(mActor->GetIDX(), 0);
+            TcpClient::get()->SendMessageToServer(data);
+        }
+    }
+    break;
     default:
         break;
     }
