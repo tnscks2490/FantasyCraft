@@ -73,6 +73,7 @@ void MarineComp::MessageProc(ActorMessage& msg)
             TcpClient::get()->SendMessageToServer(data);
         }
     } break;
+   
     default:
         break;
     }

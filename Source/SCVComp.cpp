@@ -113,6 +113,14 @@ void SCVComp::MessageProc(ActorMessage& msg)
             mBuilding = nullptr;
             cmdLocked = false;
         }
+        if (mCurAction == ActionState::Gathering)
+        {
+            if (mGatherResource)
+            {
+                ActorMessage msg = {MsgType::Cancel, mActor, nullptr, nullptr};
+                SendActorMessage(mGatherResource, msg);
+            }
+        }
         AddGoal_AllCancel(mActor);
     }
     break;

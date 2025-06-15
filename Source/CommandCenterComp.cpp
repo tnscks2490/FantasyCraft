@@ -109,6 +109,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
     } break;
     case MsgType::Attack:
     {
+
         int damage = msg.sender->mUnitComp->mStatus.AT - mStatus.DF;
         if (damage <= 0)
             damage = 1;

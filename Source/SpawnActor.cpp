@@ -28,9 +28,7 @@ Actor* DeathActor(ax::Node* parent, Actor* dActor)
 
     auto animinfo = dActor->mDrawComp->mCurAnimInfo;
 
-    auto anim = draw->CreateAnimNode(animinfo->name, animinfo->act, animinfo->dir, "Anim");
-
-    draw->ChangeAnimDeath(animinfo->name);
+    auto anim = draw->CreateDeathAnim(animinfo->name, "Anim");
         
     return actor;
 }

@@ -24,6 +24,19 @@ void MineralComp::MessageProc(ActorMessage& msg)
             mActor->mDrawComp->CreateGatheringNode(ActorType::SCV);
         }
     }break;
+    case MsgType::Cancel:
+    {
+        if (isGathering)
+        {
+            isGathering = false;
+            mTimer      = 0.f;
+            auto anim   = mActor->GetRoot()->getChildByName("GatherAnim");
+            anim->stopActionByTag(20202);
+
+            anim->removeFromParentAndCleanup(true);
+        }
+    }
+    break;
     default:
         break;
     }

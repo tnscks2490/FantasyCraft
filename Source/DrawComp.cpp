@@ -15,7 +15,7 @@ DrawComp::DrawComp(Actor* actor)
 DrawComp::~DrawComp()
 {
     if (mRoot.isNotNull())
-        mRoot->removeFromParent();
+        mRoot->removeFromParentAndCleanup(true);
 
     if (mActor)
         mActor->mDrawComp = nullptr;
@@ -519,6 +519,39 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, ECharAct action, int i
             mCurAnimInfo = &info;
         return node;
     }
+    return nullptr;
+}
+
+ax::Node* DrawComp::CreateDeathAnim(ECharName name, std::string_view nodeName)
+{
+
+    if (mRoot.isNotNull())
+    {
+        AnimInfo& animInfo = FindAnimInfo(name, ECharAct::Death, ECharDir::Face);
+        animInfo.CreateAnimation();
+
+        auto node = ax::Sprite::createWithSpriteFrame(animInfo.animation->getFrames().front()->getSpriteFrame());
+        node->setName(nodeName);
+
+        mRoot->addChild(node, 1);
+        node->setPosition(ax::Vec2::ZERO);
+
+        ax::Animate* animate = ax::Animate::create(animInfo.animation.get());
+
+        auto removeNode = ax::CallFuncN::create([mActor = this->mActor](ax::Node* sender) {
+            sender->removeFromParentAndCleanup(true);
+            delete mActor;
+        });
+
+        // 4. 시퀀스로 실행
+        auto sequence = ax::Sequence::create(animate, removeNode, nullptr);
+        sequence->setTag(20202);
+        node->runAction(sequence);
+
+        /////
+        return node;
+    }
+
     return nullptr;
 }
 
