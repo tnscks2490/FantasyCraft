@@ -780,6 +780,7 @@ void MainScene::Decording()
             {
                 if (ac->idx == (int)data.pos.x)
                 {
+                    // 데미지 계산식을 UnitComp에서 하도록 할것
                     ac->mUnitComp->mStatus.HP -= (int)data.pos.y;
                     break;
                 }
@@ -837,6 +838,7 @@ void MainScene::Decording()
                     ac->mUnitComp->mCurAction = ActionState::Death;
                     ac->isDead                = true;
                     ac->GetRoot()->setVisible(false);
+                    World::get()->Actor_PushBackDelete(ac);
                     Actor* actor = DeathActor(mMapLayer, ac);
                     actor->SetPosition(pos);
                     break;
