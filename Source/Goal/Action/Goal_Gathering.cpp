@@ -26,6 +26,7 @@ void Goal_Gathering::Start()
 int Goal_Gathering::Do()
 {
     If_Inactive_Start();
+
     m_Status = Goal::completed_t;
 
     return m_Status;

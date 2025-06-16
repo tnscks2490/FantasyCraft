@@ -42,7 +42,18 @@ void MapLayer::CreateWalls()
                 auto draw = ax::DrawNode::create();
                 draw->drawRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), ax::Color4B::RED);
                 addChild(draw);
-                draw->setPosition(ax::Vec2(j * 32, (mHeight-1 - i) * 32));
+                draw->setPosition(ax::Vec2(j * 32, (mHeight-1 - i) * 32) + ax::Vec2(16,16));
+                draw->setVisible(false);
+                mPaths.push_back(draw);
+            }
+            else
+            {
+                auto draw = ax::DrawNode::create();
+                draw->drawRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), ax::Color4B::BLUE);
+                addChild(draw);
+                draw->setPosition(ax::Vec2(j * 32, (mHeight - 1 - i) * 32) + ax::Vec2(16,16));
+                draw->setVisible(false);
+                mPaths.push_back(draw);
             }
         }
     }
@@ -61,6 +72,13 @@ void MapLayer::SettingResource()
         ax::Vec2 pos;
         pos.x = obj["x"].asFloat();
         pos.y = obj["y"].asFloat();
+
+        pos.x = (int)pos.x / 32;
+        pos.y = (int)pos.y / 32;
+
+        pos.x = pos.x * 32;
+        pos.y = pos.y * 32;
+
 
         auto t = obj["type"].asString();
 
@@ -137,4 +155,22 @@ ax::Vec2 MapLayer::SetStartPoint()
     }
 
     return spos;
+}
+
+void MapLayer::ShowPath()
+{
+    isShowPath = true;
+    for (auto node : mPaths)
+    {
+        node->setVisible(true);
+    }
+}
+
+void MapLayer::HidePath()
+{
+    isShowPath = false;
+    for (auto node : mPaths)
+    {
+        node->setVisible(false);
+    }
 }

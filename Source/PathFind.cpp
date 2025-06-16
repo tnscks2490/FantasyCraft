@@ -133,36 +133,83 @@ ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
 
     auto findPos = sp - ep;
 
-    float fx = std::abs(findPos.x);
-    float fy = std::abs(findPos.y);
 
-    if (fx >= fy)
+    int spx = (int)sp.x / 32;
+    int spy = (int)sp.y / 32;
+
+    int epx = (int)ep.x / 32;
+    int epy = (int)ep.y / 32;
+
+
+    int x = 0;
+    int y = 0;
+
+
+    x = (findPos.x > 0) ? 1 : -1;
+    y = (findPos.y > 0) ? 1 : -1;
+
+
+
+
+    auto tmpx = epx;
+    auto tmpy = epy;
+    while (1)
     {
-        if (findPos.x > 0)
-        {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, true, true);
-            return ax::Vec2(pos*32,ePos.y);
-        }
+        if (mColMap->IsCollision(tmpx, tmpy))
+            tmpx += x;
         else
         {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, true, false);
-            return ax::Vec2(pos * 32, ePos.y);
+            epx = tmpx;
+            epy = tmpy;
+            return ax::Vec2(epx * 32, epy * 32);
         }
-    }
-    else
-    {
-        if (findPos.y > 0)
-        {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, false, true);
-            return ax::Vec2(ePos.x, pos * 32);
-        }
+
+        if (mColMap->IsCollision(tmpx, tmpy))
+            tmpy += y;
         else
         {
-            int32_t pos = mColMap->GetOpenValue(ePos.x / 32, ePos.y / 32, false, false);
-            return ax::Vec2(ePos.x, pos * 32);
+            epx = tmpx;
+            epy = tmpy;
+            return ax::Vec2(epx * 32, epy * 32);
         }
     }
-    return ax::Vec2::ZERO;
+
+    return ax::Vec2(epx * 32, epy * 32);
+
+    //float fx = std::abs(findPos.x);
+    //float fy = std::abs(findPos.y);
+
+
+    //int EPx = (int)ep.x;
+    //int EPy = (int)ep.y;
+
+    //if (fx >= fy)
+    //{
+    //    if (findPos.x > 0)
+    //    {
+    //        int32_t pos = mColMap->GetOpenValue(EPx / 32, EPy / 32, true, true);
+    //        return ax::Vec2(pos * 32, EPy);
+    //    }
+    //    else
+    //    {
+    //        int32_t pos = mColMap->GetOpenValue(EPx / 32, EPy / 32, true, false);
+    //        return ax::Vec2(pos * 32, EPy);
+    //    }
+    //}
+    //else
+    //{
+    //    if (findPos.y > 0)
+    //    {
+    //        int32_t pos = mColMap->GetOpenValue(EPx / 32, EPy / 32, false, true);
+    //        return ax::Vec2(EPx, pos * 32);
+    //    }
+    //    else
+    //    {
+    //        int32_t pos = mColMap->GetOpenValue(EPx / 32, EPy / 32, false, false);
+    //        return ax::Vec2(EPx, pos * 32);
+    //    }
+    //}
+    //return ax::Vec2::ZERO;
 }
 
 void PathFind::SetTile(int x, int y)

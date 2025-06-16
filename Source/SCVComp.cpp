@@ -209,8 +209,11 @@ void SCVComp::MessageProc(ActorMessage& msg)
     {
         cmdLocked  = false;
         mCurAction = ActionState::Idle;
-        mActor->mDrawComp->CreateCarryMineral();
-        mItem = GetItem::Mineral;
+        if (mItem == GetItem::None)
+        {
+            mActor->mDrawComp->CreateCarryMineral();
+            mItem = GetItem::Mineral;
+        }
 
 
         if (mCargo)
@@ -229,8 +232,11 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::GatherGas:
     {
         mCurAction = ActionState::Idle;
-        mActor->mDrawComp->CreateCarryGas();
-        mItem = GetItem::Gas;
+        if (mItem == GetItem::None)
+        {
+            mActor->mDrawComp->CreateCarryGas();
+            mItem = GetItem::Gas;
+        }
         mActor->GetRoot()->setVisible(true);
     } break;
 

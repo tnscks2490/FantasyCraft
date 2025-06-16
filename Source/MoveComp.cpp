@@ -53,12 +53,6 @@ bool MoveComp::IsArrive()
     
     if (1.0 > m)
     {
-        if (mTargetList.size() < 1)
-        {
-            int x = (int)mypos.x / 16;
-            int y = (int)mypos.y / 16;
-            World::get()->mPath->mColMap->SetAt(x, y);
-        }
         return true;
     }
     else
@@ -356,7 +350,14 @@ void MoveComp::Avoid()
 
 void MoveComp::SetTarget(ax::Vec2 target)
 {
-    mTarget  = target;
+    ax::Vec2 targetpos;
+
+    targetpos.x = (int)target.x / 32;
+    targetpos.y = (int)target.y / 32;
+
+    targetpos *= 32;
+
+    mTarget  = targetpos;
     IsMoving = true;
 }
 
@@ -380,11 +381,6 @@ void MoveComp::SetPath(ax::Vec2 targetPos)
     if (mTargetList.size() < 1)
         return;
 
-    int x, y;
-    x = (int)mActor->GetPosition().x / 16;
-    y = (int)mActor->GetPosition().y / 16;
-
-    World::get()->mPath->mColMap->ClrAt(x, y);
 
     mTargetList.pop_front();
     mLastTarget = targetPos;

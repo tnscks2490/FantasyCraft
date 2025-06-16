@@ -22,9 +22,15 @@ public:
     void SettingResource();
     ax::Vec2 SetStartPoint();
 
-   
+    void ShowPath();
+    void HidePath();
+
+
 
 public:
+
+    std::vector<ax::Node*> mPaths;
+
     std::vector<ax::Vec2> walls;
 
     std::vector<std::vector<ax::Vec2>> WallGroup;
@@ -33,4 +39,5 @@ public:
     int mHeight = 128;
 
     bool isFirstSetting = true;
+    bool isShowPath     = false;
 };

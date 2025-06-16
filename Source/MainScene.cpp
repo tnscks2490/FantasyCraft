@@ -160,7 +160,7 @@ void MainScene::onMouseDown(Event* event)
     ax::Vec2 mousePos = ax::Vec2(e->getCursorX(), e->getCursorY());
     ax::Vec2 realpos  = mousePos - mMapLayer->getPosition();
 
-    printf("마우스 위치 : x = %f || y = %f",realpos.x,realpos.y);
+    printf("마우스 위치 : x = %f || y = %f\n",realpos.x,realpos.y);
 
     auto Lfunc = [&](PhysicsWorld& world, PhysicsShape& shape, void* userData) -> bool {
         auto A                = shape.getBody()->getNode();
@@ -258,9 +258,18 @@ void MainScene::onMouseDown(Event* event)
 
     if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT)
     {
+        auto t = World::get()->mPath->mColMap->IsCollision((int)realpos.x / 32, (int)realpos.y / 32);
+        if (t)
+            printf("충돌지점입니다 x : %d || y : %d \n", (int)realpos.x / 32, (int)realpos.y / 32);
+        else
+            printf("이동가능한지점입니다 x : %d || y : %d \n", (int)realpos.x / 32, (int)realpos.y / 32);
+
+
         if (mCursor->mCursorComp->mState == CursorState::ContactTeam)
         {
             getPhysicsWorld()->queryRect(Rfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
+
+
         }
         else
         {
@@ -496,21 +505,16 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     ///////////////////////////// input 나중에 정렬할것
     case ax::EventKeyboard::KeyCode::KEY_X:
     {
-        PK_Data data;
-        data.ClientID = TcpClient::get()->GetID();
-        data.pos      = Vec2(500, 500);
-        data.input    = 102;
-        TcpClient::get()->SendMessageToServer(data);
+        
     }
     break;
 
     case ax::EventKeyboard::KeyCode::KEY_M:
     {
-        PK_Data data;
-        data.ClientID = TcpClient::get()->GetID();
-        data.pos      = ax::Vec2(320, 512);
-        data.input    = 50;
-        TcpClient::get()->SendMessageToServer(data);
+        if (mMapLayer->isShowPath)
+            mMapLayer->HidePath();
+        else
+            mMapLayer->ShowPath();
     }
     break;
 
@@ -851,7 +855,7 @@ void MainScene::Decording()
             Actor* actor = SpawnMineral(mMapLayer, data);
             World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(64, 32));
             
-            actor->SetPosition(ChangeTiledPos(data.pos) + ax::Vec2(32,16));
+            actor->SetPosition(ChangeTiledPos(data.pos));
         }
         break;
         case 51:
@@ -900,7 +904,6 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnSCV(mMapLayer, data);
             actor->SetPosition(ChangeTiledPos(data.pos));
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(32, 32));
 
             if (data.ClientID == TcpClient::get()->GetID())
             {
@@ -913,7 +916,8 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnMarine(mMapLayer, data);
             actor->SetPosition(ChangeTiledPos(data.pos));
-            World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(32, 32));
+
+
             if (data.ClientID == TcpClient::get()->GetID())
             {
                 mPlayer->PushBackActor(actor);

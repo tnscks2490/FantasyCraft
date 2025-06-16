@@ -24,10 +24,10 @@ DrawComp::~DrawComp()
 void DrawComp::update(float delta)
 {
     if (mActor->mCategory == UnitCategory::Resource)
-        mRoot->setLocalZOrder(129 - mActor->GetPosition().y / 32);
+        mRoot->setLocalZOrder(129 - (int)mActor->GetPosition().y / 32);
     else
     {
-        mRoot->setLocalZOrder(128 - mActor->GetPosition().y / 32);
+        mRoot->setLocalZOrder(128 - (int)mActor->GetPosition().y / 32);
     }
 
     if (mActor->mActorType == ActorType::Mineral)
@@ -171,9 +171,14 @@ ax::Node* DrawComp::CreateRootNode()
         ///////////////////////////////
         // 루트노드 확인용 드로우 노드 //
         ///////////////////////////////
-        auto draw = ax::DrawNode::create();
+        /*auto draw = ax::DrawNode::create();
         draw->drawRect(ax::Vec2(-8, -8), ax::Vec2(8, 8), ax::Color4B::RED);
-        node->addChild(draw);
+        node->addChild(draw);*/
+
+        auto circle = ax::DrawNode::create();
+        circle->drawDot(ax::Vec2::ZERO, 4, ax::Color4B::WHITE);
+        node->addChild(circle);
+
         
         return node;
     }

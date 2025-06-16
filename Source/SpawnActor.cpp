@@ -584,6 +584,7 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
 
 
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Mineral, ECharAct::M01, 0);
+    anim->setPosition(ax::Vec2(32,0));
     auto unit = new MineralComp(actor);
 
     UserData* mUserData = new UserData;
