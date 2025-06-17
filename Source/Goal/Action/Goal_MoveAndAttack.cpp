@@ -13,7 +13,6 @@ Goal_MoveAndAttack::Goal_MoveAndAttack(Actor* Attacker, Actor* Target)
     : Goal_Composite(Attacker,GoalType::Attack)
 {
     mTargetActor = Target;
-
 }
 
 void Goal_MoveAndAttack::Start()

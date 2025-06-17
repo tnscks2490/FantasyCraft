@@ -221,6 +221,11 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
             receiver->mUnitComp->MessageProc(msg);
     }
     break;
+    case MsgType::ImDead:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }
     case MsgType::SearchCargo:
     {
         if (receiver->mUnitComp)

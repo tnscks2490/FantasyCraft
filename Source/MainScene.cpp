@@ -797,15 +797,25 @@ void MainScene::Decording()
             FirstObjectSetting();
         } break;
 
-        case 5:
+        case 5: //데미지 계산식
         {
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+                if (ac && ac->idx == (int)data.pos.x)
                 {
                     // 데미지 계산식을 UnitComp에서 하도록 할것
                     ac->mUnitComp->mStatus.HP -= (int)data.pos.y;
+                    if (ac->mUnitComp->mStatus.HP <= 0)
+                    {
+                        ac->mUnitComp->mCurAction = ActionState::Death;
+                        auto pos                  = ac->GetPosition();
+                        ac->isDead                = true;
+                        ac->GetRoot()->setVisible(false);
+                        World::get()->Actor_PushBackDelete(ac);
+                        Actor* actor = DeathActor(mMapLayer, ac);
+                        actor->SetPosition(pos);
+                    }
                     break;
                 }
             }
@@ -832,7 +842,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+                if (ac && ac->idx == (int)data.pos.x)
                 {
                     ac->mUnitComp->ChangeAction(ActionState::Create_Unit);
                     break;
@@ -844,7 +854,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+                if (ac && ac->idx == (int)data.pos.x)
                 {
                     ac->mUnitComp->mCurAction = ActionState::Idle;
                     break;
@@ -856,7 +866,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+                if (ac && ac->idx == (int)data.pos.x)
                 {
                     auto pos                  = ac->GetPosition();
                     ac->mUnitComp->mCurAction = ActionState::Death;
@@ -1439,6 +1449,31 @@ void MainScene::Decording()
         }break;
         case 131: //MoveAndGather 가스캐기,
         {
+        }
+        break;
+        case 132: // MoveAndAttack
+        {
+            auto& actors = World::get()->w_ActorList;
+            Actor* Attack  = nullptr;
+            Actor* Target = nullptr;
+            for (auto& ac : actors)
+            {
+                if (ac->idx == (int)data.pos.x)
+                {
+                    Attack = ac;
+                }
+                if (ac->idx == (int)data.pos.y)
+                {
+                    Target = ac;
+                }
+                if (Attack && Target)
+                    break;
+            }
+
+            if (Attack && !Attack->isDead && !Target->isDead)
+            {
+                AddGoal_MoveAndAttack(Attack, Target);
+            }
         }
         break;
 

@@ -13,7 +13,7 @@ void Weapon::CoolTime(float delta)
             mTimer  = 0.f;
             mActor->mUnitComp->cmdLocked  = false;
             IsUsing   = false;
-            mActor->mUnitComp->mCurAction = ActionState::Idle;
+            //mActor->mUnitComp->mCurAction = ActionState::Idle;
         }
     }
 }

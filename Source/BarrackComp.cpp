@@ -154,8 +154,13 @@ void BarrackComp::update(float delta)
                     SendActorMessage(mBuilder, msg);
 
                     isBuild    = true;
-                    mCurAction = ActionState::Idle;
                     mBuilder   = nullptr;
+
+                    PK_Data data;
+                    data.ClientID = mActor->GetID();
+                    data.input    = 12;
+                    data.pos      = ax::Vec2(mActor->GetIDX(), 0);
+                    TcpClient::get()->SendMessageToServer(data);
                 }
                 else
                 {
@@ -181,13 +186,22 @@ void BarrackComp::update(float delta)
             if (unitTimer >= GetUnitBuildTime())
             {
                 unitTimer = 0.f;
-                SendPK_Data(GetCreateCommand(CreateUnitArray[0]), mActor->GetPosition() + ax::Vec2(0, -100));
+                PK_Data data;
+                data.ClientID = mActor->GetID();
+                data.input    = GetCreateCommand(CreateUnitArray[0]);
+                data.pos      = mActor->GetPosition() + ax::Vec2(0, -100);
+                TcpClient::get()->SendMessageToServer(data);
                 DeleteUnit();
 
                 if (IsUnitArrayEmpty())
                 {
                     IsCreatingUnit = false;
-                    mCurAction     = ActionState::Idle;
+
+                    PK_Data data;
+                    data.ClientID = mActor->GetID();
+                    data.input    = 12;
+                    data.pos      = ax::Vec2(mActor->GetIDX(), 0);
+                    TcpClient::get()->SendMessageToServer(data);
                 }
                 else
                 {

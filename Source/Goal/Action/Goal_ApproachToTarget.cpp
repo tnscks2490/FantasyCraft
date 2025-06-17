@@ -14,7 +14,6 @@ Goal_ApproachToTarget::Goal_ApproachToTarget(Actor* actor,ax::Vec2 dest)
     : Goal(actor,GoalType::Approach) {
 
      mTargetDest = dest;
-     mApproDest = World::get()->mPath->FindEmptyTileNearActor(mActor->GetPosition(), mTargetDest);
 }
 
 void Goal_ApproachToTarget::Start()
@@ -23,7 +22,7 @@ void Goal_ApproachToTarget::Start()
     mActor->mGoalComp->mCurGoal = GoalType::Approach;
 
     if (mActor->mMoveComp)
-        mActor->mMoveComp->SetPath(mApproDest);
+        mActor->mMoveComp->SetPath(mTargetDest);
 
      mActor->mUnitComp->mCurAction = ActionState::Move;
 }
@@ -32,7 +31,7 @@ int Goal_ApproachToTarget::Do()
 {
     If_Inactive_Start();
 
-    auto len = length(mActor->GetPosition(), mTargetDest);
+    auto len   = length(mActor->GetPosition(), mTargetDest);
     auto range = mActor->mWeaponComp->GetRange();
 
     if ( len < range)

@@ -40,31 +40,36 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::Build:
     {
         printf("문제발견!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        /*ax::Vec2* pos = (ax::Vec2*)msg.data;
+        // 문제 발견하여 주석처리함 
+        {
+            /*ax::Vec2* pos = (ax::Vec2*)msg.data;
 
         int command = 0;
-        switch (msg.sender->mBPComp->mBPType)
-        {
-        case ActorType::CommandCenter: command = 120;break;
-        case ActorType::SupplyDepot: command = 121;break;
-        case ActorType::Barrack: command = 122; break;
-        case ActorType::EngineeringBay: command = 123; break;
-        case ActorType::Academy: command = 124; break;
-        case ActorType::Refinery: command = 125; break;
-        case ActorType::Factory: command = 126; break;
-        case ActorType::StarPort: command = 127; break;
-        case ActorType::Armory: command = 128; break;
-        case ActorType::ScienceFacility: command = 129; break;
-        default:
-            break;
-        }
+        switch
+            (msg.sender->mBPComp->mBPType)
+            {
+            case ActorType::CommandCenter: command = 120;break;
+            case ActorType::SupplyDepot: command = 121;break;
+            case ActorType::Barrack: command = 122; break;
+            case ActorType::EngineeringBay: command = 123; break;
+            case ActorType::Academy: command = 124; break;
+            case ActorType::Refinery: command = 125; break;
+            case ActorType::Factory: command = 126; break;
+            case ActorType::StarPort: command = 127; break;
+            case ActorType::Armory: command = 128; break;
+            case ActorType::ScienceFacility: command = 129; break;
+            default:
+                break;
+            }
 
 
         PK_Data data;
-        data.ClientID = mActor->idx;
-        data.input    = command;
-        data.pos      = *pos;
-        TcpClient::get()->SendMessageToServer(data);*/
+            data.ClientID = mActor->idx;
+            data.input    = command;
+            data.pos      = *pos;
+            TcpClient::get()->SendMessageToServer(data);*/
+        } 
+
     }
         break;
     case MsgType::Do_Build:
@@ -147,14 +152,10 @@ void SCVComp::MessageProc(ActorMessage& msg)
         mActor->mDrawComp->CreateDemageNode(msg.sender->mActorType);
 
 
-        if (mActor->mUnitComp->mStatus.HP <= 0)
+        if (mActor->mUnitComp->mStatus.HP - damage <= 0)
         {
-            PK_Data data;
-            data.ClientID = mActor->GetID();
-            data.input    = 13;
-            data.pos      = ax::Vec2(mActor->GetIDX(), 0);
-            TcpClient::get()->SendMessageToServer(data);
-
+            ActorMessage msgToSender = {MsgType::ImDead, mActor, nullptr, nullptr};
+            SendActorMessage(msg.sender, msgToSender);
         }
     } 
     break;

@@ -3,6 +3,7 @@
 #include "MarineComp.h"
 #include "Goal/Base/GoalComp.h"
 #include "DrawComp.h"
+#include "SensorComp.h"
 
 MarineComp::MarineComp(Actor* actor)
     : UnitComp(actor)
@@ -73,9 +74,26 @@ void MarineComp::MessageProc(ActorMessage& msg)
             TcpClient::get()->SendMessageToServer(data);
         }
     } break;
-   
+    case MsgType::ImDead:
+    {
+        mAttackTarget = nullptr;
+        mActor->mSensorComp->mTarget = nullptr;
+        //SearchNextTarget();
+    }
+    break;
     default:
         break;
+    }
+}
+
+void MarineComp::SearchNextTarget()
+{
+    if (mAttackTarget)
+        return;
+    else
+    {
+        mActor->mSensorComp->ReStartSensor();
+
     }
 }
 

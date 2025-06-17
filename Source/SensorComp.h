@@ -16,6 +16,8 @@ public:
     void SetSight(float sight) { mSight = sight*32; }
 
     void SetSightByType(ActorType type);
+    void ReStartSensor();
+
 
     ax::Node* CreateSightNode();
 

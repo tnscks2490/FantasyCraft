@@ -11,7 +11,7 @@ public:
     virtual void update(float delta) override;
     virtual void MessageProc(ActorMessage& msg) override;
 
-
+    void SearchNextTarget();
     void AttackTarget(Actor* Target);
 
 public:

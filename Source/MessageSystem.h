@@ -32,6 +32,10 @@ enum class MsgType
     Build_Continue,
     Build_Start,
     Build_GetBuilder,
+
+    // 전투 관련하기
+    ImDead,
+
     // 유닛생산하기
 
     DoOrder,

@@ -40,7 +40,12 @@ void SensorComp::MessageProc(ActorMessage& msg)
             if (!mTarget || mTarget == msg.sender)
             {
                 mTarget = msg.sender;
-                AddGoal_MoveAndAttack(mActor, mTarget);
+                PK_Data data;
+                data.ClientID = mActor->GetID();
+                data.input    = 132;
+                data.pos      = ax::Vec2(mActor->GetIDX(), mTarget->GetIDX());
+                TcpClient::get()->SendMessageToServer(data);
+                //AddGoal_MoveAndAttack(mActor, mTarget);
             }
         }
     }
@@ -80,6 +85,18 @@ void SensorComp::SetSightByType(ActorType type)
     case ActorType::Refinery:        SetSight(8);   break;
     default:  break;
     }
+}
+
+void SensorComp::ReStartSensor()
+{
+    if (mActor->GetRoot())
+    {
+        auto root = mActor->GetRoot();
+        auto sensorNode = root->getChildByName("SensorNode");
+        sensorNode->removeFromParentAndCleanup(true);
+        mTarget = nullptr;
+    }
+    CreateSightNode();
 }
 
 

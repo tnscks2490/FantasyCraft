@@ -17,7 +17,6 @@ public:
 
 public:
     ax::Vec2 mTargetDest;
-    ax::Vec2 mApproDest;
 };
 
 
