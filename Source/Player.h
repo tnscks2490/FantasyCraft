@@ -133,7 +133,7 @@ public:
     UILayer* ui = nullptr;
     Actor* cursor = nullptr;
 
-    int mMineral = 50;
+    int mMineral = 50000; // 추후에 50으로 다시 돌릴것
     int mGas      = 0;
     int MaxPop   = 200;
     int mCurPop   = 0;

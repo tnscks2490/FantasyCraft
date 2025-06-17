@@ -83,6 +83,11 @@ enum class MsgType
     CreateBP,
     BPCMC,
     BPSD,
+
+
+    // 그외
+
+    CollisionMove,
 };
 
 

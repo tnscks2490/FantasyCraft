@@ -6,6 +6,7 @@
 #include "UnitComp.h"
 #include "SensorComp.h"
 #include "CursorComp.h"
+#include "MoveComp.h"
 #include "BPComp.h"
 #include "DrawComp.h"
 #include "Player.h"
@@ -24,6 +25,7 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mCursorComp)  receiver->mCursorComp->MessageProc(msg);
         if (receiver->mSensorComp)  receiver->mSensorComp->MessageProc(msg);
         if (receiver->mUnitComp)    receiver->mUnitComp->MessageProc(msg);
+        if (receiver->mMoveComp)    receiver->mMoveComp->MessageProc(msg);
         if (receiver->mBPComp)      receiver->mBPComp->MessageProc(msg);
         if (receiver->mDrawComp)    receiver->mDrawComp->MessageProc(msg);
     } break;
@@ -32,9 +34,18 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mCursorComp)  receiver->mCursorComp->MessageProc(msg);
         if (receiver->mSensorComp)  receiver->mSensorComp->MessageProc(msg);
         if (receiver->mUnitComp)    receiver->mUnitComp->MessageProc(msg);
+        if (receiver->mMoveComp)    receiver->mMoveComp->MessageProc(msg);
         if (receiver->mBPComp)      receiver->mBPComp->MessageProc(msg);
         if (receiver->mDrawComp)    receiver->mDrawComp->MessageProc(msg);
     } break;
+
+    case MsgType::CollisionMove:
+    {
+        if (receiver->mMoveComp)
+            receiver->mMoveComp->MessageProc(msg);
+    }
+    break;
+
     case MsgType::Build:
     {
         if (receiver->mUnitComp)

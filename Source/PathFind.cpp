@@ -88,11 +88,16 @@ void PathFind::SetTileActorPhysics(ax::Vec2 actorPos, ax::Vec2 actorSize)
     int CountX = as.x / 32;
     int CountY = as.y / 32;
 
+    if (CountX % 2 == 0)
+        CountX++;
+    if (CountY % 2 == 0)
+        CountY++;
+
     for (int i = 0; i < CountX; i++)
     {
         for (int j = 0; j < CountY; j++)
         {
-            mColMap->SetAt(X+i, Y+j);
+            mColMap->SetAt(X+i - CountX/2, Y+j - CountY/2);
         }
     } 
 } 
@@ -153,28 +158,49 @@ ax::Vec2 PathFind::FindEmptyTileNearActor(ax::Vec2 sPos, ax::Vec2 ePos)
 
     auto tmpx = epx;
     auto tmpy = epy;
+
+    bool isFindX = false;
+    bool isFindY = false;
+
     while (1)
     {
-        if (mColMap->IsCollision(tmpx, tmpy))
-            tmpx += x;
-        else
+        if (!isFindX)
         {
-            epx = tmpx;
-            epy = tmpy;
-            return ax::Vec2(epx * 32, epy * 32);
+            if (mColMap->IsCollision(tmpx, epy))
+                tmpx += x;
+            else
+            {
+                isFindX = true;
+            }
         }
+        
 
-        if (mColMap->IsCollision(tmpx, tmpy))
-            tmpy += y;
-        else
+        if (!isFindY)
         {
-            epx = tmpx;
-            epy = tmpy;
-            return ax::Vec2(epx * 32, epy * 32);
+            if (mColMap->IsCollision(epx, tmpy))
+                tmpy += y;
+            else
+            {
+                isFindY = true;
+            }
         }
+        if (isFindX && isFindY)
+            break;
     }
 
-    return ax::Vec2(epx * 32, epy * 32);
+    auto distToX = length(ax::Vec2(spx,spy),ax::Vec2(tmpx,epy));
+    auto distToY = length(ax::Vec2(spx,spy),ax::Vec2(epx,tmpy));
+
+    if (distToX < distToY)
+    {
+        return ax::Vec2(tmpx * 32, epy * 32);
+    }
+    else
+    {
+        return ax::Vec2(epx * 32, tmpy * 32);
+    }
+
+    return ax::Vec2::ZERO;
 
     //float fx = std::abs(findPos.x);
     //float fy = std::abs(findPos.y);
@@ -251,10 +277,10 @@ std::list<jpspath::Coord> PathFind::PathSearch(ax::Vec2 start, ax::Vec2 dest)
     
     jps.Init(mColMap);
 
-    int32_t sx = start.x / 32;
-    int32_t sy = start.y / 32;
-    int32_t ex = dest.x / 32;
-    int32_t ey = dest.y / 32;
+    int32_t sx = (int32_t)start.x / 32;
+    int32_t sy = (int32_t)start.y / 32;
+    int32_t ex = (int32_t)dest.x / 32;
+    int32_t ey = (int32_t)dest.y / 32;
 
     jps.Search(sx, sy, ex, ey, ResultNodes);
     return ResultNodes;

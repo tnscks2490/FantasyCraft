@@ -42,18 +42,7 @@ void MapLayer::CreateWalls()
                 auto draw = ax::DrawNode::create();
                 draw->drawRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), ax::Color4B::RED);
                 addChild(draw);
-                draw->setPosition(ax::Vec2(j * 32, (mHeight-1 - i) * 32) + ax::Vec2(16,16));
-                draw->setVisible(false);
-                mPaths.push_back(draw);
-            }
-            else
-            {
-                auto draw = ax::DrawNode::create();
-                draw->drawRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), ax::Color4B::BLUE);
-                addChild(draw);
-                draw->setPosition(ax::Vec2(j * 32, (mHeight - 1 - i) * 32) + ax::Vec2(16,16));
-                draw->setVisible(false);
-                mPaths.push_back(draw);
+                draw->setPosition(ax::Vec2(j * 32, (mHeight-1 - i) * 32));
             }
         }
     }
@@ -160,17 +149,26 @@ ax::Vec2 MapLayer::SetStartPoint()
 void MapLayer::ShowPath()
 {
     isShowPath = true;
-    for (auto node : mPaths)
+    auto draw  = ax::DrawNode::create();
+    for (int y = 0; y < 128; y++)
     {
-        node->setVisible(true);
+        for (int x = 0; x < 128; x++)
+        {
+            
+            if (World::get()->mPath->mColMap->IsCollision(x, y))
+                draw->drawDot(ax::Vec2(x * 32, y * 32), 2, ax::Color4B::RED);
+            else
+                draw->drawDot(ax::Vec2(x * 32, y * 32), 2, ax::Color4B::BLUE);
+           
+        }
     }
+    draw->setName("Dot");
+    addChild(draw);
 }
 
 void MapLayer::HidePath()
 {
     isShowPath = false;
-    for (auto node : mPaths)
-    {
-        node->setVisible(false);
-    }
+    auto dot   = getChildByName("Dot");
+    dot->removeFromParentAndCleanup(true);
 }

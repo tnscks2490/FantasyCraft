@@ -479,7 +479,11 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
         break;
 
     case ax::EventKeyboard::KeyCode::KEY_SPACE:
-        mPlayer->PrintSelectActors();
+        if (mPlayer->mMainActor)
+        {
+            printf("타일 칸 x : %d y : %d \n", (int)mPlayer->mMainActor->GetPosition().x / 32,
+                   (int)mPlayer->mMainActor->GetPosition().y / 32);
+        }
         break;
 
 
@@ -596,14 +600,30 @@ bool MainScene::onContactPreSolve(ax::PhysicsContact& contact, ax::PhysicsContac
         Actor* actorA = userDataA->mActor;
         Actor* actorB = userDataB->mActor;
 
-        if (actorA->mMoveComp->IsContacted(actorB->mMoveComp->mBodyBorder))
-        {         
-            actorB->mMoveComp->CollisionMove(actorA->mMoveComp->mBodyBorder);
-        }
-        else if (actorB->mMoveComp->IsContacted(actorA->mMoveComp->mBodyBorder))
+        
+        if (actorA->mMoveComp->IsContacted(actorB->mMoveComp->mBodyBorder) ||
+            actorB->mMoveComp->IsContacted(actorA->mMoveComp->mBodyBorder))
         {
-            actorA->mMoveComp->CollisionMove(actorB->mMoveComp->mBodyBorder);
+            if (actorA->mMoveComp->IsMoving && !actorB->mMoveComp->IsMoving)
+            {
+                ActorMessage msg = {MsgType::CollisionMove, actorB, nullptr, nullptr};
+                SendActorMessage(actorA, msg);
+            }
+            else if (!actorA->mMoveComp->IsMoving && actorB->mMoveComp->IsMoving)
+            {
+                ActorMessage msg = {MsgType::CollisionMove, actorA, nullptr, nullptr};
+                SendActorMessage(actorB, msg);
+            }
+            else if (actorA->mMoveComp->IsMoving && actorB->mMoveComp->IsMoving)
+            {
+                ActorMessage msg = {MsgType::CollisionMove, actorA, nullptr, nullptr};
+                SendActorMessage(actorB, msg);
+
+                ActorMessage msg2 = {MsgType::CollisionMove, actorB, nullptr, nullptr};
+                SendActorMessage(actorA, msg2);
+            } 
         }
+
         return true;
     }
     return true;
@@ -862,7 +882,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnGas(mMapLayer, data);
             World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(96, 64));
-            actor->SetPosition(ChangeTiledPos(data.pos) + ax::Vec2(48, 32));
+            actor->SetPosition(ChangeTiledPos(data.pos));
         }
         break;
 
@@ -879,7 +899,7 @@ void MainScene::Decording()
         {
             Actor* actor = SpawnCommandCenterComplete(mMapLayer, data);
             World::get()->mPath->SetTileActorPhysics(data.pos, ax::Vec2(128, 96));
-            actor->SetPosition(ChangeTiledPos(data.pos) + ax::Vec2(64,48));
+            actor->SetPosition(ChangeTiledPos(data.pos));
 
             if (data.ClientID == TcpClient::get()->GetID())
             {
@@ -1199,6 +1219,13 @@ void MainScene::Decording()
             
             if (ac && !ac->isDead && ac->mMoveComp)
             {
+                if (ac->mMoveComp->isNoCol)
+                {
+                    ac->mMoveComp->isNoCol = false;
+                }
+                ActorMessage msg{MsgType::Cancel, ac, nullptr, nullptr};
+                SendActorMessage(ac, msg);
+
                 AddGoal_MoveToPath(ac, data.pos);
             }
 
@@ -1246,7 +1273,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == data.ClientID)
+                if (ac->GetIDX() == data.ClientID)
                 {
                     if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
                     {
@@ -1274,7 +1301,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == data.ClientID)
+                if (ac->GetIDX() == data.ClientID)
                 {
                     if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
                     {
@@ -1288,7 +1315,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == data.ClientID)
+                if (ac->GetIDX() == data.ClientID)
                 {
                     if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
                     {
@@ -1405,6 +1432,7 @@ void MainScene::Decording()
 
             if (gather && !gather->isDead && gather->mUnitComp && gather->mMoveComp)
             {
+                gather->mMoveComp->isNoCol = true;
                 AddGoal_MoveAndGathering(gather,mineral);
             }
 
@@ -1432,26 +1460,26 @@ void MainScene::ScreenMove(float delta)
 
     if (ScreenMoveTimer > 0.01f)
     {
-        ScreenMoveTimer = 0;
+        ScreenMoveTimer = 0.0000f;
         ax::Vec2 mapPos = mMapLayer->getPosition();
         if (mCursorPos.x > visibleSize.x - 32 && mapPos.x > -2816)
         {
-            mapPos.x -= 8;
+            mapPos.x -= 16;
             mMapLayer->setPosition(mapPos);
         }
         else if (mCursorPos.x < 32 && mapPos.x < 0)
         {
-            mapPos.x += 8;
+            mapPos.x += 16;
             mMapLayer->setPosition(mapPos);
         }
         else if (mCursorPos.y > visibleSize.y - 32 && mapPos.y > -3128)
         {
-            mapPos.y -= 8;
+            mapPos.y -= 16;
             mMapLayer->setPosition(mapPos);
         }
         else if (mCursorPos.y < 32 && mapPos.y < 210)
         {
-            mapPos.y += 8;
+            mapPos.y += 16;
             mMapLayer->setPosition(mapPos);
         }
     }

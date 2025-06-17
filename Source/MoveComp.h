@@ -22,7 +22,7 @@ public:
     ~MoveComp();
 
     virtual void update(float delta) override;
-
+    virtual void MessageProc(ActorMessage& msg) override;
 
     void SetTarget(ax::Vec2 target);
     void SetPath(ax::Vec2 targetPos);
@@ -64,6 +64,9 @@ public:
     bool IsPathMoving = false;
     bool mTag       = false;
     bool testing      = false;
+
+    bool isNoCol        = false;
+    bool isWait          = false;
 
     bool ServerMoveOrder = false;
     std::list<ax::Vec2> mTargetList;

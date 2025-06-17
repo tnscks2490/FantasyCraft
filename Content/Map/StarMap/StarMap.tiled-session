@@ -12,10 +12,10 @@
         },
         "StarMap.tmx": {
             "scale": 2,
-            "selectedLayer": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 2801.75,
-                "y": 276
+                "x": 3729.25,
+                "y": 1357.5
             }
         },
         "StarMap.tmx#ResourcePython": {

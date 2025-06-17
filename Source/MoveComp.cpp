@@ -27,7 +27,7 @@ void MoveComp::update(float delta)
     if (mTimer != -1.0)
         mTimer += delta;
     CheckTargetList();
-    if (IsMoving)
+    if (IsMoving )
     {
         Do_Moving();
         mVelocity.normalize();
@@ -42,6 +42,23 @@ void MoveComp::update(float delta)
 
 }
 
+void MoveComp::MessageProc(ActorMessage& msg)
+{
+    switch (msg.msgType)
+    {
+    case MsgType::CollisionMove:
+    {
+        if (!isNoCol)
+            CollisionMove(msg.sender->mMoveComp->mBodyBorder);    
+
+        
+    } break;
+    default:
+        break;
+    }
+
+}
+
 
 
 bool MoveComp::IsArrive()
@@ -51,7 +68,7 @@ bool MoveComp::IsArrive()
 
     float m = length(mypos, mTarget);
     
-    if (1.0 > m)
+    if (2.0 > m)
     {
         return true;
     }
@@ -89,10 +106,11 @@ void MoveComp::CheckTargetList()
 
 void MoveComp::UpdateBodyRect()
 {
-    mBodyBorder.left = mActor->GetPosition().x - 8.f;
-    mBodyBorder.right = mActor->GetPosition().x + 8.f;
-    mBodyBorder.bottom = mActor->GetPosition().y - 8.f;
-    mBodyBorder.top    = mActor->GetPosition().y + 8.f;
+    auto size          = mActor->mDrawComp->mBodySize;
+    mBodyBorder.left   = mActor->GetPosition().x - size.x/4;
+    mBodyBorder.right  = mActor->GetPosition().x + size.x/4;
+    mBodyBorder.bottom = mActor->GetPosition().y - size.y/4;
+    mBodyBorder.top    = mActor->GetPosition().y + size.y/4;
     mBodyBorder.pos    = mActor->GetPosition();
 }
 
@@ -274,15 +292,15 @@ bool MoveComp::AccumulateForce(ax::Vec2 RunningTot, ax::Vec2 ForceToAdd)
 
 void MoveComp::CollisionMove(Border other)
 {
-    
-    float left   = mBodyBorder.left - other.right;
-    float right  = other.left - mBodyBorder.right;
-    float top    = mBodyBorder.top - other.bottom;
-    float bottom = other.top - mBodyBorder.bottom;
+    float left    = mBodyBorder.left - other.right;
+    float right   = other.left - mBodyBorder.right;
+    float bottom  = other.top - mBodyBorder.bottom;
+    float top     = mBodyBorder.top - other.bottom;
 
 
     ax::Vec2 movePos = mActor->GetPosition();
 
+    
     if (right <= 0 || left <= 0 || top <= 0 || bottom <= 0)
     {
         if (right >= left || right >= top || right >= bottom)
@@ -307,16 +325,20 @@ void MoveComp::CollisionMove(Border other)
         }
     }
 
-    if (mTarget != ax::Vec2::ZERO)
+
+    //가만히 있는데 누가와서 충돌한 경우 가만히 있는 애 기준
+
+
+    if (IsMoving)
+    {
         mTargetList.insert(mTargetList.begin(), mTarget);
-    SetTarget(movePos);
-   
+        SetTarget(movePos);
+    }
+    
 }
 
 bool MoveComp::IsContacted(Border other)
 {
-
-
     float xdis = std::max(mBodyBorder.pos.x, other.pos.x) - std::min(mBodyBorder.pos.x, other.pos.x);
     float xRectdis = ((mBodyBorder.right - mBodyBorder.left) / 2) + ((other.right - other.left) / 2);
 
@@ -325,13 +347,13 @@ bool MoveComp::IsContacted(Border other)
 
     float ydis     = std::max(mBodyBorder.pos.y, other.pos.y) - std::min(mBodyBorder.pos.y, other.pos.y);
     float yRectdis = ((mBodyBorder.top - mBodyBorder.bottom) / 2) + ((other.top - other.bottom) / 2);
+
     if (ydis >= yRectdis)
         return false;
 
     if (xdis < xRectdis && ydis < yRectdis)
         return true;
 
-    return false;
 }
 
 void MoveComp::Avoid()
@@ -370,6 +392,7 @@ void MoveComp::SetPath(ax::Vec2 targetPos)
     {
         SetTarget(mActor->GetPosition());
     }
+
     if (mTargetList.size() > 0)
     {
         mTargetList.clear();

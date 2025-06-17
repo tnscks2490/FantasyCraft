@@ -511,9 +511,7 @@ ax::Node* DrawComp::CreateAnimNodeByIndex(ECharName name, ECharAct action, int i
 
         auto node = ax::Sprite::createWithSpriteFrame(info.animation->getFrames().front()->getSpriteFrame());
         node->setName(nodeName);
-
         mRoot->addChild(node,1);
-        node->setPosition(ax::Vec2::ZERO);
 
         ax::Animate* animate = ax::Animate::create(info.animation.get());
         ax::Action* action = ax::RepeatForever::create(animate);

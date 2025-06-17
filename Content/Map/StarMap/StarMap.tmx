@@ -274,10 +274,10 @@
    <property name="P3Spawn" type="object" value="5"/>
    <property name="P4Spawn" type="object" value="3"/>
   </properties>
-  <object id="3" name="SpawnP4" type="StartPoint" x="3727.27" y="1355.64" width="4.18182" height="3.81818"/>
-  <object id="5" name="SpawnP3" type="StartPoint" x="2674.61" y="208.303" width="84.6061" height="63.2121"/>
-  <object id="8" name="SpawnP2" type="StartPoint" x="277.333" y="2790.67" width="3.27273" height="2.72727"/>
-  <object id="10" name="SpawnP1" type="StartPoint" x="1370.48" y="3879.55" width="3.09091" height="4"/>
+  <object id="3" name="SpawnP4" type="StartPoint" x="3749.27" y="1318.14" width="22.1818" height="14.3182"/>
+  <object id="5" name="SpawnP3" type="StartPoint" x="2697.11" y="231.303" width="16.6061" height="16.7121"/>
+  <object id="8" name="SpawnP2" type="StartPoint" x="327.333" y="2760.17" width="18.2727" height="14.2273"/>
+  <object id="10" name="SpawnP1" type="StartPoint" x="1418.48" y="3849.05" width="17.0909" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="ResourcePoint">
   <object id="19" name="Point2M1" type="Mineral" x="96.33" y="2851.22" width="64" height="32"/>
@@ -298,27 +298,27 @@
   <object id="44" name="Point1M7" type="Mineral" x="1183.39" y="3773.87" width="64" height="32"/>
   <object id="45" name="Point1M8" type="Mineral" x="1151.82" y="3741.1" width="64" height="32"/>
   <object id="46" name="Point1M9" type="Mineral" x="1184.23" y="3708.38" width="64" height="32"/>
-  <object id="47" name="Point3M1" type="Mineral" x="2828.66" y="439.667" width="39" height="16.6667"/>
-  <object id="48" name="Point3M2" type="Mineral" x="2894.25" y="431.992" width="38.3333" height="33.1667"/>
-  <object id="49" name="Point3M3" type="Mineral" x="2929.13" y="363.833" width="32.25" height="39.75"/>
-  <object id="50" name="Point3M4" type="Mineral" x="2956.91" y="300.625" width="52.5" height="38.5"/>
-  <object id="51" name="Point3M5" type="Mineral" x="2927.46" y="239.708" width="45.25" height="38"/>
-  <object id="52" name="Point3M6" type="Mineral" x="2923.3" y="173.291" width="47" height="35"/>
-  <object id="53" name="Point3M7" type="Mineral" x="2954.38" y="108.845" width="48.6364" height="35.6818"/>
-  <object id="54" name="Point3M8" type="Mineral" x="2891.38" y="79.625" width="45.75" height="38.5"/>
-  <object id="55" name="Point3M9" type="Mineral" x="2831.05" y="42.5415" width="39.5833" height="37.5"/>
-  <object id="56" name="Point4G1" type="Gas" x="3716.87" y="1119.42" width="96" height="64"/>
+  <object id="47" name="Point3M1" type="Mineral" x="2922.16" y="362.667" width="39" height="16.6667"/>
+  <object id="48" name="Point3M2" type="Mineral" x="2922.75" y="333.492" width="31.3333" height="10.6667"/>
+  <object id="49" name="Point3M3" type="Mineral" x="2923.13" y="297.833" width="35.25" height="15.25"/>
+  <object id="50" name="Point3M4" type="Mineral" x="2920.91" y="264.125" width="36" height="15"/>
+  <object id="51" name="Point3M5" type="Mineral" x="2925.46" y="234.208" width="35.75" height="20.5"/>
+  <object id="52" name="Point3M6" type="Mineral" x="2922.3" y="203.791" width="38" height="17.5"/>
+  <object id="53" name="Point3M7" type="Mineral" x="2924.38" y="167.345" width="36.6364" height="18.6818"/>
+  <object id="54" name="Point3M8" type="Mineral" x="2927.38" y="133.625" width="36.25" height="21"/>
+  <object id="55" name="Point3M9" type="Mineral" x="2923.05" y="103.541" width="39.5833" height="16.5"/>
+  <object id="56" name="Point4G1" type="Gas" x="3725.87" y="1131.92" width="79.5" height="44.5"/>
   <object id="57" name="Point3G1" type="Gas" x="2669.23" y="46.9697" width="70.5" height="37.5"/>
   <object id="58" name="Point2G1" type="Gas" x="267.03" y="2559.38" width="96" height="64"/>
   <object id="59" name="Point1G1" type="Gas" x="1354.39" y="3647.33" width="96" height="64"/>
-  <object id="60" name="Point4M1" type="Mineral" x="3918.52" y="1413.23" width="37.5" height="21"/>
-  <object id="61" name="Point4M2" type="Mineral" x="3952.44" y="1383.97" width="37" height="18.6667"/>
-  <object id="62" name="Point4M3" type="Mineral" x="3953.83" y="1349.23" width="35" height="21.3333"/>
-  <object id="63" name="Point4M4" type="Mineral" x="3984.76" y="1316.94" width="35.6667" height="22"/>
-  <object id="64" name="Point4M5" type="Mineral" x="3955.24" y="1287.86" width="34" height="16.6667"/>
-  <object id="65" name="Point4M6" type="Mineral" x="3982.33" y="1254.27" width="35.6667" height="19.3333"/>
+  <object id="60" name="Point4M1" type="Mineral" x="3951.52" y="1414.73" width="32.5" height="21"/>
+  <object id="61" name="Point4M2" type="Mineral" x="3979.94" y="1383.97" width="37" height="18.6667"/>
+  <object id="62" name="Point4M3" type="Mineral" x="3986.33" y="1350.23" width="35" height="21.3333"/>
+  <object id="63" name="Point4M4" type="Mineral" x="4009.26" y="1318.44" width="35.6667" height="22"/>
+  <object id="64" name="Point4M5" type="Mineral" x="3980.24" y="1287.36" width="34" height="16.6667"/>
+  <object id="65" name="Point4M6" type="Mineral" x="4014.33" y="1254.27" width="35.6667" height="19.3333"/>
   <object id="66" name="Point4M7" type="Mineral" x="3980.56" y="1221.52" width="37" height="19.3333"/>
   <object id="67" name="Point4M8" type="Mineral" x="3952.08" y="1192.52" width="35" height="14.4167"/>
-  <object id="68" name="Point4M9" type="Mineral" x="3917.6" y="1163.22" width="37.7273" height="14.6288"/>
+  <object id="68" name="Point4M9" type="Mineral" x="3917.1" y="1160.22" width="37.7273" height="14.6288"/>
  </objectgroup>
 </map>

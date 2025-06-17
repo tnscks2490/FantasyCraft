@@ -119,6 +119,7 @@ void SCVComp::MessageProc(ActorMessage& msg)
             {
                 ActorMessage msg = {MsgType::Cancel, mActor, nullptr, nullptr};
                 SendActorMessage(mGatherResource, msg);
+                mGatherResource = nullptr;
             }
         }
         AddGoal_AllCancel(mActor);
@@ -191,11 +192,11 @@ void SCVComp::MessageProc(ActorMessage& msg)
                 Gathering(mineral);
             else
             {
-                mineral = SearchCloseMineral(mineral->GetIDX());
+                auto newMineral = SearchCloseMineral(mineral->GetIDX());
                 PK_Data data;
                 data.ClientID = mActor->GetID();
                 data.input    = 130;
-                data.pos      = ax::Vec2(mActor->GetIDX(), mineral->GetIDX());
+                data.pos      = ax::Vec2(mActor->GetIDX(), newMineral->GetIDX());
                 TcpClient::get()->SendMessageToServer(data);
             }
         }
