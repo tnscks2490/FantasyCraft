@@ -115,6 +115,9 @@ void CursorComp::LClick(ax::Vec2 pos)
                 && cPlayer->mGas >= bp.gasCost)
             {
                 cPlayer->UseResource(bp.mineralCost, bp.gasCost);
+                SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None,
+                                      nullptr};
+                SendSystemMessage(cPlayer->ui, cPlayer, smsg);
                 CreateBuildingByBP(mBP, pos, cPlayer->mMainActor->GetIDX());
             }
         }           

@@ -64,10 +64,11 @@ void DrawComp::update(float delta)
     }
     else 
     {
-
+        // 여기가 현재 애니메이션
         ECharDir dir  = mCurAnimInfo->dir;
         ECharName anim        = mCurAnimInfo->name;
         ECharAct action       = mCurAnimInfo->act;
+        // 현재 행동명령
         ActionState curAction = mActor->mUnitComp->mCurAction;
 
         ax::Vec2 dirV;
@@ -123,8 +124,6 @@ void DrawComp::update(float delta)
 
         case ActionState::Attack:
         {
-            if (mCurAnimInfo->act == ECharAct::Attack)
-                return;
             ChangeAnim(anim, ECharAct::Attack, dir,false);
             mActionState = curAction;
         } break;

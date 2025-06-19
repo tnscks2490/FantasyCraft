@@ -37,8 +37,15 @@ int Goal_MoveAndAttack::Do()
 
     if (m_Status == Goal::completed_t && !mTargetActor->isDead)
     {
-        ActorMessage msg = {MsgType::SetAttackTarget, mTargetActor, nullptr, nullptr};
-        SendActorMessage(mActor, msg);
+        PK_Data data;
+        data.ClientID = mActor->GetID();
+        data.input    = 132;
+        data.pos      = ax::Vec2(mActor->GetIDX(), mTargetActor->GetIDX());
+        TcpClient::get()->SendMessageToServer(data);
+
+
+        /*ActorMessage msg = {MsgType::SetAttackTarget, mTargetActor, nullptr, nullptr};
+        SendActorMessage(mActor, msg);*/
     }
 
     return m_Status;

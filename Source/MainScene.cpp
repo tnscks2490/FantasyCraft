@@ -1458,11 +1458,12 @@ void MainScene::Decording()
             Actor* Target = nullptr;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+
+                if ( ac != nullptr &&ac->idx == (int)data.pos.x)
                 {
                     Attack = ac;
                 }
-                if (ac->idx == (int)data.pos.y)
+                if (ac != nullptr && ac->idx == (int)data.pos.y)
                 {
                     Target = ac;
                 }

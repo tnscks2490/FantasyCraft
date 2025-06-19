@@ -30,15 +30,15 @@ void SensorComp::MessageProc(ActorMessage& msg)
 {
     switch (msg.msgType)
     {
-    //case MsgType::Separate:
     case MsgType::Contacted:
     {
         if (msg.sender->mActorType == ActorType::Cursor)
             return;
         if (msg.sender->GetID() != mActor->GetID() && msg.sender->mCategory != UnitCategory::Resource)
         {
-            if (!mTarget || mTarget == msg.sender)
+            if (mTarget == nullptr)
             {
+
                 mTarget = msg.sender;
                 PK_Data data;
                 data.ClientID = mActor->GetID();
@@ -48,6 +48,11 @@ void SensorComp::MessageProc(ActorMessage& msg)
                 //AddGoal_MoveAndAttack(mActor, mTarget);
             }
         }
+    }
+    break;
+    case MsgType::Separate:
+    {
+        mTarget = nullptr;
     }
     break;
     default:

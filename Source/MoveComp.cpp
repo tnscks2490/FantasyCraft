@@ -124,7 +124,7 @@ bool MoveComp::IsArriveComplete()
 void MoveComp::StopMove()
 {
     IsMoving = false;
-    mTarget = mActor->GetPosition();
+    //mTarget = mActor->GetPosition();
     mTargetList.clear();
 
 }
