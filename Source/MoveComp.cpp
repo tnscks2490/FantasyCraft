@@ -27,7 +27,7 @@ void MoveComp::update(float delta)
     if (mTimer != -1.0)
         mTimer += delta;
     CheckTargetList();
-    if (IsMoving )
+    if (IsMoving)
     {
         Do_Moving();
         mVelocity.normalize();
@@ -96,12 +96,15 @@ void MoveComp::CheckTargetList()
         return;
     }
 
+
     if (!IsMoving)
     {
         ax::Vec2 pos = mTargetList.front();
         mTargetList.pop_front();
         SetTarget(pos);
     }
+
+    
 }
 
 void MoveComp::UpdateBodyRect()
@@ -328,11 +331,18 @@ void MoveComp::CollisionMove(Border other)
 
     //가만히 있는데 누가와서 충돌한 경우 가만히 있는 애 기준
 
+    
+
+
 
     if (IsMoving)
     {
-        mTargetList.insert(mTargetList.begin(), mTarget);
+        
+        if (mTargetList.size() > 0)
+            mTargetList.insert(mTargetList.begin(), mTarget);
+
         SetTarget(movePos);
+
     }
     
 }
@@ -388,15 +398,16 @@ void MoveComp::SetPath(ax::Vec2 targetPos)
     // 이 둘은 비슷한 결과를 가져옴(이동중 다른곳을 클릭하면
     // 지금 진행중인 이동을 정지하고 새로운 길을 찾고 이동함
 
-    if (IsMoving)
+    /*if (IsMoving)
     {
         SetTarget(mActor->GetPosition());
-    }
+    }*/
 
-    if (mTargetList.size() > 0)
+   /* if (mTargetList.size() > 0)
     {
         mTargetList.clear();
-    }
+    }*/
+    mTargetList.clear();
 
     mTargetList = World::get()->mPath->GetTargetList(mActor->GetPosition(),targetPos);
 
@@ -404,8 +415,14 @@ void MoveComp::SetPath(ax::Vec2 targetPos)
     if (mTargetList.size() < 1)
         return;
 
-
     mTargetList.pop_front();
+    if (IsMoving)
+    {
+        ax::Vec2 pos = mTargetList.front();
+        mTargetList.pop_front();
+        SetTarget(pos);
+    }
+
     mLastTarget = targetPos;
 }
 

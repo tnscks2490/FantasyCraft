@@ -103,8 +103,6 @@ void DrawComp::update(float delta)
         {
         case ActionState::Idle:
         {
-            if (mCurAnimInfo->act == ECharAct::Idle)
-                return;
             ChangeAnim(anim, ECharAct::Idle, dir);
             mActionState = curAction;   
         } break;

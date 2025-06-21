@@ -574,10 +574,15 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     UserData* dataA = (UserData*)A->getUserData();
     UserData* dataB = (UserData*)B->getUserData();
 
-    ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, AbodyNode, dataB};
+    /*ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, AbodyNode, dataB};
     SendActorMessage(dataA->mActor, amsgA);
 
     ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, dataA};
+    SendActorMessage(dataB->mActor, amsgB);*/
+    ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, BbodyNode, dataB};
+    SendActorMessage(dataA->mActor, amsgA);
+
+    ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, AbodyNode, dataA};
     SendActorMessage(dataB->mActor, amsgB);
 
       

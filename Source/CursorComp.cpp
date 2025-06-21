@@ -158,6 +158,9 @@ void CursorComp::RClick(ax::Vec2 pos)
 void CursorComp::ContactedUnit(ActorMessage& msg)
 {
     UserData* other = (UserData*)msg.data;
+    if (msg.bodyNode->getName() == "SensorNode")
+        return;
+
 
     if (other)
     {
