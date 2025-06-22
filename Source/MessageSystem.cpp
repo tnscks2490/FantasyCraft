@@ -226,11 +226,24 @@ void SendActorMessage(Actor* receiver, ActorMessage msg)
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
     }
+    break;
+    case MsgType::ImNotDead:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }
+    break;
     case MsgType::SearchCargo:
     {
         if (receiver->mUnitComp)
             receiver->mUnitComp->MessageProc(msg);
     } break;
+    case MsgType::WeaponIsReady:
+    {
+        if (receiver->mUnitComp)
+            receiver->mUnitComp->MessageProc(msg);
+    }
+    break;
     default:
         break;
     }

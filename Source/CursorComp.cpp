@@ -73,7 +73,8 @@ void CursorComp::MessageProc(ActorMessage& msg)
         SeparateUnit(msg);
     } break;
     case MsgType::CreateBP:
-        CreateBuildingBP(*bpType);
+        if (mBP == nullptr)
+            CreateBuildingBP(*bpType);
         break;
     default:
         break;
@@ -391,6 +392,7 @@ void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos, int BuildIdx)
             break;
         }
 
+    ReleaseBP();
     PK_Data data;
     data.ClientID = BuildIdx;
     data.input    = command;
@@ -398,7 +400,6 @@ void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos, int BuildIdx)
     TcpClient::get()->SendMessageToServer(data);
 
 
-    ReleaseBP();
 }
 
 

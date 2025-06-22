@@ -84,14 +84,12 @@ void BPComp::ContactedUnit(ActorMessage& msg)
         {
             if (tag == 10 || tag == 20)
             {
-                if (bodyNode->getChildByName("BPBodyRect"))
-                {
-                    ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
-                    dNode->clear();
-                    auto color = ax::Color4B(255, 0, 0, 100);
-                    dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
-                    BuildPossible = false;
-                }
+               // 상대방의 충돌 노드는 알수있지만 자신의 어떤 노드가 충돌했는지 알수가없음
+                ax::DrawNode* dNode = (ax::DrawNode*)bodyNode->getChildByName("BPBodyRect");
+                dNode->clear();
+                auto color = ax::Color4B(255, 0, 0, 100);
+                dNode->drawSolidRect(ax::Vec2(-16, -16), ax::Vec2(16, 16), color);
+                BuildPossible = false;
             }
         }
 

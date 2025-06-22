@@ -18,6 +18,7 @@ void Goal_SetTargetAndAttack::Start()
 {
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::Attack;
+
     if (!mTarget->isDead)
     {
         ActorMessage msg = {MsgType::AttackTarget, mTarget, nullptr, nullptr};
@@ -33,6 +34,7 @@ int Goal_SetTargetAndAttack::Do()
 
 
     m_Status = Goal::completed_t;
+
     return m_Status;
 }
 

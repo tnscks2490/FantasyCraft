@@ -17,12 +17,13 @@ void Weapon_Normal::update(float delta)
     CoolTime(delta);
 }
 
-void Weapon_Normal::Use()
+void Weapon_Normal::Use(Actor* target)
 {
     if (!IsUsing)
     {
-        IsUsing  = true;
-        mActor->mUnitComp->cmdLocked  = true;
+        IsUsing = true;
+        ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
+        SendActorMessage(target, msg);
         mActor->mUnitComp->mCurAction = ActionState::Attack;
     }
 }

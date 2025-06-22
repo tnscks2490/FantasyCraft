@@ -268,8 +268,6 @@ void MainScene::onMouseDown(Event* event)
         if (mCursor->mCursorComp->mState == CursorState::ContactTeam)
         {
             getPhysicsWorld()->queryRect(Rfunc, Rect(mousePos.x, mousePos.y, 5, 5), nullptr);
-
-
         }
         else
         {
@@ -1015,7 +1013,7 @@ void MainScene::Decording()
             auto& actors = World::get()->w_ActorList;
             for (auto& ac : actors)
             {
-                if (ac->idx == (int)data.pos.x)
+                if (ac->GetIDX() == (int)data.pos.x)
                 {
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnBarrack(mMapLayer, data);
@@ -1031,6 +1029,7 @@ void MainScene::Decording()
                         mPlayer->PushBackActor(actor);
                         break;
                     }
+                    break;
                 }
             }
         } break;
@@ -1321,6 +1320,7 @@ void MainScene::Decording()
                     if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
                     {
                         AddGoal_MoveAndBuild(ac, data.pos, ActorType::Barrack);
+                        break;
                     }
                 }
             }   

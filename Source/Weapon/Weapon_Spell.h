@@ -8,7 +8,7 @@ public:
 
     Weapon_Spell(Actor* actor);
     virtual void update(float delta) override;
-    virtual void Use() override;
+    virtual void Use(Actor* target) override;
 };
 
 

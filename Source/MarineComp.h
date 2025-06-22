@@ -13,10 +13,13 @@ public:
 
     void SearchNextTarget();
     void AttackTarget(Actor* Target);
+    void WaitCoolTime();
 
 public:
     short mPop      = 1;
 
     // 공격대상
     Actor* mAttackTarget = nullptr;
+
+    
 };

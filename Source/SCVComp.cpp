@@ -146,7 +146,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
         data.input    = 5;
         data.pos      = ax::Vec2(mActor->GetIDX(), damage);
         TcpClient::get()->SendMessageToServer(data);
-  
+
+
 
         SCVHpChange();
         mActor->mDrawComp->CreateDemageNode(msg.sender->mActorType);
@@ -155,6 +156,11 @@ void SCVComp::MessageProc(ActorMessage& msg)
         if (mActor->mUnitComp->mStatus.HP - damage <= 0)
         {
             ActorMessage msgToSender = {MsgType::ImDead, mActor, nullptr, nullptr};
+            SendActorMessage(msg.sender, msgToSender);
+        }
+        else
+        {
+            ActorMessage msgToSender = {MsgType::ImNotDead, mActor, nullptr, nullptr};
             SendActorMessage(msg.sender, msgToSender);
         }
     } 
@@ -443,7 +449,7 @@ void SCVComp::Building(ActorMessage& msg)
     PK_Data data;
     data.ClientID = mActor->GetID();
     data.input    = command;
-    data.pos      = ax::Vec2(mActor->idx,0);
+    data.pos      = ax::Vec2(mActor->GetIDX(), 0);
     TcpClient::get()->SendMessageToServer(data);
 
 

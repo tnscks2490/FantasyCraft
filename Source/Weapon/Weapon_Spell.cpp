@@ -15,7 +15,7 @@ void Weapon_Spell::update(float delta)
     CoolTime(delta);
 }
 
-void Weapon_Spell::Use()
+void Weapon_Spell::Use(Actor* target)
 {
     if (!IsUsing)
     {

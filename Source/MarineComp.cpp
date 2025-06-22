@@ -19,6 +19,7 @@ MarineComp::~MarineComp()
 
 void MarineComp::update(float delta)
 {
+
 }
 
 void MarineComp::MessageProc(ActorMessage& msg)
@@ -42,7 +43,9 @@ void MarineComp::MessageProc(ActorMessage& msg)
         mAttackTarget = msg.sender;
 
         if (mAttackTarget && !mAttackTarget->isDead)
+        {
             AddGoal_MoveAndAttack(mActor, mAttackTarget);
+        }
 
     }break;
 
@@ -78,9 +81,18 @@ void MarineComp::MessageProc(ActorMessage& msg)
     {
         mAttackTarget = nullptr;
         mActor->mSensorComp->mTarget = nullptr;
+        ChangeAction(ActionState::Idle);
         //SearchNextTarget();
     }
     break;
+    case MsgType::ImNotDead:
+    {
+        mAttackTarget = msg.sender;
+    } break;
+    case MsgType::WeaponIsReady:
+    {
+        AddGoal_MoveAndAttack(mActor, mAttackTarget);
+    }
     default:
         break;
     }
@@ -93,7 +105,6 @@ void MarineComp::SearchNextTarget()
     else
     {
         mActor->mSensorComp->ReStartSensor();
-
     }
 }
 
@@ -102,7 +113,11 @@ void MarineComp::AttackTarget(Actor* Target)
     if (mActor->mWeaponComp->DoAttack(Target))
     {
         auto pos = Target->GetPosition() - mActor->GetPosition();
-        mActor->mDrawComp->ChangeCurDir(pos);
+        mActor->mDrawComp->ChangeCurDir(pos);   
     }
+}
+
+void MarineComp::WaitCoolTime()
+{
 
 }

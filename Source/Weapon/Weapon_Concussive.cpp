@@ -15,7 +15,7 @@ void Weapon_Concussive::update(float delta)
     CoolTime(delta);
 }
 
-void Weapon_Concussive::Use()
+void Weapon_Concussive::Use(Actor* target)
 {
     if (!IsUsing)
     {

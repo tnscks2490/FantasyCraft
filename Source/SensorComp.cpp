@@ -23,7 +23,6 @@ SensorComp::~SensorComp()
 
 void SensorComp::update(float delta)
 {
-
 }
 
 void SensorComp::MessageProc(ActorMessage& msg)
@@ -36,17 +35,21 @@ void SensorComp::MessageProc(ActorMessage& msg)
             return;
         if (msg.sender->GetID() != mActor->GetID() && msg.sender->mCategory != UnitCategory::Resource)
         {
-            if (mTarget == nullptr)
+            if (msg.sender->mCategory == UnitCategory::Unit || msg.sender->mCategory == UnitCategory::Building)
             {
+                if (mTarget == nullptr)
+                {
 
-                mTarget = msg.sender;
-                PK_Data data;
-                data.ClientID = mActor->GetID();
-                data.input    = 132;
-                data.pos      = ax::Vec2(mActor->GetIDX(), mTarget->GetIDX());
-                TcpClient::get()->SendMessageToServer(data);
-                //AddGoal_MoveAndAttack(mActor, mTarget);
+                    mTarget = msg.sender;
+                    PK_Data data;
+                    data.ClientID = mActor->GetID();
+                    data.input    = 132;
+                    data.pos      = ax::Vec2(mActor->GetIDX(), mTarget->GetIDX());
+                    TcpClient::get()->SendMessageToServer(data);
+                    // AddGoal_MoveAndAttack(mActor, mTarget);
+                }
             }
+            
         }
     }
     break;

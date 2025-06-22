@@ -34,7 +34,10 @@ void WeaponComp::MessageProc(ActorMessage& msg)
 void WeaponComp::update(float delta)
 {
     TakeAimAndShoot();
-    if (mCurWeapon) mCurWeapon->update(delta);
+    if (mCurWeapon)
+    {
+        mCurWeapon->update(delta);
+    }
 }
 
 void WeaponComp::SelectWeapon() {
@@ -76,23 +79,14 @@ bool WeaponComp::DoAttack(Actor* mTarget)
 {
     if (length(mTarget->GetPosition(), mActor->GetPosition()) < mRange)
     {
-        if (!mActor->mUnitComp->IsCmdLocked())
-        {
-            DoAction();
-            ActorMessage msg = {MsgType::Attack, mActor, nullptr, nullptr};
-            SendActorMessage(mTarget, msg);
-            return true;
-        }
+        if (mCurWeapon)
+            mCurWeapon->Use(mTarget);
+        return true;
     }
 
     return false;
 }
 
-void WeaponComp::DoAction()
-{
-    if (mCurWeapon)
-        mCurWeapon->Use();
-}
 
 WeaponType WeaponComp::ClassifyWeapon(ActorType type)
 {

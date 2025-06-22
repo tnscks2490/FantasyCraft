@@ -8,11 +8,14 @@ void Weapon::CoolTime(float delta)
     if (IsUsing)
     {
         mTimer += delta;
-        if (mTimer > mCoolTime)
+        if (mTimer >= mCoolTime)
         {
-            mTimer  = 0.f;
+            mTimer  = 0.000f;
             mActor->mUnitComp->cmdLocked  = false;
             IsUsing   = false;
+
+            ActorMessage msg = {MsgType::WeaponIsReady, mActor, nullptr, nullptr};
+            SendActorMessage(mActor, msg);
             //mActor->mUnitComp->mCurAction = ActionState::Idle;
         }
     }

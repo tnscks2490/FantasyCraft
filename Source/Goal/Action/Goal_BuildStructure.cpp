@@ -21,8 +21,6 @@ void Goal_BuildStructure::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal   = GoalType::Build;
 
-
-    
     ActorMessage msg;
     msg.msgType = MsgType::Do_Build;
     msg.sender  = mActor;

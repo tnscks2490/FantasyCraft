@@ -35,7 +35,8 @@ enum class MsgType
 
     // 전투 관련하기
     ImDead,
-
+    ImNotDead,
+    WeaponIsReady,
     // 유닛생산하기
 
     DoOrder,
