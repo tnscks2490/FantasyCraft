@@ -94,7 +94,11 @@ void DrawComp::update(float delta)
 
 
         if (dirV == ax::Vec2::ZERO && curAction != ActionState::Death)
-            mCurAnimInfo->dir = mCurDir;
+        {
+            //mCurAnimInfo->dir = mCurDir;
+            dir = mCurDir;
+        }
+
          
 
         mCurDir = CalcAniDir(dirV);

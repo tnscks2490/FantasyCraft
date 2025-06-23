@@ -30,7 +30,7 @@ void Goal_DoingBuild::Start()
     ax::Vec2 dest    = m_Dest + randPos;
 
     PushSubGoal(new Goal_MoveToTarget(mActor, dest));
-    PushSubGoal(new Goal_ChangeDir(mActor, randPos));
+    PushSubGoal(new Goal_ChangeDir(mActor, -randPos));
     PushSubGoal(new Goal_WaitTime(mActor));
 }
 
