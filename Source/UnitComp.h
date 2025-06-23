@@ -112,7 +112,7 @@ public:
 
 
     bool cmdLocked = false;
-
+    short mPop                 = 0;
     int killCount          = 0;
     std::string_view mUnitName = "";
 

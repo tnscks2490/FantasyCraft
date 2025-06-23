@@ -53,6 +53,7 @@ void ResourceLayer::MessageProc(SystemMessage smsg)
     {
         updateResource();
     }
+    break;
     default:
         break;
     }

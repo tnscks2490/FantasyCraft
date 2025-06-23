@@ -47,16 +47,16 @@ void BPComp::update(float delta)
 void BPComp::ContactedUnit(ActorMessage& msg)
 {
     auto bodyNode = msg.bodyNode;
-    UserData* other = (UserData*)msg.data;
+    auto other = msg.sender;
 
-    if (other->mActor->GetRoot()->getChildByName("Body"))
+    if (other->GetRoot()->getChildByName("Body"))
     {
-        int tag = other->mActor->GetRoot()->getChildByName("Body")->getTag();
+        int tag = other->GetRoot()->getChildByName("Body")->getTag();
 
         if (mBPType == ActorType::Refinery)
         {
-            int OtherX = other->mActor->GetPosition().x;
-            int OtherY = other->mActor->GetPosition().y;
+            int OtherX = other->GetPosition().x;
+            int OtherY = other->GetPosition().y;
 
             OtherX /= 32;
             OtherY /= 32;

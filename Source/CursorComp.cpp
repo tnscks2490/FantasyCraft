@@ -58,10 +58,7 @@ void CursorComp::update(float delta)
 }
 
 void CursorComp::MessageProc(ActorMessage& msg)
-{
-
-    //UserData* other = (UserData*)msg.data;
-    ActorType* bpType = (ActorType*)msg.data;
+{  
     switch (msg.msgType)
     {
     case MsgType::Contacted:
@@ -74,7 +71,10 @@ void CursorComp::MessageProc(ActorMessage& msg)
     } break;
     case MsgType::CreateBP:
         if (mBP == nullptr)
+        {
+            ActorType* bpType = (ActorType*)msg.data;
             CreateBuildingBP(*bpType);
+        }
         break;
     default:
         break;
@@ -158,19 +158,22 @@ void CursorComp::RClick(ax::Vec2 pos)
 
 void CursorComp::ContactedUnit(ActorMessage& msg)
 {
-    UserData* other = (UserData*)msg.data;
-    if (msg.bodyNode->getName() == "SensorNode")
+    auto other = msg.sender;
+
+    ax::Node* otherBody = (ax::Node*)msg.data;
+
+    if (otherBody->getName() == "SensorNode")
         return;
 
 
     if (other)
     {
-        if (other->mActor->GetRoot()->getChildByName("Body"))
+        if (other->GetRoot()->getChildByName("Body"))
         {
-            auto tag = other->mActor->GetRoot()->getChildByName("Body")->getTag();
+            auto tag = other->GetRoot()->getChildByName("Body")->getTag();
             if (tag == 10 || tag == 20)
             {
-                auto otherRoot = other->mActor->GetRoot();
+                auto otherRoot = other->GetRoot();
 
 
                 if (mState == CursorState::SetAttackTarget)
@@ -183,15 +186,15 @@ void CursorComp::ContactedUnit(ActorMessage& msg)
                 }
                 else if (mState != CursorState::Drag)
                 {
-                    if (other->mActor->mActorType == ActorType::Mineral ||
-                        other->mActor->mActorType == ActorType::Gas)
+                    if (other->mActorType == ActorType::Mineral ||
+                        other->mActorType == ActorType::Gas)
                     {
                         mState = CursorState::ContactTeam;
                         return;
                     }
 
 
-                    if (other->mActor->mID == mActor->mID)
+                    if (other->GetID() == mActor->GetID())
                         mState = CursorState::ContactTeam;
                     else
                         mState = CursorState::ContactEnemy;
@@ -393,11 +396,14 @@ void CursorComp::CreateBuildingByBP(Actor* BP, ax::Vec2 createPos, int BuildIdx)
         }
 
     ReleaseBP();
+
     PK_Data data;
     data.ClientID = BuildIdx;
     data.input    = command;
     data.pos      = pos;
     TcpClient::get()->SendMessageToServer(data);
+
+    printf("CreateBuildingByBP 들어왔음\n");
 
 
 }

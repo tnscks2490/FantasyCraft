@@ -94,7 +94,7 @@ void CommandCenterComp::MessageProc(ActorMessage& msg)
         if (mOrderAction == ActionState::AddSCV)
         {
             PK_Data data;
-            data.ClientID = TcpClient::get()->GetID();
+            data.ClientID = mActor->GetID();
             data.input    = 11;
             data.pos      = ax::Vec2(mActor->idx, 0);
             TcpClient::get()->SendMessageToServer(data);

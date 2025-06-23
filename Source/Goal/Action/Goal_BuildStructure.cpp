@@ -21,19 +21,31 @@ void Goal_BuildStructure::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal   = GoalType::Build;
 
-    ActorMessage msg;
+    /*ActorMessage msg;
     msg.msgType = MsgType::Do_Build;
     msg.sender  = mActor;
     msg.data    = &mStructure;
-    SendActorMessage(mActor, msg);
+    SendActorMessage(mActor, msg);*/
+    if (TcpClient::get()->GetID() == mActor->GetID())
+    {
+        PEvent event = {EventType::AddUnit, 0, 0, true, mActor, mStructure};
+        SendEvent(event);
+    }
+    
+
+    printf("Goal_BuildStructure 들어옴\n");
+    isdoing = true;
 }
 
 int Goal_BuildStructure::Do()
 {
     If_Inactive_Start();
 
-
-    m_Status = Goal::completed_t;
+    if (isdoing)
+    {
+        m_Status = Goal::completed_t;
+        return m_Status;
+    }
 
     return m_Status;
 }

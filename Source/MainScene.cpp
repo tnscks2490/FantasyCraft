@@ -460,8 +460,8 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
 
                 PK_Data data;
                 data.ClientID = TcpClient::get()->GetID();
-                data.pos      = actor->GetPosition();
                 data.input    = 77;
+                data.pos      = actor->GetPosition();
                 TcpClient::get()->SendMessageToServer(data);
                
             }
@@ -490,8 +490,8 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode code, Event* event)
     {
         PK_Data data;
         data.ClientID = TcpClient::get()->GetID();
-        data.pos      = Vec2(500, 500);
         data.input    = 100;
+        data.pos      = Vec2(500, 500);
         TcpClient::get()->SendMessageToServer(data);
     } break;
 
@@ -577,10 +577,10 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
 
     ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, dataA};
     SendActorMessage(dataB->mActor, amsgB);*/
-    ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, BbodyNode, dataB};
+    ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, AbodyNode, BbodyNode};
     SendActorMessage(dataA->mActor, amsgA);
 
-    ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, AbodyNode, dataA};
+    ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, AbodyNode};
     SendActorMessage(dataB->mActor, amsgB);
 
       
@@ -1018,6 +1018,7 @@ void MainScene::Decording()
                     data.pos     = ac->GetPosition();
                     Actor* actor = SpawnBarrack(mMapLayer, data);
                     actor->SetPosition(ChangeTiledPos(data.pos));
+                    printf("Spawn Barrack 들어옴\n");
 
                     ActorMessage msg = {MsgType::SendInfo, actor, nullptr, nullptr};
                     SendActorMessage(ac, msg);
@@ -1320,6 +1321,7 @@ void MainScene::Decording()
                     if (ac && !ac->isDead && ac->mUnitComp && ac->mMoveComp)
                     {
                         AddGoal_MoveAndBuild(ac, data.pos, ActorType::Barrack);
+                        printf("Decoding AddGoal_MoveAndBuild들어옴\n");
                         break;
                     }
                 }

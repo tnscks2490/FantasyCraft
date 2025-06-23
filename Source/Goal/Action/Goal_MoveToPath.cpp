@@ -27,7 +27,7 @@ void Goal_MoveToPath::Start()
 
     mActor->mUnitComp->mCurAction = ActionState::Move;
 
-    printf("이동중\n");
+    printf("Goal_MoveToPath들어옴\n");
 }
 
 int Goal_MoveToPath::Do()

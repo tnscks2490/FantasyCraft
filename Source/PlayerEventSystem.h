@@ -9,6 +9,7 @@ enum class EventType
     UseResource,
     AddPop,
     MinusPop,
+    AddUnit,
 };
 
 

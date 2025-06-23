@@ -16,7 +16,6 @@ public:
     void WaitCoolTime();
 
 public:
-    short mPop      = 1;
 
     // 공격대상
     Actor* mAttackTarget = nullptr;

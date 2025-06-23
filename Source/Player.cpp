@@ -269,6 +269,16 @@ void Player::EvnetProc(PEvent evnet)
         }
     }
     break;
+    case EventType::AddUnit:
+    {
+        PK_Data data;
+        data.ClientID = e.sender->GetID();
+        data.input    = 104;
+        data.pos      = ax::Vec2(e.sender->GetIDX(),0);
+        TcpClient::get()->SendMessageToServer(data);
+
+    }
+    break;
 
     default:
         break;
@@ -555,6 +565,14 @@ void Player::ReSelected()
 
 void Player::PushBackActor(Actor* actor)
 {
+    if (actor->mCategory == UnitCategory::Unit)
+    {
+        mCurPop += actor->mUnitComp->mPop;
+        SystemMessage smsg = {SMsgType::ChangeResource, ReceiverType::UI, ActorType::None, ButtonType::None, nullptr};
+        SendSystemMessage(ui, this, smsg);
+    }
+
+
     mActors.push_back(actor);
 }
 

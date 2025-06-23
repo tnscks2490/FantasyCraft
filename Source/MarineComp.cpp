@@ -11,6 +11,7 @@ MarineComp::MarineComp(Actor* actor)
     actor->mUnitComp = this;
     SetUnitStatus(ActorType::Marine);
     mUnitName = "Terran Marine";
+    mPop      = 1;
 }
 
 MarineComp::~MarineComp()

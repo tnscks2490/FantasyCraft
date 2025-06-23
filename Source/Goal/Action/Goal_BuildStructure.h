@@ -21,6 +21,7 @@ public:
     ax::Vec2 m_Dest;
 
     ActorType mStructure;
+    bool isdoing = false;
 
 };
 

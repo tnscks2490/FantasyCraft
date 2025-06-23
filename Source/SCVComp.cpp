@@ -18,6 +18,7 @@ SCVComp::SCVComp(Actor* actor)
     actor->mUnitComp = this;
     SetUnitStatus(ActorType::SCV);
     mUnitName  = "Terran SCV";
+    mPop      = 1;
 
 }
 
@@ -36,7 +37,8 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::Contacted:
     {
         
-    }break;
+    } break;
+
     case MsgType::Build:
     {
         printf("문제발견!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -70,14 +72,17 @@ void SCVComp::MessageProc(ActorMessage& msg)
             TcpClient::get()->SendMessageToServer(data);*/
         } 
 
-    }
-        break;
+    } break;
+
     case MsgType::Do_Build:
+    {
         Building(msg);
-        break;
+    } break;
+
     case MsgType::SendInfo:
     {
         mBuilding = msg.sender;
+        printf("SCV SendInfo 들어옴\n");
         ActorMessage msg = {MsgType::Build_GetBuilder, mActor, nullptr, nullptr};
         SendActorMessage(mBuilding, msg);
         AddGoal_DoingBuild(mActor, mBuilding);
@@ -445,13 +450,36 @@ void SCVComp::Building(ActorMessage& msg)
     default:
         break;
     }
-
-    PK_Data data;
+    printf("SCVComp Build 들어옴");
+    /*PK_Data data;
     data.ClientID = mActor->GetID();
     data.input    = command;
     data.pos      = ax::Vec2(mActor->GetIDX(), 0);
-    TcpClient::get()->SendMessageToServer(data);
+    TcpClient::get()->SendMessageToServer(data);*/
 
+    //auto actorpos = ChangeTiledPos(mActor->GetPosition());
+
+    //PK_Data data;
+    //data.ClientID = mActor->GetID();
+    //data.input    = 104;
+    //data.pos      = actorpos;
+
+
+
+    //Actor* actor = SpawnBarrack(mActor->GetRoot()->getParent(), data);
+    //actor->SetPosition(ChangeTiledPos(data.pos));
+    //printf("Spawn Barrack 들어옴\n");
+
+    //ActorMessage msg2 = {MsgType::SendInfo, actor, nullptr, nullptr};
+    //SendActorMessage(mActor, msg2);
+
+    //World::get()->mPath->SetTileActorPhysics(actor->GetPosition(), ax::Vec2(96, 64));
+
+    /*if (data.ClientID == TcpClient::get()->GetID())
+    {
+        mPlayer->PushBackActor(actor);
+        break;
+    }*/
 
     mCurAction = ActionState::Building;
 }
