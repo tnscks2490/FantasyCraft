@@ -124,9 +124,9 @@ ax::Node* SensorComp::CreateSightNode()
         sNode->setPhysicsBody(sBody);
         sNode->setTag(100);
 
-        ax::DrawNode* circle = ax::DrawNode::create();
+       /* ax::DrawNode* circle = ax::DrawNode::create();
         circle->drawCircle(ax::Vec2::ZERO, mSight,360, 100,true,ax::Color4B::RED);
-        sNode->addChild(circle,1);
+        sNode->addChild(circle,1);*/
 
         return sNode;
     }

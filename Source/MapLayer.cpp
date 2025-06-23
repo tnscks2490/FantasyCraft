@@ -31,7 +31,7 @@ void MapLayer::CreateWalls()
 {
     auto walls = mMap->getLayer("Wall");
 
-    auto draw = ax::DrawNode::create();
+    //auto draw = ax::DrawNode::create();
     for (int i = 0; i < mHeight; i++)
     {
         for (int j = 0; j < mWidth; j++)
@@ -43,13 +43,13 @@ void MapLayer::CreateWalls()
                 
                 //draw->drawRect(ax::Vec2(-16 , -16), ax::Vec2(16, 16), ax::Color4B::RED);
                 //draw->setPosition(ax::Vec2(j * 32, (mHeight-1 - i) * 32));
-                draw->drawRect(ax::Vec2(-16 + j*32, -16 + (mHeight-1 - i) * 32),
+                /*draw->drawRect(ax::Vec2(-16 + j*32, -16 + (mHeight-1 - i) * 32),
                                ax::Vec2(16 + j * 32, 16 + (mHeight - 1 - i) * 32),
-                               ax::Color4B::RED);
+                               ax::Color4B::RED);*/
             }
         }
     }
-    addChild(draw);
+   // addChild(draw);
 }
 
 void MapLayer::SettingResource()

@@ -20,7 +20,7 @@ void Goal_MoveAndAttack::Start()
     m_Status                        = Goal::active_t;
     mActor->mGoalComp->mCurGoal = GoalType::Attack;
 
-    if (!mTargetActor->isDead)
+    if (mTargetActor  && !mTargetActor->isDead)
     {
         PushSubGoal(new Goal_ApproachToTarget(mActor, mTargetActor->GetPosition()));
         PushSubGoal(new Goal_SetTargetAndAttack(mActor, mTargetActor));

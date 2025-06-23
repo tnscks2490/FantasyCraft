@@ -11,13 +11,13 @@ bool UnitInfoLayer::init()
         return false;
     }
 
-    ax::DrawNode* draw = ax::DrawNode::create();
+    /*ax::DrawNode* draw = ax::DrawNode::create();
     draw->drawRect(ax::Vec2(-320, -80), ax::Vec2(320, 80), ax::Color4B::BLUE);
     addChild(draw);
 
     ax::DrawNode* dot = ax::DrawNode::create();
     dot->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::ORANGE);
-    addChild(dot, 1);
+    addChild(dot, 1);*/
     // 위의 두 노드는 UnitInfoLayer를 표시하기 위한 장치들//
     /////////////////////////////////////////////////////
 
@@ -280,28 +280,6 @@ void UnitInfoLayer::SingleSelected(SystemMessage smsg)
 
 void UnitInfoLayer::BuildUpdate(float delta)
 {
-    //if (mActor->mUnitComp->IsCmdLocked())
-    //{
-    //    mCurLoadTime += delta;
-    //    if (mLoadIdx != (int)(mCurLoadTime / mFrame))
-    //    {
-    //        mMaxHP     = mActor->mUnitComp->mStatus.MaxHP;
-    //        mCurHP     = mActor->mUnitComp->mStatus.HP;
-    //        auto hpstr = NumSlashNumToString(mCurHP, mMaxHP);
-    //        mHP->setString(hpstr);
-
-    //        mLoadIdx = (int)(mCurLoadTime / mFrame);
-    //        if (mCurLoadTime >= mMaxLoadTime)
-    //        {
-    //            mLoadIdx = 0;
-    //            ChangeLoadBar(mLoadIdx, false);
-    //            ChangeLayerState(LayerState::Idle);
-    //            mLoadBar->setVisible(false);
-    //            return;
-    //        }
-    //        ChangeLoadBar(mLoadIdx, false);
-    //    }
-    //}
     mCurLoadTime += delta;
     if (mLoadIdx != (int)(mCurLoadTime / mFrame))
     {
@@ -373,12 +351,6 @@ void UnitInfoLayer::ChangeLayerState(LayerState cState)
         mName->setVisible(true);
         mWire->setVisible(true);
         mHP->setVisible(true);
-
-        //mUnitList->setVisible(true);
-        //mLoadBar->setVisible(true);
-        //mLoadBar->setPosition(ax::Vec2(36, 0));
-
-        // 각 건물별로 설명이 다르기 때문에 넣어줄것
         if (mActor->mCategory == UnitCategory::Unit)
         {
             mATUpgrade->setVisible(true);

@@ -7,27 +7,29 @@ bool ResourceLayer::init()
     {
         return false;
     }
-    ax::DrawNode* draw = ax::DrawNode::create();
+  /*  ax::DrawNode* draw = ax::DrawNode::create();
     draw->drawRect(ax::Vec2(-192, -32), ax::Vec2(192, 32), ax::Color4B::RED);
     addChild(draw, 1);
 
     ax::DrawNode* dot = ax::DrawNode::create();
     dot->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::BLUE);
-    addChild(dot, 1);
+    addChild(dot, 1);*/
 
 
 
 
-    mMineralIcon = ax::Sprite::create("MineralIcon.png"sv);
-    mMineralIcon->setScale(2.f);
-    mMineralIcon->setPosition(ax::Vec2(-128, 0));
-    addChild(mMineralIcon, 1);
+   
 
 
     /*ax::DrawNode* dot2 = ax::DrawNode::create();
     dot2->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::RED);
     mMineralIcon->addChild(dot2, 1);*/
 
+
+    mMineralIcon = ax::Sprite::create("MineralIcon.png"sv);
+    mMineralIcon->setScale(2.f);
+    mMineralIcon->setPosition(ax::Vec2(-128, 0));
+    addChild(mMineralIcon, 1);
    
     mGasIcon     = ax::Sprite::create("TGasIcon.png"sv);
     mGasIcon->setScale(2.f);
@@ -91,9 +93,9 @@ void ResourceLayer::SetNumText()
         mMineralNum->setColor(ax::Color3B::GREEN);
         addChild(mMineralNum, 1);
 
-        ax::DrawNode* dot2 = ax::DrawNode::create();
+        /*ax::DrawNode* dot2 = ax::DrawNode::create();
         dot2->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::RED);
-        mMineralNum->addChild(dot2, 1);
+        mMineralNum->addChild(dot2, 1);*/
         /////////////////////////////////////////////////
 
         auto str2    = std::to_string(mPlayer->mGas);
@@ -104,9 +106,9 @@ void ResourceLayer::SetNumText()
         mGasNum->setColor(ax::Color3B::GREEN);
         addChild(mGasNum, 1);
 
-        ax::DrawNode* dot3 = ax::DrawNode::create();
+        /*ax::DrawNode* dot3 = ax::DrawNode::create();
         dot3->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::RED);
-        mGasNum->addChild(dot3, 1);
+        mGasNum->addChild(dot3, 1);*/
 
         /////////////////////////////////////////////////
 
@@ -119,9 +121,9 @@ void ResourceLayer::SetNumText()
         mPopNum->setColor(ax::Color3B::GREEN);
         addChild(mPopNum, 1);
 
-        ax::DrawNode* dot4 = ax::DrawNode::create();
-        dot4->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::RED);
-        mPopNum->addChild(dot4, 1);
+        //ax::DrawNode* dot4 = ax::DrawNode::create();
+        //dot4->drawDot(ax::Vec2::ZERO, 3, ax::Color4B::RED);
+        //mPopNum->addChild(dot4, 1);
     }
 }
 
