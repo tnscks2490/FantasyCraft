@@ -54,6 +54,5 @@ void PushGoal_ApproachToTarget(Actor* Attacker, ax::Vec2 dest);
 void AddGoal_MoveAndAttack(Actor* Attacker, Actor* Target);
 void PushGoal_MoveAndAttack(Actor* Attacker, Actor* Target);
 
-
 void AddGoal_ReturnCargo(Actor* Gather, Actor* Cargo);
 void PushGoal_ReturnCargo(Actor* Gather, Actor* Cargo);

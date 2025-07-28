@@ -49,3 +49,18 @@ ax::Vec2 ChangeTiledPos(ax::Vec2 pos)
 
     return Pos;
 }
+
+ax::Node* GetRootNode(ax::Node* node)
+{
+    if (node == nullptr)
+        return nullptr;
+
+    ax::Node* current = node;
+
+    while (current->getName() != "Root")
+    {
+        current = current->getParent();
+    }
+
+    return current;
+}

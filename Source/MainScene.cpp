@@ -37,6 +37,7 @@
 #include "DrawComp.h"
 #include "CursorComp.h"
 #include "MessageSystem.h"
+#include "ComFunction.h"
 #include <iostream>
 #include "2DGeometry.h"
 
@@ -557,33 +558,20 @@ bool MainScene::onContactBegin(ax::PhysicsContact& contact)
     auto A = contact.getShapeA()->getBody()->getNode();
     auto B = contact.getShapeB()->getBody()->getNode();
 
-    auto AbodyNode = A;
-    auto BbodyNode = B;
+    ax::Node* AbodyNode = A;
+    ax::Node* BbodyNode = B;
 
-    while (A->getName() != "Root")
-    {
-        A = A->getParent();
-    }
-    while (B->getName() != "Root")
-    {
-        B = B->getParent();
-    }
+    A = GetRootNode(A);
+    B = GetRootNode(B);
 
     UserData* dataA = (UserData*)A->getUserData();
     UserData* dataB = (UserData*)B->getUserData();
 
-    /*ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, AbodyNode, dataB};
-    SendActorMessage(dataA->mActor, amsgA);
-
-    ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, dataA};
-    SendActorMessage(dataB->mActor, amsgB);*/
     ActorMessage amsgA = {MsgType::Contacted, dataB->mActor, AbodyNode, BbodyNode};
     SendActorMessage(dataA->mActor, amsgA);
 
     ActorMessage amsgB = {MsgType::Contacted, dataA->mActor, BbodyNode, AbodyNode};
     SendActorMessage(dataB->mActor, amsgB);
-
-      
     
     return true;
 }

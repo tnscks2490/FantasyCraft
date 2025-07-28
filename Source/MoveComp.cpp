@@ -50,8 +50,6 @@ void MoveComp::MessageProc(ActorMessage& msg)
     {
         if (!isNoCol)
             CollisionMove(msg.sender->mMoveComp->mBodyBorder);    
-
-        
     } break;
     default:
         break;
@@ -328,13 +326,6 @@ void MoveComp::CollisionMove(Border other)
         }
     }
 
-
-    //가만히 있는데 누가와서 충돌한 경우 가만히 있는 애 기준
-
-    
-
-
-
     if (IsMoving)
     {
         
@@ -342,9 +333,7 @@ void MoveComp::CollisionMove(Border other)
             mTargetList.insert(mTargetList.begin(), mTarget);
 
         SetTarget(movePos);
-
     }
-    
 }
 
 bool MoveComp::IsContacted(Border other)

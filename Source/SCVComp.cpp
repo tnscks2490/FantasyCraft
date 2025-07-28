@@ -91,10 +91,10 @@ void SCVComp::MessageProc(ActorMessage& msg)
     case MsgType::Build_Complete:
         mBuilding = nullptr;
         cmdLocked = false;
+        ChangeAction(ActionState::Idle);
         break;
     case MsgType::IsBuild_Complete:
     {
-
         if (mBuilding && !mBuilding->mUnitComp->IsBuild())
             AddGoal_DoingBuild(mActor, mBuilding);
     }break;
@@ -358,8 +358,6 @@ void SCVComp::GiveMineral()
         ActorMessage msg = {MsgType::GiveResource, mActor, nullptr, nullptr};
         SendActorMessage(mCargo, msg);
     }
-    
-    
 }
 
 void SCVComp::SCVHpChange()

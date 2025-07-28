@@ -75,27 +75,18 @@ Actor* SpawnSCV(ax::Node* parent, PK_Data data)
 
     auto node = draw->CreateRootNode();
     parent->addChild(node, 1.0f);
-
     auto body = draw->CreatePhysicsNode(ax::Vec2(32, 32));
-
     auto anim       = draw->CreateAnimNode(ECharName::SCV, ECharAct::Idle, ECharDir::S, "Anim");
-    // 선택 표기 타원의 위치는 바디사이즈의 1/2, 반지름의 크기도 바디사이즈의 1/2로 설정할것
-
- 
     auto selectanim = draw->CreateSelectedNode(draw->mBodySize);
-
     auto hpbar = draw->CreateHPBarByIndex(ECharName::Marine, 0);
     hpbar->setPosition(ax::Vec2(0, -20));
     selectanim->addChild(hpbar);
 
-
-    
     auto goal = new GoalComp(actor);
     auto move = new MoveComp(actor);
     auto unit = new SCVComp(actor);
     auto weapon = new WeaponComp(actor);
     weapon->AddWeapon(WeaponType::Normal);
-
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
@@ -566,8 +557,8 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
     actor->charNum    = data.input;
 
     
-
     auto draw = new DrawComp(actor);
+    auto unit = new MineralComp(actor);
     auto node = draw->CreateRootNode();
 
     int idx = data.pos.y / 32;
@@ -581,12 +572,7 @@ Actor* SpawnMineral(ax::Node* parent, PK_Data data)
     selectanim->setName("Select");
     selectanim->setVisible(false);
     node->addChild(selectanim);
-
-
     auto anim = draw->CreateAnimNodeByIndex(ECharName::Mineral, ECharAct::M01, 0);
-
-
-    auto unit = new MineralComp(actor);
 
     UserData* mUserData = new UserData;
     mUserData->mActor   = actor;
