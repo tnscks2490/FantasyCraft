@@ -298,10 +298,8 @@ void MoveComp::CollisionMove(Border other)
     float bottom  = other.top - mBodyBorder.bottom;
     float top     = mBodyBorder.top - other.bottom;
 
-
     ax::Vec2 movePos = mActor->GetPosition();
 
-    
     if (right <= 0 || left <= 0 || top <= 0 || bottom <= 0)
     {
         if (right >= left || right >= top || right >= bottom)
